@@ -1,6 +1,6 @@
 #include "unpack.h"
 
-float unpack_f32(uint8_t buf[static 1])
+float __lip_unpack_f32(uint8_t buf[static 1])
 {
     union
     {
@@ -11,7 +11,7 @@ float unpack_f32(uint8_t buf[static 1])
     return v.f;
 }
 
-double unpack_f64(uint8_t buf[static 1])
+double __lip_unpack_f64(uint8_t buf[static 1])
 {
     union
     {

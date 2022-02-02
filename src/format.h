@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-enum format
+enum lip_format
 {
     FMT_POSITIVE_FIXINT,
     FMT_FIXMAP,
@@ -45,7 +45,7 @@ enum format
     FMT_SENTINEL,
 };
 
-enum format_family
+enum lip_format_family
 {
     FMT_FAMILY_NIL,
     FMT_FAMILY_BOOL,
@@ -59,13 +59,13 @@ enum format_family
     FMT_FAMILY_SENTINEL,
 };
 
-extern int const format_family_map[];
+extern int const __lip_format_family_map[];
 
-static inline int format_family(int format)
+static inline int __lip_format_family(int format)
 {
-    return format_family_map[format];
+    return __lip_format_family_map[format];
 }
 
-int format_parse(uint8_t first_byte);
+int __lip_format(int first_byte);
 
 #endif

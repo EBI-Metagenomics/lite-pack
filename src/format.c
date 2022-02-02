@@ -3,7 +3,7 @@
 #include <limits.h>
 #include <stdlib.h>
 
-int const format_family_map[] = {
+int const __lip_format_family_map[] = {
     [FMT_POSITIVE_FIXINT] = FMT_FAMILY_INT,
     [FMT_FIXMAP] = FMT_FAMILY_MAP,
     [FMT_FIXARRAY] = FMT_FAMILY_ARRAY,
@@ -43,7 +43,7 @@ int const format_family_map[] = {
     [FMT_NEGATIVE_FIXINT] = FMT_FAMILY_INT,
 };
 
-int format_parse(uint8_t first_byte)
+int __lip_format(int first_byte)
 {
     switch (first_byte)
     {

@@ -22,7 +22,7 @@ static inline uint8_t fluid_first_byte(int format, int val)
     BUG();
 }
 
-static inline uint8_t first_byte(int format)
+static inline uint8_t __lip_first_byte(int format)
 {
     switch (format)
     {
