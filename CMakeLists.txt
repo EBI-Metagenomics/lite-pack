@@ -8,7 +8,8 @@ project(
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_library(${PROJECT_NAME} src/lite_pack.c src/format.c)
+add_library(${PROJECT_NAME} src/format.c src/lite_pack.c src/pack.c
+                            src/unpack.c)
 add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_compile_features(${PROJECT_NAME} PRIVATE c_std_11)
