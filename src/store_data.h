@@ -53,28 +53,27 @@ static inline void __lip_store_f64_data(uint8_t buf[static 8], double val)
 }
 
 static inline void __lip_store_fix_str_data(uint8_t buf[static 1],
-                                            unsigned long length,
+                                            unsigned length,
                                             char const val[static 1])
 {
     memcpy(buf, val, length);
 }
 
-static inline void __lip_store_str8_data(uint8_t buf[static 1],
-                                         unsigned long length,
+static inline void __lip_store_str8_data(uint8_t buf[static 1], unsigned length,
                                          char const val[static 1])
 {
     memcpy(buf, val, length);
 }
 
 static inline void __lip_store_str16_data(uint8_t buf[static 1],
-                                          unsigned long length,
+                                          unsigned length,
                                           char const val[static 1])
 {
     memcpy(buf, val, length);
 }
 
 static inline void __lip_store_str32_data(uint8_t buf[static 1],
-                                          unsigned long length,
+                                          unsigned length,
                                           char const val[static 1])
 {
     memcpy(buf, val, length);

@@ -44,22 +44,22 @@ static int test_uint(void)
 
         if (i <= 127U)
         {
-            if (lip_format(buf) != FMT_POSITIVE_FIXINT) return 1;
+            if (lip_format(buf) != LIP_FMT_POSITIVE_FIXINT) return 1;
             if (lip_unpack_uint(buf) != i) return 1;
         }
         else if (i <= 255U)
         {
-            if (lip_format(buf) != FMT_UINT_8) return 1;
+            if (lip_format(buf) != LIP_FMT_UINT_8) return 1;
             if (lip_unpack_uint(buf) != i) return 1;
         }
         else if (i <= 65535U)
         {
-            if (lip_format(buf) != FMT_UINT_16) return 1;
+            if (lip_format(buf) != LIP_FMT_UINT_16) return 1;
             if (lip_unpack_uint(buf) != i) return 1;
         }
         else if (i <= 4294967295U)
         {
-            if (lip_format(buf) != FMT_UINT_32) return 1;
+            if (lip_format(buf) != LIP_FMT_UINT_32) return 1;
             if (lip_unpack_uint(buf) != i) return 1;
         }
         else
@@ -86,11 +86,12 @@ static int test_ulong(void)
                             9223372039002259456UL,
                             18446744073709551615UL};
 
-    int formats[] = {
-        FMT_POSITIVE_FIXINT, FMT_POSITIVE_FIXINT, FMT_POSITIVE_FIXINT,
-        FMT_UINT_8,          FMT_UINT_8,          FMT_UINT_16,
-        FMT_UINT_16,         FMT_UINT_32,         FMT_UINT_32,
-        FMT_UINT_64,         FMT_UINT_64};
+    int formats[] = {LIP_FMT_POSITIVE_FIXINT, LIP_FMT_POSITIVE_FIXINT,
+                     LIP_FMT_POSITIVE_FIXINT, LIP_FMT_UINT_8,
+                     LIP_FMT_UINT_8,          LIP_FMT_UINT_16,
+                     LIP_FMT_UINT_16,         LIP_FMT_UINT_32,
+                     LIP_FMT_UINT_32,         LIP_FMT_UINT_64,
+                     LIP_FMT_UINT_64};
 
     for (unsigned i = 0; i < array_size(vals); ++i)
     {
@@ -112,7 +113,7 @@ static int test_pack_float(void)
     {
         clear(buf);
         lip_pack_float(buf, vals[i]);
-        if (lip_format(buf) != FMT_FLOAT_32) return 1;
+        if (lip_format(buf) != LIP_FMT_FLOAT_32) return 1;
         if (lip_unpack_float(buf) != vals[i]) return 1;
     }
 
@@ -128,7 +129,7 @@ static int test_double(void)
     {
         clear(buf);
         lip_pack_float(buf, vals[i]);
-        if (lip_format(buf) != FMT_FLOAT_64) return 1;
+        if (lip_format(buf) != LIP_FMT_FLOAT_64) return 1;
         if (lip_unpack_double(buf) != vals[i]) return 1;
     }
 
@@ -147,8 +148,8 @@ static int test_str(void)
 
     unsigned long sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000UL};
     int formats[] = {
-        FMT_FIXSTR, FMT_FIXSTR, FMT_STR_8,  FMT_STR_8,
-        FMT_STR_16, FMT_STR_16, FMT_STR_32,
+        LIP_FMT_FIXSTR, LIP_FMT_FIXSTR, LIP_FMT_STR_8,  LIP_FMT_STR_8,
+        LIP_FMT_STR_16, LIP_FMT_STR_16, LIP_FMT_STR_32,
     };
 
     char const *str = 0;
@@ -177,8 +178,30 @@ error:
     return 1;
 }
 
+static int test_map_length(void)
+{
+    uint8_t buf[17] = {0};
+
+    unsigned lengths[] = {
+        0, 15, 16, 65535, 65536, 4294967295,
+    };
+
+    int formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP, LIP_FMT_MAP_16,
+                     LIP_FMT_MAP_16, LIP_FMT_MAP_32, LIP_FMT_MAP_32};
+
+    for (unsigned i = 0; i < array_size(lengths); ++i)
+    {
+        clear(buf);
+        lip_pack_map_length(buf, lengths[i]);
+        if (lip_format(buf) != formats[i]) return 1;
+        if (lip_unpack_map_length(buf) != lengths[i]) return 1;
+    }
+
+    return 0;
+}
+
 int main(void)
 {
     return test_pack_bool() | test_uint() | test_ulong() | test_pack_float() |
-           test_double() | test_str();
+           test_double() | test_str() | test_map_length();
 }
