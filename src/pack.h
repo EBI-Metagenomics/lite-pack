@@ -8,12 +8,12 @@
 
 static inline void lip_pack_false(uint8_t buf[static 1])
 {
-    buf[0] = __lip_first_byte(LIP_FMT_FALSE);
+    __lip_store_false(buf);
 }
 
 static inline void lip_pack_true(uint8_t buf[static 1])
 {
-    buf[0] = __lip_first_byte(LIP_FMT_TRUE);
+    __lip_store_true(buf);
 }
 
 static inline void lip_pack_bool(uint8_t buf[static 1], bool val)

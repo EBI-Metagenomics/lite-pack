@@ -6,6 +6,16 @@
 #include "format.h"
 #include "store_data.h"
 
+static inline void __lip_store_false(uint8_t buf[static 1])
+{
+    buf[0] = __lip_first_byte(LIP_FMT_FALSE);
+}
+
+static inline void __lip_store_true(uint8_t buf[static 1])
+{
+    buf[0] = __lip_first_byte(LIP_FMT_TRUE);
+}
+
 static inline void __lip_store_pfix_int(uint8_t buf[static 1], uint8_t val)
 {
     buf[0] = __lip_first_byte_fix(LIP_FMT_POSITIVE_FIXINT, val);
