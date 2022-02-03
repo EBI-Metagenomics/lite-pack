@@ -1,6 +1,8 @@
 #include "lite_pack.h"
+#include "lorem.h"
 #include <float.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define array_size(arr) (sizeof(arr) / sizeof((arr)[0]))
@@ -133,8 +135,49 @@ static int test_pack_double(void)
     return 0;
 }
 
+static int test_pack_str(void)
+{
+    unsigned long buf_size = 0x10000UL + 6UL;
+    unsigned long out_size = 0x10000UL + 1UL;
+    uint8_t *buf = malloc(buf_size);
+    if (!buf) exit(1);
+
+    char *out = malloc(out_size);
+    if (!out) exit(1);
+
+    unsigned long sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000UL};
+    int formats[] = {
+        FMT_FIXSTR, FMT_FIXSTR, FMT_STR_8,  FMT_STR_8,
+        FMT_STR_16, FMT_STR_16, FMT_STR_32,
+    };
+
+    char const *str = 0;
+
+    for (unsigned i = 0; i < array_size(sizes); ++i)
+    {
+        memset(buf, 0, buf_size);
+        str = lorem_new(sizes[i]);
+        lip_pack_str(buf, str);
+        if (lip_format(buf) != formats[i]) goto error;
+        lip_unpack_str(buf, out);
+        if (strcmp(out, str) != 0) goto error;
+        free((void *)str);
+    }
+
+    free(buf);
+    free(out);
+    return 0;
+
+error:
+    free(buf);
+    free(out);
+    free((void *)str);
+    return 1;
+}
+
 int main(void)
 {
+    return test_pack_str();
     return test_pack_bool() | test_pack_int_unpack_uint() |
            test_pack_int_unpack_ulong() | test_pack_float() |
            test_pack_double();

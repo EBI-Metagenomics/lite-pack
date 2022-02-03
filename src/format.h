@@ -1,6 +1,7 @@
 #ifndef FORMAT_H
 #define FORMAT_H
 
+#include "bug.h"
 #include <stdint.h>
 
 enum lip_format
@@ -61,11 +62,40 @@ enum lip_format_family
 
 extern int const __lip_format_family_map[];
 
-static inline int __lip_format_family(int format)
+static inline int __lip_format_family(int first_byte)
 {
-    return __lip_format_family_map[format];
+    return __lip_format_family_map[first_byte];
 }
 
 int __lip_format(int first_byte);
+
+static inline int lip_format(uint8_t const buf[static 1])
+{
+    return __lip_format(buf[0]);
+}
+
+static inline int lip_format_family(uint8_t const buf[static 1])
+{
+    return __lip_format_family(buf[0]);
+}
+
+static inline int __lip_format_fix_value(uint8_t first_byte)
+{
+    int format = __lip_format(first_byte);
+    switch (format)
+    {
+    case FMT_POSITIVE_FIXINT:
+        return ~0x00 & first_byte;
+    case FMT_FIXMAP:
+        return ~0x80 & first_byte;
+    case FMT_FIXARRAY:
+        return ~0x90 & first_byte;
+    case FMT_FIXSTR:
+        return ~0xa0 & first_byte;
+    case FMT_NEGATIVE_FIXINT:
+        return ~0xe0 & first_byte;
+    }
+    BUG();
+}
 
 #endif

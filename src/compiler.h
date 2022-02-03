@@ -15,14 +15,14 @@ static_assert(UINT32_MAX >= 4294967295U, "uint32 max req.");
 static_assert(sizeof(float) == 4, "32-bits float");
 static_assert(sizeof(double) == 8, "64-bits double");
 
-#define host_to_big_endian(x)                                                  \
+#define big_endian(x)                                                          \
     _Generic((x), uint8_t                                                      \
              : (x), uint16_t                                                   \
              : htons(x), uint32_t                                              \
              : htonl(x), uint64_t                                              \
              : htonll(x))
 
-#define big_to_host_endian(x)                                                  \
+#define host_endian(x)                                                         \
     _Generic((x), uint8_t                                                      \
              : (x), uint16_t                                                   \
              : ntohs(x), uint32_t                                              \

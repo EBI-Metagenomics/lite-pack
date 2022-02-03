@@ -5,31 +5,32 @@
 #include <stdint.h>
 #include <string.h>
 
-static inline void store_u8_data(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u8_data(uint8_t buf[static 1], unsigned val)
 {
-    val = host_to_big_endian((uint8_t)val);
+    val = big_endian((uint8_t)val);
     memcpy(buf, &val, 1);
 }
 
-static inline void store_u16_data(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u16_data(uint8_t buf[static 1], unsigned val)
 {
-    val = host_to_big_endian((uint16_t)val);
+    val = big_endian((uint16_t)val);
     memcpy(buf, &val, 4);
 }
 
-static inline void store_u32_data(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u32_data(uint8_t buf[static 1], unsigned val)
 {
-    val = host_to_big_endian((uint32_t)val);
+    val = big_endian((uint32_t)val);
     memcpy(buf, &val, 4);
 }
 
-static inline void store_u64_data(uint8_t buf[static 1], unsigned long val)
+static inline void __lip_store_u64_data(uint8_t buf[static 1],
+                                        unsigned long val)
 {
-    val = host_to_big_endian((uint64_t)val);
+    val = big_endian((uint64_t)val);
     memcpy(buf, &val, 8);
 }
 
-static inline void store_f32_data(uint8_t buf[static 1], float val)
+static inline void __lip_store_f32_data(uint8_t buf[static 1], float val)
 {
     union
     {
@@ -37,10 +38,10 @@ static inline void store_f32_data(uint8_t buf[static 1], float val)
         uint32_t u;
     } v;
     v.f = val;
-    store_u32_data(buf, v.u);
+    __lip_store_u32_data(buf, v.u);
 }
 
-static inline void store_f64_data(uint8_t buf[static 1], double val)
+static inline void __lip_store_f64_data(uint8_t buf[static 1], double val)
 {
     union
     {
@@ -48,7 +49,35 @@ static inline void store_f64_data(uint8_t buf[static 1], double val)
         uint64_t u;
     } v;
     v.f = val;
-    store_u64_data(buf, v.u);
+    __lip_store_u64_data(buf, v.u);
+}
+
+static inline void __lip_store_fix_str_data(uint8_t buf[static 1],
+                                            unsigned long length,
+                                            char const val[static 1])
+{
+    memcpy(buf, val, length);
+}
+
+static inline void __lip_store_str8_data(uint8_t buf[static 1],
+                                         unsigned long length,
+                                         char const val[static 1])
+{
+    memcpy(buf, val, length);
+}
+
+static inline void __lip_store_str16_data(uint8_t buf[static 1],
+                                          unsigned long length,
+                                          char const val[static 1])
+{
+    memcpy(buf, val, length);
+}
+
+static inline void __lip_store_str32_data(uint8_t buf[static 1],
+                                          unsigned long length,
+                                          char const val[static 1])
+{
+    memcpy(buf, val, length);
 }
 
 #endif
