@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_H
 #define LITE_PACK_H
 
+#include "ctx.h"
 #include "format.h"
 #include "pack.h"
 #include "unpack.h"
@@ -34,6 +35,13 @@ enum lip_format_family;
 
 static inline int lip_format(uint8_t const buf[static 1]);
 static inline int lip_format_family(uint8_t const buf[static 1]);
+
+unsigned               lip_read_uint(struct lip_ctx_read *ctx);
+unsigned long          lip_read_ulong(struct lip_ctx_read *ctx);
+static inline float    lip_read_float(struct lip_ctx_read *ctx);
+static inline double   lip_read_double(struct lip_ctx_read *ctx);
+char*                  lip_read_str(struct lip_ctx_read *ctx);
+unsigned               lip_read_map_length(struct lip_ctx_read *ctx);
 
 /* clang-format on */
 

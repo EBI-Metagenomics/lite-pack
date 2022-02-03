@@ -249,7 +249,7 @@ static int test_map_example1(void)
 
 int main(void)
 {
-    return test_map_example1();
+    // return test_map_example1();
     return test_pack_bool() | test_uint() | test_ulong() | test_pack_float() |
            test_double() | test_str() | test_map_length();
 }
