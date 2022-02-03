@@ -8,11 +8,45 @@ project(
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_library(${PROJECT_NAME} src/format.c src/lite_pack.c src/pack.c
-                            src/unpack.c)
+if(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+  # /wd5105:
+  # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/c5105?view=msvc-160
+  set(WARNING_FLAGS /W3 /wd5105)
+else()
+  set(WARNING_FLAGS
+      -Wall
+      -Wextra
+      -Wstrict-prototypes
+      -Wshadow
+      -Wconversion
+      -Wmissing-prototypes
+      -Wno-unused-parameter
+      -Wsign-conversion
+      -Wno-unused-function
+      -Wmissing-field-initializers)
+
+  if(NOT CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    list(
+      APPEND
+      WARNING_FLAGS
+      -Wno-gnu-designator
+      -Wno-empty-translation-unit
+      -Wno-gnu-statement-expression
+      -Wno-nullability-extension
+      -Wconditional-uninitialized
+      -Wgnu-empty-initializer)
+  endif()
+endif()
+
+add_library(${PROJECT_NAME} src/format.c src/pack.c src/unpack.c)
 add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
+include(CheckIPOSupported)
+check_ipo_supported()
+set_target_properties(${PROJECT_NAME} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 target_compile_features(${PROJECT_NAME} PRIVATE c_std_11)
+target_compile_options(${PROJECT_NAME} PRIVATE ${WARNING_FLAGS})
 
 target_include_directories(
   ${PROJECT_NAME}

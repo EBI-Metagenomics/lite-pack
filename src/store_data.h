@@ -11,26 +11,26 @@ static inline void __lip_store_u8_data(uint8_t buf[static 1], unsigned val)
     memcpy(buf, &val, 1);
 }
 
-static inline void __lip_store_u16_data(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u16_data(uint8_t buf[static 2], unsigned val)
 {
     val = big_endian((uint16_t)val);
-    memcpy(buf, &val, 4);
+    memcpy(buf, &val, 2);
 }
 
-static inline void __lip_store_u32_data(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u32_data(uint8_t buf[static 4], unsigned val)
 {
     val = big_endian((uint32_t)val);
     memcpy(buf, &val, 4);
 }
 
-static inline void __lip_store_u64_data(uint8_t buf[static 1],
+static inline void __lip_store_u64_data(uint8_t buf[static 8],
                                         unsigned long val)
 {
     val = big_endian((uint64_t)val);
     memcpy(buf, &val, 8);
 }
 
-static inline void __lip_store_f32_data(uint8_t buf[static 1], float val)
+static inline void __lip_store_f32_data(uint8_t buf[static 4], float val)
 {
     union
     {
@@ -41,7 +41,7 @@ static inline void __lip_store_f32_data(uint8_t buf[static 1], float val)
     __lip_store_u32_data(buf, v.u);
 }
 
-static inline void __lip_store_f64_data(uint8_t buf[static 1], double val)
+static inline void __lip_store_f64_data(uint8_t buf[static 8], double val)
 {
     union
     {

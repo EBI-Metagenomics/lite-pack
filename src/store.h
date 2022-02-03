@@ -11,45 +11,45 @@ static inline void __lip_store_pfix_int(uint8_t buf[static 1], uint8_t val)
     buf[0] = val;
 }
 
-static inline void __lip_store_u8(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u8(uint8_t buf[static 2], unsigned val)
 {
     buf[0] = __lip_first_byte(FMT_UINT_8);
     __lip_store_u8_data(buf + 1, val);
 }
 
-static inline void __lip_store_u16(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u16(uint8_t buf[static 3], unsigned val)
 {
     buf[0] = __lip_first_byte(FMT_UINT_16);
     __lip_store_u16_data(buf + 1, val);
 }
 
-static inline void __lip_store_u32(uint8_t buf[static 1], unsigned val)
+static inline void __lip_store_u32(uint8_t buf[static 5], unsigned val)
 {
     buf[0] = __lip_first_byte(FMT_UINT_32);
     __lip_store_u32_data(buf + 1, val);
 }
 
-static inline void __lip_store_u64(uint8_t buf[static 1], unsigned long val)
+static inline void __lip_store_u64(uint8_t buf[static 9], unsigned long val)
 {
     buf[0] = __lip_first_byte(FMT_UINT_64);
     __lip_store_u64_data(buf + 1, val);
 }
 
-static inline void __lip_store_f32(uint8_t buf[static 1], float val)
+static inline void __lip_store_f32(uint8_t buf[static 5], float val)
 {
     CHECK_FLOAT_ORDER();
     buf[0] = __lip_first_byte(FMT_FLOAT_32);
     __lip_store_f32_data(buf + 1, val);
 }
 
-static inline void __lip_store_f64(uint8_t buf[static 1], double val)
+static inline void __lip_store_f64(uint8_t buf[static 9], double val)
 {
     CHECK_FLOAT_ORDER();
     buf[0] = __lip_first_byte(FMT_FLOAT_64);
     __lip_store_f64_data(buf + 1, val);
 }
 
-static inline void __lip_store_fix_str(uint8_t buf[static 1],
+static inline void __lip_store_fix_str(uint8_t buf[static 2],
                                        unsigned long length,
                                        char const val[static 1])
 {
@@ -57,7 +57,7 @@ static inline void __lip_store_fix_str(uint8_t buf[static 1],
     __lip_store_fix_str_data(buf + 1, length, val);
 }
 
-static inline void __lip_store_str8(uint8_t buf[static 1], unsigned long length,
+static inline void __lip_store_str8(uint8_t buf[static 3], unsigned long length,
                                     char const val[static 1])
 {
     buf[0] = __lip_first_byte(FMT_STR_8);
@@ -65,7 +65,7 @@ static inline void __lip_store_str8(uint8_t buf[static 1], unsigned long length,
     __lip_store_fix_str_data(buf + 2, length, val);
 }
 
-static inline void __lip_store_str16(uint8_t buf[static 1],
+static inline void __lip_store_str16(uint8_t buf[static 4],
                                      unsigned long length,
                                      char const val[static 1])
 {
@@ -75,7 +75,7 @@ static inline void __lip_store_str16(uint8_t buf[static 1],
     __lip_store_str16_data(buf + 3, length, val);
 }
 
-static inline void __lip_store_str32(uint8_t buf[static 1],
+static inline void __lip_store_str32(uint8_t buf[static 6],
                                      unsigned long length,
                                      char const val[static 1])
 {
