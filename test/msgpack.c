@@ -2,6 +2,7 @@
 #include "lorem.h"
 #include <float.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -200,8 +201,55 @@ static int test_map_length(void)
     return 0;
 }
 
+static int test_map_example1_write(size_t *size)
+{
+    FILE *fp = fopen("example1.mp", "wb");
+
+    uint8_t buf[256] = {0};
+    uint8_t *ptr = buf;
+
+    ptr += lip_pack_map_length(ptr, 2);
+
+    ptr += lip_pack_str(ptr, "name");
+    ptr += lip_pack_str(ptr, "Danilo Horta");
+
+    ptr += lip_pack_str(ptr, "age");
+    ptr += lip_pack_int(ptr, 36U);
+
+    *size = fwrite(buf, 1, ptr - buf, fp);
+
+    fclose(fp);
+
+    return 0;
+}
+
+static int test_map_example1_read(size_t *size)
+{
+    FILE *fp = fopen("example1.mp", "rb");
+
+    uint8_t buf[256] = {0};
+    uint8_t *ptr = buf;
+
+    fread(buf, 1, *size, fp);
+    ptr = buf;
+    lip_unpack_map_length(ptr);
+
+    fclose(fp);
+
+    return 0;
+}
+
+static int test_map_example1(void)
+{
+    size_t size = 0;
+    if (test_map_example1_write(&size)) return 1;
+    if (test_map_example1_read(&size)) return 1;
+    return 0;
+}
+
 int main(void)
 {
+    return test_map_example1();
     return test_pack_bool() | test_uint() | test_ulong() | test_pack_float() |
            test_double() | test_str() | test_map_length();
 }
