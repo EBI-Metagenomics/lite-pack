@@ -38,12 +38,17 @@ else()
   endif()
 endif()
 
-add_library(${PROJECT_NAME} src/format.c src/pack.c src/unpack.c)
+include("cmake/sanitizers.cmake")
+
+add_library(${PROJECT_NAME} src/format.c src/unpack.c)
 add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-include(CheckIPOSupported)
-check_ipo_supported()
-set_target_properties(${PROJECT_NAME} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  include(CheckIPOSupported)
+  check_ipo_supported()
+  set_target_properties(${PROJECT_NAME} PROPERTIES INTERPROCEDURAL_OPTIMIZATION
+                                                   TRUE)
+endif()
 
 target_compile_features(${PROJECT_NAME} PRIVATE c_std_11)
 target_compile_options(${PROJECT_NAME} PRIVATE ${WARNING_FLAGS})
