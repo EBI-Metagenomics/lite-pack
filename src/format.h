@@ -95,7 +95,7 @@ static inline int __lip_format_fix_value(uint8_t first_byte)
     case FMT_NEGATIVE_FIXINT:
         return ~0xe0 & first_byte;
     }
-    BUG();
+    __LIP_BUG();
 }
 
 #endif

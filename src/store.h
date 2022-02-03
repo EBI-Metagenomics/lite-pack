@@ -53,7 +53,7 @@ static inline void __lip_store_fix_str(uint8_t buf[static 1],
                                        unsigned long length,
                                        char const val[static 1])
 {
-    buf[0] = fluid_first_byte(FMT_FIXSTR, (int)length);
+    buf[0] = __lip_first_byte_fix(FMT_FIXSTR, (int)length);
     __lip_store_fix_str_data(buf + 1, length, val);
 }
 

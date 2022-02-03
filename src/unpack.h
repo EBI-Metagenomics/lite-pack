@@ -43,22 +43,46 @@ unsigned long lip_unpack_ulong(uint8_t const buf[static 1]);
 static inline float lip_unpack_float(uint8_t const buf[static 1])
 {
     if (__lip_format(buf[0]) == FMT_FLOAT_32) return __lip_unpack_f32(buf + 1);
-    BUG();
+    __LIP_BUG();
 }
 
 static inline double lip_unpack_double(uint8_t const buf[static 1])
 {
     if (__lip_format(buf[0]) == FMT_FLOAT_64) return __lip_unpack_f64(buf + 1);
-    BUG();
+    __LIP_BUG();
 }
 
-void lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
+char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
 
 static inline void __lip_unpack_fix_str(uint8_t const buf[static 1],
                                         char str[static 1])
 {
     int length = __lip_format_fix_value(buf[0]);
     memcpy(str, buf + 1, length);
+    str[length] = 0;
+}
+
+static inline void __lip_unpack_str8(uint8_t const buf[static 1],
+                                     char str[static 1])
+{
+    unsigned length = (unsigned)buf[0];
+    memcpy(str, buf + 1, length);
+    str[length] = 0;
+}
+
+static inline void __lip_unpack_str16(uint8_t const buf[static 1],
+                                      char str[static 1])
+{
+    unsigned length = host_endian(*((uint16_t *)buf));
+    memcpy(str, buf + 2, length);
+    str[length] = 0;
+}
+
+static inline void __lip_unpack_str32(uint8_t const buf[static 1],
+                                      char str[static 1])
+{
+    unsigned length = host_endian(*((uint32_t *)buf));
+    memcpy(str, buf + 4, length);
     str[length] = 0;
 }
 

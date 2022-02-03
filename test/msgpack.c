@@ -32,7 +32,7 @@ static int test_pack_bool(void)
     return 0;
 }
 
-static int test_pack_int_unpack_uint(void)
+static int test_uint(void)
 {
     uint8_t buf[9] = {0};
 
@@ -70,7 +70,7 @@ static int test_pack_int_unpack_uint(void)
     return 0;
 }
 
-static int test_pack_int_unpack_ulong(void)
+static int test_ulong(void)
 {
     uint8_t buf[17] = {0};
 
@@ -119,7 +119,7 @@ static int test_pack_float(void)
     return 0;
 }
 
-static int test_pack_double(void)
+static int test_double(void)
 {
     uint8_t buf[9] = {0};
     double vals[] = {-1.2, -0.0, +0.0, 1.2, DBL_MAX, DBL_MIN, DBL_EPSILON};
@@ -135,7 +135,7 @@ static int test_pack_double(void)
     return 0;
 }
 
-static int test_pack_str(void)
+static int test_str(void)
 {
     unsigned long buf_size = 0x10000UL + 6UL;
     unsigned long out_size = 0x10000UL + 1UL;
@@ -156,11 +156,13 @@ static int test_pack_str(void)
     for (unsigned i = 0; i < array_size(sizes); ++i)
     {
         memset(buf, 0, buf_size);
+
         str = lorem_new(sizes[i]);
         lip_pack_str(buf, str);
+
         if (lip_format(buf) != formats[i]) goto error;
-        lip_unpack_str(buf, out);
-        if (strcmp(out, str) != 0) goto error;
+        if (strcmp(lip_unpack_str(buf, out), str)) goto error;
+
         free((void *)str);
     }
 
@@ -177,8 +179,6 @@ error:
 
 int main(void)
 {
-    return test_pack_str();
-    return test_pack_bool() | test_pack_int_unpack_uint() |
-           test_pack_int_unpack_ulong() | test_pack_float() |
-           test_pack_double();
+    return test_pack_bool() | test_uint() | test_ulong() | test_pack_float() |
+           test_double() | test_str();
 }

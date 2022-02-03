@@ -5,6 +5,9 @@
 #include "pack.h"
 #include "unpack.h"
 
+enum lip_format;
+enum lip_format_family;
+
 static inline void lip_pack_true(uint8_t buf[static 1]);
 static inline void lip_pack_false(uint8_t buf[static 1]);
 static inline void lip_pack_bool(uint8_t buf[static 1], bool val);
@@ -26,5 +29,7 @@ static inline void lip_pack_bool(uint8_t buf[static 1], bool val);
 
 static inline void lip_pack_str(uint8_t buf[static 1],
                                 char const val[static 1]);
+
+static inline int lip_format(uint8_t const buf[static 1]);
 
 #endif

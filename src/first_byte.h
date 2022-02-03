@@ -4,7 +4,7 @@
 #include "bug.h"
 #include "format.h"
 
-static inline uint8_t fluid_first_byte(int format, int val)
+static inline uint8_t __lip_first_byte_fix(int format, int val)
 {
     switch (format)
     {
@@ -19,7 +19,7 @@ static inline uint8_t fluid_first_byte(int format, int val)
     case FMT_NEGATIVE_FIXINT:
         return (uint8_t)(0xe0 | val);
     }
-    BUG();
+    __LIP_BUG();
 }
 
 static inline uint8_t __lip_first_byte(int format)
@@ -91,7 +91,7 @@ static inline uint8_t __lip_first_byte(int format)
     case FMT_MAP_32:
         return 0xdf;
     }
-    BUG();
+    __LIP_BUG();
 }
 
 #endif

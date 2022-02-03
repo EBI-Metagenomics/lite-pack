@@ -40,7 +40,7 @@ unsigned lip_unpack_uint(uint8_t const buf[static 1])
     {
         return __lip_unpack_u32(buf + 1);
     }
-    BUG();
+    __LIP_BUG();
 }
 
 unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
@@ -65,27 +65,26 @@ unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
     {
         return __lip_unpack_u64(buf + 1);
     }
-    BUG();
+    __LIP_BUG();
 }
 
-void lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
+char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
 {
     if (lip_format(buf) == FMT_FIXSTR)
     {
         __lip_unpack_fix_str(buf, str);
     }
-    // else if (lip_format(buf) == FMT_STR_8)
-    // {
-    //     __lip_unpack_str8(buf + 1, str);
-    // }
-    // else if (lip_format(buf) == FMT_STR_16)
-    // {
-    //     __lip_unpack_str16(buf + 1, str);
-    // }
-    // else if (lip_format(buf) == FMT_STR_32)
-    // {
-    //     __lip_unpack_str32(buf + 1, str);
-    // }
-    return;
-    BUG();
+    else if (lip_format(buf) == FMT_STR_8)
+    {
+        __lip_unpack_str8(buf + 1, str);
+    }
+    else if (lip_format(buf) == FMT_STR_16)
+    {
+        __lip_unpack_str16(buf + 1, str);
+    }
+    else if (lip_format(buf) == FMT_STR_32)
+    {
+        __lip_unpack_str32(buf + 1, str);
+    }
+    return str;
 }
