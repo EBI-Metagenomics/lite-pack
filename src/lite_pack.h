@@ -27,7 +27,8 @@ long                        : __lip_pack_i64)(buf, val)
 float                       : __lip_pack_f32,                            \
 double                      : __lip_pack_f64)(buf, val)
 static inline unsigned long     lip_pack_str(uint8_t buf[static 1], char const val[static 1]);
-static inline unsigned long     lip_pack_map(uint8_t buf[static 1], unsigned length);
+static inline unsigned long     lip_pack_str_head(unsigned length);
+static inline unsigned long     lip_pack_map_head(uint8_t buf[static 1], unsigned length);
 
 bool                   lip_unpack_bool(uint8_t const buf[static 1]);
 unsigned               lip_unpack_uint(uint8_t const buf[static 1]);
@@ -37,7 +38,7 @@ long                   lip_unpack_long(uint8_t const buf[static 1]);
 static inline float    lip_unpack_float(uint8_t const buf[static 1]);
 static inline double   lip_unpack_double(uint8_t const buf[static 1]);
 char*                  lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
-unsigned               lip_unpack_map(uint8_t const buf[static 1]);
+unsigned               lip_unpack_map_head(uint8_t const buf[static 1]);
 
 enum lip_format;
 enum lip_format_family;

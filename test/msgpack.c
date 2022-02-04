@@ -240,9 +240,9 @@ static int test_map(void)
     for (unsigned i = 0; i < array_size(lengths); ++i)
     {
         clear(buf);
-        lip_pack_map(buf, lengths[i]);
+        lip_pack_map_head(buf, lengths[i]);
         if (lip_format(buf) != formats[i]) return 1;
-        if (lip_unpack_map(buf) != lengths[i]) return 1;
+        if (lip_unpack_map_head(buf) != lengths[i]) return 1;
     }
 
     return 0;
@@ -255,7 +255,7 @@ static int test_map_example1_write(size_t *size)
     uint8_t buf[256] = {0};
     uint8_t *ptr = buf;
 
-    ptr += lip_pack_map(ptr, 2);
+    ptr += lip_pack_map_head(ptr, 2);
 
     ptr += lip_pack_str(ptr, "name");
     ptr += lip_pack_str(ptr, "Danilo Horta");
@@ -281,7 +281,7 @@ static int test_map_example1_read(size_t *size)
     fread(buf, 1, *size, fp);
     ptr = buf;
 
-    if (lip_unpack_map(ptr) != 2) return 1;
+    if (lip_unpack_map_head(ptr) != 2) return 1;
     ptr += lip_skip(ptr);
 
     if (strcmp(lip_unpack_str(ptr, str), "name")) return 1;

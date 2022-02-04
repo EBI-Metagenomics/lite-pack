@@ -112,13 +112,19 @@ static inline unsigned long lip_pack_str(uint8_t buf[static 2],
     return __lip_store_str32(buf, length, val);
 }
 
-static inline unsigned long lip_pack_map(uint8_t buf[static 1], unsigned length)
+static inline unsigned long     lip_pack_str_head(unsigned length)
+{
+
+}
+
+static inline unsigned long lip_pack_map_head(uint8_t buf[static 1],
+                                              unsigned length)
 {
     if (length <= 0xf)
-        return __lip_store_fix_map(buf, length);
+        return __lip_store_fix_map_head(buf, length);
     else if (length <= 0xffff)
-        return __lip_store_map16(buf, length);
-    return __lip_store_map32(buf, length);
+        return __lip_store_map16_head(buf, length);
+    return __lip_store_map32_head(buf, length);
 }
 
 #endif

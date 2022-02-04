@@ -82,7 +82,7 @@ char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
     return 0;
 }
 
-unsigned lip_unpack_map(uint8_t const buf[static 1])
+unsigned lip_unpack_map_head(uint8_t const buf[static 1])
 {
     switch (lip_format(buf))
     {

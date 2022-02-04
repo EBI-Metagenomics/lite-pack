@@ -90,7 +90,7 @@ static inline unsigned long __lip_store_f64_data(uint8_t buf[static 8],
     return __lip_store_u64_data(buf, v.u);
 }
 
-static inline unsigned long __lip_store_fix_str_data(uint8_t buf[static 1],
+static inline unsigned long __lip_store_fix_str_body(uint8_t buf[static 1],
                                                      unsigned length,
                                                      char const val[static 1])
 {

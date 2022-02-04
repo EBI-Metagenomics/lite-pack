@@ -29,6 +29,6 @@ static inline double lip_unpack_double(uint8_t const buf[static 9])
 
 char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
 
-unsigned lip_unpack_map(uint8_t const buf[static 1]);
+unsigned lip_unpack_map_head(uint8_t const buf[static 1]);
 
 #endif
