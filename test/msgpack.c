@@ -194,7 +194,7 @@ static int test_str(void)
     char *out = malloc(out_size);
     if (!out) exit(1);
 
-    unsigned long sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000UL};
+    unsigned long lengths[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000UL};
     int formats[] = {
         LIP_FMT_FIXSTR, LIP_FMT_FIXSTR, LIP_FMT_STR_8,  LIP_FMT_STR_8,
         LIP_FMT_STR_16, LIP_FMT_STR_16, LIP_FMT_STR_32,
@@ -202,11 +202,11 @@ static int test_str(void)
 
     char const *str = 0;
 
-    for (unsigned i = 0; i < array_size(sizes); ++i)
+    for (unsigned i = 0; i < array_size(lengths); ++i)
     {
         memset(buf, 0, buf_size);
 
-        str = lorem_new(sizes[i]);
+        str = lorem_new(lengths[i]);
         lip_pack_str(buf, str);
 
         if (lip_format(buf) != formats[i]) goto error;
@@ -296,9 +296,7 @@ static int test_map_example1(void)
 
 int main(void)
 {
-    return test_bool();
-    return test_int();
     // return test_map_example1();
-    return test_bool() | test_uint() | test_ulong() | test_pack_float() |
-           test_double() | test_str() | test_map_length();
+    return test_bool() | test_uint() | test_ulong() | test_int() |
+           test_pack_float() | test_double() | test_str() | test_map_length();
 }

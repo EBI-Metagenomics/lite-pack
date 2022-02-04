@@ -59,36 +59,40 @@ static inline long __lip_load_i64(uint8_t const buf[static 9])
     return (long)host_endian(*((int64_t *)(buf + 1)));
 }
 
-static inline void __lip_load_fix_str(uint8_t const buf[static 1],
-                                      char str[static 1])
+static inline char *__lip_load_fix_str(uint8_t const buf[static 1],
+                                       char str[static 1])
 {
     unsigned length = __lip_fix_str_length(buf);
     memcpy(str, buf + 1, length);
     str[length] = 0;
+    return str;
 }
 
-static inline void __lip_load_str8(uint8_t const buf[static 2],
-                                   char str[static 1])
+static inline char *__lip_load_str8(uint8_t const buf[static 2],
+                                    char str[static 1])
 {
     unsigned length = __lip_str8_length(buf);
     memcpy(str, buf + 2, length);
     str[length] = 0;
+    return str;
 }
 
-static inline void __lip_load_str16(uint8_t const buf[static 3],
-                                    char str[static 1])
+static inline char *__lip_load_str16(uint8_t const buf[static 3],
+                                     char str[static 1])
 {
     unsigned length = __lip_str16_length(buf);
     memcpy(str, buf + 3, length);
     str[length] = 0;
+    return str;
 }
 
-static inline void __lip_load_str32(uint8_t const buf[static 5],
-                                    char str[static 1])
+static inline char *__lip_load_str32(uint8_t const buf[static 5],
+                                     char str[static 1])
 {
     unsigned length = __lip_str32_length(buf);
     memcpy(str, buf + 5, length);
     str[length] = 0;
+    return str;
 }
 
 static inline float __lip_load_f32_data(uint8_t const buf[static 4])
