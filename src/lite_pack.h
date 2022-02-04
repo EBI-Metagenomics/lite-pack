@@ -4,6 +4,7 @@
 #include "ctx.h"
 #include "format.h"
 #include "pack.h"
+#include "skip.h"
 #include "unpack.h"
 
 /* clang-format off */

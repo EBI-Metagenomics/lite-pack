@@ -3,6 +3,7 @@
 
 #include "bug.h"
 #include "format.h"
+#include "map.h"
 #include "str.h"
 
 static inline unsigned long __lip_size_static(uint8_t const buf[static 1])
@@ -68,11 +69,11 @@ static inline unsigned long __lip_size_dynamic(uint8_t const buf[static 1])
     switch (format)
     {
     case LIP_FMT_FIXMAP:
-        return __lip_fix_map_length(buf);
+        return 1;
     case LIP_FMT_FIXARRAY:
         return 0;
     case LIP_FMT_FIXSTR:
-        return __lip_fix_str_length(buf);
+        return 1 + __lip_fix_str_length(buf);
     case LIP_FMT_BIN_8:
         return 0;
     case LIP_FMT_BIN_16:
@@ -80,19 +81,19 @@ static inline unsigned long __lip_size_dynamic(uint8_t const buf[static 1])
     case LIP_FMT_BIN_32:
         return 0;
     case LIP_FMT_STR_8:
-        return __lip_str8_length(buf);
+        return 2 + __lip_str8_length(buf);
     case LIP_FMT_STR_16:
-        return __lip_str16_length(buf);
+        return 3 + __lip_str16_length(buf);
     case LIP_FMT_STR_32:
-        return __lip_str32_length(buf);
+        return 5 + __lip_str32_length(buf);
     case LIP_FMT_ARRAY_16:
         return 0;
     case LIP_FMT_ARRAY_32:
         return 0;
     case LIP_FMT_MAP_16:
-        return __lip_map8_length(buf);
+        return 3;
     case LIP_FMT_MAP_32:
-        return __lip_map32_length(buf);
+        return 5;
     }
     return 0;
 }

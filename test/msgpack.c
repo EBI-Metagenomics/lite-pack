@@ -152,7 +152,7 @@ static int test_ulong(void)
     return 0;
 }
 
-static int test_pack_float(void)
+static int test_float(void)
 {
     uint8_t buf[5] = {0};
     float vals[] = {-1.2f, -0.0f, +0.0f, 1.2f, FLT_MAX, FLT_MIN, FLT_EPSILON};
@@ -226,7 +226,7 @@ error:
     return 1;
 }
 
-static int test_map_length(void)
+static int test_map(void)
 {
     uint8_t buf[17] = {0};
 
@@ -275,11 +275,28 @@ static int test_map_example1_read(size_t *size)
     FILE *fp = fopen("example1.mp", "rb");
 
     uint8_t buf[256] = {0};
+    char str[256] = {0};
     uint8_t *ptr = buf;
 
     fread(buf, 1, *size, fp);
     ptr = buf;
-    lip_unpack_map(ptr);
+
+    if (lip_unpack_map(ptr) != 2) return 1;
+    ptr += lip_skip(ptr);
+
+    if (strcmp(lip_unpack_str(ptr, str), "name")) return 1;
+    ptr += lip_skip(ptr);
+
+    if (strcmp(lip_unpack_str(ptr, str), "Danilo Horta")) return 1;
+    ptr += lip_skip(ptr);
+
+    if (strcmp(lip_unpack_str(ptr, str), "age")) return 1;
+    ptr += lip_skip(ptr);
+
+    if (lip_unpack_uint(ptr) != 36) return 1;
+    ptr += lip_skip(ptr);
+
+    if ((size_t)(ptr - buf) != *size) return 1;
 
     fclose(fp);
 
@@ -296,7 +313,6 @@ static int test_map_example1(void)
 
 int main(void)
 {
-    // return test_map_example1();
-    return test_bool() | test_uint() | test_ulong() | test_int() |
-           test_pack_float() | test_double() | test_str() | test_map_length();
+    return test_map_example1() | test_bool() | test_uint() | test_ulong() |
+           test_int() | test_float() | test_double() | test_str() | test_map();
 }
