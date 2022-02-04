@@ -48,6 +48,52 @@ unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
     __LIP_BUG();
 }
 
+// int lip_unpack_int(uint8_t const buf[static 1])
+// {
+//     if (lip_format(buf) == LIP_FMT_POSITIVE_FIXINT)
+//     {
+//         return __lip_load_pfix_int(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_8)
+//     {
+//         return __lip_load_u8(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_16)
+//     {
+//         return __lip_load_u16(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_32)
+//     {
+//         return __lip_load_u32(buf);
+//     }
+//     __LIP_BUG();
+// }
+//
+//  long lip_unpack_long(uint8_t const buf[static 1])
+// {
+//     if (lip_format(buf) == LIP_FMT_POSITIVE_FIXINT)
+//     {
+//         return __lip_load_pfix_int(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_8)
+//     {
+//         return __lip_load_u8(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_16)
+//     {
+//         return __lip_load_u16(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_32)
+//     {
+//         return __lip_load_u32(buf);
+//     }
+//     else if (lip_format(buf) == LIP_FMT_UINT_64)
+//     {
+//         return __lip_load_u64(buf);
+//     }
+//     __LIP_BUG();
+// }
+
 char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
 {
     if (lip_format(buf) == LIP_FMT_FIXSTR)
@@ -69,7 +115,7 @@ char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
     return str;
 }
 
-unsigned lip_unpack_map_length(uint8_t buf[static 1])
+unsigned lip_unpack_map_length(uint8_t const buf[static 1])
 {
     if (lip_format(buf) == LIP_FMT_FIXMAP)
     {

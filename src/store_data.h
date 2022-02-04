@@ -13,10 +13,24 @@ static inline unsigned long __lip_store_u8_data(uint8_t buf[static 1],
     return 1;
 }
 
+static inline unsigned long __lip_store_i8_data(uint8_t buf[static 1], int val)
+{
+    val = big_endian((int8_t)val);
+    memcpy(buf, &val, 1);
+    return 1;
+}
+
 static inline unsigned long __lip_store_u16_data(uint8_t buf[static 2],
                                                  unsigned val)
 {
     val = big_endian((uint16_t)val);
+    memcpy(buf, &val, 2);
+    return 2;
+}
+
+static inline unsigned long __lip_store_i16_data(uint8_t buf[static 2], int val)
+{
+    val = big_endian((int16_t)val);
     memcpy(buf, &val, 2);
     return 2;
 }
@@ -29,10 +43,25 @@ static inline unsigned long __lip_store_u32_data(uint8_t buf[static 4],
     return 4;
 }
 
+static inline unsigned long __lip_store_i32_data(uint8_t buf[static 4], int val)
+{
+    val = (int)big_endian((int32_t)val);
+    memcpy(buf, &val, 4);
+    return 4;
+}
+
 static inline unsigned long __lip_store_u64_data(uint8_t buf[static 8],
                                                  unsigned long val)
 {
     val = big_endian((uint64_t)val);
+    memcpy(buf, &val, 8);
+    return 8;
+}
+
+static inline unsigned long __lip_store_i64_data(uint8_t buf[static 8],
+                                                 long val)
+{
+    val = (long)big_endian((int64_t)val);
     memcpy(buf, &val, 8);
     return 8;
 }

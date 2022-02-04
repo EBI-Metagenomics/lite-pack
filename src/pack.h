@@ -55,6 +55,40 @@ static inline unsigned long __lip_pack_u64(uint8_t buf[static 2],
     return __lip_store_u64(buf, val);
 }
 
+static inline unsigned long __lip_pack_i8(uint8_t buf[static 1], int val)
+{
+    if (val >= 0) return __lip_pack_u8(buf, (unsigned)val);
+    if (val >= -32) return __lip_store_nfix_int(buf, val);
+    return __lip_store_i8(buf, val);
+}
+
+static inline unsigned long __lip_pack_i16(uint8_t buf[static 1], int val)
+{
+    if (val >= 0) return __lip_pack_u16(buf, (unsigned)val);
+    if (val >= -32) return __lip_store_nfix_int(buf, val);
+    if (val >= INT8_MIN) return __lip_store_i8(buf, val);
+    return __lip_store_i16(buf, val);
+}
+
+static inline unsigned long __lip_pack_i32(uint8_t buf[static 1], int val)
+{
+    if (val >= 0) return __lip_pack_u32(buf, (unsigned)val);
+    if (val >= -32) return __lip_store_nfix_int(buf, val);
+    if (val >= INT8_MIN) return __lip_store_i8(buf, val);
+    if (val >= INT16_MIN) return __lip_store_i16(buf, val);
+    return __lip_store_i32(buf, val);
+}
+
+static inline unsigned long __lip_pack_i64(uint8_t buf[static 1], long val)
+{
+    if (val >= 0) return __lip_pack_u64(buf, (unsigned long)val);
+    if (val >= -32) return __lip_store_nfix_int(buf, (int)val);
+    if (val >= INT8_MIN) return __lip_store_i8(buf, (int)val);
+    if (val >= INT16_MIN) return __lip_store_i16(buf, (int)val);
+    if (val >= INT32_MIN) return __lip_store_i32(buf, (int)val);
+    return __lip_store_i64(buf, val);
+}
+
 static inline unsigned long __lip_pack_f32(uint8_t buf[static 5], float val)
 {
     return __lip_store_f32(buf, val);

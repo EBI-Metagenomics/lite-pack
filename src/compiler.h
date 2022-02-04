@@ -20,6 +20,10 @@ static_assert(sizeof(double) == 8, "64-bits double");
              : (x), uint16_t                                                   \
              : htons(x), uint32_t                                              \
              : htonl(x), uint64_t                                              \
+             : htonll(x), int8_t                                               \
+             : (x), int16_t                                                    \
+             : htons(x), int32_t                                               \
+             : htonl(x), int64_t                                               \
              : htonll(x))
 
 #define host_endian(x)                                                         \
@@ -27,6 +31,10 @@ static_assert(sizeof(double) == 8, "64-bits double");
              : (x), uint16_t                                                   \
              : ntohs(x), uint32_t                                              \
              : ntohl(x), uint64_t                                              \
+             : ntohll(x), int8_t                                               \
+             : (x), int16_t                                                    \
+             : ntohs(x), int32_t                                               \
+             : ntohl(x), int64_t                                               \
              : ntohll(x))
 
 #if defined(__FLOAT_WORD_ORDER__) && defined(__BYTE_ORDER__)

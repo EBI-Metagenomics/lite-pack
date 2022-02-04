@@ -6,6 +6,12 @@
 #include "first_byte.h"
 #include "format.h"
 #include "load.h"
+#include <stdbool.h>
+
+static inline bool lip_unpack_bool(uint8_t const buf[static 1])
+{
+    return __lip_load_bool(buf);
+}
 
 unsigned lip_unpack_uint(uint8_t const buf[static 1]);
 
@@ -22,5 +28,7 @@ static inline double lip_unpack_double(uint8_t const buf[static 9])
 }
 
 char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
+
+unsigned lip_unpack_map_length(uint8_t const buf[static 1]);
 
 #endif

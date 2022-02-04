@@ -65,11 +65,14 @@ int __lip_format(int first_byte)
     case 0xc0:
         return LIP_FMT_NIL;
 
+    case 0xc1:
+        return LIP_FMT_NEVER_USED;
+
     case 0xc2:
-        return LIP_FMT_TRUE;
+        return LIP_FMT_FALSE;
 
     case 0xc3:
-        return LIP_FMT_FALSE;
+        return LIP_FMT_TRUE;
 
     case 0xc4:
         return LIP_FMT_BIN_8;
@@ -154,9 +157,6 @@ int __lip_format(int first_byte)
 
     case 0xdf:
         return LIP_FMT_MAP_32;
-
-    case 0xc1:
-        return LIP_FMT_NEVER_USED;
     }
     __builtin_unreachable();
 }

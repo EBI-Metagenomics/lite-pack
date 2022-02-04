@@ -1,3 +1,4 @@
+#include "lorem.h"
 #include <stdlib.h>
 
 #define array_size(arr) (sizeof(arr) / sizeof((arr)[0]))
