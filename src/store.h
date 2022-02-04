@@ -80,21 +80,21 @@ static inline unsigned long __lip_store_i64(uint8_t buf[static 9], long val)
     return __lip_store_i64_data(buf + 1, val) + 1;
 }
 
-static inline unsigned long __lip_store_fix_map_length(uint8_t buf[static 1],
+static inline unsigned long __lip_store_fix_map(uint8_t buf[static 1],
                                                        unsigned length)
 {
     buf[0] = __lip_first_byte_fix(LIP_FMT_FIXMAP, (int)length);
     return 1;
 }
 
-static inline unsigned long __lip_store_map16_length(uint8_t buf[static 3],
+static inline unsigned long __lip_store_map16(uint8_t buf[static 3],
                                                      unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_MAP_16);
     return __lip_store_u16_data(buf + 1, length) + 1;
 }
 
-static inline unsigned long __lip_store_map32_length(uint8_t buf[static 5],
+static inline unsigned long __lip_store_map32(uint8_t buf[static 5],
                                                      unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_MAP_32);

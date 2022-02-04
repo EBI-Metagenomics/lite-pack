@@ -26,9 +26,4 @@ static inline void __lip_ctx_read_skip_dynamic(struct lip_ctx_read *ctx)
     ctx->pos += __lip_size_dynamic(ctx->pos);
 }
 
-static inline void __lip_ctx_read_skip_header(struct lip_ctx_read *ctx)
-{
-    ctx->pos += __lip_size_header(ctx->pos);
-}
-
 #endif

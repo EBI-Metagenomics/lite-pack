@@ -9,10 +9,10 @@ unsigned lip_read_uint(struct lip_ctx_read *ctx)
     return v;
 }
 
-unsigned lip_read_map_length(struct lip_ctx_read *ctx)
+unsigned lip_read_map(struct lip_ctx_read *ctx)
 {
-    unsigned v = lip_unpack_map_length(ctx->pos);
-    __lip_ctx_read_skip_header(ctx);
+    unsigned v = lip_unpack_map(ctx->pos);
+    __lip_ctx_read_skip_dynamic(ctx);
     return v;
 }
 
