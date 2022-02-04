@@ -1,6 +1,7 @@
 #include "unpack.h"
 #include "lite_pack.h"
 #include "load.h"
+#include "load_body.h"
 
 unsigned lip_unpack_uint(uint8_t const buf[static 1])
 {
@@ -82,6 +83,28 @@ char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
     return 0;
 }
 
+unsigned lip_unpack_str_head(uint8_t const buf[static 1])
+{
+    switch (lip_format(buf))
+    {
+    case LIP_FMT_FIXSTR:
+        return __lip_fix_str_length(buf);
+    case LIP_FMT_STR_8:
+        return __lip_str8_length(buf);
+    case LIP_FMT_STR_16:
+        return __lip_str16_length(buf);
+    case LIP_FMT_STR_32:
+        return __lip_str32_length(buf);
+    }
+    return 0;
+}
+
+char *lip_unpack_str_body(uint8_t const buf[static 1], unsigned length,
+                          char str[static 1])
+{
+    return __lip_load_str_body(buf, length, str);
+}
+
 unsigned lip_unpack_map_head(uint8_t const buf[static 1])
 {
     switch (lip_format(buf))
@@ -93,5 +116,5 @@ unsigned lip_unpack_map_head(uint8_t const buf[static 1])
     case LIP_FMT_MAP_32:
         return __lip_load_u32(buf);
     }
-    __LIP_BUG();
+    return 0;
 }

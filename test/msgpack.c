@@ -10,29 +10,36 @@
 
 #define clear(buf) memset(buf, 0, sizeof(buf))
 
+#define ERROR                                                                  \
+    do                                                                         \
+    {                                                                          \
+        fprintf(stderr, "\nFailure at %s:%d\n", __func__, __LINE__);           \
+        exit(1);                                                               \
+    } while (1);
+
 static int test_bool(void)
 {
     uint8_t buf[1] = {0};
 
     clear(buf);
     lip_pack_bool(buf, false);
-    if (lip_format(buf) != LIP_FMT_FALSE) return 1;
-    if (lip_unpack_bool(buf) != false) return 1;
+    if (lip_format(buf) != LIP_FMT_FALSE) ERROR;
+    if (lip_unpack_bool(buf) != false) ERROR;
 
     clear(buf);
     lip_pack_false(buf);
-    if (lip_format(buf) != LIP_FMT_FALSE) return 1;
-    if (lip_unpack_bool(buf) != false) return 1;
+    if (lip_format(buf) != LIP_FMT_FALSE) ERROR;
+    if (lip_unpack_bool(buf) != false) ERROR;
 
     clear(buf);
     lip_pack_bool(buf, true);
-    if (lip_format(buf) != LIP_FMT_TRUE) return 1;
-    if (lip_unpack_bool(buf) != true) return 1;
+    if (lip_format(buf) != LIP_FMT_TRUE) ERROR;
+    if (lip_unpack_bool(buf) != true) ERROR;
 
     clear(buf);
     lip_pack_true(buf);
-    if (lip_format(buf) != LIP_FMT_TRUE) return 1;
-    if (lip_unpack_bool(buf) != true) return 1;
+    if (lip_format(buf) != LIP_FMT_TRUE) ERROR;
+    if (lip_unpack_bool(buf) != true) ERROR;
 
     return 0;
 }
@@ -41,23 +48,23 @@ static int positive_integer_check(uint8_t buf[9], unsigned i)
 {
     if (i <= 127U)
     {
-        if (lip_format(buf) != LIP_FMT_POSITIVE_FIXINT) return 1;
-        if (lip_unpack_uint(buf) != i) return 1;
+        if (lip_format(buf) != LIP_FMT_POSITIVE_FIXINT) ERROR;
+        if (lip_unpack_uint(buf) != i) ERROR;
     }
     else if (i <= 255U)
     {
-        if (lip_format(buf) != LIP_FMT_UINT_8) return 1;
-        if (lip_unpack_uint(buf) != i) return 1;
+        if (lip_format(buf) != LIP_FMT_UINT_8) ERROR;
+        if (lip_unpack_uint(buf) != i) ERROR;
     }
     else if (i <= 65535U)
     {
-        if (lip_format(buf) != LIP_FMT_UINT_16) return 1;
-        if (lip_unpack_uint(buf) != i) return 1;
+        if (lip_format(buf) != LIP_FMT_UINT_16) ERROR;
+        if (lip_unpack_uint(buf) != i) ERROR;
     }
     else
     {
-        if (lip_format(buf) != LIP_FMT_UINT_32) return 1;
-        if (lip_unpack_uint(buf) != i) return 1;
+        if (lip_format(buf) != LIP_FMT_UINT_32) ERROR;
+        if (lip_unpack_uint(buf) != i) ERROR;
     }
     return 0;
 }
@@ -71,7 +78,7 @@ static int test_uint(void)
     {
         clear(buf);
         lip_pack_int(buf, i);
-        if (positive_integer_check(buf, i)) return 1;
+        if (positive_integer_check(buf, i)) ERROR;
 
     } while (++i != 0);
 
@@ -90,27 +97,27 @@ static int test_int(void)
 
         if (i >= 0)
         {
-            if (positive_integer_check(buf, (unsigned)i)) return 1;
+            if (positive_integer_check(buf, (unsigned)i)) ERROR;
         }
         else if (i >= -32)
         {
-            if (lip_format(buf) != LIP_FMT_NEGATIVE_FIXINT) return 1;
-            // if (lip_unpack_uint(buf) != i) return 1;
+            if (lip_format(buf) != LIP_FMT_NEGATIVE_FIXINT) ERROR;
+            // if (lip_unpack_uint(buf) != i) ERROR;
         }
         else if (i >= INT8_MIN)
         {
-            if (lip_format(buf) != LIP_FMT_INT_8) return 1;
-            // if (lip_unpack_uint(buf) != i) return 1;
+            if (lip_format(buf) != LIP_FMT_INT_8) ERROR;
+            // if (lip_unpack_uint(buf) != i) ERROR;
         }
         else if (i >= INT16_MIN)
         {
-            if (lip_format(buf) != LIP_FMT_INT_16) return 1;
-            // if (lip_unpack_uint(buf) != i) return 1;
+            if (lip_format(buf) != LIP_FMT_INT_16) ERROR;
+            // if (lip_unpack_uint(buf) != i) ERROR;
         }
         else
         {
-            if (lip_format(buf) != LIP_FMT_INT_32) return 1;
-            // if (lip_unpack_uint(buf) != i) return 1;
+            if (lip_format(buf) != LIP_FMT_INT_32) ERROR;
+            // if (lip_unpack_uint(buf) != i) ERROR;
         }
 
     } while (i++ != INT_MAX);
@@ -145,8 +152,8 @@ static int test_ulong(void)
     {
         clear(buf);
         lip_pack_int(buf, vals[i]);
-        if (lip_format(buf) != formats[i]) return 1;
-        if (lip_unpack_ulong(buf) != vals[i]) return 1;
+        if (lip_format(buf) != formats[i]) ERROR;
+        if (lip_unpack_ulong(buf) != vals[i]) ERROR;
     }
 
     return 0;
@@ -161,8 +168,8 @@ static int test_float(void)
     {
         clear(buf);
         lip_pack_float(buf, vals[i]);
-        if (lip_format(buf) != LIP_FMT_FLOAT_32) return 1;
-        if (lip_unpack_float(buf) != vals[i]) return 1;
+        if (lip_format(buf) != LIP_FMT_FLOAT_32) ERROR;
+        if (lip_unpack_float(buf) != vals[i]) ERROR;
     }
 
     return 0;
@@ -177,8 +184,8 @@ static int test_double(void)
     {
         clear(buf);
         lip_pack_float(buf, vals[i]);
-        if (lip_format(buf) != LIP_FMT_FLOAT_64) return 1;
-        if (lip_unpack_double(buf) != vals[i]) return 1;
+        if (lip_format(buf) != LIP_FMT_FLOAT_64) ERROR;
+        if (lip_unpack_double(buf) != vals[i]) ERROR;
     }
 
     return 0;
@@ -223,7 +230,7 @@ error:
     free(buf);
     free(out);
     free((void *)str);
-    return 1;
+    ERROR;
 }
 
 static int test_map(void)
@@ -241,8 +248,8 @@ static int test_map(void)
     {
         clear(buf);
         lip_pack_map_head(buf, lengths[i]);
-        if (lip_format(buf) != formats[i]) return 1;
-        if (lip_unpack_map_head(buf) != lengths[i]) return 1;
+        if (lip_format(buf) != formats[i]) ERROR;
+        if (lip_unpack_map_head(buf) != lengths[i]) ERROR;
     }
 
     return 0;
@@ -281,22 +288,22 @@ static int test_map_example1_read(size_t *size)
     fread(buf, 1, *size, fp);
     ptr = buf;
 
-    if (lip_unpack_map_head(ptr) != 2) return 1;
+    if (lip_unpack_map_head(ptr) != 2) ERROR;
     ptr += lip_skip(ptr);
 
-    if (strcmp(lip_unpack_str(ptr, str), "name")) return 1;
+    if (strcmp(lip_unpack_str(ptr, str), "name")) ERROR;
     ptr += lip_skip(ptr);
 
-    if (strcmp(lip_unpack_str(ptr, str), "Danilo Horta")) return 1;
+    if (strcmp(lip_unpack_str(ptr, str), "Danilo Horta")) ERROR;
     ptr += lip_skip(ptr);
 
-    if (strcmp(lip_unpack_str(ptr, str), "age")) return 1;
+    if (strcmp(lip_unpack_str(ptr, str), "age")) ERROR;
     ptr += lip_skip(ptr);
 
-    if (lip_unpack_uint(ptr) != 36) return 1;
+    if (lip_unpack_uint(ptr) != 36) ERROR;
     ptr += lip_skip(ptr);
 
-    if ((size_t)(ptr - buf) != *size) return 1;
+    if ((size_t)(ptr - buf) != *size) ERROR;
 
     fclose(fp);
 
@@ -306,13 +313,16 @@ static int test_map_example1_read(size_t *size)
 static int test_map_example1(void)
 {
     size_t size = 0;
-    if (test_map_example1_write(&size)) return 1;
-    if (test_map_example1_read(&size)) return 1;
+    if (test_map_example1_write(&size)) ERROR;
+    if (test_map_example1_read(&size)) ERROR;
     return 0;
 }
 
 int main(void)
 {
-    return test_map_example1() | test_bool() | test_uint() | test_ulong() |
-           test_int() | test_float() | test_double() | test_str() | test_map();
+    return test_map_example1() | test_bool() | test_map_example1() |
+           test_bool() | test_uint() | test_ulong() | test_int();
+    // return
+    //        ) | test_float() | test_double() | test_str() |
+    //        test_map();
 }
