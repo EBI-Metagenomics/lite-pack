@@ -15,19 +15,8 @@ unsigned lip_unpack_uint(uint8_t const buf[static 1])
         return __lip_load_num16_body(buf + 1).u;
     case LIP_FMT_UINT_32:
         return __lip_load_num32_body(buf + 1).u;
-    case LIP_FMT_UINT_64:
-        return (unsigned)__lip_load_num64_body(buf + 1).u;
     }
     return 0;
-}
-
-unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
-{
-    if (lip_format(buf) == LIP_FMT_UINT_64)
-    {
-        return __lip_load_num64_body(buf + 1).u;
-    }
-    return lip_unpack_uint(buf);
 }
 
 int lip_unpack_int(uint8_t const buf[static 1])
@@ -35,32 +24,31 @@ int lip_unpack_int(uint8_t const buf[static 1])
     switch (lip_format(buf))
     {
     case LIP_FMT_POSITIVE_FIXINT:
-    case LIP_FMT_UINT_8:
-    case LIP_FMT_UINT_16:
-    case LIP_FMT_UINT_32:
-        return (int)lip_unpack_uint(buf);
-
     case LIP_FMT_NEGATIVE_FIXINT:
         return __lip_load_num8_body(buf).i;
-
+    case LIP_FMT_UINT_8:
     case LIP_FMT_INT_8:
         return __lip_load_num8_body(buf + 1).i;
-
+    case LIP_FMT_UINT_16:
     case LIP_FMT_INT_16:
         return __lip_load_num16_body(buf + 1).i;
-
     case LIP_FMT_INT_32:
         return __lip_load_num32_body(buf + 1).i;
     }
     return 0;
 }
 
+unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
+{
+    if (lip_format(buf) == LIP_FMT_UINT_64)
+        return __lip_load_num64_body(buf + 1).u;
+    return lip_unpack_uint(buf);
+}
+
 long lip_unpack_long(uint8_t const buf[static 1])
 {
-    if (lip_format(buf) == LIP_FMT_UINT_64 || lip_format(buf) == LIP_FMT_INT_64)
-    {
+    if (lip_format(buf) == LIP_FMT_INT_64)
         return __lip_load_num64_body(buf + 1).i;
-    }
     return lip_unpack_int(buf);
 }
 

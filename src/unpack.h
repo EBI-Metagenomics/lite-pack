@@ -10,27 +10,28 @@
 
 static inline bool lip_unpack_bool(uint8_t const buf[static 1])
 {
-    return __lip_load_bool(buf);
+    if (lip_format(buf) == LIP_FMT_FALSE || lip_format(buf) == LIP_FMT_TRUE)
+        return __lip_load_bool(buf);
+    return 0;
 }
-
-unsigned lip_unpack_uint(uint8_t const buf[static 1]);
-
-unsigned long lip_unpack_ulong(uint8_t const buf[static 1]);
 
 static inline float lip_unpack_float(uint8_t const buf[static 5])
 {
-    return __lip_load_num32_body(buf + 1).f;
+    if (lip_format(buf) == LIP_FMT_FLOAT_32)
+        return __lip_load_num32_body(buf + 1).f;
+    return 0;
 }
 
 static inline double lip_unpack_double(uint8_t const buf[static 9])
 {
-    return __lip_load_num64_body(buf + 1).d;
+    switch (lip_format(buf))
+    {
+    case LIP_FMT_FLOAT_64:
+        return __lip_load_num64_body(buf + 1).d;
+    case LIP_FMT_FLOAT_32:
+        return __lip_load_num32_body(buf + 1).f;
+    }
+    return 0;
 }
-
-char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
-
-unsigned lip_unpack_array_head(uint8_t const buf[static 1]);
-
-unsigned lip_unpack_map_head(uint8_t const buf[static 1]);
 
 #endif

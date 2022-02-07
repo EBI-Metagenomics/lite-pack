@@ -33,8 +33,8 @@ static inline unsigned long     lip_pack_map_head(uint8_t buf[static 1], unsigne
 
 bool                   lip_unpack_bool(uint8_t const buf[static 1]);
 unsigned               lip_unpack_uint(uint8_t const buf[static 1]);
-unsigned long          lip_unpack_ulong(uint8_t const buf[static 1]);
 int                    lip_unpack_int(uint8_t const buf[static 1]);
+unsigned long          lip_unpack_ulong(uint8_t const buf[static 1]);
 long                   lip_unpack_long(uint8_t const buf[static 1]);
 static inline float    lip_unpack_float(uint8_t const buf[static 1]);
 static inline double   lip_unpack_double(uint8_t const buf[static 1]);
