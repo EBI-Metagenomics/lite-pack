@@ -65,14 +65,14 @@ static inline unsigned long __lip_store_map16_head(uint8_t buf[static 3],
                                                    unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_MAP_16);
-    return __lip_store_u16_body(buf + 1, length) + 1;
+    return __lip_store_num16_body(buf + 1, NUM16(length)) + 1;
 }
 
 static inline unsigned long __lip_store_map32_head(uint8_t buf[static 5],
                                                    unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_MAP_32);
-    return __lip_store_u32_body(buf + 1, length) + 1;
+    return __lip_store_num32_body(buf + 1, NUM32(length)) + 1;
 }
 
 static inline unsigned long __lip_store_f32_head(uint8_t buf[static 1])
@@ -98,21 +98,21 @@ static inline unsigned long __lip_store_str8_head(uint8_t buf[static 2],
                                                   unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_8);
-    return __lip_store_u16_body(buf + 1, length) + 1;
+    return __lip_store_num8_body(buf + 1, NUM8(length)) + 1;
 }
 
 static inline unsigned long __lip_store_str16_head(uint8_t buf[static 3],
                                                    unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_16);
-    return __lip_store_u16_body(buf + 1, length) + 1;
+    return __lip_store_num16_body(buf + 1, NUM16(length)) + 1;
 }
 
 static inline unsigned long __lip_store_str32_head(uint8_t buf[static 5],
                                                    unsigned length)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_32);
-    return __lip_store_u32_body(buf + 1, length) + 1;
+    return __lip_store_num32_body(buf + 1, NUM32(length)) + 1;
 }
 
 #endif

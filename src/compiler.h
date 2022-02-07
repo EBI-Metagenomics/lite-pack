@@ -60,4 +60,55 @@ static_assert(sizeof(double) == 8, "64-bits double");
 #define CHECK_FLOAT_ORDER()
 #endif
 
+CHECK_FLOAT_ORDER();
+
+union num8
+{
+    char c[1];
+    int8_t i;
+    uint8_t u;
+};
+
+union num16
+{
+    char c[2];
+    int16_t i;
+    uint16_t u;
+};
+
+union num32
+{
+    char c[4];
+    int32_t i;
+    uint32_t u;
+    float f;
+};
+
+union num64
+{
+    char c[8];
+    int64_t i;
+    uint64_t u;
+    double d;
+};
+
+#define NUM8(x)                                                                \
+    _Generic((x), unsigned                                                     \
+             : (union num8){.u = (uint8_t)(x)}, int                            \
+             : (union num8){.i = (int8_t)(x)})
+#define NUM16(x)                                                               \
+    _Generic((x), unsigned                                                     \
+             : (union num16){.u = (uint16_t)(x)}, int                          \
+             : (union num16){.i = (int16_t)(x)})
+#define NUM32(x)                                                               \
+    _Generic((x), unsigned                                                     \
+             : (union num32){.u = (uint32_t)(x)}, int                          \
+             : (union num32){.i = (int32_t)(x)}, float                         \
+             : (union num32){.f = (float)(x)})
+#define NUM64(x)                                                               \
+    _Generic((x), unsigned long                                                \
+             : (union num64){.u = (uint64_t)(x)}, long                         \
+             : (union num64){.i = (int64_t)(x)}, double                        \
+             : (union num64){.d = (double)(x)})
+
 #endif

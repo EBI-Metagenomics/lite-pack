@@ -24,33 +24,33 @@ static inline unsigned long lip_pack_bool(uint8_t buf[static 1], bool val)
 
 static inline unsigned long __lip_pack_u8(uint8_t buf[static 1], unsigned val)
 {
-    if (val <= 0x7f) return __lip_store_pfix_int(buf, (uint8_t)val);
+    if (val <= 0x7fU) return __lip_store_pfix_int(buf, val);
     return __lip_store_u8(buf, val);
 }
 
-static inline unsigned long __lip_pack_u16(uint8_t buf[static 2], unsigned val)
+static inline unsigned long __lip_pack_u16(uint8_t buf[static 1], unsigned val)
 {
-    if (val <= 0xff) return __lip_pack_u8(buf, val);
+    if (val <= 0xffU) return __lip_pack_u8(buf, val);
     return __lip_store_u16(buf, val);
 }
 
-static inline unsigned long __lip_pack_u32(uint8_t buf[static 2], unsigned val)
+static inline unsigned long __lip_pack_u32(uint8_t buf[static 1], unsigned val)
 {
-    if (val <= 0xff)
+    if (val <= 0xffU)
         return __lip_pack_u8(buf, val);
-    else if (val <= 0xffff)
+    else if (val <= 0xffffU)
         return __lip_pack_u16(buf, val);
     return __lip_store_u32(buf, val);
 }
 
-static inline unsigned long __lip_pack_u64(uint8_t buf[static 2],
+static inline unsigned long __lip_pack_u64(uint8_t buf[static 1],
                                            unsigned long val)
 {
-    if (val <= 0xff)
+    if (val <= 0xffUL)
         return __lip_pack_u8(buf, (unsigned)val);
-    else if (val <= 0xffff)
+    else if (val <= 0xffffUL)
         return __lip_pack_u16(buf, (unsigned)val);
-    else if (val <= 0xffffffff)
+    else if (val <= 0xffffffffUL)
         return __lip_pack_u32(buf, (unsigned)val);
     return __lip_store_u64(buf, val);
 }

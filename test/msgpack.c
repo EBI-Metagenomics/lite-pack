@@ -44,44 +44,120 @@ static int test_bool(void)
     return 0;
 }
 
-static int positive_integer_check(uint8_t buf[9], unsigned i)
+static int positive_integer_check(uint8_t buf[9], unsigned v)
 {
-    if (i <= 127U)
+    if (v <= 127U)
     {
         if (lip_format(buf) != LIP_FMT_POSITIVE_FIXINT) ERROR;
-        if (lip_unpack_uint(buf) != i) ERROR;
+        if (lip_unpack_uint(buf) != v) ERROR;
     }
-    else if (i <= 255U)
+    else if (v <= 255U)
     {
         if (lip_format(buf) != LIP_FMT_UINT_8) ERROR;
-        if (lip_unpack_uint(buf) != i) ERROR;
+        if (lip_unpack_uint(buf) != v) ERROR;
     }
-    else if (i <= 65535U)
+    else if (v <= 65535U)
     {
         if (lip_format(buf) != LIP_FMT_UINT_16) ERROR;
-        if (lip_unpack_uint(buf) != i) ERROR;
+        if (lip_unpack_uint(buf) != v) ERROR;
     }
     else
     {
         if (lip_format(buf) != LIP_FMT_UINT_32) ERROR;
-        if (lip_unpack_uint(buf) != i) ERROR;
+        if (lip_unpack_uint(buf) != v) ERROR;
     }
     return 0;
 }
+
+int i32_values[] = {
+    -2147483648, -2147483647, -1073741825, -1073741824, -1073741823, -536870913,
+    -536870912,  -536870911,  -268435457,  -268435456,  -268435455,  -134217729,
+    -134217728,  -134217727,  -67108865,   -67108864,   -67108863,   -33554433,
+    -33554432,   -33554431,   -16777217,   -16777216,   -16777215,   -8388609,
+    -8388608,    -8388607,    -4194305,    -4194304,    -4194303,    -2097153,
+    -2097152,    -2097151,    -1048577,    -1048576,    -1048575,    -524289,
+    -524288,     -524287,     -262145,     -262144,     -262143,     -131073,
+    -131072,     -131071,     -65537,      -65536,      -65535,      -32769,
+    -32768,      -32767,      -16385,      -16384,      -16383,      -8193,
+    -8192,       -8191,       -4097,       -4096,       -4095,       -2049,
+    -2048,       -2047,       -1025,       -1024,       -1023,       -513,
+    -512,        -511,        -257,        -256,        -255,        -129,
+    -128,        -127,        -65,         -64,         -63,         -33,
+    -32,         -31,         -17,         -16,         -15,         -9,
+    -8,          -7,          -5,          -4,          -3,          -2,
+    -1,          0,           1,           2,           3,           4,
+    5,           7,           8,           9,           15,          16,
+    17,          31,          32,          33,          63,          64,
+    65,          127,         128,         129,         255,         256,
+    257,         511,         512,         513,         1023,        1024,
+    1025,        2047,        2048,        2049,        4095,        4096,
+    4097,        8191,        8192,        8193,        16383,       16384,
+    16385,       32767,       32768,       32769,       65535,       65536,
+    65537,       131071,      131072,      131073,      262143,      262144,
+    262145,      524287,      524288,      524289,      1048575,     1048576,
+    1048577,     2097151,     2097152,     2097153,     4194303,     4194304,
+    4194305,     8388607,     8388608,     8388609,     16777215,    16777216,
+    16777217,    33554431,    33554432,    33554433,    67108863,    67108864,
+    67108865,    134217727,   134217728,   134217729,   268435455,   268435456,
+    268435457,   536870911,   536870912,   536870913,   1073741823,  1073741824,
+    1073741825,  2147483647,
+};
+
+unsigned u32_values[] = {
+    0,          1,          2,          3,          4,          5,
+    7,          8,          9,          15,         16,         17,
+    31,         32,         33,         63,         64,         65,
+    127,        128,        129,        255,        256,        257,
+    511,        512,        513,        1023,       1024,       1025,
+    2047,       2048,       2049,       4095,       4096,       4097,
+    8191,       8192,       8193,       16383,      16384,      16385,
+    32767,      32768,      32769,      65535,      65536,      65537,
+    131071,     131072,     131073,     262143,     262144,     262145,
+    524287,     524288,     524289,     1048575,    1048576,    1048577,
+    2097151,    2097152,    2097153,    4194303,    4194304,    4194305,
+    8388607,    8388608,    8388609,    16777215,   16777216,   16777217,
+    33554431,   33554432,   33554433,   67108863,   67108864,   67108865,
+    134217727,  134217728,  134217729,  268435455,  268435456,  268435457,
+    536870911,  536870912,  536870913,  1073741823, 1073741824, 1073741825,
+    2147483647, 2147483648, 2147483649, 4294967295};
 
 static int test_uint(void)
 {
     uint8_t buf[9] = {0};
 
-    unsigned i = 0;
-    do
+    for (unsigned i = 0; i < array_size(u32_values); ++i)
     {
+        unsigned v = u32_values[i];
         clear(buf);
-        lip_pack_int(buf, i);
-        if (positive_integer_check(buf, i)) ERROR;
+        lip_pack_int(buf, v);
+        if (positive_integer_check(buf, v)) ERROR;
+    }
 
-    } while (++i != 0);
+    return 0;
+}
 
+static int negative_integer_check(uint8_t buf[9], int v)
+{
+    if (v >= -32)
+    {
+        if (lip_format(buf) != LIP_FMT_NEGATIVE_FIXINT) ERROR;
+        if (lip_unpack_int(buf) != v) ERROR;
+    }
+    else if (v >= INT8_MIN)
+    {
+        if (lip_format(buf) != LIP_FMT_INT_8) ERROR;
+        if (lip_unpack_int(buf) != v) ERROR;
+    }
+    else if (v >= INT16_MIN)
+    {
+        if (lip_format(buf) != LIP_FMT_INT_16) ERROR;
+        if (lip_unpack_int(buf) != v) ERROR;
+    }
+    else
+    {
+        if (lip_format(buf) != LIP_FMT_INT_32) ERROR;
+        if (lip_unpack_int(buf) != v) ERROR;
+    }
     return 0;
 }
 
@@ -89,38 +165,21 @@ static int test_int(void)
 {
     uint8_t buf[9] = {0};
 
-    int i = INT_MIN;
-    do
+    for (unsigned i = 0; i < array_size(u32_values); ++i)
     {
+        int v = i32_values[i];
         clear(buf);
-        lip_pack_int(buf, i);
+        lip_pack_int(buf, v);
 
-        if (i >= 0)
+        if (v >= 0)
         {
-            if (positive_integer_check(buf, (unsigned)i)) ERROR;
-        }
-        else if (i >= -32)
-        {
-            if (lip_format(buf) != LIP_FMT_NEGATIVE_FIXINT) ERROR;
-            // if (lip_unpack_uint(buf) != i) ERROR;
-        }
-        else if (i >= INT8_MIN)
-        {
-            if (lip_format(buf) != LIP_FMT_INT_8) ERROR;
-            // if (lip_unpack_uint(buf) != i) ERROR;
-        }
-        else if (i >= INT16_MIN)
-        {
-            if (lip_format(buf) != LIP_FMT_INT_16) ERROR;
-            // if (lip_unpack_uint(buf) != i) ERROR;
+            if (positive_integer_check(buf, (unsigned)v)) ERROR;
         }
         else
         {
-            if (lip_format(buf) != LIP_FMT_INT_32) ERROR;
-            // if (lip_unpack_uint(buf) != i) ERROR;
+            if (negative_integer_check(buf, v)) ERROR;
         }
-
-    } while (i++ != INT_MAX);
+    }
 
     return 0;
 }
@@ -321,8 +380,6 @@ static int test_map_example1(void)
 int main(void)
 {
     return test_map_example1() | test_bool() | test_map_example1() |
-           test_bool() | test_uint() | test_ulong() | test_int();
-    // return
-    //        ) | test_float() | test_double() | test_str() |
-    //        test_map();
+           test_bool() | test_uint() | test_ulong() | test_int() |
+           test_float() | test_double() | test_str();
 }
