@@ -115,26 +115,15 @@ static inline unsigned long lip_pack_str_body(uint8_t buf[static 1],
                                               unsigned length,
                                               char const val[static 1])
 {
-    if (length <= 0x1f)
-        return __lip_store_fix_str(buf, length, val);
-    else if (length <= 0xff)
-        return __lip_store_str8(buf, length, val);
-    else if (length <= 0xffff)
-        return __lip_store_str16(buf, length, val);
-    return __lip_store_str32(buf, length, val);
+    return __lip_store_body_str(buf, length, val);
 }
 
 static inline unsigned long lip_pack_str(uint8_t buf[static 2],
                                          char const val[static 1])
 {
     unsigned length = (unsigned)strlen(val);
-    if (length <= 0x1f)
-        return __lip_store_fix_str(buf, length, val);
-    else if (length <= 0xff)
-        return __lip_store_str8(buf, length, val);
-    else if (length <= 0xffff)
-        return __lip_store_str16(buf, length, val);
-    return __lip_store_str32(buf, length, val);
+    unsigned long offset = lip_pack_str_head(buf, length);
+    return offset + lip_pack_str_body(buf + offset, length, val);
 }
 
 static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
