@@ -54,6 +54,27 @@ static inline unsigned long __lip_store_i64_head(uint8_t buf[static 1])
     return 1;
 }
 
+static inline unsigned long __lip_store_fix_array_head(uint8_t buf[static 1],
+                                                       unsigned length)
+{
+    buf[0] = __lip_first_byte_fix(LIP_FMT_FIXARRAY, (int)length);
+    return 1;
+}
+
+static inline unsigned long __lip_store_array16_head(uint8_t buf[static 3],
+                                                     unsigned length)
+{
+    buf[0] = __lip_first_byte(LIP_FMT_ARRAY_16);
+    return __lip_store_num16_body(buf + 1, NUM16(length)) + 1;
+}
+
+static inline unsigned long __lip_store_array32_head(uint8_t buf[static 5],
+                                                     unsigned length)
+{
+    buf[0] = __lip_first_byte(LIP_FMT_ARRAY_32);
+    return __lip_store_num32_body(buf + 1, NUM32(length)) + 1;
+}
+
 static inline unsigned long __lip_store_fix_map_head(uint8_t buf[static 1],
                                                      unsigned length)
 {

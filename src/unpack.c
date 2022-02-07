@@ -101,6 +101,20 @@ char *lip_unpack_str_body(uint8_t const buf[static 1], unsigned length,
     return __lip_load_str_body(buf, length, str);
 }
 
+unsigned lip_unpack_array_head(uint8_t const buf[static 1])
+{
+    switch (lip_format(buf))
+    {
+    case LIP_FMT_FIXARRAY:
+        return (unsigned)__lip_format_fix_value(buf[0]);
+    case LIP_FMT_ARRAY_16:
+        return __lip_load_num16_body(buf + 1).u;
+    case LIP_FMT_ARRAY_32:
+        return __lip_load_num32_body(buf + 1).u;
+    }
+    return 0;
+}
+
 unsigned lip_unpack_map_head(uint8_t const buf[static 1])
 {
     switch (lip_format(buf))

@@ -30,6 +30,7 @@ static inline unsigned long     lip_pack_str(uint8_t buf[static 1], char const v
 static inline unsigned long     lip_pack_str_head(uint8_t buf[static 1], unsigned length);
 static inline unsigned long     lip_pack_str_body(uint8_t buf[static 1], unsigned length,
                                                   char const val[static 1]);
+static inline unsigned long     lip_pack_array_head(uint8_t buf[static 1], unsigned length);
 static inline unsigned long     lip_pack_map_head(uint8_t buf[static 1], unsigned length);
 
 bool                   lip_unpack_bool(uint8_t const buf[static 1]);
@@ -43,6 +44,7 @@ char*                  lip_unpack_str(uint8_t const buf[static 1], char str[stat
 unsigned               lip_unpack_str_head(uint8_t const buf[static 1]);
 char*                  lip_unpack_str_body(uint8_t const buf[static 1], unsigned length,
                                            char str[static 1]);
+unsigned               lip_unpack_array_head(uint8_t const buf[static 1]);
 unsigned               lip_unpack_map_head(uint8_t const buf[static 1]);
 
 enum lip_format;

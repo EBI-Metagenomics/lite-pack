@@ -137,6 +137,16 @@ static inline unsigned long lip_pack_str(uint8_t buf[static 2],
     return __lip_store_str32(buf, length, val);
 }
 
+static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
+                                                unsigned length)
+{
+    if (length <= 0xf)
+        return __lip_store_fix_array_head(buf, length);
+    else if (length <= 0xffff)
+        return __lip_store_array16_head(buf, length);
+    return __lip_store_array32_head(buf, length);
+}
+
 static inline unsigned long lip_pack_map_head(uint8_t buf[static 1],
                                               unsigned length)
 {
