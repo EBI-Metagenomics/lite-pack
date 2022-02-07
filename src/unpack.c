@@ -15,8 +15,10 @@ unsigned lip_unpack_uint(uint8_t const buf[static 1])
         return __lip_load_num16_body(buf + 1).u;
     case LIP_FMT_UINT_32:
         return __lip_load_num32_body(buf + 1).u;
+    case LIP_FMT_UINT_64:
+        return (unsigned)__lip_load_num64_body(buf + 1).u;
     }
-    __LIP_BUG();
+    return 0;
 }
 
 unsigned long lip_unpack_ulong(uint8_t const buf[static 1])
@@ -50,7 +52,7 @@ int lip_unpack_int(uint8_t const buf[static 1])
     case LIP_FMT_INT_32:
         return __lip_load_num32_body(buf + 1).i;
     }
-    __LIP_BUG();
+    return 0;
 }
 
 long lip_unpack_long(uint8_t const buf[static 1])
@@ -75,7 +77,6 @@ char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
     case LIP_FMT_STR_32:
         return __lip_load_str32(buf, str);
     }
-    __LIP_BUG();
     return 0;
 }
 

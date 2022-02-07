@@ -9,8 +9,6 @@
 
 /* clang-format off */
 
-static inline unsigned long     lip_pack_false(uint8_t buf[static 1]);
-static inline unsigned long     lip_pack_true(uint8_t buf[static 1]);
 static inline unsigned long     lip_pack_bool(uint8_t buf[static 1], bool val);
 #define                         lip_pack_int(buf, val)    _Generic((val),\
 uint8_t                     : __lip_pack_u8,                             \

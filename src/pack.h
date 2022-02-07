@@ -6,20 +6,20 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-static inline unsigned long lip_pack_false(uint8_t buf[static 1])
+static inline unsigned long __lip_pack_false(uint8_t buf[static 1])
 {
     return __lip_store_false(buf);
 }
 
-static inline unsigned long lip_pack_true(uint8_t buf[static 1])
+static inline unsigned long __lip_pack_true(uint8_t buf[static 1])
 {
     return __lip_store_true(buf);
 }
 
 static inline unsigned long lip_pack_bool(uint8_t buf[static 1], bool val)
 {
-    if (val) return lip_pack_true(buf);
-    return lip_pack_false(buf);
+    if (val) return __lip_pack_true(buf);
+    return __lip_pack_false(buf);
 }
 
 static inline unsigned long __lip_pack_u8(uint8_t buf[static 1], unsigned val)
@@ -103,12 +103,12 @@ static inline unsigned long lip_pack_str_head(uint8_t buf[static 1],
                                               unsigned length)
 {
     if (length <= 0x1f)
-        return __lip_store_fix_str_head(buf, length);
+        return __lip_store_head_fix_str(buf, length);
     else if (length <= 0xff)
-        return __lip_store_str8_head(buf, length);
+        return __lip_store_head_str8(buf, length);
     else if (length <= 0xffff)
-        return __lip_store_str16_head(buf, length);
-    return __lip_store_str32_head(buf, length);
+        return __lip_store_head_str16(buf, length);
+    return __lip_store_head_str32(buf, length);
 }
 
 static inline unsigned long lip_pack_str_body(uint8_t buf[static 1],
@@ -141,20 +141,20 @@ static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
                                                 unsigned length)
 {
     if (length <= 0xf)
-        return __lip_store_fix_array_head(buf, length);
+        return __lip_store_head_fix_array(buf, length);
     else if (length <= 0xffff)
-        return __lip_store_array16_head(buf, length);
-    return __lip_store_array32_head(buf, length);
+        return __lip_store_head_array16(buf, length);
+    return __lip_store_head_array32(buf, length);
 }
 
 static inline unsigned long lip_pack_map_head(uint8_t buf[static 1],
                                               unsigned length)
 {
     if (length <= 0xf)
-        return __lip_store_fix_map_head(buf, length);
+        return __lip_store_head_fix_map(buf, length);
     else if (length <= 0xffff)
-        return __lip_store_map16_head(buf, length);
-    return __lip_store_map32_head(buf, length);
+        return __lip_store_head_map16(buf, length);
+    return __lip_store_head_map32(buf, length);
 }
 
 #endif
