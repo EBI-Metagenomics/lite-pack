@@ -1,7 +1,6 @@
 #ifndef FORMAT_H
 #define FORMAT_H
 
-#include "bug.h"
 #include "compiler.h"
 #include <stdint.h>
 
@@ -113,7 +112,7 @@ static inline unsigned __lip_format_fix_pvalue(union num8 first_byte)
     case LIP_FMT_FIXSTR:
         return (~0xa0U & first_byte.u);
     }
-    __LIP_BUG();
+    return 0;
 }
 
 static inline int __lip_format_fix_nvalue(union num8 first_byte)
@@ -124,7 +123,7 @@ static inline int __lip_format_fix_nvalue(union num8 first_byte)
     case LIP_FMT_NEGATIVE_FIXINT:
         return (~0xe0U & first_byte.u);
     }
-    __LIP_BUG();
+    return 0;
 }
 
 #endif

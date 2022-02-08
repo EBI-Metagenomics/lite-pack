@@ -1,7 +1,6 @@
 #ifndef FIRST_BYTE_H
 #define FIRST_BYTE_H
 
-#include "bug.h"
 #include "compiler.h"
 #include "format.h"
 
@@ -110,7 +109,7 @@ static inline uint8_t __lip_first_byte(int format)
     case LIP_FMT_MAP_32:
         return 0xdf;
     }
-    __LIP_BUG();
+    return 0;
 }
 
 #endif

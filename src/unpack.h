@@ -1,7 +1,6 @@
 #ifndef UNPACK_H
 #define UNPACK_H
 
-#include "bug.h"
 #include "compiler.h"
 #include "first_byte.h"
 #include "format.h"

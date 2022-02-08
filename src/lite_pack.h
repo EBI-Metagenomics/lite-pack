@@ -3,7 +3,6 @@
 
 #include "format.h"
 #include "pack.h"
-#include "skip.h"
 #include "unpack.h"
 
 static inline unsigned long lip_pack_bool(uint8_t buf[static 1], bool val);
@@ -37,10 +36,6 @@ enum lip_format_family;
 
 static inline int lip_format(uint8_t const buf[static 1]);
 static inline int lip_format_family(uint8_t const buf[static 1]);
-
-static inline unsigned long lip_skip(uint8_t const buf[static 1]);
-static inline unsigned long lip_skip_head(uint8_t const buf[static 1]);
-static inline unsigned long lip_skip_body(uint8_t const buf[static 1]);
 /* clang-format on */
 
 #endif
