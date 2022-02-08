@@ -8,7 +8,7 @@ static int test_example1_write(size_t *size)
     uint8_t buf[256] = {0};
     uint8_t *ptr = buf;
 
-    ptr += lip_pack_map_head(ptr, 2);
+    ptr += lip_pack_map_size(ptr, 2);
 
     ptr += lip_pack_str(ptr, "name");
     ptr += lip_pack_str(ptr, "Danilo Horta");
@@ -34,20 +34,31 @@ static int test_example1_read(size_t *size)
     fread(buf, 1, *size, fp);
     ptr = buf;
 
-    if (lip_unpack_map_head(ptr) != 2) ERROR;
-    ptr += lip_skip(ptr);
+    unsigned sz = 0;
+    ptr += lip_unpack_map_size(ptr, &sz);
+    if (sz != 2) ERROR;
 
-    if (strcmp(lip_unpack_str(ptr, str), "name")) ERROR;
-    ptr += lip_skip(ptr);
+    ptr += lip_unpack_str_size(ptr, &sz);
+    if (sz != 4) ERROR;
 
-    if (strcmp(lip_unpack_str(ptr, str), "Danilo Horta")) ERROR;
-    ptr += lip_skip(ptr);
+    ptr += lip_unpack_str_data(ptr, sz, str);
+    if (strncmp(str, "name", sz)) ERROR;
 
-    if (strcmp(lip_unpack_str(ptr, str), "age")) ERROR;
-    ptr += lip_skip(ptr);
+    ptr += lip_unpack_str_size(ptr, &sz);
+    if (sz != 12) ERROR;
 
-    if (lip_unpack_uint(ptr) != 36) ERROR;
-    ptr += lip_skip(ptr);
+    ptr += lip_unpack_str_data(ptr, sz, str);
+    if (strncmp(str, "Danilo Horta", sz)) ERROR;
+
+    ptr += lip_unpack_str_size(ptr, &sz);
+    if (sz != 3) ERROR;
+
+    ptr += lip_unpack_str_data(ptr, sz, str);
+    if (strncmp(str, "age", sz)) ERROR;
+
+    unsigned age = 0;
+    ptr += lip_unpack_int(ptr, &age);
+    if (age != 36) ERROR;
 
     if ((size_t)(ptr - buf) != *size) ERROR;
 
