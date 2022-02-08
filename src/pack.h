@@ -126,10 +126,11 @@ static inline unsigned lip_pack_str_size(uint8_t buf[static 1], unsigned size)
     return __lip_store_head_str32(buf, size);
 }
 
-static inline unsigned lip_pack_str_data(uint8_t buf[static 1], unsigned length,
+static inline unsigned lip_pack_str_data(uint8_t buf[static 1], unsigned size,
                                          char const val[static 1])
 {
-    return __lip_store_body_str(buf, length, val);
+    memcpy(buf, val, size);
+    return size;
 }
 
 static inline unsigned long lip_pack_str(uint8_t buf[static 2],

@@ -3,7 +3,6 @@
 
 #include "compiler.h"
 #include "format.h"
-#include "load_body.h"
 #include <stdbool.h>
 #include <string.h>
 
