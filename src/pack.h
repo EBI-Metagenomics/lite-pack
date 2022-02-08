@@ -140,8 +140,7 @@ static inline unsigned long lip_pack_str(uint8_t buf[static 2],
     return offset + lip_pack_str_data(buf + offset, length, val);
 }
 
-static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
-                                                unsigned size)
+static inline unsigned lip_pack_array_size(uint8_t buf[static 1], unsigned size)
 {
     if (size <= 0xf)
         return __lip_store_head_fix_array(buf, (uint8_t)size);
@@ -150,8 +149,7 @@ static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
     return __lip_store_head_array32(buf, (uint32_t)size);
 }
 
-static inline unsigned lip_pack_map_size(uint8_t buf[static 1],
-                                              unsigned size)
+static inline unsigned lip_pack_map_size(uint8_t buf[static 1], unsigned size)
 {
     if (size <= 0xf)
         return __lip_store_head_fix_map(buf, (uint8_t)size);

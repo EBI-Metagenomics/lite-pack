@@ -209,16 +209,19 @@ unsigned lip_unpack_str_data(uint8_t const buf[static 1], unsigned size,
     return __lip_load_str_body(buf, size, str);
 }
 
-unsigned lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size)
+unsigned lip_unpack_array_size(uint8_t const buf[static 1], unsigned *size)
 {
     switch (lip_format(buf))
     {
     case LIP_FMT_FIXARRAY:
-        return __lip_format_fix_pvalue(NUM8(buf[0]));
+        *size = (unsigned)__lip_format_fix_value(buf[0]);
+        return 1;
     case LIP_FMT_ARRAY_16:
-        return __lip_load_num16_body(buf + 1, (union num16 *)size);
+        *size = __lip_load_num16(buf + 1).u;
+        return 3;
     case LIP_FMT_ARRAY_32:
-        return __lip_load_num32_body(buf + 1, (union num32 *)size);
+        *size = __lip_load_num32(buf + 1).u;
+        return 5;
     }
     return 0;
 }

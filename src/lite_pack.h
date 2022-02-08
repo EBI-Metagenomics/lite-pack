@@ -16,8 +16,8 @@ static inline unsigned lip_pack_str_size(uint8_t buf[static 1], unsigned size);
 static inline unsigned lip_pack_str_data(uint8_t buf[static 1], unsigned size,
                                          char const str[static 1]);
 
-static inline unsigned long lip_pack_array_head(uint8_t buf[static 1],
-                                                unsigned size);
+static inline unsigned lip_pack_array_size(uint8_t buf[static 1],
+                                           unsigned size);
 
 static inline unsigned lip_pack_map_size(uint8_t buf[static 1], unsigned size);
 
@@ -28,7 +28,7 @@ unsigned lip_unpack_bool(uint8_t const buf[static 1], bool *val);
 unsigned lip_unpack_str_size(uint8_t const buf[static 1], unsigned *size);
 unsigned lip_unpack_str_data(uint8_t const buf[static 1], unsigned size,
                              char str[static 1]);
-unsigned lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size);
+unsigned lip_unpack_array_size(uint8_t const buf[static 1], unsigned *size);
 unsigned lip_unpack_map_size(uint8_t const buf[static 1], unsigned *size);
 
 /* clang-format off */

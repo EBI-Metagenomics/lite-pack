@@ -29,6 +29,7 @@ lp_add_test(float)
 lp_add_test(first_byte)
 lp_add_test(bool)
 lp_add_test(map)
+lp_add_test(array)
 # lp_add_test(examples)
 
 lp_add_test(pack_int)

@@ -30,7 +30,7 @@ static int read_int_values(char const *input)
 static int write_int_values(char const *output)
 {
     uint8_t *ptr = buf;
-    ptr += lip_pack_array_head(ptr, nvalues);
+    ptr += lip_pack_array_size(ptr, nvalues);
 
     for (unsigned i = 0; i < nvalues; ++i)
     {
