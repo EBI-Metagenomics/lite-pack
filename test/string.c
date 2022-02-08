@@ -11,10 +11,13 @@ int main(void)
     char *out = malloc(out_size);
     if (!out) exit(1);
 
-    unsigned long lengths[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000UL};
+    unsigned lengths[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000U};
     int formats[] = {
         LIP_FMT_FIXSTR, LIP_FMT_FIXSTR, LIP_FMT_STR_8,  LIP_FMT_STR_8,
         LIP_FMT_STR_16, LIP_FMT_STR_16, LIP_FMT_STR_32,
+    };
+    unsigned sizes[] = {
+        1, 1, 2, 2, 3, 3, 5,
     };
 
     char const *str = 0;
@@ -24,10 +27,13 @@ int main(void)
         memset(buf, 0, buf_size);
 
         str = lorem_new(lengths[i]);
-        lip_pack_str(buf, str);
+        unsigned len = (unsigned)strlen(str);
+        if (lip_pack_str_size(buf, len) != sizes[i]) ERROR;
+        if (lip_pack_str_data(buf + sizes[i], len, str) != lengths[i]) ERROR;
 
-        if (lip_format(buf) != formats[i]) goto error;
-        if (strcmp(lip_unpack_str(buf, out), str)) goto error;
+        if (lip_format(buf) != formats[i]) ERROR;
+        if (lip_unpack_str_size(buf, &len) != sizes[i]) ERROR;
+        // if (strcmp(lip_unpack_str(buf, out), str)) goto error;
 
         free((void *)str);
     }
@@ -35,10 +41,4 @@ int main(void)
     free(buf);
     free(out);
     return 0;
-
-error:
-    free(buf);
-    free(out);
-    free((void *)str);
-    ERROR;
 }

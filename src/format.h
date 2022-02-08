@@ -2,6 +2,7 @@
 #define FORMAT_H
 
 #include "bug.h"
+#include "compiler.h"
 #include <stdint.h>
 
 enum lip_format
@@ -85,15 +86,43 @@ static inline int __lip_format_fix_value(uint8_t first_byte)
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
-        return ~0x00 & first_byte;
+        return (int)first_byte;
     case LIP_FMT_FIXMAP:
-        return ~0x80 & first_byte;
+        return (int)(~0x80 & first_byte);
     case LIP_FMT_FIXARRAY:
-        return ~0x90 & first_byte;
+        return (int)(~0x90 & first_byte);
     case LIP_FMT_FIXSTR:
-        return ~0xa0 & first_byte;
+        return (int)(~0xa0 & first_byte);
     case LIP_FMT_NEGATIVE_FIXINT:
-        return ~0xe0 & first_byte;
+        return NUM8(first_byte).i;
+    }
+    return 0;
+}
+
+static inline unsigned __lip_format_fix_pvalue(union num8 first_byte)
+{
+    int format = __lip_format(first_byte.i);
+    switch (format)
+    {
+    case LIP_FMT_POSITIVE_FIXINT:
+        return (~0x00U & first_byte.u);
+    case LIP_FMT_FIXMAP:
+        return (~0x80U & first_byte.u);
+    case LIP_FMT_FIXARRAY:
+        return (~0x90U & first_byte.u);
+    case LIP_FMT_FIXSTR:
+        return (~0xa0U & first_byte.u);
+    }
+    __LIP_BUG();
+}
+
+static inline int __lip_format_fix_nvalue(union num8 first_byte)
+{
+    int format = __lip_format(first_byte.i);
+    switch (format)
+    {
+    case LIP_FMT_NEGATIVE_FIXINT:
+        return (~0xe0U & first_byte.u);
     }
     __LIP_BUG();
 }

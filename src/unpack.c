@@ -169,6 +169,7 @@ unsigned __lip_unpack_f64(uint8_t const buf[static 5], double *val)
     return 0;
 }
 
+#if 0
 char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
 {
     switch (lip_format(buf))
@@ -184,27 +185,28 @@ char *lip_unpack_str(uint8_t const buf[static 1], char str[static 1])
     }
     return 0;
 }
+#endif
 
-unsigned lip_unpack_str_head(uint8_t const buf[static 1], unsigned *size)
+unsigned lip_unpack_str_size(uint8_t const buf[static 1], unsigned *size)
 {
     switch (lip_format(buf))
     {
     case LIP_FMT_FIXSTR:
-        *size = __lip_fix_str_length(buf);
+        *size = __lip_format_fix_pvalue(NUM8(buf[0]));
     case LIP_FMT_STR_8:
-        *size = __lip_str8_length(buf);
+        *size = __lip_load_num8(buf + 1).u;
     case LIP_FMT_STR_16:
-        *size = __lip_str16_length(buf);
+        *size = __lip_load_num16(buf + 1).u;
     case LIP_FMT_STR_32:
-        *size = __lip_str32_length(buf);
+        *size = __lip_load_num32(buf + 1).u;
     }
     return 0;
 }
 
-char *lip_unpack_str_body(uint8_t const buf[static 1], unsigned length,
-                          char str[static 1])
+unsigned lip_unpack_str_data(uint8_t const buf[static 1], unsigned size,
+                             char str[static 1])
 {
-    return __lip_load_str_body(buf, length, str);
+    return __lip_load_str_body(buf, size, str);
 }
 
 unsigned lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size)
@@ -212,7 +214,7 @@ unsigned lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size)
     switch (lip_format(buf))
     {
     case LIP_FMT_FIXARRAY:
-        return (unsigned)__lip_format_fix_value(buf[0]);
+        return __lip_format_fix_pvalue(NUM8(buf[0]));
     case LIP_FMT_ARRAY_16:
         return __lip_load_num16_body(buf + 1, (union num16 *)size);
     case LIP_FMT_ARRAY_32:
@@ -221,16 +223,19 @@ unsigned lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size)
     return 0;
 }
 
-unsigned lip_unpack_map_head(uint8_t const buf[static 1], unsigned *size)
+unsigned lip_unpack_map_size(uint8_t const buf[static 1], unsigned *size)
 {
     switch (lip_format(buf))
     {
     case LIP_FMT_FIXMAP:
-        return (unsigned)__lip_format_fix_value(buf[0]);
+        *size = (unsigned)__lip_format_fix_value(buf[0]);
+        return 1;
     case LIP_FMT_MAP_16:
-        return __lip_load_num16_body(buf + 1, (union num16 *)size);
+        *size = __lip_load_num16(buf + 1).u;
+        return 3;
     case LIP_FMT_MAP_32:
-        return __lip_load_num32_body(buf + 1, (union num32 *)size);
+        *size = __lip_load_num32(buf + 1).u;
+        return 5;
     }
     return 0;
 }

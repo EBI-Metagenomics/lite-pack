@@ -62,6 +62,12 @@ static_assert(sizeof(double) == 8, "64-bits double");
 
 CHECK_FLOAT_ORDER();
 
+union num
+{
+    int i;
+    unsigned u;
+};
+
 union num8
 {
     char c[1];
@@ -92,23 +98,26 @@ union num64
     double d;
 };
 
+#define NUM(x)                                                                 \
+    _Generic((x), unsigned : (union num){.u = (x)}, int : (union num){.i = (x)})
+
 #define NUM8(x)                                                                \
-    _Generic((x), unsigned                                                     \
-             : (union num8){.u = (uint8_t)(x)}, int                            \
-             : (union num8){.i = (int8_t)(x)})
+    _Generic((x), uint8_t                                                      \
+             : (union num8){.u = (x)}, int8_t                                  \
+             : (union num8){.i = (x)})
 #define NUM16(x)                                                               \
-    _Generic((x), unsigned                                                     \
-             : (union num16){.u = (uint16_t)(x)}, int                          \
-             : (union num16){.i = (int16_t)(x)})
+    _Generic((x), uint16_t                                                     \
+             : (union num16){.u = (x)}, int16_t                                \
+             : (union num16){.i = (x)})
 #define NUM32(x)                                                               \
-    _Generic((x), unsigned                                                     \
-             : (union num32){.u = (uint32_t)(x)}, int                          \
-             : (union num32){.i = (int32_t)(x)}, float                         \
-             : (union num32){.f = (float)(x)})
+    _Generic((x), uint32_t                                                     \
+             : (union num32){.u = (x)}, int32_t                                \
+             : (union num32){.i = (x)}, float                                  \
+             : (union num32){.f = (x)})
 #define NUM64(x)                                                               \
-    _Generic((x), unsigned long                                                \
-             : (union num64){.u = (uint64_t)(x)}, long                         \
-             : (union num64){.i = (int64_t)(x)}, double                        \
-             : (union num64){.d = (double)(x)})
+    _Generic((x), uint64_t                                                     \
+             : (union num64){.u = (x)}, int64_t                                \
+             : (union num64){.i = (x)}, double                                 \
+             : (union num64){.d = (x)})
 
 #endif

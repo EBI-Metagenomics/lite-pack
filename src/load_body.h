@@ -37,12 +37,11 @@ static inline unsigned __lip_load_num64_body(uint8_t const buf[static 8],
     return 8;
 }
 
-static inline char *__lip_load_str_body(uint8_t const buf[static 1],
-                                        unsigned length, char str[static 1])
+static inline unsigned __lip_load_str_body(uint8_t const buf[static 1],
+                                           unsigned size, char str[static 1])
 {
-    memcpy(str, buf, length);
-    str[length] = 0;
-    return str;
+    memcpy(str, buf, size);
+    return size;
 }
 
 #endif

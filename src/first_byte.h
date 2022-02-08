@@ -2,24 +2,43 @@
 #define FIRST_BYTE_H
 
 #include "bug.h"
+#include "compiler.h"
 #include "format.h"
+
+static inline uint8_t __lip_first_byte_fix_old(int format, union num8 val)
+{
+    switch (format)
+    {
+    case LIP_FMT_POSITIVE_FIXINT:
+        return (uint8_t)(0x00U | val.u);
+    case LIP_FMT_FIXMAP:
+        return (uint8_t)(0x80U | val.u);
+    case LIP_FMT_FIXARRAY:
+        return (uint8_t)(0x90U | val.u);
+    case LIP_FMT_FIXSTR:
+        return (uint8_t)(0xa0U | val.u);
+    case LIP_FMT_NEGATIVE_FIXINT:
+        return ~NUM8((uint8_t)(~(0xe0U | val.u))).u;
+    }
+    return 0;
+}
 
 static inline uint8_t __lip_first_byte_fix(int format, int val)
 {
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
-        return (uint8_t)(0x00 | val);
+        return NUM8((uint8_t)NUM(0x00 | val).u).u;
     case LIP_FMT_FIXMAP:
-        return (uint8_t)(0x80 | val);
+        return NUM8((uint8_t)NUM(0x80 | val).u).u;
     case LIP_FMT_FIXARRAY:
-        return (uint8_t)(0x90 | val);
+        return NUM8((uint8_t)NUM(0x90 | val).u).u;
     case LIP_FMT_FIXSTR:
-        return (uint8_t)(0xa0 | val);
+        return NUM8((uint8_t)NUM(0xa0 | val).u).u;
     case LIP_FMT_NEGATIVE_FIXINT:
-        return (uint8_t)(0xe0 | val);
+        return NUM8((int8_t)NUM(0xe0 | val).i).u;
     }
-    __LIP_BUG();
+    return NUM8((uint8_t)0).u;
 }
 
 static inline uint8_t __lip_first_byte(int format)
