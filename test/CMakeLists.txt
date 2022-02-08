@@ -25,7 +25,7 @@ endfunction()
 
 lp_add_test(integer)
 lp_add_test(float)
-# lp_add_test(string)
+lp_add_test(string)
 lp_add_test(first_byte)
 lp_add_test(bool)
 lp_add_test(map)
