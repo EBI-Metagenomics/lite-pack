@@ -5,36 +5,36 @@
 #include <stdint.h>
 #include <string.h>
 
-static inline union num8 __lip_load_num8_body(uint8_t const buf[static 1])
+static inline unsigned __lip_load_num8_body(uint8_t const buf[static 1],
+                                            union num8 *num)
 {
-    union num8 num;
-    memcpy(num.c, buf, 1);
-    num.u = big_endian(num.u);
-    return num;
+    memcpy(num->c, buf, 1);
+    num->u = big_endian(num->u);
+    return 1;
 }
 
-static inline union num16 __lip_load_num16_body(uint8_t const buf[static 2])
+static inline unsigned __lip_load_num16_body(uint8_t const buf[static 2],
+                                             union num16 *num)
 {
-    union num16 num;
-    memcpy(num.c, buf, 2);
-    num.u = big_endian(num.u);
-    return num;
+    memcpy(num->c, buf, 2);
+    num->u = big_endian(num->u);
+    return 2;
 }
 
-static inline union num32 __lip_load_num32_body(uint8_t const buf[static 4])
+static inline unsigned __lip_load_num32_body(uint8_t const buf[static 4],
+                                             union num32 *num)
 {
-    union num32 num;
-    memcpy(num.c, buf, 4);
-    num.u = big_endian(num.u);
-    return num;
+    memcpy(num->c, buf, 4);
+    num->u = big_endian(num->u);
+    return 4;
 }
 
-static inline union num64 __lip_load_num64_body(uint8_t const buf[static 8])
+static inline unsigned __lip_load_num64_body(uint8_t const buf[static 8],
+                                             union num64 *num)
 {
-    union num64 num;
-    memcpy(num.c, buf, 8);
-    num.u = big_endian(num.u);
-    return num;
+    memcpy(num->c, buf, 8);
+    num->u = big_endian(num->u);
+    return 8;
 }
 
 static inline char *__lip_load_str_body(uint8_t const buf[static 1],

@@ -17,7 +17,10 @@ static int test_f32(void)
         clear(buf);
         lip_pack_float(buf, f32_values[i]);
         if (lip_format(buf) != LIP_FMT_FLOAT_32) ERROR;
-        if (lip_unpack_float(buf) != f32_values[i]) ERROR;
+
+        float v = 0;
+        if (lip_unpack_float(buf, &v) != 5) ERROR;
+        if (v != f32_values[i]) ERROR;
     }
 
     return 0;
@@ -30,7 +33,10 @@ static int test_f64(void)
         clear(buf);
         lip_pack_float(buf, f64_values[i]);
         if (lip_format(buf) != LIP_FMT_FLOAT_64) ERROR;
-        if (lip_unpack_double(buf) != f64_values[i]) ERROR;
+
+        double v = 0;
+        if (lip_unpack_float(buf, &v) != 9) ERROR;
+        if (v != f64_values[i]) ERROR;
     }
 
     return 0;

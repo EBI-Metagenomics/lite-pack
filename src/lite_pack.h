@@ -10,20 +10,20 @@
 /* clang-format off */
 
 static inline unsigned long     lip_pack_bool(uint8_t buf[static 1], bool val);
-#define                         lip_pack_int(buf, val)    _Generic((val),\
-uint8_t                     : __lip_pack_u8,                             \
-uint16_t                    : __lip_pack_u16,                            \
-uint32_t                    : __lip_pack_u32,                            \
-uint64_t                    : __lip_pack_u64,                            \
-unsigned long               : __lip_pack_u64,                            \
-int8_t                      : __lip_pack_i8,                             \
-int16_t                     : __lip_pack_i16,                            \
-int32_t                     : __lip_pack_i32,                            \
-int64_t                     : __lip_pack_i64,                            \
-long                        : __lip_pack_i64)(buf, val)
-#define                         lip_pack_float(buf, val)  _Generic((val),\
-float                       : __lip_pack_f32,                            \
-double                      : __lip_pack_f64)(buf, val)
+#define                         lip_pack_int(buf, val) _Generic((val),             \
+    uint8_t       : __lip_pack_u8,                                                 \
+    uint16_t      : __lip_pack_u16,                                                \
+    uint32_t      : __lip_pack_u32,                                                \
+    uint64_t      : __lip_pack_u64,                                                \
+    unsigned long : __lip_pack_u64,                                                \
+    int8_t        : __lip_pack_i8,                                                 \
+    int16_t       : __lip_pack_i16,                                                \
+    int32_t       : __lip_pack_i32,                                                \
+    int64_t       : __lip_pack_i64,                                                \
+    long          : __lip_pack_i64)(buf, val)
+#define                         lip_pack_float(buf, val) _Generic((val),           \
+    float         : __lip_pack_f32,                                  \
+    double        : __lip_pack_f64)(buf, val)
 static inline unsigned long     lip_pack_str(uint8_t buf[static 1], char const val[static 1]);
 static inline unsigned long     lip_pack_str_head(uint8_t buf[static 1], unsigned size);
 static inline unsigned long     lip_pack_str_body(uint8_t buf[static 1], unsigned size,
@@ -31,19 +31,27 @@ static inline unsigned long     lip_pack_str_body(uint8_t buf[static 1], unsigne
 static inline unsigned long     lip_pack_array_head(uint8_t buf[static 1], unsigned size);
 static inline unsigned long     lip_pack_map_head(uint8_t buf[static 1], unsigned size);
 
-bool                   lip_unpack_bool(uint8_t const buf[static 1]);
-unsigned               lip_unpack_uint(uint8_t const buf[static 1]);
-int                    lip_unpack_int(uint8_t const buf[static 1]);
-unsigned long          lip_unpack_ulong(uint8_t const buf[static 1]);
-long                   lip_unpack_long(uint8_t const buf[static 1]);
-static inline float    lip_unpack_float(uint8_t const buf[static 1]);
-static inline double   lip_unpack_double(uint8_t const buf[static 1]);
+unsigned                   lip_unpack_bool(uint8_t const buf[static 1], bool *val);
+#define                    lip_unpack_int(buf, val) _Generic((val),                   \
+    uint8_t*       : __lip_unpack_u8,                                                 \
+    uint16_t*      : __lip_unpack_u16,                                                \
+    uint32_t*      : __lip_unpack_u32,                                                \
+    uint64_t*      : __lip_unpack_u64,                                                \
+    unsigned long* : __lip_unpack_u64,                                                \
+    int8_t*        : __lip_unpack_i8,                                                 \
+    int16_t*       : __lip_unpack_i16,                                                \
+    int32_t*       : __lip_unpack_i32,                                                \
+    int64_t*       : __lip_unpack_i64,                                                \
+    long*          : __lip_unpack_i64)(buf, val)
+#define                lip_unpack_float(buf, val) _Generic((val),              \
+float*                                            : __lip_unpack_f32,          \
+double*                                           : __lip_unpack_f64)(buf, val)
 char*                  lip_unpack_str(uint8_t const buf[static 1], char str[static 1]);
-unsigned               lip_unpack_str_head(uint8_t const buf[static 1]);
+unsigned               lip_unpack_str_head(uint8_t const buf[static 1], unsigned *size);
 char*                  lip_unpack_str_body(uint8_t const buf[static 1], unsigned size,
                                            char str[static 1]);
-unsigned               lip_unpack_array_head(uint8_t const buf[static 1]);
-unsigned               lip_unpack_map_head(uint8_t const buf[static 1]);
+unsigned               lip_unpack_array_head(uint8_t const buf[static 1], unsigned *size);
+unsigned               lip_unpack_map_head(uint8_t const buf[static 1], unsigned *size);
 
 enum lip_format;
 enum lip_format_family;

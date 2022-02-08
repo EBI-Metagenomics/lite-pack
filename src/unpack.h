@@ -8,30 +8,24 @@
 #include "load.h"
 #include <stdbool.h>
 
-static inline bool lip_unpack_bool(uint8_t const buf[static 1])
+static inline unsigned lip_unpack_bool(uint8_t const buf[static 1], bool *val)
 {
     if (lip_format(buf) == LIP_FMT_FALSE || lip_format(buf) == LIP_FMT_TRUE)
-        return __lip_load_bool(buf);
+        return __lip_load_bool(buf, val);
     return 0;
 }
 
-static inline float lip_unpack_float(uint8_t const buf[static 5])
-{
-    if (lip_format(buf) == LIP_FMT_FLOAT_32)
-        return __lip_load_num32_body(buf + 1).f;
-    return 0;
-}
+unsigned __lip_unpack_u8(uint8_t const buf[static 1], uint8_t *val);
+unsigned __lip_unpack_u16(uint8_t const buf[static 1], uint16_t *val);
+unsigned __lip_unpack_u32(uint8_t const buf[static 1], uint32_t *val);
+unsigned __lip_unpack_u64(uint8_t const buf[static 1], uint64_t *val);
 
-static inline double lip_unpack_double(uint8_t const buf[static 9])
-{
-    switch (lip_format(buf))
-    {
-    case LIP_FMT_FLOAT_64:
-        return __lip_load_num64_body(buf + 1).d;
-    case LIP_FMT_FLOAT_32:
-        return __lip_load_num32_body(buf + 1).f;
-    }
-    return 0;
-}
+unsigned __lip_unpack_i8(uint8_t const buf[static 1], int8_t *val);
+unsigned __lip_unpack_i16(uint8_t const buf[static 1], int16_t *val);
+unsigned __lip_unpack_i32(uint8_t const buf[static 1], int32_t *val);
+unsigned __lip_unpack_i64(uint8_t const buf[static 1], int64_t *val);
+
+unsigned __lip_unpack_f32(uint8_t const buf[static 5], float *val);
+unsigned __lip_unpack_f64(uint8_t const buf[static 5], double *val);
 
 #endif

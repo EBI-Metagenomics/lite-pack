@@ -8,9 +8,10 @@
 #include <stdbool.h>
 #include <string.h>
 
-static inline bool __lip_load_bool(uint8_t const buf[static 1])
+static inline unsigned __lip_load_bool(uint8_t const buf[static 1], bool *val)
 {
-    return __lip_format(buf[0]) ^ LIP_FMT_FALSE;
+    *val = __lip_format(buf[0]) ^ LIP_FMT_FALSE;
+    return 1;
 }
 
 static inline char *__lip_load_fix_str(uint8_t const buf[static 1],
