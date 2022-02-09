@@ -8,7 +8,12 @@
 #include "pack_int.h"
 #include "pack_map.h"
 #include "pack_str.h"
-#include "unpack.h"
+#include "unpack_array.h"
+#include "unpack_bool.h"
+#include "unpack_float.h"
+#include "unpack_int.h"
+#include "unpack_map.h"
+#include "unpack_str.h"
 
 static inline unsigned lip_pack_bool(uint8_t buf[static 1], bool val);
 
