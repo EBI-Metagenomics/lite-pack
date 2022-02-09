@@ -3,9 +3,10 @@
 
 #include "format.h"
 #include "pack.h"
+#include "pack_bool.h"
 #include "unpack.h"
 
-static inline unsigned long lip_pack_bool(uint8_t buf[static 1], bool val);
+static inline unsigned lip_pack_bool(uint8_t buf[static 1], bool val);
 
 #define lip_pack_int(buf, val) __lip_pack_int(buf, val)
 
