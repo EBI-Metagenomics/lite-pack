@@ -17,14 +17,14 @@
              : __lip_pack_i64, long                                            \
              : __lip_pack_i64)(buf, val)
 
-unsigned __lip_pack_i8(uint8_t buf[static 1], int val);
-unsigned __lip_pack_i16(uint8_t buf[static 1], int val);
-unsigned __lip_pack_i32(uint8_t buf[static 1], int val);
-unsigned __lip_pack_i64(uint8_t buf[static 1], long val);
+unsigned __lip_pack_i8(unsigned char buf[static 1], int val);
+unsigned __lip_pack_i16(unsigned char buf[static 1], int val);
+unsigned __lip_pack_i32(unsigned char buf[static 1], int val);
+unsigned __lip_pack_i64(unsigned char buf[static 1], long val);
 
-unsigned __lip_pack_u8(uint8_t buf[static 1], unsigned val);
-unsigned __lip_pack_u16(uint8_t buf[static 1], unsigned val);
-unsigned __lip_pack_u32(uint8_t buf[static 1], unsigned val);
-unsigned __lip_pack_u64(uint8_t buf[static 1], unsigned long val);
+unsigned __lip_pack_u8(unsigned char buf[static 1], unsigned val);
+unsigned __lip_pack_u16(unsigned char buf[static 1], unsigned val);
+unsigned __lip_pack_u32(unsigned char buf[static 1], unsigned val);
+unsigned __lip_pack_u64(unsigned char buf[static 1], unsigned long val);
 
 #endif

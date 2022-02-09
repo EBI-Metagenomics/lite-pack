@@ -3,7 +3,7 @@
 
 #include "format.h"
 
-uint8_t __lip_first_byte(enum lip_format format);
-uint8_t __lip_first_byte_fix(enum lip_format format, int val);
+unsigned char __lip_first_byte(enum lip_format format);
+unsigned char __lip_first_byte_fix(enum lip_format format, int val);
 
 #endif

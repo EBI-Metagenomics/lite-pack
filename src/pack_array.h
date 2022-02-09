@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-unsigned lip_pack_array_size(uint8_t buf[static 1], unsigned size);
+unsigned lip_pack_array_size(unsigned char buf[static 1], unsigned size);
 
 #endif

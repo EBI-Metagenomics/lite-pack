@@ -4,7 +4,7 @@
 
 /* SIGNED INTEGER */
 
-unsigned __lip_unpack_i8(uint8_t const buf[static 1], int8_t *val)
+unsigned __lip_unpack_i8(unsigned char const buf[static 1], int8_t *val)
 {
     switch (lip_format(buf))
     {
@@ -20,7 +20,7 @@ unsigned __lip_unpack_i8(uint8_t const buf[static 1], int8_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_i16(uint8_t const buf[static 1], int16_t *val)
+unsigned __lip_unpack_i16(unsigned char const buf[static 1], int16_t *val)
 {
     switch (lip_format(buf))
     {
@@ -40,7 +40,7 @@ unsigned __lip_unpack_i16(uint8_t const buf[static 1], int16_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_i32(uint8_t const buf[static 1], int32_t *val)
+unsigned __lip_unpack_i32(unsigned char const buf[static 1], int32_t *val)
 {
     switch (lip_format(buf))
     {
@@ -64,7 +64,7 @@ unsigned __lip_unpack_i32(uint8_t const buf[static 1], int32_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_i64(uint8_t const buf[static 1], int64_t *val)
+unsigned __lip_unpack_i64(unsigned char const buf[static 1], int64_t *val)
 {
     switch (lip_format(buf))
     {
@@ -94,7 +94,7 @@ unsigned __lip_unpack_i64(uint8_t const buf[static 1], int64_t *val)
 
 /* UNSIGNED INTEGER */
 
-unsigned __lip_unpack_u8(uint8_t const buf[static 1], uint8_t *val)
+unsigned __lip_unpack_u8(unsigned char const buf[static 1], uint8_t *val)
 {
     switch (lip_format(buf))
     {
@@ -110,7 +110,7 @@ unsigned __lip_unpack_u8(uint8_t const buf[static 1], uint8_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_u16(uint8_t const buf[static 1], uint16_t *val)
+unsigned __lip_unpack_u16(unsigned char const buf[static 1], uint16_t *val)
 {
     switch (lip_format(buf))
     {
@@ -130,7 +130,7 @@ unsigned __lip_unpack_u16(uint8_t const buf[static 1], uint16_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_u32(uint8_t const buf[static 1], uint32_t *val)
+unsigned __lip_unpack_u32(unsigned char const buf[static 1], uint32_t *val)
 {
     switch (lip_format(buf))
     {
@@ -154,7 +154,7 @@ unsigned __lip_unpack_u32(uint8_t const buf[static 1], uint32_t *val)
     return 0;
 }
 
-unsigned __lip_unpack_u64(uint8_t const buf[static 1], uint64_t *val)
+unsigned __lip_unpack_u64(unsigned char const buf[static 1], uint64_t *val)
 {
     switch (lip_format(buf))
     {

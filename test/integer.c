@@ -86,7 +86,7 @@ static long const i64_values[] = {-9223372036854775807L,
                                   4294967295L,
                                   9223372036854775807L};
 
-static int positive_integer_check(uint8_t buf[9], unsigned long v)
+static int positive_integer_check(unsigned char buf[9], unsigned long v)
 {
     uint8_t u8 = 0;
     uint16_t u16 = 0;
@@ -125,7 +125,7 @@ static int positive_integer_check(uint8_t buf[9], unsigned long v)
     return 0;
 }
 
-static int negative_integer_check(uint8_t buf[9], long v)
+static int negative_integer_check(unsigned char buf[9], long v)
 {
     int8_t i8 = 0;
     int16_t i16 = 0;

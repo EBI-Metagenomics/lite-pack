@@ -2,7 +2,7 @@
 #include "format.h"
 #include "load_number.h"
 
-unsigned lip_unpack_array_size(uint8_t const buf[static 1], unsigned *size)
+unsigned lip_unpack_array_size(unsigned char const buf[static 1], unsigned *size)
 {
     switch (lip_format(buf))
     {

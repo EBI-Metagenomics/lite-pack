@@ -1,7 +1,7 @@
 #include "pack_array.h"
 #include "store_array.h"
 
-unsigned lip_pack_array_size(uint8_t buf[static 1], unsigned size)
+unsigned lip_pack_array_size(unsigned char buf[static 1], unsigned size)
 {
     if (size <= 0xf)
         return __lip_store_fixarray(buf, (uint8_t)size);

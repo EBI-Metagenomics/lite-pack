@@ -9,7 +9,7 @@ unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
 int const formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP, LIP_FMT_MAP_16,
                        LIP_FMT_MAP_16, LIP_FMT_MAP_32, LIP_FMT_MAP_32};
 
-uint8_t buf[17] = {0};
+static unsigned char buf[17] = {0};
 
 int main(void)
 {

@@ -1,7 +1,7 @@
 #include "helper.h"
 #include "lite_pack.h"
 
-static uint8_t buf = 0;
+static unsigned char buf = 0;
 
 int main(void)
 {

@@ -4,7 +4,7 @@
 #define ROW_SIZE 128
 #define MAX_NUM_VALUES 256
 
-static uint8_t buf[1024 * 128] = {0};
+static unsigned char buf[1024 * 128] = {0};
 static long long values[MAX_NUM_VALUES];
 static unsigned nvalues = 0;
 
@@ -29,7 +29,7 @@ static int read_int_values(char const *input)
 
 static int write_int_values(char const *output)
 {
-    uint8_t *ptr = buf;
+    unsigned char *ptr = buf;
     ptr += lip_pack_array_size(ptr, nvalues);
 
     for (unsigned i = 0; i < nvalues; ++i)

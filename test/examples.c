@@ -5,8 +5,8 @@ static int test_example1_write(size_t *size)
 {
     FILE *fp = fopen("example1.mp", "wb");
 
-    uint8_t buf[256] = {0};
-    uint8_t *ptr = buf;
+    unsigned char buf[256] = {0};
+    unsigned char *ptr = buf;
 
     ptr += lip_pack_map_size(ptr, 2);
 
@@ -32,9 +32,9 @@ static int test_example1_read(size_t *size)
 {
     FILE *fp = fopen("example1.mp", "rb");
 
-    uint8_t buf[256] = {0};
+    unsigned char buf[256] = {0};
     char str[256] = {0};
-    uint8_t *ptr = buf;
+    unsigned char *ptr = buf;
 
     fread(buf, 1, *size, fp);
     ptr = buf;

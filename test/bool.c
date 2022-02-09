@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    uint8_t buf[1] = {0};
+    unsigned char buf[1] = {0};
     bool v = 0;
 
     clear(buf);
