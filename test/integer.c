@@ -164,7 +164,7 @@ static int negative_integer_check(unsigned char buf[9], long v)
     return 0;
 }
 
-static uint8_t buf[9] = {0};
+static unsigned char buf[9] = {0};
 
 static int test_u32(void)
 {
