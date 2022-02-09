@@ -20,8 +20,7 @@ unsigned lip_pack_str_size(uint8_t buf[static 1], unsigned size);
 unsigned lip_pack_str_data(uint8_t buf[static 1], unsigned size,
                            char const str[static 1]);
 
-static inline unsigned lip_pack_array_size(uint8_t buf[static 1],
-                                           unsigned size);
+unsigned lip_pack_array_size(uint8_t buf[static 1], unsigned size);
 
 unsigned lip_pack_map_size(uint8_t buf[static 1], unsigned size);
 
