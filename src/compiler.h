@@ -62,27 +62,27 @@ static_assert(sizeof(double) == 8, "64-bits double");
 
 CHECK_FLOAT_ORDER();
 
-union num
+union __lip_num
 {
     int i;
     unsigned u;
 };
 
-union num8
+union __lip_num8
 {
     char c[1];
     int8_t i;
     uint8_t u;
 };
 
-union num16
+union __lip_num16
 {
     char c[2];
     int16_t i;
     uint16_t u;
 };
 
-union num32
+union __lip_num32
 {
     char c[4];
     int32_t i;
@@ -90,7 +90,7 @@ union num32
     float f;
 };
 
-union num64
+union __lip_num64
 {
     char c[8];
     int64_t i;
@@ -98,26 +98,28 @@ union num64
     double d;
 };
 
-#define NUM(x)                                                                 \
-    _Generic((x), unsigned : (union num){.u = (x)}, int : (union num){.i = (x)})
+#define __LIP_NUM(x)                                                           \
+    _Generic((x), unsigned                                                     \
+             : (union __lip_num){.u = (x)}, int                                \
+             : (union __lip_num){.i = (x)})
 
-#define NUM8(x)                                                                \
+#define __LIP_NUM8(x)                                                                \
     _Generic((x), uint8_t                                                      \
-             : (union num8){.u = (x)}, int8_t                                  \
-             : (union num8){.i = (x)})
-#define NUM16(x)                                                               \
+             : (union __lip_num8){.u = (x)}, int8_t                            \
+             : (union __lip_num8){.i = (x)})
+#define __LIP_NUM16(x)                                                               \
     _Generic((x), uint16_t                                                     \
-             : (union num16){.u = (x)}, int16_t                                \
-             : (union num16){.i = (x)})
-#define NUM32(x)                                                               \
+             : (union __lip_num16){.u = (x)}, int16_t                          \
+             : (union __lip_num16){.i = (x)})
+#define __LIP_NUM32(x)                                                               \
     _Generic((x), uint32_t                                                     \
-             : (union num32){.u = (x)}, int32_t                                \
-             : (union num32){.i = (x)}, float                                  \
-             : (union num32){.f = (x)})
-#define NUM64(x)                                                               \
+             : (union __lip_num32){.u = (x)}, int32_t                          \
+             : (union __lip_num32){.i = (x)}, float                            \
+             : (union __lip_num32){.f = (x)})
+#define __LIP_NUM64(x)                                                               \
     _Generic((x), uint64_t                                                     \
-             : (union num64){.u = (x)}, int64_t                                \
-             : (union num64){.i = (x)}, double                                 \
-             : (union num64){.d = (x)})
+             : (union __lip_num64){.u = (x)}, int64_t                          \
+             : (union __lip_num64){.i = (x)}, double                           \
+             : (union __lip_num64){.d = (x)})
 
 #endif

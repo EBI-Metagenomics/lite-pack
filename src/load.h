@@ -12,33 +12,33 @@ static inline unsigned __lip_load_bool(uint8_t const buf[static 1], bool *val)
     return 1;
 }
 
-static inline union num8 __lip_load_num8(uint8_t const buf[static 1])
+static inline union __lip_num8 __lip_load_num8(uint8_t const buf[static 1])
 {
-    union num8 num;
+    union __lip_num8 num;
     memcpy(num.c, buf, sizeof(num));
     num.u = big_endian(num.u);
     return num;
 }
 
-static inline union num16 __lip_load_num16(uint8_t const buf[static 1])
+static inline union __lip_num16 __lip_load_num16(uint8_t const buf[static 1])
 {
-    union num16 num;
+    union __lip_num16 num;
     memcpy(num.c, buf, sizeof(num));
     num.u = big_endian(num.u);
     return num;
 }
 
-static inline union num32 __lip_load_num32(uint8_t const buf[static 1])
+static inline union __lip_num32 __lip_load_num32(uint8_t const buf[static 1])
 {
-    union num32 num;
+    union __lip_num32 num;
     memcpy(num.c, buf, sizeof(num));
     num.u = big_endian(num.u);
     return num;
 }
 
-static inline union num64 __lip_load_num64(uint8_t const buf[static 1])
+static inline union __lip_num64 __lip_load_num64(uint8_t const buf[static 1])
 {
-    union num64 num;
+    union __lip_num64 num;
     memcpy(num.c, buf, sizeof(num));
     num.u = big_endian(num.u);
     return num;

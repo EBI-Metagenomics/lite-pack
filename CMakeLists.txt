@@ -40,7 +40,7 @@ endif()
 
 include("cmake/sanitizers.cmake")
 
-add_library(${PROJECT_NAME} src/format.c src/unpack.c)
+add_library(${PROJECT_NAME} src/format.c src/unpack.c src/first_byte.c)
 add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")

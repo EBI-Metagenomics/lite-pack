@@ -43,7 +43,6 @@ enum lip_format
     LIP_FMT_MAP_16,
     LIP_FMT_MAP_32,
     LIP_FMT_NEGATIVE_FIXINT,
-    LIP_FMT_SENTINEL,
 };
 
 enum lip_format_family
@@ -57,7 +56,6 @@ enum lip_format_family
     LIP_FMT_FAMILY_ARRAY,
     LIP_FMT_FAMILY_MAP,
     LIP_FMT_FAMILY_EXT,
-    LIP_FMT_FAMILY_SENTINEL,
 };
 
 extern int const __lip_format_family_map[];
@@ -93,12 +91,12 @@ static inline int __lip_format_fix_value(uint8_t first_byte)
     case LIP_FMT_FIXSTR:
         return (int)(~0xa0 & first_byte);
     case LIP_FMT_NEGATIVE_FIXINT:
-        return NUM8(first_byte).i;
+        return __LIP_NUM8(first_byte).i;
     }
     return 0;
 }
 
-static inline unsigned __lip_format_fix_pvalue(union num8 first_byte)
+static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
 {
     int format = __lip_format(first_byte.i);
     switch (format)
@@ -115,7 +113,7 @@ static inline unsigned __lip_format_fix_pvalue(union num8 first_byte)
     return 0;
 }
 
-static inline int __lip_format_fix_nvalue(union num8 first_byte)
+static inline int __lip_format_fix_nvalue(union __lip_num8 first_byte)
 {
     int format = __lip_format(first_byte.i);
     switch (format)
