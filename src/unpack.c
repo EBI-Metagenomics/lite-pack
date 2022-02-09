@@ -1,6 +1,6 @@
 #include "unpack.h"
 #include "lite_pack.h"
-#include "load.h"
+#include "load_number.h"
 
 unsigned __lip_unpack_u8(uint8_t const buf[static 1], uint8_t *val)
 {

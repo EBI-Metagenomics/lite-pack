@@ -4,7 +4,7 @@
 #include "compiler.h"
 #include "first_byte.h"
 #include "format.h"
-#include "load.h"
+#include "load_bool.h"
 #include <stdbool.h>
 
 static inline unsigned lip_unpack_bool(uint8_t const buf[static 1], bool *val)
