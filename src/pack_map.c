@@ -1,7 +1,7 @@
 #include "pack_map.h"
 #include "store_map.h"
 
-unsigned lip_pack_map_size(unsigned char buf[static 1], unsigned size)
+unsigned lip_pack_map_size(unsigned char buf[], unsigned size)
 {
     if (size <= 0xf)
         return __lip_store_fixmap(buf, (uint8_t)size);

@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-unsigned lip_pack_map_size(unsigned char buf[static 1], unsigned size);
+unsigned lip_pack_map_size(unsigned char buf[], unsigned size);
 
 #endif

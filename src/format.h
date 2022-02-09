@@ -68,12 +68,12 @@ static inline int __lip_format_family(int first_byte)
 
 int __lip_format(int first_byte);
 
-static inline int lip_format(uint8_t const buf[static 1])
+static inline int lip_format(uint8_t const buf[])
 {
     return __lip_format(buf[0]);
 }
 
-static inline int lip_format_family(uint8_t const buf[static 1])
+static inline int lip_format_family(uint8_t const buf[])
 {
     return __lip_format_family(buf[0]);
 }
@@ -111,7 +111,7 @@ static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
     case LIP_FMT_FIXSTR:
         return (~0xa0U & first_byte.u);
     }
-    return 0;
+    return 0U;
 }
 
 static inline int __lip_format_fix_nvalue(union __lip_num8 first_byte)
@@ -120,7 +120,7 @@ static inline int __lip_format_fix_nvalue(union __lip_num8 first_byte)
     switch (format)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
-        return (~0xe0U & first_byte.u);
+        return (int)(~0xe0U & first_byte.u);
     }
     return 0;
 }

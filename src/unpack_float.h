@@ -9,7 +9,7 @@ float*  : __lip_unpack_f32,                                         \
 double* : __lip_unpack_f64)(buf, val)
 /* clang-format on */
 
-unsigned __lip_unpack_f32(unsigned char const buf[static 5], float *val);
-unsigned __lip_unpack_f64(unsigned char const buf[static 5], double *val);
+unsigned __lip_unpack_f32(unsigned char const buf[], float *val);
+unsigned __lip_unpack_f64(unsigned char const buf[], double *val);
 
 #endif

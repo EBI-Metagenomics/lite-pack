@@ -1,7 +1,7 @@
 #include "pack_str.h"
 #include "store_str.h"
 
-unsigned lip_pack_str_size(unsigned char buf[static 1], unsigned size)
+unsigned lip_pack_str_size(unsigned char buf[], unsigned size)
 {
     if (size <= 0x1f)
         return __lip_store_fixstr(buf, (uint8_t)size);
@@ -12,15 +12,15 @@ unsigned lip_pack_str_size(unsigned char buf[static 1], unsigned size)
     return __lip_store_str32(buf, size);
 }
 
-unsigned lip_pack_str_data(unsigned char buf[static 1], unsigned size,
-                           char const val[static 1])
+unsigned lip_pack_str_data(unsigned char buf[], unsigned size,
+                           char const val[])
 {
     memcpy(buf, val, size);
     return size;
 }
 
 #if 0
-unsigned long lip_pack_str(unsigned char buf[static 2], char const val[static 1])
+unsigned long lip_pack_str(unsigned char buf[], char const val[])
 {
     unsigned length = (unsigned)strlen(val);
     unsigned long offset = lip_pack_str_size(buf, length);

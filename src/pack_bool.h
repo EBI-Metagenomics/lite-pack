@@ -4,7 +4,7 @@
 #include "store_bool.h"
 #include <stdint.h>
 
-static inline unsigned lip_pack_bool(unsigned char buf[static 1], bool val)
+static inline unsigned lip_pack_bool(unsigned char buf[], bool val)
 {
     return __lip_store_bool(buf, val);
 }

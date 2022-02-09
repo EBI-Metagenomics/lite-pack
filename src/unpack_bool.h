@@ -4,6 +4,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-unsigned lip_unpack_bool(unsigned char const buf[static 1], bool *val);
+unsigned lip_unpack_bool(unsigned char const buf[], bool *val);
 
 #endif

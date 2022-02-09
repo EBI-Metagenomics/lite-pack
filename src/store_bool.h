@@ -4,7 +4,7 @@
 #include "first_byte.h"
 #include <stdbool.h>
 
-static inline unsigned __lip_store_bool(unsigned char buf[static 1], bool val)
+static inline unsigned __lip_store_bool(unsigned char buf[], bool val)
 {
     if (val)
         buf[0] = __lip_first_byte(LIP_FMT_TRUE);
