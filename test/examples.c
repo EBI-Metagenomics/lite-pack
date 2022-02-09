@@ -1,11 +1,12 @@
 #include "helper.h"
 #include "lite_pack.h"
 
+static unsigned char buf[1024] = {0};
+
 static int test_example1_write(size_t *size)
 {
     FILE *fp = fopen("example1.mp", "wb");
 
-    unsigned char buf[256] = {0};
     unsigned char *ptr = buf;
 
     ptr += lip_pack_map_size(ptr, 2);
@@ -32,7 +33,6 @@ static int test_example1_read(size_t *size)
 {
     FILE *fp = fopen("example1.mp", "rb");
 
-    unsigned char buf[256] = {0};
     char str[256] = {0};
     unsigned char *ptr = buf;
 
@@ -80,4 +80,71 @@ static int test_example1(void)
     return 0;
 }
 
-int main(void) { return test_example1(); }
+static int test_example2_write(size_t *size)
+{
+    FILE *fp = fopen("example2.mp", "wb");
+
+    unsigned char *ptr = buf;
+
+    ptr += lip_pack_array_size(ptr, 2);
+
+    ptr += lip_pack_array_size(ptr, 2);
+    ptr += lip_pack_int(ptr, 0);
+    ptr += lip_pack_int(ptr, 1);
+
+    ptr += lip_pack_int(ptr, 2);
+    ptr += lip_pack_int(ptr, 3);
+
+    *size = fwrite(buf, 1, (size_t)(ptr - buf), fp);
+
+    fclose(fp);
+
+    return 0;
+}
+
+static int test_example2_read(size_t *size)
+{
+    FILE *fp = fopen("example2.mp", "rb");
+
+    unsigned char *ptr = buf;
+
+    fread(buf, 1, *size, fp);
+    ptr = buf;
+
+    unsigned sz = 0;
+    ptr += lip_unpack_array_size(ptr, &sz);
+    if (sz != 2) ERROR;
+
+    ptr += lip_unpack_array_size(ptr, &sz);
+    if (sz != 2) ERROR;
+
+    int v = 0;
+
+    ptr += lip_unpack_int(ptr, &v);
+    if (v != 0) ERROR;
+
+    ptr += lip_unpack_int(ptr, &v);
+    if (v != 1) ERROR;
+
+    ptr += lip_unpack_int(ptr, &v);
+    if (v != 2) ERROR;
+
+    ptr += lip_unpack_int(ptr, &v);
+    if (v != 3) ERROR;
+
+    if ((size_t)(ptr - buf) != *size) ERROR;
+
+    fclose(fp);
+
+    return 0;
+}
+
+static int test_example2(void)
+{
+    size_t size = 0;
+    if (test_example2_write(&size)) ERROR;
+    if (test_example2_read(&size)) ERROR;
+    return 0;
+}
+
+int main(void) { return test_example1() | test_example2(); }
