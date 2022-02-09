@@ -2,8 +2,12 @@
 #define LITE_PACK_H
 
 #include "format.h"
-#include "pack.h"
+#include "pack_array.h"
 #include "pack_bool.h"
+#include "pack_float.h"
+#include "pack_int.h"
+#include "pack_map.h"
+#include "pack_str.h"
 #include "unpack.h"
 
 static inline unsigned lip_pack_bool(uint8_t buf[static 1], bool val);
