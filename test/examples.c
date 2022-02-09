@@ -10,10 +10,15 @@ static int test_example1_write(size_t *size)
 
     ptr += lip_pack_map_size(ptr, 2);
 
-    ptr += lip_pack_str(ptr, "name");
-    ptr += lip_pack_str(ptr, "Danilo Horta");
+    ptr += lip_pack_str_size(ptr, 4);
+    ptr += lip_pack_str_data(ptr, 4, "name");
 
-    ptr += lip_pack_str(ptr, "age");
+    ptr += lip_pack_str_size(ptr, 12);
+    ptr += lip_pack_str_data(ptr, 12, "Danilo Horta");
+
+    ptr += lip_pack_str_size(ptr, 3);
+    ptr += lip_pack_str_data(ptr, 3, "age");
+
     ptr += lip_pack_int(ptr, 36U);
 
     *size = fwrite(buf, 1, (size_t)(ptr - buf), fp);

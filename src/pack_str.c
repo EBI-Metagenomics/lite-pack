@@ -19,9 +19,11 @@ unsigned lip_pack_str_data(uint8_t buf[static 1], unsigned size,
     return size;
 }
 
+#if 0
 unsigned long lip_pack_str(uint8_t buf[static 2], char const val[static 1])
 {
     unsigned length = (unsigned)strlen(val);
     unsigned long offset = lip_pack_str_size(buf, length);
     return offset + lip_pack_str_data(buf + offset, length, val);
 }
+#endif
