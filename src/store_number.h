@@ -2,31 +2,35 @@
 #define LIP_STORE_NUMBER_H
 
 #include "compiler.h"
-#include <stdint.h>
+#include "number.h"
 #include <string.h>
 
-static inline unsigned lip_store_num8(uint8_t buf[static 1], union __lip_num8 val)
+static inline unsigned lip_store_num8(uint8_t buf[static 1],
+                                      union __lip_num8 val)
 {
     val.u = big_endian(val.u);
     memcpy(buf, &val, 1);
     return 1;
 }
 
-static inline unsigned lip_store_num16(uint8_t buf[static 2], union __lip_num16 val)
+static inline unsigned lip_store_num16(uint8_t buf[static 2],
+                                       union __lip_num16 val)
 {
     val.u = big_endian(val.u);
     memcpy(buf, &val, 2);
     return 2;
 }
 
-static inline unsigned lip_store_num32(uint8_t buf[static 4], union __lip_num32 val)
+static inline unsigned lip_store_num32(uint8_t buf[static 4],
+                                       union __lip_num32 val)
 {
     val.u = big_endian(val.u);
     memcpy(buf, &val, 4);
     return 4;
 }
 
-static inline unsigned lip_store_num64(uint8_t buf[static 8], union __lip_num64 val)
+static inline unsigned lip_store_num64(uint8_t buf[static 8],
+                                       union __lip_num64 val)
 {
     val.u = big_endian(val.u);
     memcpy(buf, &val, 8);

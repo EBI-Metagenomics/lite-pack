@@ -2,6 +2,7 @@
 #define FORMAT_H
 
 #include "compiler.h"
+#include "number.h"
 #include <stdint.h>
 
 enum lip_format

@@ -1,4 +1,5 @@
 #include "first_byte.h"
+#include "number.h"
 
 uint8_t __lip_first_byte(enum lip_format format)
 {

@@ -1,9 +1,7 @@
 #ifndef LIP_STORE_MAP_H
 #define LIP_STORE_MAP_H
 
-#include "compiler.h"
 #include "first_byte.h"
-#include "format.h"
 #include "store_number.h"
 
 static inline unsigned __lip_store_fixmap(uint8_t buf[static 1], uint8_t size)
