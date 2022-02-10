@@ -49,29 +49,31 @@ lp_add_test(first_byte)
 lp_add_test(bool)
 lp_add_test(map)
 lp_add_test(array)
+lp_add_test(ext)
 lp_add_test(examples)
 lp_add_test(integer_stress)
+lp_add_test(emis)
 
 if(${PYTHON_READY})
   lp_add_test(pack_int)
   add_custom_command(
     TARGET pack_int
     POST_BUILD
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py "${ASSETS}/u32.txt"
-            "${TMPDIR}/u32_py.mp")
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py
+            "${ASSETS}/u32.txt" "${TMPDIR}/u32_py.mp")
   add_custom_command(
     TARGET pack_int
     POST_BUILD
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py "${ASSETS}/i32.txt"
-            "${TMPDIR}/i32_py.mp")
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py
+            "${ASSETS}/i32.txt" "${TMPDIR}/i32_py.mp")
   add_custom_command(
     TARGET pack_int
     POST_BUILD
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py "${ASSETS}/u64.txt"
-            "${TMPDIR}/u64_py.mp")
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py
+            "${ASSETS}/u64.txt" "${TMPDIR}/u64_py.mp")
   add_custom_command(
     TARGET pack_int
     POST_BUILD
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py "${ASSETS}/i64.txt"
-            "${TMPDIR}/i64_py.mp")
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/pack_int.py
+            "${ASSETS}/i64.txt" "${TMPDIR}/i64_py.mp")
 endif()

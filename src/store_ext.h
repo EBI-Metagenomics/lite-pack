@@ -38,6 +38,11 @@ static inline unsigned __lip_store_fixext8(unsigned char buf[], uint8_t type)
     return __lip_store_fixext(buf, LIP_FMT_FIXEXT_8, type);
 }
 
+static inline unsigned __lip_store_fixext16(unsigned char buf[], uint8_t type)
+{
+    return __lip_store_fixext(buf, LIP_FMT_FIXEXT_16, type);
+}
+
 static inline unsigned __lip_store_ext8(unsigned char buf[], uint8_t size,
                                         uint8_t type)
 {
