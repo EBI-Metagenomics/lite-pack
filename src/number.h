@@ -21,7 +21,7 @@ static inline union __lip_num __lip_inum(int x)
 
 union __lip_num8
 {
-    char c[1];
+    unsigned char c[1];
     int8_t i;
     uint8_t u;
 };
@@ -38,7 +38,7 @@ static inline union __lip_num8 __lip_inum8(int8_t x)
 
 union __lip_num16
 {
-    char c[2];
+    unsigned char c[2];
     int16_t i;
     uint16_t u;
 };
@@ -55,7 +55,7 @@ static inline union __lip_num16 __lip_inum16(int16_t x)
 
 union __lip_num32
 {
-    char c[4];
+    unsigned char c[4];
     int32_t i;
     uint32_t u;
     float f;
@@ -78,7 +78,7 @@ static inline union __lip_num32 __lip_fnum32(float x)
 
 union __lip_num64
 {
-    char c[8];
+    unsigned char c[8];
     int64_t i;
     uint64_t u;
     double f;

@@ -77,9 +77,19 @@ static inline unsigned lip_store_i8(unsigned char buf[], int8_t val)
     return __lip_store_num8(buf, __LIP_NUM8(val));
 }
 
+static inline unsigned lip_store_i8_inplace(unsigned char buf[])
+{
+    return __lip_store_num8(buf, (union __lip_num8){.c = {buf[0]}});
+}
+
 static inline unsigned lip_store_i16(unsigned char buf[], int16_t val)
 {
     return __lip_store_num16(buf, __LIP_NUM16(val));
+}
+
+static inline unsigned lip_store_i16_inplace(unsigned char buf[])
+{
+    return __lip_store_num16(buf, (union __lip_num16){.c = {buf[0], buf[1]}});
 }
 
 static inline unsigned lip_store_i32(unsigned char buf[], int32_t val)
@@ -87,9 +97,22 @@ static inline unsigned lip_store_i32(unsigned char buf[], int32_t val)
     return __lip_store_num32(buf, __LIP_NUM32(val));
 }
 
+static inline unsigned lip_store_i32_inplace(unsigned char buf[])
+{
+    return __lip_store_num32(
+        buf, (union __lip_num32){.c = {buf[0], buf[1], buf[2], buf[3]}});
+}
+
 static inline unsigned lip_store_i64(unsigned char buf[], int64_t val)
 {
     return __lip_store_num64(buf, __LIP_NUM64(val));
+}
+
+static inline unsigned lip_store_i64_inplace(unsigned char buf[])
+{
+    return __lip_store_num64(
+        buf, (union __lip_num64){.c = {buf[0], buf[1], buf[2], buf[3], buf[4],
+                                       buf[5], buf[6], buf[7]}});
 }
 
 /* RAW UNSIGNED INTEGER FOR PUBLIC INTERFACE */
@@ -99,9 +122,19 @@ static inline unsigned lip_store_u8(unsigned char buf[], uint8_t val)
     return __lip_store_num8(buf, __LIP_NUM8(val));
 }
 
+static inline unsigned lip_store_u8_inplace(unsigned char buf[])
+{
+    return __lip_store_num8(buf, (union __lip_num8){.c = {buf[0]}});
+}
+
 static inline unsigned lip_store_u16(unsigned char buf[], uint16_t val)
 {
     return __lip_store_num16(buf, __LIP_NUM16(val));
+}
+
+static inline unsigned lip_store_u16_inplace(unsigned char buf[])
+{
+    return __lip_store_num16(buf, (union __lip_num16){.c = {buf[0], buf[1]}});
 }
 
 static inline unsigned lip_store_u32(unsigned char buf[], uint32_t val)
@@ -109,9 +142,22 @@ static inline unsigned lip_store_u32(unsigned char buf[], uint32_t val)
     return __lip_store_num32(buf, __LIP_NUM32(val));
 }
 
+static inline unsigned lip_store_u32_inplace(unsigned char buf[])
+{
+    return __lip_store_num32(
+        buf, (union __lip_num32){.c = {buf[0], buf[1], buf[2], buf[3]}});
+}
+
 static inline unsigned lip_store_u64(unsigned char buf[], uint64_t val)
 {
     return __lip_store_num64(buf, __LIP_NUM64(val));
+}
+
+static inline unsigned lip_store_u64_inplace(unsigned char buf[])
+{
+    return __lip_store_num64(
+        buf, (union __lip_num64){.c = {buf[0], buf[1], buf[2], buf[3], buf[4],
+                                       buf[5], buf[6], buf[7]}});
 }
 
 #endif
