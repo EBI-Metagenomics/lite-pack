@@ -3,13 +3,13 @@
 #include <limits.h>
 #include <stdlib.h>
 
-int const __lip_format_family_map[] = {
+enum lip_format_family const __lip_format_family_map[] = {
     [LIP_FMT_POSITIVE_FIXINT] = LIP_FMT_FAMILY_INT,
     [LIP_FMT_FIXMAP] = LIP_FMT_FAMILY_MAP,
     [LIP_FMT_FIXARRAY] = LIP_FMT_FAMILY_ARRAY,
     [LIP_FMT_FIXSTR] = LIP_FMT_FAMILY_STR,
     [LIP_FMT_NIL] = LIP_FMT_FAMILY_NIL,
-    [LIP_FMT_NEVER_USED] = -1,
+    [LIP_FMT_NEVER_USED] = 0,
     [LIP_FMT_FALSE] = LIP_FMT_FAMILY_BOOL,
     [LIP_FMT_TRUE] = LIP_FMT_FAMILY_BOOL,
     [LIP_FMT_BIN_8] = LIP_FMT_FAMILY_BIN,

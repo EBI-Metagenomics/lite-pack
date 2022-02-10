@@ -59,9 +59,9 @@ enum lip_format_family
     LIP_FMT_FAMILY_EXT,
 };
 
-extern int const __lip_format_family_map[];
+extern enum lip_format_family const __lip_format_family_map[];
 
-static inline int __lip_format_family(int first_byte)
+static inline enum lip_format_family __lip_format_family(int first_byte)
 {
     return __lip_format_family_map[first_byte];
 }
@@ -73,7 +73,7 @@ static inline enum lip_format lip_format(uint8_t const buf[])
     return __lip_format(buf[0]);
 }
 
-static inline int lip_format_family(uint8_t const buf[])
+static inline enum lip_format_family lip_format_family(uint8_t const buf[])
 {
     return __lip_format_family(buf[0]);
 }

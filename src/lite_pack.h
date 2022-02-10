@@ -102,7 +102,7 @@ enum lip_format;
 enum lip_format_family;
 
 static inline enum lip_format lip_format(unsigned char const buf[]);
-static inline int lip_format_family(unsigned char const buf[]);
+static inline enum lip_format_family lip_format_family(unsigned char const buf[]);
 /* clang-format on */
 
 #endif
