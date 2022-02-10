@@ -1,8 +1,8 @@
 #ifndef LIP_STORE_ARRAY_H
 #define LIP_STORE_ARRAY_H
 
-#include "first_byte.h"
-#include "store_number.h"
+#include "lite_pack/first_byte.h"
+#include "lite_pack/store_number.h"
 
 static inline unsigned __lip_store_fixarray(unsigned char buf[], uint8_t size)
 {

@@ -1,7 +1,7 @@
 #ifndef LIP_LOAD_BOOL_H
 #define LIP_LOAD_BOOL_H
 
-#include "format.h"
+#include "lite_pack/format.h"
 #include <stdbool.h>
 
 static inline unsigned __lip_load_bool(unsigned char const buf[], bool *val)

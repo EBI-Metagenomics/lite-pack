@@ -1,7 +1,7 @@
 #ifndef EXT_EXAMPLE_H
 #define EXT_EXAMPLE_H
 
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 
 enum type
 {

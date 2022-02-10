@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 
 int main(void)
 {

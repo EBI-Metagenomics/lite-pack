@@ -1,5 +1,5 @@
-#include "pack_array.h"
-#include "store_array.h"
+#include "lite_pack/pack_array.h"
+#include "lite_pack/store_array.h"
 
 unsigned lip_pack_array_size(unsigned char buf[], unsigned size)
 {

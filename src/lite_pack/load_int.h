@@ -1,8 +1,8 @@
 #ifndef LIP_LOAD_INT_H
 #define LIP_LOAD_INT_H
 
-#include "format.h"
-#include "load_number.h"
+#include "lite_pack/format.h"
+#include "lite_pack/load_number.h"
 
 /* RAW SIGNED INTEGER FOR PUBLIC INTERFACE */
 

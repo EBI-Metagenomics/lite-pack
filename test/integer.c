@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 #include <stdint.h>
 
 static unsigned const u32_values[] = {

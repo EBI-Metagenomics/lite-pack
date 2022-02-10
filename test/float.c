@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 #include <float.h>
 #include <math.h>
 

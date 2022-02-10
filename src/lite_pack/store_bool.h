@@ -1,7 +1,7 @@
 #ifndef LIP_STORE_BOOL
 #define LIP_STORE_BOOL
 
-#include "first_byte.h"
+#include "lite_pack/first_byte.h"
 #include <stdbool.h>
 
 static inline unsigned __lip_store_bool(unsigned char buf[], bool val)

@@ -1,8 +1,8 @@
 #ifndef FORMAT_H
 #define FORMAT_H
 
-#include "compiler.h"
-#include "number.h"
+#include "lite_pack/compiler.h"
+#include "lite_pack/number.h"
 #include <stdint.h>
 
 enum lip_format

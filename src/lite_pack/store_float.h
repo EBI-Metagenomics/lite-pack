@@ -1,8 +1,8 @@
 #ifndef LIP_STORE_FLOAT_H
 #define LIP_STORE_FLOAT_H
 
-#include "first_byte.h"
-#include "store_number.h"
+#include "lite_pack/first_byte.h"
+#include "lite_pack/store_number.h"
 
 static inline unsigned lip_store_f32(unsigned char buf[], float val)
 {

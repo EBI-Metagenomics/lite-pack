@@ -1,6 +1,6 @@
 #include "ext_example.h"
 #include "helper.h"
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 
 static unsigned char buffer[1024 * 1024] = {0};
 

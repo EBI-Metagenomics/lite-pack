@@ -1,8 +1,8 @@
 #ifndef LIP_LOAD_FLOAT_H
 #define LIP_LOAD_FLOAT_H
 
-#include "format.h"
-#include "load_number.h"
+#include "lite_pack/format.h"
+#include "lite_pack/load_number.h"
 
 static inline unsigned lip_load_f32(unsigned char const buf[], float *val)
 {

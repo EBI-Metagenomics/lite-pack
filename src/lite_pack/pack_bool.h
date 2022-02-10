@@ -1,7 +1,7 @@
 #ifndef LIP_PACK_BOOL
 #define LIP_PACK_BOOL
 
-#include "store_bool.h"
+#include "lite_pack/store_bool.h"
 #include <stdint.h>
 
 static inline unsigned lip_pack_bool(unsigned char buf[], bool val)

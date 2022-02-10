@@ -1,10 +1,10 @@
 #ifndef LIP_STORE_STR_H
 #define LIP_STORE_STR_H
 
-#include "compiler.h"
-#include "first_byte.h"
-#include "format.h"
-#include "store_number.h"
+#include "lite_pack/compiler.h"
+#include "lite_pack/first_byte.h"
+#include "lite_pack/format.h"
+#include "lite_pack/store_number.h"
 
 static inline unsigned __lip_store_fixstr(unsigned char buf[], uint8_t size)
 {

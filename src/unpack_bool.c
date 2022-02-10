@@ -1,6 +1,6 @@
-#include "unpack_bool.h"
-#include "format.h"
-#include "load_bool.h"
+#include "lite_pack/unpack_bool.h"
+#include "lite_pack/format.h"
+#include "lite_pack/load_bool.h"
 
 unsigned lip_unpack_bool(unsigned char const buf[], bool *val)
 {

@@ -1,8 +1,8 @@
 #ifndef LIP_STORE_NUMBER_H
 #define LIP_STORE_NUMBER_H
 
-#include "compiler.h"
-#include "number.h"
+#include "lite_pack/compiler.h"
+#include "lite_pack/number.h"
 #include <string.h>
 
 static inline unsigned __lip_store_num8(unsigned char buf[],

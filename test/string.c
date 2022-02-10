@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack.h"
+#include "lite_pack/lite_pack.h"
 
 static unsigned const sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000U};
 

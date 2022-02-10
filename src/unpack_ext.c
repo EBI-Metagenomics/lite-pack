@@ -1,7 +1,7 @@
-#include "unpack_ext.h"
-#include "compiler.h"
-#include "format.h"
-#include "load_ext.h"
+#include "lite_pack/unpack_ext.h"
+#include "lite_pack/compiler.h"
+#include "lite_pack/format.h"
+#include "lite_pack/load_ext.h"
 
 unsigned lip_unpack_ext_size_type(unsigned char const buf[], unsigned *size,
                                   uint8_t *type)

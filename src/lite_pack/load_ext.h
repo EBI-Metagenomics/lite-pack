@@ -1,7 +1,7 @@
 #ifndef LIP_LOAD_EXT_H
 #define LIP_LOAD_EXT_H
 
-#include "first_byte.h"
+#include "lite_pack/first_byte.h"
 #include "load_number.h"
 
 static inline unsigned __lip_load_fixext(unsigned char const buf[],

@@ -1,6 +1,6 @@
-#include "unpack_str.h"
-#include "format.h"
-#include "load_number.h"
+#include "lite_pack/unpack_str.h"
+#include "lite_pack/format.h"
+#include "lite_pack/load_number.h"
 
 unsigned lip_unpack_str_size(unsigned char const buf[], unsigned *size)
 {

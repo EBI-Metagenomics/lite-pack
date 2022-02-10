@@ -1,7 +1,7 @@
 #ifndef LIP_PACK_INT_H
 #define LIP_PACK_INT_H
 
-#include "store_int.h"
+#include "lite_pack/store_int.h"
 #include <stdint.h>
 
 #define __lip_pack_signed(buf, val)                                            \
