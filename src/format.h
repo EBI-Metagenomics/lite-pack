@@ -66,9 +66,9 @@ static inline int __lip_format_family(int first_byte)
     return __lip_format_family_map[first_byte];
 }
 
-int __lip_format(int first_byte);
+enum lip_format __lip_format(int first_byte);
 
-static inline int lip_format(uint8_t const buf[])
+static inline enum lip_format lip_format(uint8_t const buf[])
 {
     return __lip_format(buf[0]);
 }
@@ -80,7 +80,7 @@ static inline int lip_format_family(uint8_t const buf[])
 
 static inline int __lip_format_fix_value(uint8_t first_byte)
 {
-    int format = __lip_format(first_byte);
+    enum lip_format format = __lip_format(first_byte);
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -93,13 +93,14 @@ static inline int __lip_format_fix_value(uint8_t first_byte)
         return (int)(~0xa0 & first_byte);
     case LIP_FMT_NEGATIVE_FIXINT:
         return __LIP_NUM8(first_byte).i;
+    default:
+        return 0;
     }
-    return 0;
 }
 
 static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
 {
-    int format = __lip_format(first_byte.i);
+    enum lip_format format = __lip_format(first_byte.i);
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -110,19 +111,21 @@ static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
         return (~0x90U & first_byte.u);
     case LIP_FMT_FIXSTR:
         return (~0xa0U & first_byte.u);
+    default:
+        return 0;
     }
-    return 0U;
 }
 
 static inline int __lip_format_fix_nvalue(union __lip_num8 first_byte)
 {
-    int format = __lip_format(first_byte.i);
+    enum lip_format format = __lip_format(first_byte.i);
     switch (format)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
         return (int)(~0xe0U & first_byte.u);
+    default:
+        return 0;
     }
-    return 0;
 }
 
 #endif

@@ -81,7 +81,7 @@ union __lip_num64
     char c[8];
     int64_t i;
     uint64_t u;
-    double d;
+    double f;
 };
 
 static inline union __lip_num64 __lip_unum64(uint64_t x)
@@ -96,7 +96,7 @@ static inline union __lip_num64 __lip_inum64(int64_t x)
 
 static inline union __lip_num64 __lip_fnum64(double x)
 {
-    return (union __lip_num64){.d = (x)};
+    return (union __lip_num64){.f = (x)};
 }
 
 #define __LIP_NUM(x) _Generic((x), unsigned : __lip_unum, int : __lip_inum)(x)

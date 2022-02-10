@@ -1,12 +1,13 @@
 #include "helper.h"
 #include "lite_pack.h"
 
-unsigned const sizes[] = {
+static unsigned const sizes[] = {
     0, 15, 16, 65535, 65536, 4294967295,
 };
-unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
 
-int const formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP, LIP_FMT_MAP_16,
+static unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
+
+static enum lip_format const formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP, LIP_FMT_MAP_16,
                        LIP_FMT_MAP_16, LIP_FMT_MAP_32, LIP_FMT_MAP_32};
 
 static unsigned char buf[17] = {0};

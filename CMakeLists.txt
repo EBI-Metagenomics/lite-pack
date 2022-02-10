@@ -48,11 +48,13 @@ add_library(
   src/pack_int.c
   src/pack_map.c
   src/pack_str.c
+  src/pack_ext.c
   src/unpack_array.c
   src/unpack_bool.c
   src/unpack_float.c
   src/unpack_int.c
   src/unpack_map.c
+  src/unpack_ext.c
   src/unpack_str.c)
 add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 

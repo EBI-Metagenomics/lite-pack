@@ -15,6 +15,7 @@ unsigned lip_unpack_map_size(unsigned char const buf[], unsigned *size)
     case LIP_FMT_MAP_32:
         *size = __lip_load_num32(buf + 1).u;
         return 5;
+    default:
+        return 0;
     }
-    return 0;
 }

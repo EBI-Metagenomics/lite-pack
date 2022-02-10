@@ -2,11 +2,12 @@
 #include "lite_pack.h"
 
 static unsigned const sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000U};
+
 static unsigned const pack_sizes[] = {
     1, 1, 2, 2, 3, 3, 5,
 };
 
-static int const formats[] = {
+static enum lip_format const formats[] = {
     LIP_FMT_FIXSTR, LIP_FMT_FIXSTR, LIP_FMT_STR_8,  LIP_FMT_STR_8,
     LIP_FMT_STR_16, LIP_FMT_STR_16, LIP_FMT_STR_32,
 };

@@ -15,6 +15,7 @@ unsigned lip_unpack_array_size(unsigned char const buf[], unsigned *size)
     case LIP_FMT_ARRAY_32:
         *size = __lip_load_num32(buf + 1).u;
         return 5;
+    default:
+        return 0;
     }
-    return 0;
 }

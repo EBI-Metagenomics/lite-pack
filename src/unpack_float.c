@@ -22,7 +22,7 @@ unsigned __lip_unpack_f64(unsigned char const buf[], double *val)
 
     if (lip_format(buf) == LIP_FMT_FLOAT_64)
     {
-        *val = __lip_load_num64(buf + 1).d;
+        *val = __lip_load_num64(buf + 1).f;
         return 9;
     }
 

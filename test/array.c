@@ -1,13 +1,14 @@
 #include "helper.h"
 #include "lite_pack.h"
 
-unsigned const sizes[] = {
+static unsigned const sizes[] = {
     0, 15, 16, 65535, 65536, 4294967295,
 };
-unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
+static unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
 
-int const formats[] = {LIP_FMT_FIXARRAY, LIP_FMT_FIXARRAY, LIP_FMT_ARRAY_16,
-                       LIP_FMT_ARRAY_16, LIP_FMT_ARRAY_32, LIP_FMT_ARRAY_32};
+static enum lip_format const formats[] = {LIP_FMT_FIXARRAY, LIP_FMT_FIXARRAY,
+                                          LIP_FMT_ARRAY_16, LIP_FMT_ARRAY_16,
+                                          LIP_FMT_ARRAY_32, LIP_FMT_ARRAY_32};
 
 static unsigned char buf[17] = {0};
 

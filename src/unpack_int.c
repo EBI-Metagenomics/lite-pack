@@ -6,7 +6,7 @@
 
 unsigned __lip_unpack_i8(unsigned char const buf[], int8_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -17,6 +17,8 @@ unsigned __lip_unpack_i8(unsigned char const buf[], int8_t *val)
     case LIP_FMT_INT_8:
         *val = __lip_load_num8(buf + 1).i;
         return 2;
+    default:
+        break;
     }
 
     if (fmt == LIP_FMT_UINT_8 && __lip_load_num8(buf + 1).u <= INT8_MAX)
@@ -29,7 +31,7 @@ unsigned __lip_unpack_i8(unsigned char const buf[], int8_t *val)
 
 unsigned __lip_unpack_i16(unsigned char const buf[], int16_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -47,6 +49,8 @@ unsigned __lip_unpack_i16(unsigned char const buf[], int16_t *val)
     case LIP_FMT_INT_16:
         *val = __lip_load_num16(buf + 1).i;
         return 3;
+    default:
+        break;
     }
 
     if (fmt == LIP_FMT_UINT_16 && __lip_load_num16(buf + 1).u <= INT16_MAX)
@@ -59,7 +63,7 @@ unsigned __lip_unpack_i16(unsigned char const buf[], int16_t *val)
 
 unsigned __lip_unpack_i32(unsigned char const buf[], int32_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -84,6 +88,8 @@ unsigned __lip_unpack_i32(unsigned char const buf[], int32_t *val)
     case LIP_FMT_INT_32:
         *val = __lip_load_num32(buf + 1).i;
         return 5;
+    default:
+        break;
     }
 
     if (fmt == LIP_FMT_UINT_32 && __lip_load_num32(buf + 1).u <= INT32_MAX)
@@ -96,7 +102,7 @@ unsigned __lip_unpack_i32(unsigned char const buf[], int32_t *val)
 
 unsigned __lip_unpack_i64(unsigned char const buf[], int64_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -128,6 +134,8 @@ unsigned __lip_unpack_i64(unsigned char const buf[], int64_t *val)
     case LIP_FMT_INT_64:
         *val = __lip_load_num64(buf + 1).i;
         return 9;
+    default:
+        break;
     }
 
     if (fmt == LIP_FMT_UINT_64 && __lip_load_num64(buf + 1).u <= INT64_MAX)
@@ -142,7 +150,7 @@ unsigned __lip_unpack_i64(unsigned char const buf[], int64_t *val)
 
 unsigned __lip_unpack_u8(unsigned char const buf[], uint8_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
@@ -158,13 +166,15 @@ unsigned __lip_unpack_u8(unsigned char const buf[], uint8_t *val)
     case LIP_FMT_UINT_8:
         *val = __lip_load_num8(buf + 1).u;
         return 2;
+    default:
+        break;
     }
     return 0;
 }
 
 unsigned __lip_unpack_u16(unsigned char const buf[], uint16_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
@@ -187,13 +197,15 @@ unsigned __lip_unpack_u16(unsigned char const buf[], uint16_t *val)
     case LIP_FMT_UINT_16:
         *val = __lip_load_num16(buf + 1).u;
         return 3;
+    default:
+        break;
     }
     return 0;
 }
 
 unsigned __lip_unpack_u32(unsigned char const buf[], uint32_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
@@ -223,13 +235,15 @@ unsigned __lip_unpack_u32(unsigned char const buf[], uint32_t *val)
     case LIP_FMT_UINT_32:
         *val = __lip_load_num32(buf + 1).u;
         return 5;
+    default:
+        break;
     }
     return 0;
 }
 
 unsigned __lip_unpack_u64(unsigned char const buf[], uint64_t *val)
 {
-    int fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf);
     switch (fmt)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
@@ -266,6 +280,8 @@ unsigned __lip_unpack_u64(unsigned char const buf[], uint64_t *val)
     case LIP_FMT_UINT_64:
         *val = __lip_load_num64(buf + 1).u;
         return 9;
+    default:
+        break;
     }
     return 0;
 }

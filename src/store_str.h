@@ -15,19 +15,19 @@ static inline unsigned __lip_store_fixstr(unsigned char buf[], uint8_t size)
 static inline unsigned __lip_store_str8(unsigned char buf[], uint8_t size)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_8);
-    return lip_store_num8(buf + 1, __LIP_NUM8(size)) + 1;
+    return __lip_store_num8(buf + 1, __LIP_NUM8(size)) + 1;
 }
 
 static inline unsigned __lip_store_str16(unsigned char buf[], uint16_t size)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_16);
-    return lip_store_num16(buf + 1, __LIP_NUM16(size)) + 1;
+    return __lip_store_num16(buf + 1, __LIP_NUM16(size)) + 1;
 }
 
 static inline unsigned __lip_store_str32(unsigned char buf[], uint32_t size)
 {
     buf[0] = __lip_first_byte(LIP_FMT_STR_32);
-    return lip_store_num32(buf + 1, __LIP_NUM32(size)) + 1;
+    return __lip_store_num32(buf + 1, __LIP_NUM32(size)) + 1;
 }
 
 #endif
