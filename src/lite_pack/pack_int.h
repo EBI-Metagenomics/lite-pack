@@ -1,6 +1,7 @@
 #ifndef LIP_PACK_INT_H
 #define LIP_PACK_INT_H
 
+#include "lite_pack/export.h"
 #include "lite_pack/store_int.h"
 #include <stdint.h>
 
@@ -31,14 +32,14 @@
              : __lip_pack_unsigned(buf, val), unsigned long long               \
              : __lip_pack_unsigned(buf, val))
 
-unsigned __lip_pack_i8(unsigned char buf[], int val);
-unsigned __lip_pack_i16(unsigned char buf[], int val);
-unsigned __lip_pack_i32(unsigned char buf[], int val);
-unsigned __lip_pack_i64(unsigned char buf[], long val);
+LIP_API unsigned __lip_pack_i8(unsigned char buf[], int val);
+LIP_API unsigned __lip_pack_i16(unsigned char buf[], int val);
+LIP_API unsigned __lip_pack_i32(unsigned char buf[], int val);
+LIP_API unsigned __lip_pack_i64(unsigned char buf[], long val);
 
-unsigned __lip_pack_u8(unsigned char buf[], unsigned val);
-unsigned __lip_pack_u16(unsigned char buf[], unsigned val);
-unsigned __lip_pack_u32(unsigned char buf[], unsigned val);
-unsigned __lip_pack_u64(unsigned char buf[], unsigned long val);
+LIP_API unsigned __lip_pack_u8(unsigned char buf[], unsigned val);
+LIP_API unsigned __lip_pack_u16(unsigned char buf[], unsigned val);
+LIP_API unsigned __lip_pack_u32(unsigned char buf[], unsigned val);
+LIP_API unsigned __lip_pack_u64(unsigned char buf[], unsigned long val);
 
 #endif

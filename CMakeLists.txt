@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 project(
-  litepack
+  lite_pack
   VERSION 0.0.1
   LANGUAGES C)
 
@@ -42,6 +42,7 @@ include("cmake/sanitizers.cmake")
 
 add_library(
   ${PROJECT_NAME}
+  src/1darray.c
   src/first_byte.c
   src/format.c
   src/pack_array.c
@@ -56,7 +57,20 @@ add_library(
   src/unpack_map.c
   src/unpack_ext.c
   src/unpack_str.c)
-add_library(LITEPACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+set(EXPORT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/export.h)
+include(GenerateExportHeader)
+generate_export_header(
+  ${PROJECT_NAME}
+  BASE_NAME
+  LIP
+  INCLUDE_GUARD_NAME
+  LITE_PACK_EXPORT_H
+  EXPORT_MACRO_NAME
+  LIP_API
+  EXPORT_FILE_NAME
+  ${EXPORT_FILE})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
   include(CheckIPOSupported)
@@ -72,7 +86,31 @@ target_include_directories(
   ${PROJECT_NAME}
   PUBLIC $<INSTALL_INTERFACE:include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-targets)
+
+install(DIRECTORY src/${PROJECT_NAME}/ DESTINATION include/${PROJECT_NAME})
+
+install(
+  EXPORT ${PROJECT_NAME}-targets
+  FILE ${PROJECT_NAME}-targets.cmake
+  NAMESPACE LITE_PACK::
+  DESTINATION lib/cmake/${PROJECT_NAME})
+
+include(CMakePackageConfigHelpers)
+
+set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake)
+configure_package_config_file(${PROJECT_NAME}-config.cmake.in ${CONFIG_FILE}
+                              INSTALL_DESTINATION lib/cmake/${PROJECT_NAME})
+
+set(VERSION_FILE
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake)
+write_basic_package_version_file(${VERSION_FILE} COMPATIBILITY SameMajorVersion)
+
+install(FILES ${CONFIG_FILE} ${VERSION_FILE} ${EXPORT_FILE}
+        DESTINATION lib/cmake/${PROJECT_NAME})
 
 enable_testing()
 add_subdirectory(test)

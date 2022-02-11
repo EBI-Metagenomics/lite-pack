@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_H
 #define LITE_PACK_H
 
+#include "lite_pack/export.h"
 #include "lite_pack/format.h"
 #include "lite_pack/load_float.h"
 #include "lite_pack/load_int.h"
@@ -26,26 +27,27 @@
 static inline unsigned lip_pack_bool(unsigned char buf[], bool val);
 #define lip_pack_int(buf, val) __lip_pack_int(buf, val)
 #define lip_pack_float(buf, val) __lip_pack_float(buf, val)
-unsigned lip_pack_str_size(unsigned char buf[], unsigned size);
-unsigned lip_pack_str_data(unsigned char buf[], unsigned size,
-                           char const str[]);
-unsigned lip_pack_array_size(unsigned char buf[], unsigned size);
-unsigned lip_pack_map_size(unsigned char buf[], unsigned size);
-unsigned lip_pack_ext_size_type(unsigned char buf[], unsigned size,
-                                uint8_t type);
+LIP_API unsigned lip_pack_str_size(unsigned char buf[], unsigned size);
+LIP_API unsigned lip_pack_str_data(unsigned char buf[], unsigned size,
+                                   char const str[]);
+LIP_API unsigned lip_pack_array_size(unsigned char buf[], unsigned size);
+LIP_API unsigned lip_pack_map_size(unsigned char buf[], unsigned size);
+LIP_API unsigned lip_pack_ext_size_type(unsigned char buf[], unsigned size,
+                                        uint8_t type);
 
 /* UNPACK */
 
-unsigned lip_unpack_bool(unsigned char const buf[], bool *val);
+LIP_API unsigned lip_unpack_bool(unsigned char const buf[], bool *val);
 #define lip_unpack_int(buf, val) __lip_unpack_int(buf, val)
 #define lip_unpack_float(buf, val) __lip_unpack_float(buf, val)
-unsigned lip_unpack_str_size(unsigned char const buf[], unsigned *size);
-unsigned lip_unpack_str_data(unsigned char const buf[], unsigned size,
-                             char str[]);
-unsigned lip_unpack_array_size(unsigned char const buf[], unsigned *size);
-unsigned lip_unpack_map_size(unsigned char const buf[], unsigned *size);
-unsigned lip_unpack_ext_size_type(unsigned char const buf[], unsigned *size,
-                                  uint8_t *type);
+LIP_API unsigned lip_unpack_str_size(unsigned char const buf[], unsigned *size);
+LIP_API unsigned lip_unpack_str_data(unsigned char const buf[], unsigned size,
+                                     char str[]);
+LIP_API unsigned lip_unpack_array_size(unsigned char const buf[],
+                                       unsigned *size);
+LIP_API unsigned lip_unpack_map_size(unsigned char const buf[], unsigned *size);
+LIP_API unsigned lip_unpack_ext_size_type(unsigned char const buf[],
+                                          unsigned *size, uint8_t *type);
 
 /* STORE RAW NUMBERS */
 
