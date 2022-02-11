@@ -109,8 +109,10 @@ set(VERSION_FILE
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake)
 write_basic_package_version_file(${VERSION_FILE} COMPATIBILITY SameMajorVersion)
 
-install(FILES ${CONFIG_FILE} ${VERSION_FILE} ${EXPORT_FILE}
+install(FILES ${CONFIG_FILE} ${VERSION_FILE}
         DESTINATION lib/cmake/${PROJECT_NAME})
+
+install(FILES ${EXPORT_FILE} DESTINATION include/${PROJECT_NAME})
 
 enable_testing()
 add_subdirectory(test)
