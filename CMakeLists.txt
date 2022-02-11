@@ -44,6 +44,7 @@ add_library(
   ${PROJECT_NAME}
   src/1darray.c
   src/ctx/file_write.c
+  src/ctx/file_write_1darray.c
   src/ctx/file_read.c
   src/first_byte.c
   src/format.c

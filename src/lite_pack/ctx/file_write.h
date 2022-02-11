@@ -15,20 +15,20 @@ static inline void lip_write_bool(struct lip_ctx_file *ctx, bool val)
 /* INTEGER */
 
 #define __lip_write_signed(buf, val)                                           \
-    sizeof(val) == 1   ? __lip_write_i8(buf, (int8_t)(val))                    \
-    : sizeof(val) == 2 ? __lip_write_i16(buf, (int16_t)(val))                  \
-    : sizeof(val) == 4 ? __lip_write_i32(buf, (int32_t)(val))                  \
-    : sizeof(val) == 8 ? __lip_write_i64(buf, (int64_t)(val))                  \
+    sizeof(val) == 1   ? lip_write_i8(buf, (int8_t)(val))                      \
+    : sizeof(val) == 2 ? lip_write_i16(buf, (int16_t)(val))                    \
+    : sizeof(val) == 4 ? lip_write_i32(buf, (int32_t)(val))                    \
+    : sizeof(val) == 8 ? lip_write_i64(buf, (int64_t)(val))                    \
                        : 0
 
 #define __lip_write_unsigned(buf, val)                                         \
-    sizeof(val) == 1   ? __lip_write_u8(buf, (uint8_t)(val))                   \
-    : sizeof(val) == 2 ? __lip_write_u16(buf, (uint16_t)(val))                 \
-    : sizeof(val) == 4 ? __lip_write_u32(buf, (uint32_t)(val))                 \
-    : sizeof(val) == 8 ? __lip_write_u64(buf, (uint64_t)(val))                 \
+    sizeof(val) == 1   ? lip_write_u8(buf, (uint8_t)(val))                     \
+    : sizeof(val) == 2 ? lip_write_u16(buf, (uint16_t)(val))                   \
+    : sizeof(val) == 4 ? lip_write_u32(buf, (uint32_t)(val))                   \
+    : sizeof(val) == 8 ? lip_write_u64(buf, (uint64_t)(val))                   \
                        : 0U
 
-#define __lip_write_int(buf, val)                                              \
+#define lip_write_int(buf, val)                                                \
     _Generic((val), signed char                                                \
              : __lip_write_signed(buf, val), signed short                      \
              : __lip_write_signed(buf, val), signed int                        \

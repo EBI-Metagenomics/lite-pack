@@ -18,21 +18,21 @@ static inline void lip_read_bool(struct lip_ctx_file *ctx, bool *val)
 /* INTEGER */
 
 #define __lip_read_signed(buf, val)                                            \
-    sizeof(val) == 1   ? __lip_read_i8(buf, (int8_t)(val))                     \
-    : sizeof(val) == 2 ? __lip_read_i16(buf, (int16_t)(val))                   \
-    : sizeof(val) == 4 ? __lip_read_i32(buf, (int32_t)(val))                   \
-    : sizeof(val) == 8 ? __lip_read_i64(buf, (int64_t)(val))                   \
-                       : 0
+    sizeof(*val) == 1   ? __lip_read_i8(buf, (int8_t *)(val))                  \
+    : sizeof(*val) == 2 ? __lip_read_i16(buf, (int16_t *)(val))                \
+    : sizeof(*val) == 4 ? __lip_read_i32(buf, (int32_t *)(val))                \
+    : sizeof(*val) == 8 ? __lip_read_i64(buf, (int64_t *)(val))                \
+                        : 0
 
 #define __lip_read_unsigned(buf, val)                                          \
-    sizeof(val) == 1   ? __lip_read_u8(buf, (uint8_t)(val))                    \
-    : sizeof(val) == 2 ? __lip_read_u16(buf, (uint16_t)(val))                  \
-    : sizeof(val) == 4 ? __lip_read_u32(buf, (uint32_t)(val))                  \
-    : sizeof(val) == 8 ? __lip_read_u64(buf, (uint64_t)(val))                  \
-                       : 0U
+    sizeof(*val) == 1   ? __lip_read_u8(buf, (uint8_t *)(val))                 \
+    : sizeof(*val) == 2 ? __lip_read_u16(buf, (uint16_t *)(val))               \
+    : sizeof(*val) == 4 ? __lip_read_u32(buf, (uint32_t *)(val))               \
+    : sizeof(*val) == 8 ? __lip_read_u64(buf, (uint64_t *)(val))               \
+                        : 0U
 
-#define __lip_read_int(buf, val)                                               \
-    _Generic((val), signed char                                                \
+#define lip_read_int(buf, val)                                                 \
+    _Generic((*val), signed char                                               \
              : __lip_read_signed(buf, val), signed short                       \
              : __lip_read_signed(buf, val), signed int                         \
              : __lip_read_signed(buf, val), signed long                        \
@@ -46,17 +46,17 @@ static inline void lip_read_bool(struct lip_ctx_file *ctx, bool *val)
 
 /* SIGNED INTEGER */
 
-LIP_API void lip_read_i8(struct lip_ctx_file *ctx, int8_t *val);
-LIP_API void lip_read_i16(struct lip_ctx_file *ctx, int16_t *val);
-LIP_API void lip_read_i32(struct lip_ctx_file *ctx, int32_t *val);
-LIP_API void lip_read_i64(struct lip_ctx_file *ctx, int64_t *val);
+LIP_API void __lip_read_i8(struct lip_ctx_file *ctx, int8_t *val);
+LIP_API void __lip_read_i16(struct lip_ctx_file *ctx, int16_t *val);
+LIP_API void __lip_read_i32(struct lip_ctx_file *ctx, int32_t *val);
+LIP_API void __lip_read_i64(struct lip_ctx_file *ctx, int64_t *val);
 
 /* UNSIGNED INTEGER */
 
-LIP_API void lip_read_u8(struct lip_ctx_file *ctx, uint8_t *val);
-LIP_API void lip_read_u16(struct lip_ctx_file *ctx, uint16_t *val);
-LIP_API void lip_read_u32(struct lip_ctx_file *ctx, uint32_t *val);
-LIP_API void lip_read_u64(struct lip_ctx_file *ctx, uint64_t *val);
+LIP_API void __lip_read_u8(struct lip_ctx_file *ctx, uint8_t *val);
+LIP_API void __lip_read_u16(struct lip_ctx_file *ctx, uint16_t *val);
+LIP_API void __lip_read_u32(struct lip_ctx_file *ctx, uint32_t *val);
+LIP_API void __lip_read_u64(struct lip_ctx_file *ctx, uint64_t *val);
 
 /* FLOAT */
 
