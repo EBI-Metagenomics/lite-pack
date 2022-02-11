@@ -43,19 +43,21 @@ include("cmake/sanitizers.cmake")
 add_library(
   ${PROJECT_NAME}
   src/1darray.c
+  src/ctx/file_write.c
+  src/ctx/file_read.c
   src/first_byte.c
   src/format.c
   src/pack_array.c
+  src/pack_ext.c
   src/pack_int.c
   src/pack_map.c
   src/pack_str.c
-  src/pack_ext.c
   src/unpack_array.c
   src/unpack_bool.c
+  src/unpack_ext.c
   src/unpack_float.c
   src/unpack_int.c
   src/unpack_map.c
-  src/unpack_ext.c
   src/unpack_str.c)
 add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
