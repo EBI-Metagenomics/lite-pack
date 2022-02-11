@@ -41,6 +41,9 @@ static inline void lip_write_bool(struct lip_ctx_file *ctx, bool val)
              : __lip_write_unsigned(buf, val), unsigned long long              \
              : __lip_write_unsigned(buf, val))
 
+#define lip_write_float(ctx, val)                                              \
+    _Generic((val), float : lip_write_f32, double : lip_write_f64)(ctx, val)
+
 /* SIGNED INTEGER */
 
 static inline void lip_write_i8(struct lip_ctx_file *ctx, int val)

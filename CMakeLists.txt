@@ -46,6 +46,7 @@ add_library(
   src/ctx/file_write.c
   src/ctx/file_write_1darray.c
   src/ctx/file_read.c
+  src/ctx/file_read_1darray.c
   src/first_byte.c
   src/format.c
   src/pack_array.c

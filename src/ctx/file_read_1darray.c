@@ -1,5 +1,5 @@
-#include "lite_pack/1darray.h"
 #include "lite_pack/ctx/file_read_1darray.h"
+#include "lite_pack/1darray.h"
 
 void lip_read_1darray_size_type(struct lip_ctx_file *ctx, unsigned *size,
                                 uint8_t *type)
@@ -68,6 +68,38 @@ void lip_read_1darray_u8_data(struct lip_ctx_file *ctx, unsigned size,
         ctx->error = fread(ctx->buf, sz * sizeof(uint8_t), 1, ctx->fp) != 1;
         lip_unpack_1darray_u8_data(ctx->buf, sz, arr);
         arr += sz * sizeof(uint8_t);
+        size = (unsigned)(size - sz);
+    }
+}
+
+/* FLOAT */
+
+void __lip_read_1darray_f32_data(struct lip_ctx_file *ctx, unsigned size,
+                               float arr[])
+{
+    while (size > 0)
+    {
+        if (ctx->error) return;
+        unsigned sz =
+            size > BUFSIZ / sizeof(float) ? BUFSIZ / sizeof(float) : size;
+        ctx->error = fread(ctx->buf, sz * sizeof(float), 1, ctx->fp) != 1;
+        lip_unpack_1darray_f32_data(ctx->buf, sz, arr);
+        arr += sz * sizeof(float);
+        size = (unsigned)(size - sz);
+    }
+}
+
+void __lip_read_1darray_f64_data(struct lip_ctx_file *ctx, unsigned size,
+                               double arr[])
+{
+    while (size > 0)
+    {
+        if (ctx->error) return;
+        unsigned sz =
+            size > BUFSIZ / sizeof(double) ? BUFSIZ / sizeof(double) : size;
+        ctx->error = fread(ctx->buf, sz * sizeof(double), 1, ctx->fp) != 1;
+        lip_unpack_1darray_f64_data(ctx->buf, sz, arr);
+        arr += sz * sizeof(double);
         size = (unsigned)(size - sz);
     }
 }
