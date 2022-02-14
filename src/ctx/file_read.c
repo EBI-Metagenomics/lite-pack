@@ -1,5 +1,15 @@
 #include "lite_pack/ctx/file_read.h"
 
+void lip_read_bool(struct lip_ctx_file *ctx, bool *val)
+{
+    if (ctx->error) return;
+
+    ctx->error = fread(ctx->buf, 1, 1, ctx->fp) != 1;
+    if (ctx->error) return;
+
+    ctx->error = lip_unpack_bool(ctx->buf, val) == 0;
+}
+
 static inline unsigned int_size(enum lip_format fmt)
 {
     unsigned sz = 0;
@@ -152,7 +162,7 @@ void __lip_read_u64(struct lip_ctx_file *ctx, uint64_t *val)
 
 /* FLOAT */
 
-void lip_read_f32(struct lip_ctx_file *ctx, float *val)
+void __lip_read_f32(struct lip_ctx_file *ctx, float *val)
 {
     if (ctx->error) return;
 
@@ -171,7 +181,7 @@ void lip_read_f32(struct lip_ctx_file *ctx, float *val)
     ctx->error = __lip_unpack_f32(ctx->buf, val) == 0;
 }
 
-void lip_read_f64(struct lip_ctx_file *ctx, double *val)
+void __lip_read_f64(struct lip_ctx_file *ctx, double *val)
 {
     if (ctx->error) return;
 

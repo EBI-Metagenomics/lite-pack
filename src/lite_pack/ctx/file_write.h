@@ -5,69 +5,61 @@
 #include "lite_pack/export.h"
 #include "lite_pack/lite_pack.h"
 
-static inline void lip_write_bool(struct lip_ctx_file *ctx, bool val)
-{
-    if (ctx->error) return;
-    unsigned sz = lip_pack_bool(ctx->buf, val);
-    ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
-}
+void lip_write_bool(struct lip_ctx_file *ctx, bool val);
 
 /* INTEGER */
 
-#define __lip_write_signed(buf, val)                                           \
-    sizeof(val) == 1   ? lip_write_i8(buf, (int8_t)(val))                      \
-    : sizeof(val) == 2 ? lip_write_i16(buf, (int16_t)(val))                    \
-    : sizeof(val) == 4 ? lip_write_i32(buf, (int32_t)(val))                    \
-    : sizeof(val) == 8 ? lip_write_i64(buf, (int64_t)(val))                    \
+#define __lip_write_signed(ctx, val)                                           \
+    sizeof(val) == 1   ? __lip_write_i8(ctx, (int8_t)(val))                    \
+    : sizeof(val) == 2 ? __lip_write_i16(ctx, (int16_t)(val))                  \
+    : sizeof(val) == 4 ? __lip_write_i32(ctx, (int32_t)(val))                  \
+    : sizeof(val) == 8 ? __lip_write_i64(ctx, (int64_t)(val))                  \
                        : 0
 
-#define __lip_write_unsigned(buf, val)                                         \
-    sizeof(val) == 1   ? lip_write_u8(buf, (uint8_t)(val))                     \
-    : sizeof(val) == 2 ? lip_write_u16(buf, (uint16_t)(val))                   \
-    : sizeof(val) == 4 ? lip_write_u32(buf, (uint32_t)(val))                   \
-    : sizeof(val) == 8 ? lip_write_u64(buf, (uint64_t)(val))                   \
+#define __lip_write_unsigned(ctx, val)                                         \
+    sizeof(val) == 1   ? __lip_write_u8(ctx, (uint8_t)(val))                   \
+    : sizeof(val) == 2 ? __lip_write_u16(ctx, (uint16_t)(val))                 \
+    : sizeof(val) == 4 ? __lip_write_u32(ctx, (uint32_t)(val))                 \
+    : sizeof(val) == 8 ? __lip_write_u64(ctx, (uint64_t)(val))                 \
                        : 0U
 
-#define lip_write_int(buf, val)                                                \
+#define __lip_write_int(ctx, val)                                              \
     _Generic((val), signed char                                                \
-             : __lip_write_signed(buf, val), signed short                      \
-             : __lip_write_signed(buf, val), signed int                        \
-             : __lip_write_signed(buf, val), signed long                       \
-             : __lip_write_signed(buf, val), signed long long                  \
-             : __lip_write_signed(buf, val), unsigned char                     \
-             : __lip_write_unsigned(buf, val), unsigned short                  \
-             : __lip_write_unsigned(buf, val), unsigned int                    \
-             : __lip_write_unsigned(buf, val), unsigned long                   \
-             : __lip_write_unsigned(buf, val), unsigned long long              \
-             : __lip_write_unsigned(buf, val))
-
-#define lip_write_float(ctx, val)                                              \
-    _Generic((val), float : lip_write_f32, double : lip_write_f64)(ctx, val)
+             : __lip_write_signed(ctx, val), signed short                      \
+             : __lip_write_signed(ctx, val), signed int                        \
+             : __lip_write_signed(ctx, val), signed long                       \
+             : __lip_write_signed(ctx, val), signed long long                  \
+             : __lip_write_signed(ctx, val), unsigned char                     \
+             : __lip_write_unsigned(ctx, val), unsigned short                  \
+             : __lip_write_unsigned(ctx, val), unsigned int                    \
+             : __lip_write_unsigned(ctx, val), unsigned long                   \
+             : __lip_write_unsigned(ctx, val), unsigned long long              \
+             : __lip_write_unsigned(ctx, val))
 
 /* SIGNED INTEGER */
 
-static inline void lip_write_i8(struct lip_ctx_file *ctx, int val)
+static inline void __lip_write_i8(struct lip_ctx_file *ctx, int val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_i8(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_i16(struct lip_ctx_file *ctx, int val)
+static inline void __lip_write_i16(struct lip_ctx_file *ctx, int val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_i16(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_i32(struct lip_ctx_file *ctx, int val)
+static inline void __lip_write_i32(struct lip_ctx_file *ctx, int val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_i32(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_i64(struct lip_ctx_file *ctx, long val)
+static inline void __lip_write_i64(struct lip_ctx_file *ctx, long val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_i64(ctx->buf, val);
@@ -76,28 +68,28 @@ static inline void lip_write_i64(struct lip_ctx_file *ctx, long val)
 
 /* UNSIGNED INTEGER */
 
-static inline void lip_write_u8(struct lip_ctx_file *ctx, unsigned val)
+static inline void __lip_write_u8(struct lip_ctx_file *ctx, unsigned val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_u8(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_u16(struct lip_ctx_file *ctx, unsigned val)
+static inline void __lip_write_u16(struct lip_ctx_file *ctx, unsigned val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_u16(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_u32(struct lip_ctx_file *ctx, unsigned val)
+static inline void __lip_write_u32(struct lip_ctx_file *ctx, unsigned val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_u32(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_u64(struct lip_ctx_file *ctx, unsigned long val)
+static inline void __lip_write_u64(struct lip_ctx_file *ctx, unsigned long val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_u64(ctx->buf, val);
@@ -106,19 +98,22 @@ static inline void lip_write_u64(struct lip_ctx_file *ctx, unsigned long val)
 
 /* FLOAT */
 
-static inline void lip_write_f32(struct lip_ctx_file *ctx, float val)
+static inline void __lip_write_f32(struct lip_ctx_file *ctx, float val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_f32(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-static inline void lip_write_f64(struct lip_ctx_file *ctx, double val)
+static inline void __lip_write_f64(struct lip_ctx_file *ctx, double val)
 {
     if (ctx->error) return;
     unsigned sz = __lip_pack_f64(ctx->buf, val);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
+
+#define __lip_write_float(ctx, val)                                            \
+    _Generic((val), float : __lip_write_f32, double : __lip_write_f64)(ctx, val)
 
 /* ARRAY */
 
@@ -147,8 +142,8 @@ static inline void lip_write_str_size(struct lip_ctx_file *ctx, unsigned size)
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 
-LIP_API void lip_write_str_data(struct lip_ctx_file *ctx, unsigned size,
-                                char const val[]);
+void lip_write_str_data(struct lip_ctx_file *ctx, unsigned size,
+                        char const val[]);
 
 /* EXT */
 
