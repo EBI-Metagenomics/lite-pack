@@ -124,26 +124,30 @@ static inline union __lip_num64 __lip_num_f64(double x)
     _Generic((x), int : __lip_num_int, unsigned : __lip_num_unsigned)(x)
 
 #define __LIP_NUM8(x)                                                          \
-    _Generic((x), unsigned char const*                                         \
+    _Generic((x), unsigned char*                                               \
+             : __lip_num_uchar8, unsigned char const*                          \
              : __lip_num_uchar8, int8_t                                        \
              : __lip_num_i8, uint8_t                                           \
              : __lip_num_u8)(x)
 
 #define __LIP_NUM16(x)                                                         \
-    _Generic((x), unsigned char const*                                         \
+    _Generic((x), unsigned char*                                               \
+             : __lip_num_uchar16, unsigned char const*                         \
              : __lip_num_uchar16, int16_t                                      \
              : __lip_num_i16, uint16_t                                         \
              : __lip_num_u16)(x)
 
 #define __LIP_NUM32(x)                                                         \
-    _Generic((x), unsigned char const*                                         \
+    _Generic((x), unsigned char*                                               \
+             : __lip_num_uchar32, unsigned char const*                         \
              : __lip_num_uchar32, int32_t                                      \
              : __lip_num_i32, uint32_t                                         \
              : __lip_num_u32, float                                            \
              : __lip_num_f32)(x)
 
 #define __LIP_NUM64(x)                                                         \
-    _Generic((x), unsigned char const*                                         \
+    _Generic((x), unsigned char*                                               \
+             : __lip_num_uchar64, unsigned char const*                         \
              : __lip_num_uchar64, int64_t                                      \
              : __lip_num_i64, uint64_t                                         \
              : __lip_num_u64, double                                           \
