@@ -1,9 +1,10 @@
-#include "lite_pack/ctx/file_write.h"
+#include "lite_pack/io/file.h"
+#include "lite_pack/pack_str.h"
 
-void lip_write_bool(struct lip_ctx_file *ctx, bool val)
+void lip_write_str_size(struct lip_ctx_file *ctx, unsigned size)
 {
     if (ctx->error) return;
-    unsigned sz = lip_pack_bool(ctx->buf, val);
+    unsigned sz = lip_pack_str_size(ctx->buf, size);
     ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
 }
 

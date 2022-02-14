@@ -1,13 +1,8 @@
-#ifndef LIP_CTX_FILE_READ_H
-#define LIP_CTX_FILE_READ_H
+#ifndef LIP_IO_FILE_READ_INT_H
+#define LIP_IO_FILE_READ_INT_H
 
-#include "lite_pack/ctx/file_ctx.h"
 #include "lite_pack/export.h"
-#include "lite_pack/lite_pack.h"
-
-void lip_read_bool(struct lip_ctx_file *ctx, bool *val);
-
-/* INTEGER */
+#include <stdint.h>
 
 #define __lip_read_signed(ctx, val)                                            \
     sizeof(*val) == 1   ? __lip_read_i8(ctx, (int8_t *)(val))                  \
@@ -36,6 +31,8 @@ void lip_read_bool(struct lip_ctx_file *ctx, bool *val);
              : __lip_read_unsigned(ctx, val), unsigned long long               \
              : __lip_read_unsigned(ctx, val))
 
+struct lip_ctx_file;
+
 /* SIGNED INTEGER */
 
 LIP_API void __lip_read_i8(struct lip_ctx_file *ctx, int8_t *val);
@@ -49,31 +46,5 @@ LIP_API void __lip_read_u8(struct lip_ctx_file *ctx, uint8_t *val);
 LIP_API void __lip_read_u16(struct lip_ctx_file *ctx, uint16_t *val);
 LIP_API void __lip_read_u32(struct lip_ctx_file *ctx, uint32_t *val);
 LIP_API void __lip_read_u64(struct lip_ctx_file *ctx, uint64_t *val);
-
-/* FLOAT */
-
-LIP_API void __lip_read_f32(struct lip_ctx_file *ctx, float *val);
-LIP_API void __lip_read_f64(struct lip_ctx_file *ctx, double *val);
-
-#define __lip_read_float(ctx, val)                                             \
-    _Generic(*(val), float : lip_read_f32, double : lip_read_f64)(ctx, val)
-
-/* ARRAY */
-
-void lip_read_array_size(struct lip_ctx_file *ctx, unsigned *size);
-
-/* MAP */
-
-void lip_read_map_size(struct lip_ctx_file *ctx, unsigned *size);
-
-/* STR */
-
-void lip_read_str_size(struct lip_ctx_file *ctx, unsigned *size);
-void lip_read_str_data(struct lip_ctx_file *ctx, unsigned size, char val[]);
-
-/* EXT */
-
-void lip_read_ext_size_type(struct lip_ctx_file *ctx, unsigned *size,
-                            uint8_t *type);
 
 #endif

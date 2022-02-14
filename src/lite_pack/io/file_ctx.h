@@ -1,5 +1,5 @@
-#ifndef LIP_CTX_FILE_CTX_H
-#define LIP_CTX_FILE_CTX_H
+#ifndef LIP_IO_FILE_CTX_H
+#define LIP_IO_FILE_CTX_H
 
 #include <assert.h>
 #include <stdbool.h>
@@ -12,6 +12,6 @@ struct lip_ctx_file
     bool error;
 };
 
-static_assert(BUFSIZ >= 256, "Minimum bufsize.");
+static_assert(BUFSIZ >= 256, "Minimum BUFSIZE.");
 
 #endif
