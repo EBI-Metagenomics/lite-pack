@@ -36,7 +36,7 @@ static int test_example1_read(size_t *size)
     char str[256] = {0};
     unsigned char *ptr = buf;
 
-    fread(buf, 1, *size, fp);
+    if (fread(buf, 1, *size, fp) != *size) ERROR;
     ptr = buf;
 
     unsigned sz = 0;
@@ -108,7 +108,7 @@ static int test_example2_read(size_t *size)
 
     unsigned char *ptr = buf;
 
-    fread(buf, 1, *size, fp);
+    if (fread(buf, 1, *size, fp) != *size) ERROR;
     ptr = buf;
 
     unsigned sz = 0;
