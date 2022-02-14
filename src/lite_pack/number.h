@@ -9,14 +9,14 @@ union __lip_num
     unsigned u;
 };
 
-static inline union __lip_num __lip_unum(unsigned x)
+static inline union __lip_num __lip_num_int(int x)
 {
-    return (union __lip_num){.u = (x)};
+    return (union __lip_num){.i = x};
 }
 
-static inline union __lip_num __lip_inum(int x)
+static inline union __lip_num __lip_num_unsigned(unsigned x)
 {
-    return (union __lip_num){.i = (x)};
+    return (union __lip_num){.u = x};
 }
 
 union __lip_num8
@@ -26,14 +26,19 @@ union __lip_num8
     uint8_t u;
 };
 
-static inline union __lip_num8 __lip_unum8(uint8_t x)
+static inline union __lip_num8 __lip_num_uchar8(unsigned char const x[])
 {
-    return (union __lip_num8){.u = (x)};
+    return (union __lip_num8){.c = {x[0]}};
 }
 
-static inline union __lip_num8 __lip_inum8(int8_t x)
+static inline union __lip_num8 __lip_num_i8(int8_t x)
 {
-    return (union __lip_num8){.i = (x)};
+    return (union __lip_num8){.i = x};
+}
+
+static inline union __lip_num8 __lip_num_u8(uint8_t x)
+{
+    return (union __lip_num8){.u = x};
 }
 
 union __lip_num16
@@ -43,14 +48,19 @@ union __lip_num16
     uint16_t u;
 };
 
-static inline union __lip_num16 __lip_unum16(uint16_t x)
+static inline union __lip_num16 __lip_num_uchar16(unsigned char const x[])
 {
-    return (union __lip_num16){.u = (x)};
+    return (union __lip_num16){.c = {x[0], x[1]}};
 }
 
-static inline union __lip_num16 __lip_inum16(int16_t x)
+static inline union __lip_num16 __lip_num_i16(int16_t x)
 {
-    return (union __lip_num16){.i = (x)};
+    return (union __lip_num16){.i = x};
+}
+
+static inline union __lip_num16 __lip_num_u16(uint16_t x)
+{
+    return (union __lip_num16){.u = x};
 }
 
 union __lip_num32
@@ -61,19 +71,24 @@ union __lip_num32
     float f;
 };
 
-static inline union __lip_num32 __lip_unum32(uint32_t x)
+static inline union __lip_num32 __lip_num_uchar32(unsigned char const x[])
 {
-    return (union __lip_num32){.u = (x)};
+    return (union __lip_num32){.c = {x[0], x[1], x[2], x[3]}};
 }
 
-static inline union __lip_num32 __lip_inum32(int32_t x)
+static inline union __lip_num32 __lip_num_i32(int32_t x)
 {
-    return (union __lip_num32){.i = (x)};
+    return (union __lip_num32){.i = x};
 }
 
-static inline union __lip_num32 __lip_fnum32(float x)
+static inline union __lip_num32 __lip_num_u32(uint32_t x)
 {
-    return (union __lip_num32){.f = (x)};
+    return (union __lip_num32){.u = x};
+}
+
+static inline union __lip_num32 __lip_num_f32(float x)
+{
+    return (union __lip_num32){.f = x};
 }
 
 union __lip_num64
@@ -84,39 +99,54 @@ union __lip_num64
     double f;
 };
 
-static inline union __lip_num64 __lip_unum64(uint64_t x)
+static inline union __lip_num64 __lip_num_uchar64(unsigned char const x[])
 {
-    return (union __lip_num64){.u = (x)};
+    return (union __lip_num64){
+        .c = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}};
 }
 
-static inline union __lip_num64 __lip_inum64(int64_t x)
+static inline union __lip_num64 __lip_num_i64(int64_t x)
 {
-    return (union __lip_num64){.i = (x)};
+    return (union __lip_num64){.i = x};
 }
 
-static inline union __lip_num64 __lip_fnum64(double x)
+static inline union __lip_num64 __lip_num_u64(uint64_t x)
 {
-    return (union __lip_num64){.f = (x)};
+    return (union __lip_num64){.u = x};
 }
 
-#define __LIP_NUM(x) _Generic((x), unsigned : __lip_unum, int : __lip_inum)(x)
+static inline union __lip_num64 __lip_num_f64(double x)
+{
+    return (union __lip_num64){.f = x};
+}
+
+#define __LIP_NUM(x)                                                           \
+    _Generic((x), int : __lip_num_int, unsigned : __lip_num_unsigned)(x)
 
 #define __LIP_NUM8(x)                                                          \
-    _Generic((x), uint8_t : __lip_unum8, int8_t : __lip_inum8)(x)
+    _Generic((x), unsigned char const*                                         \
+             : __lip_num_uchar8, int8_t                                        \
+             : __lip_num_i8, uint8_t                                           \
+             : __lip_num_u8)(x)
 
 #define __LIP_NUM16(x)                                                         \
-    _Generic((x), uint16_t : __lip_unum16, int16_t : __lip_inum16)(x)
+    _Generic((x), unsigned char const*                                         \
+             : __lip_num_uchar16, int16_t                                      \
+             : __lip_num_i16, uint16_t                                         \
+             : __lip_num_u16)(x)
 
 #define __LIP_NUM32(x)                                                         \
-    _Generic((x), uint32_t                                                     \
-             : __lip_unum32, int32_t                                           \
-             : __lip_inum32, float                                             \
-             : __lip_fnum32)(x)
+    _Generic((x), unsigned char const*                                         \
+             : __lip_num_uchar32, int32_t                                      \
+             : __lip_num_i32, uint32_t                                         \
+             : __lip_num_u32, float                                            \
+             : __lip_num_f32)(x)
 
 #define __LIP_NUM64(x)                                                         \
-    _Generic((x), uint64_t                                                     \
-             : __lip_unum64, int64_t                                           \
-             : __lip_inum64, double                                            \
-             : __lip_fnum64)(x)
+    _Generic((x), unsigned char const*                                         \
+             : __lip_num_uchar64, int64_t                                      \
+             : __lip_num_i64, uint64_t                                         \
+             : __lip_num_u64, double                                           \
+             : __lip_num_f64)(x)
 
 #endif
