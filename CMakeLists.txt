@@ -44,10 +44,20 @@ add_library(
   ${PROJECT_NAME}
   src/ext/pack_1darray.c
   src/ext/unpack_1darray.c
-  src/ctx/file_write.c
-  src/ctx/file_write_1darray.c
-  src/ctx/file_read.c
-  src/ctx/file_read_1darray.c
+  src/io/file_write_array.c
+  src/io/file_write_bool.c
+  src/io/file_write_ext.c
+  src/io/file_write_float.c
+  src/io/file_write_int.c
+  src/io/file_write_map.c
+  src/io/file_write_str.c
+  src/io/file_read_array.c
+  src/io/file_read_bool.c
+  src/io/file_read_ext.c
+  src/io/file_read_float.c
+  src/io/file_read_int.c
+  src/io/file_read_map.c
+  src/io/file_read_str.c
   src/first_byte.c
   src/format.c
   src/pack_array.c
