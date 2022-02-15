@@ -16,4 +16,10 @@ LIP_API void lip_write_1darray_f32_data(struct lip_ctx_file *ctx, unsigned size,
 LIP_API void lip_write_1darray_f64_data(struct lip_ctx_file *ctx, unsigned size,
                                         double const arr[]);
 
+LIP_API void lip_write_1darray_f32_data_inplace(struct lip_ctx_file *ctx,
+                                                unsigned size, float arr[]);
+
+LIP_API void lip_write_1darray_f64_data_inplace(struct lip_ctx_file *ctx,
+                                                unsigned size, double arr[]);
+
 #endif

@@ -1,5 +1,5 @@
-#ifndef LIP_EXT_1DARRAY_WRITE_H
-#define LIP_EXT_1DARRAY_WRITE_H
+#ifndef LIP_1DARRAY_WRITE_H
+#define LIP_1DARRAY_WRITE_H
 
 #include "lite_pack/export.h"
 #include "lite_pack/1darray/write_float.h"

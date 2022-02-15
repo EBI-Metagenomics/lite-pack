@@ -1,6 +1,7 @@
 #include "lite_pack/1darray/write_int.h"
-#include "lite_pack/1darray/pack.h"
+#include "1darray/pack.h"
 #include "lite_pack/io/file.h"
+#include "lite_pack/store_int.h"
 
 /* SIGNED */
 

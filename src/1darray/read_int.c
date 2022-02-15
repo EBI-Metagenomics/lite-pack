@@ -1,5 +1,5 @@
 #include "lite_pack/1darray/read_int.h"
-#include "lite_pack/1darray/unpack.h"
+#include "1darray/unpack_int_inplace.h"
 #include "lite_pack/io/file.h"
 
 void lip_read_1darray_i8_data(struct lip_ctx_file *ctx, unsigned size,

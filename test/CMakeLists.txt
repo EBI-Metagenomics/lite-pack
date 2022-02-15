@@ -23,7 +23,6 @@ function(lp_add_test name)
   target_compile_definitions(${name} PUBLIC "ASSETS=\"${ASSETS}\"")
 endfunction()
 
-lp_add_test(1darray)
 lp_add_test(array)
 lp_add_test(bool)
 lp_add_test(examples)
