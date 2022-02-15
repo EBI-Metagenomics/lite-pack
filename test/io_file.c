@@ -4,7 +4,7 @@
 
 static void test_correct_usage()
 {
-    struct lip_ctx_file ctx = {0};
+    struct lip_io_file ctx = {0};
 
     ctx.fp = fopen(TMPDIR "/io_file.mp", "wb");
     lip_write_int(&ctx, 0);
@@ -39,7 +39,7 @@ static void test_correct_usage()
 
 static void test_incorrect_usage()
 {
-    struct lip_ctx_file ctx = {0};
+    struct lip_io_file ctx = {0};
 
     ctx.fp = fopen(TMPDIR "/io_file.mp", "wb");
     lip_write_int(&ctx, INT64_MAX);
