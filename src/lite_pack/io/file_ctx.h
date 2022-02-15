@@ -8,10 +8,7 @@
 struct lip_ctx_file
 {
     FILE *fp;
-    unsigned char buf[BUFSIZ];
     bool error;
 };
-
-static_assert(BUFSIZ >= 256, "Minimum BUFSIZE.");
 
 #endif

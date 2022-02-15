@@ -1,7 +1,6 @@
 #ifndef COMPILER_H
 #define COMPILER_H
 
-#include <arpa/inet.h>
 #include <assert.h>
 #include <limits.h>
 #include <stdint.h>
@@ -25,7 +24,7 @@ static_assert(sizeof(double) == 8, "64-bits double");
  *   goto <label>;
  *   return [expression];
  *
- *  gcc:
+ * gcc:
  * https://gcc.gnu.org/onlinedocs/gcc/Statement-Attributes.html#Statement-Attributes
  */
 #if __has_attribute(__fallthrough__)
@@ -37,61 +36,7 @@ static_assert(sizeof(double) == 8, "64-bits double");
     } while (0) /* fallthrough */
 #endif
 
-#ifndef htonll
-#include <byteswap.h>
-
-#if __BIG_ENDIAN__
-
-static inline uint64_t htonll(uint64_t x) { return 0; }
-static inline uint64_t ntohll(uint64_t x) { return 0; }
-
-#else
-
-static inline uint64_t htonll(uint64_t x)
-{
-    return bswap_64(x);
-    // return ((uint64_t)htonl((x)&0xFFFFFFFF) << 32) |
-    //        htonl((uint32_t)((x) >> 32));
-}
-
-static inline uint64_t ntohll(uint64_t x)
-{
-    return bswap_64(x);
-    // return ((uint64_t)ntohl((x)&0xFFFFFFFF) << 32) |
-    //        ntohl((uint32_t)((x) >> 32));
-}
-
-#endif
-#endif
-
-static inline uint16_t __lip_htons(uint16_t x) { return htons(x); }
-static inline uint32_t __lip_htonl(uint32_t x) { return htonl(x); }
-static inline uint64_t __lip_htonll(uint64_t x) { return htonll(x); }
-
-static inline uint16_t __lip_ntohs(uint16_t x) { return ntohs(x); }
-static inline uint32_t __lip_ntohl(uint32_t x) { return ntohl(x); }
-static inline uint64_t __lip_ntohll(uint64_t x) { return ntohll(x); }
-
-#define __lip_big_endian(x)                                                    \
-    _Generic((x), uint16_t                                                     \
-             : __lip_htons, uint32_t                                           \
-             : __lip_htonl, uint64_t                                           \
-             : __lip_htonll, int16_t                                           \
-             : __lip_htons, int32_t                                            \
-             : __lip_htonl, int64_t                                            \
-             : __lip_htonll)(x)
-
-#define __lip_host_endian(x)                                                   \
-    _Generic((x), uint16_t                                                     \
-             : __lip_ntohs, uint32_t                                           \
-             : __lip_ntohl, uint64_t                                           \
-             : __lip_ntohll, int16_t                                           \
-             : __lip_ntohs, int32_t                                            \
-             : __lip_ntohl, int64_t                                            \
-             : __lip_ntohll)(x)
-
 #if defined(__FLOAT_WORD_ORDER__) && defined(__BYTE_ORDER__)
-
 // We check where possible that the float byte order matches the
 // integer byte order. This is extremely unlikely to fail, but
 // we check anyway just in case.

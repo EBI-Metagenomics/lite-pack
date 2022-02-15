@@ -1,7 +1,7 @@
 #ifndef LIP_STORE_NUMBER_H
 #define LIP_STORE_NUMBER_H
 
-#include "lite_pack/compiler.h"
+#include "lite_pack/endian.h"
 #include "lite_pack/number.h"
 #include <string.h>
 

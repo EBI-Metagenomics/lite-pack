@@ -5,8 +5,10 @@ void lip_read_bool(struct lip_ctx_file *ctx, bool *val)
 {
     if (ctx->error) return;
 
-    ctx->error = fread(ctx->buf, 1, 1, ctx->fp) != 1;
+    unsigned char buf[1] = {0};
+
+    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
     if (ctx->error) return;
 
-    ctx->error = lip_unpack_bool(ctx->buf, val) == 0;
+    ctx->error = lip_unpack_bool(buf, val) == 0;
 }

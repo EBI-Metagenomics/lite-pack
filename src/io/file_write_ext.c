@@ -5,6 +5,8 @@ void lip_write_ext_size_type(struct lip_ctx_file *ctx, unsigned size,
                              uint8_t type)
 {
     if (ctx->error) return;
-    unsigned sz = lip_pack_ext_size_type(ctx->buf, size, type);
-    ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
+
+    unsigned char buf[6] = {0};
+    unsigned sz = lip_pack_ext_size_type(buf, size, type);
+    ctx->error = fwrite(buf, sz, 1, ctx->fp) != 1;
 }

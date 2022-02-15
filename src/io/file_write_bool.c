@@ -4,6 +4,8 @@
 void lip_write_bool(struct lip_ctx_file *ctx, bool val)
 {
     if (ctx->error) return;
-    unsigned sz = lip_pack_bool(ctx->buf, val);
-    ctx->error = fwrite(ctx->buf, sz, 1, ctx->fp) != 1;
+
+    unsigned char buf[1] = {0};
+    unsigned sz = lip_pack_bool(buf, val);
+    ctx->error = fwrite(buf, sz, 1, ctx->fp) != 1;
 }
