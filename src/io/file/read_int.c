@@ -28,12 +28,10 @@ static inline unsigned int_size(enum lip_format fmt)
     }
 }
 
-/* SIGNED INTEGER */
-
-static inline void read_int(struct lip_io_file *ctx, unsigned char buf[])
+static inline void read_int(struct lip_io_file *io, unsigned char buf[])
 {
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
     unsigned sz = 0;
     switch (lip_format(buf))
@@ -56,8 +54,8 @@ static inline void read_int(struct lip_io_file *ctx, unsigned char buf[])
     case LIP_FMT_INT_8:
     case LIP_FMT_UINT_8:
         sz += 1;
-        ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
-        if (ctx->error) return;
+        io->error = fread(buf + 1, sz, 1, io->fp) != 1;
+        if (io->error) return;
         fallthrough;
 
     case LIP_FMT_POSITIVE_FIXINT:
@@ -65,97 +63,91 @@ static inline void read_int(struct lip_io_file *ctx, unsigned char buf[])
         break;
 
     default:
-        ctx->error = true;
+        io->error = true;
         return;
     }
 }
 
-void __lip_read_i8(struct lip_io_file *ctx, int8_t *val)
+/* SIGNED */
+
+void __lip_read_i8(struct lip_io_file *io, int8_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_i8(buf, val) == 0;
+    io->error = __lip_unpack_i8(io->buf, val) == 0;
 }
 
-void __lip_read_i16(struct lip_io_file *ctx, int16_t *val)
+void __lip_read_i16(struct lip_io_file *io, int16_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_i16(buf, val) == 0;
+    io->error = __lip_unpack_i16(io->buf, val) == 0;
 }
 
-void __lip_read_i32(struct lip_io_file *ctx, int32_t *val)
+void __lip_read_i32(struct lip_io_file *io, int32_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_i32(buf, val) == 0;
+    io->error = __lip_unpack_i32(io->buf, val) == 0;
 }
 
-void __lip_read_i64(struct lip_io_file *ctx, int64_t *val)
+void __lip_read_i64(struct lip_io_file *io, int64_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_i64(buf, val) == 0;
+    io->error = __lip_unpack_i64(io->buf, val) == 0;
 }
 
-/* UNSIGNED INTEGER */
+/* UNSIGNED */
 
-void __lip_read_u8(struct lip_io_file *ctx, uint8_t *val)
+void __lip_read_u8(struct lip_io_file *io, uint8_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_u8(buf, val) == 0;
+    io->error = __lip_unpack_u8(io->buf, val) == 0;
 }
 
-void __lip_read_u16(struct lip_io_file *ctx, uint16_t *val)
+void __lip_read_u16(struct lip_io_file *io, uint16_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_u16(buf, val) == 0;
+    io->error = __lip_unpack_u16(io->buf, val) == 0;
 }
 
-void __lip_read_u32(struct lip_io_file *ctx, uint32_t *val)
+void __lip_read_u32(struct lip_io_file *io, uint32_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_u32(buf, val) == 0;
+    io->error = __lip_unpack_u32(io->buf, val) == 0;
 }
 
-void __lip_read_u64(struct lip_io_file *ctx, uint64_t *val)
+void __lip_read_u64(struct lip_io_file *io, uint64_t *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    read_int(ctx, buf);
-    if (ctx->error) return;
+    read_int(io, io->buf);
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_u64(buf, val) == 0;
+    io->error = __lip_unpack_u64(io->buf, val) == 0;
 }

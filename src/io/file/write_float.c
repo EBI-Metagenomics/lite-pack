@@ -1,20 +1,18 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/pack_float.h"
 
-void __lip_write_f32(struct lip_io_file *ctx, float val)
+void __lip_write_f32(struct lip_io_file *io, float val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[5] = {0};
-    unsigned sz = __lip_pack_f32(buf, val);
-    ctx->error = fwrite(buf, sz, 1, ctx->fp) != 1;
+    unsigned sz = __lip_pack_f32(io->buf, val);
+    io->error = fwrite(io->buf, sz, 1, io->fp) != 1;
 }
 
-void __lip_write_f64(struct lip_io_file *ctx, double val)
+void __lip_write_f64(struct lip_io_file *io, double val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-    unsigned sz = __lip_pack_f64(buf, val);
-    ctx->error = fwrite(buf, sz, 1, ctx->fp) != 1;
+    unsigned sz = __lip_pack_f64(io->buf, val);
+    io->error = fwrite(io->buf, sz, 1, io->fp) != 1;
 }

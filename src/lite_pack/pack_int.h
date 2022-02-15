@@ -32,10 +32,10 @@
              : __lip_pack_unsigned(buf, v), unsigned long long                 \
              : __lip_pack_unsigned(buf, v))
 
-#define __lip_pack_int(ctx, val)                                               \
+#define __lip_pack_int(io, val)                                               \
     ({                                                                         \
         typeof(val) tmp = (val);                                               \
-        __lip_pack_int_typed(ctx, __builtin_constant_p(val) ? tmp : val);      \
+        __lip_pack_int_typed(io, __builtin_constant_p(val) ? tmp : val);      \
     })
 
 LIP_API unsigned __lip_pack_i8(unsigned char buf[], int val);

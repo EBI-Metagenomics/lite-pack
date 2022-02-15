@@ -1,14 +1,12 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_bool.h"
 
-void lip_read_bool(struct lip_io_file *ctx, bool *val)
+void lip_read_bool(struct lip_io_file *io, bool *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[1] = {0};
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
-
-    ctx->error = lip_unpack_bool(buf, val) == 0;
+    io->error = lip_unpack_bool(io->buf, val) == 0;
 }

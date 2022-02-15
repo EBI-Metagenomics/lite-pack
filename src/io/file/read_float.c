@@ -2,53 +2,49 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_float.h"
 
-void __lip_read_f32(struct lip_io_file *ctx, float *val)
+void __lip_read_f32(struct lip_io_file *io, float *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[5] = {0};
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
-
-    if (lip_format(buf) != LIP_FMT_FLOAT_32)
+    if (lip_format(io->buf) != LIP_FMT_FLOAT_32)
     {
-        ctx->error = true;
+        io->error = true;
         return;
     }
 
-    ctx->error = fread(buf + 1, 4, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf + 1, 4, 1, io->fp) != 1;
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_f32(buf, val) == 0;
+    io->error = __lip_unpack_f32(io->buf, val) == 0;
 }
 
-void __lip_read_f64(struct lip_io_file *ctx, double *val)
+void __lip_read_f64(struct lip_io_file *io, double *val)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[9] = {0};
-
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
     unsigned sz = 0;
-    if (lip_format(buf) == LIP_FMT_FLOAT_32)
+    if (lip_format(io->buf) == LIP_FMT_FLOAT_32)
     {
         sz = 4;
     }
-    else if (lip_format(buf) == LIP_FMT_FLOAT_64)
+    else if (lip_format(io->buf) == LIP_FMT_FLOAT_64)
     {
         sz = 8;
     }
     else
     {
-        ctx->error = true;
+        io->error = true;
         return;
     }
 
-    ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
+    if (io->error) return;
 
-    ctx->error = __lip_unpack_f64(buf, val) == 0;
+    io->error = __lip_unpack_f64(io->buf, val) == 0;
 }

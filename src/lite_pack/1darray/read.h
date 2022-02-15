@@ -6,7 +6,7 @@
 
 struct lip_io_file;
 
-LIP_API void lip_read_1darray_size_type(struct lip_io_file *ctx,
+LIP_API void lip_read_1darray_size_type(struct lip_io_file *io,
                                         unsigned *size, uint8_t *type);
 
 #endif

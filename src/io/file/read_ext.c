@@ -2,18 +2,16 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_ext.h"
 
-void lip_read_ext_size_type(struct lip_io_file *ctx, unsigned *size,
+void lip_read_ext_size_type(struct lip_io_file *io, unsigned *size,
                             uint8_t *type)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[6] = {0};
-
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
     unsigned sz = 1;
-    switch (lip_format(buf))
+    switch (lip_format(io->buf))
     {
     case LIP_FMT_FIXEXT_16:
         fallthrough;
@@ -34,14 +32,14 @@ void lip_read_ext_size_type(struct lip_io_file *ctx, unsigned *size,
         fallthrough;
     case LIP_FMT_EXT_8:
         sz += 1;
-        ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
-        if (ctx->error) return;
+        io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
+        if (io->error) return;
         break;
 
     default:
-        ctx->error = true;
+        io->error = true;
         return;
     }
 
-    ctx->error = lip_unpack_ext_size_type(buf, size, type) == 0;
+    io->error = lip_unpack_ext_size_type(io->buf, size, type) == 0;
 }

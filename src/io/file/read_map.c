@@ -2,16 +2,15 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_map.h"
 
-void lip_read_map_size(struct lip_io_file *ctx, unsigned *size)
+void lip_read_map_size(struct lip_io_file *io, unsigned *size)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[5] = {0};
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
     unsigned sz = 0;
-    switch (lip_format(buf))
+    switch (lip_format(io->buf))
     {
     case LIP_FMT_MAP_32:
         sz += 2;
@@ -19,17 +18,17 @@ void lip_read_map_size(struct lip_io_file *ctx, unsigned *size)
 
     case LIP_FMT_MAP_16:
         sz += 2;
-        ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
-        if (ctx->error) return;
+        io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
+        if (io->error) return;
         fallthrough;
 
     case LIP_FMT_FIXMAP:
         break;
 
     default:
-        ctx->error = true;
+        io->error = true;
         return;
     }
 
-    ctx->error = lip_unpack_map_size(buf, size) == 0;
+    io->error = lip_unpack_map_size(io->buf, size) == 0;
 }

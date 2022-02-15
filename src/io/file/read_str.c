@@ -2,16 +2,15 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_str.h"
 
-void lip_read_str_size(struct lip_io_file *ctx, unsigned *size)
+void lip_read_str_size(struct lip_io_file *io, unsigned *size)
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    unsigned char buf[5] = {0};
-    ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
-    if (ctx->error) return;
+    io->error = fread(io->buf, 1, 1, io->fp) != 1;
+    if (io->error) return;
 
     unsigned sz = 0;
-    switch (lip_format(buf))
+    switch (lip_format(io->buf))
     {
     case LIP_FMT_STR_32:
         sz += 2;
@@ -23,24 +22,24 @@ void lip_read_str_size(struct lip_io_file *ctx, unsigned *size)
 
     case LIP_FMT_STR_8:
         sz += 1;
-        ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
-        if (ctx->error) return;
+        io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
+        if (io->error) return;
         fallthrough;
 
     case LIP_FMT_FIXSTR:
         break;
 
     default:
-        ctx->error = true;
+        io->error = true;
         return;
     }
 
-    ctx->error = lip_unpack_str_size(buf, size) == 0;
+    io->error = lip_unpack_str_size(io->buf, size) == 0;
 }
 
-void lip_read_str_data(struct lip_io_file *ctx, unsigned size, char val[])
+void lip_read_str_data(struct lip_io_file *io, unsigned size, char str[])
 {
-    if (ctx->error) return;
+    if (io->error) return;
 
-    ctx->error = fread(val, size, 1, ctx->fp) != 1;
+    io->error = fread(str, size, 1, io->fp) != 1;
 }
