@@ -1,4 +1,4 @@
-#include "lite_pack/ext/1darray.h"
+#include "lite_pack/1darray/1darray.h"
 
 void lip_pack_1darray_i8_data(unsigned char buf[], unsigned size,
                               int8_t const arr[])

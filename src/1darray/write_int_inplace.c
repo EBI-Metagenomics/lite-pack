@@ -1,5 +1,5 @@
-#include "lite_pack/ext/1darray/write_int_inplace.h"
-#include "lite_pack/ext/1darray/pack.h"
+#include "lite_pack/1darray/write_int_inplace.h"
+#include "lite_pack/1darray/pack.h"
 #include "lite_pack/io/file.h"
 
 /* SIGNED */

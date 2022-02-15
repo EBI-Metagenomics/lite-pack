@@ -1,4 +1,4 @@
-#include "lite_pack/ext/1darray/write_float.h"
+#include "lite_pack/1darray/write_float.h"
 #include "lite_pack/io/file.h"
 #include "lite_pack/store_float.h"
 

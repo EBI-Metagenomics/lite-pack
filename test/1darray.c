@@ -1,5 +1,5 @@
+#include "lite_pack/1darray/1darray.h"
 #include "helper.h"
-#include "lite_pack/ext/1darray.h"
 #include "lite_pack/lite_pack.h"
 
 static unsigned char buffer[1024 * 1024] = {0};

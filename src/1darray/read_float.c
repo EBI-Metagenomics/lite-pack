@@ -1,5 +1,5 @@
-#include "lite_pack/ext/1darray/read_float.h"
-#include "lite_pack/ext/1darray/unpack.h"
+#include "lite_pack/1darray/read_float.h"
+#include "lite_pack/1darray/unpack.h"
 #include "lite_pack/io/file.h"
 
 void lip_read_1darray_f32_data(struct lip_ctx_file *ctx, unsigned size,

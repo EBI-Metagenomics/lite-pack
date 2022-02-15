@@ -1,5 +1,5 @@
-#include "lite_pack/ext/1darray/write_float_inplace.h"
-#include "lite_pack/ext/1darray/pack.h"
+#include "lite_pack/1darray/write_float_inplace.h"
+#include "lite_pack/1darray/pack.h"
 #include "lite_pack/io/file.h"
 
 void lip_write_1darray_f32_data_inplace(struct lip_ctx_file *ctx, unsigned size,

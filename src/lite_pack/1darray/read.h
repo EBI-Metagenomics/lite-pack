@@ -2,8 +2,8 @@
 #define LIP_EXT_1DARRAY_READ_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/ext/1darray/read_float.h"
-#include "lite_pack/ext/1darray/read_int.h"
+#include "lite_pack/1darray/read_float.h"
+#include "lite_pack/1darray/read_int.h"
 #include <stdint.h>
 
 struct lip_ctx_file;

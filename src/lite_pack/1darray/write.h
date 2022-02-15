@@ -2,10 +2,10 @@
 #define LIP_EXT_1DARRAY_WRITE_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/ext/1darray/write_float.h"
-#include "lite_pack/ext/1darray/write_float_inplace.h"
-#include "lite_pack/ext/1darray/write_int.h"
-#include "lite_pack/ext/1darray/write_int_inplace.h"
+#include "lite_pack/1darray/write_float.h"
+#include "lite_pack/1darray/write_float_inplace.h"
+#include "lite_pack/1darray/write_int.h"
+#include "lite_pack/1darray/write_int_inplace.h"
 #include <stdint.h>
 
 LIP_API void lip_write_1darray_size_type(struct lip_ctx_file *ctx,

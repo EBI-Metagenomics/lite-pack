@@ -42,18 +42,18 @@ include("cmake/sanitizers.cmake")
 
 add_library(
   ${PROJECT_NAME}
-  src/ext/1darray/pack.c
-  src/ext/1darray/unpack.c
-  src/ext/1darray/write.c
-  src/ext/1darray/write_int.c
-  src/ext/1darray/write_int_inplace.c
-  src/ext/1darray/write_float.c
-  src/ext/1darray/write_float_inplace.c
-  src/ext/1darray/write_float.c
-  src/ext/1darray/read.c
-  src/ext/1darray/read_int.c
-  src/ext/1darray/read_float.c
-  src/ext/1darray/read_float.c
+  src/1darray/pack.c
+  src/1darray/unpack.c
+  src/1darray/write.c
+  src/1darray/write_int.c
+  src/1darray/write_int_inplace.c
+  src/1darray/write_float.c
+  src/1darray/write_float_inplace.c
+  src/1darray/write_float.c
+  src/1darray/read.c
+  src/1darray/read_int.c
+  src/1darray/read_float.c
+  src/1darray/read_float.c
   src/io/file_write_array.c
   src/io/file_write_bool.c
   src/io/file_write_ext.c
