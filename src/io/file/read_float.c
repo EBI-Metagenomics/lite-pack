@@ -1,9 +1,8 @@
-#include "lite_pack/io/file_read_float.h"
 #include "lite_pack/format.h"
-#include "lite_pack/io/file_ctx.h"
+#include "lite_pack/io/file.h"
 #include "lite_pack/unpack_float.h"
 
-void __lip_read_f32(struct lip_ctx_file *ctx, float *val)
+void __lip_read_f32(struct lip_io_file *ctx, float *val)
 {
     if (ctx->error) return;
 
@@ -24,7 +23,7 @@ void __lip_read_f32(struct lip_ctx_file *ctx, float *val)
     ctx->error = __lip_unpack_f32(buf, val) == 0;
 }
 
-void __lip_read_f64(struct lip_ctx_file *ctx, double *val)
+void __lip_read_f64(struct lip_io_file *ctx, double *val)
 {
     if (ctx->error) return;
 

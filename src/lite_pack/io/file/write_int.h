@@ -37,16 +37,16 @@
         __lip_write_int_typed(ctx, __builtin_constant_p(val) ? tmp : val);     \
     })
 
-struct lip_ctx_file;
+struct lip_io_file;
 
-LIP_API void __lip_write_i8(struct lip_ctx_file *ctx, int val);
-LIP_API void __lip_write_i16(struct lip_ctx_file *ctx, int val);
-LIP_API void __lip_write_i32(struct lip_ctx_file *ctx, int val);
-LIP_API void __lip_write_i64(struct lip_ctx_file *ctx, long val);
+LIP_API void __lip_write_i8(struct lip_io_file *ctx, int val);
+LIP_API void __lip_write_i16(struct lip_io_file *ctx, int val);
+LIP_API void __lip_write_i32(struct lip_io_file *ctx, int val);
+LIP_API void __lip_write_i64(struct lip_io_file *ctx, long val);
 
-LIP_API void __lip_write_u8(struct lip_ctx_file *ctx, unsigned val);
-LIP_API void __lip_write_u16(struct lip_ctx_file *ctx, unsigned val);
-LIP_API void __lip_write_u32(struct lip_ctx_file *ctx, unsigned val);
-LIP_API void __lip_write_u64(struct lip_ctx_file *ctx, unsigned long val);
+LIP_API void __lip_write_u8(struct lip_io_file *ctx, unsigned val);
+LIP_API void __lip_write_u16(struct lip_io_file *ctx, unsigned val);
+LIP_API void __lip_write_u32(struct lip_io_file *ctx, unsigned val);
+LIP_API void __lip_write_u64(struct lip_io_file *ctx, unsigned long val);
 
 #endif

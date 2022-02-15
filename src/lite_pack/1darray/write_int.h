@@ -4,7 +4,7 @@
 #include "lite_pack/export.h"
 #include <stdint.h>
 
-struct lip_ctx_file;
+struct lip_io_file;
 
 #define __lip_write_1darray_signed_data(ctx, sz, arr)                          \
     sizeof(*arr) == 1                                                          \
@@ -51,30 +51,30 @@ struct lip_ctx_file;
 
 /* SIGNED */
 
-LIP_API void lip_write_1darray_i8_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_i8_data(struct lip_io_file *ctx, unsigned size,
                                        int8_t const arr[]);
 
-LIP_API void lip_write_1darray_i16_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_i16_data(struct lip_io_file *ctx, unsigned size,
                                         int16_t const arr[]);
 
-LIP_API void lip_write_1darray_i32_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_i32_data(struct lip_io_file *ctx, unsigned size,
                                         int32_t const arr[]);
 
-LIP_API void lip_write_1darray_i64_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_i64_data(struct lip_io_file *ctx, unsigned size,
                                         int64_t const arr[]);
 
 /* UNSIGNED */
 
-LIP_API void lip_write_1darray_u8_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_u8_data(struct lip_io_file *ctx, unsigned size,
                                        uint8_t const arr[]);
 
-LIP_API void lip_write_1darray_u16_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_u16_data(struct lip_io_file *ctx, unsigned size,
                                         uint16_t const arr[]);
 
-LIP_API void lip_write_1darray_u32_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_u32_data(struct lip_io_file *ctx, unsigned size,
                                         uint32_t const arr[]);
 
-LIP_API void lip_write_1darray_u64_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_write_1darray_u64_data(struct lip_io_file *ctx, unsigned size,
                                         uint64_t const arr[]);
 
 #endif

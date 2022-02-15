@@ -1,8 +1,8 @@
 #include "lite_pack/format.h"
 #include "lite_pack/io/file.h"
-#include "lite_pack/unpack_array.h"
+#include "lite_pack/unpack_map.h"
 
-void lip_read_array_size(struct lip_ctx_file *ctx, unsigned *size)
+void lip_read_map_size(struct lip_io_file *ctx, unsigned *size)
 {
     if (ctx->error) return;
 
@@ -13,17 +13,17 @@ void lip_read_array_size(struct lip_ctx_file *ctx, unsigned *size)
     unsigned sz = 0;
     switch (lip_format(buf))
     {
-    case LIP_FMT_ARRAY_32:
+    case LIP_FMT_MAP_32:
         sz += 2;
         fallthrough;
 
-    case LIP_FMT_ARRAY_16:
+    case LIP_FMT_MAP_16:
         sz += 2;
         ctx->error = fread(buf + 1, sz, 1, ctx->fp) != 1;
         if (ctx->error) return;
         fallthrough;
 
-    case LIP_FMT_FIXARRAY:
+    case LIP_FMT_FIXMAP:
         break;
 
     default:
@@ -31,5 +31,5 @@ void lip_read_array_size(struct lip_ctx_file *ctx, unsigned *size)
         return;
     }
 
-    ctx->error = lip_unpack_array_size(buf, size) == 0;
+    ctx->error = lip_unpack_map_size(buf, size) == 0;
 }

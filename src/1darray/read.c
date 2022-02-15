@@ -2,7 +2,7 @@
 #include "1darray/unpack.h"
 #include "lite_pack/io/file.h"
 
-void lip_read_1darray_size_type(struct lip_ctx_file *ctx, unsigned *size,
+void lip_read_1darray_size_type(struct lip_io_file *ctx, unsigned *size,
                                 uint8_t *type)
 {
     if (ctx->error) return;

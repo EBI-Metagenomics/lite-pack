@@ -1,7 +1,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/pack_str.h"
 
-void lip_write_str_size(struct lip_ctx_file *ctx, unsigned size)
+void lip_write_str_size(struct lip_io_file *ctx, unsigned size)
 {
     if (ctx->error) return;
 
@@ -10,7 +10,7 @@ void lip_write_str_size(struct lip_ctx_file *ctx, unsigned size)
     ctx->error = fwrite(buf, sz, 1, ctx->fp) != 1;
 }
 
-void lip_write_str_data(struct lip_ctx_file *ctx, unsigned size,
+void lip_write_str_data(struct lip_io_file *ctx, unsigned size,
                         char const val[])
 {
     if (ctx->error) return;

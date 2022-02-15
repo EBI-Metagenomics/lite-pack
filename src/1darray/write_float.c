@@ -3,7 +3,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/store_float.h"
 
-void lip_write_1darray_f32_data(struct lip_ctx_file *ctx, unsigned size,
+void lip_write_1darray_f32_data(struct lip_io_file *ctx, unsigned size,
                                 float const arr[])
 {
     if (ctx->error) return;
@@ -16,7 +16,7 @@ void lip_write_1darray_f32_data(struct lip_ctx_file *ctx, unsigned size,
     }
 }
 
-void lip_write_1darray_f64_data(struct lip_ctx_file *ctx, unsigned size,
+void lip_write_1darray_f64_data(struct lip_io_file *ctx, unsigned size,
                                 double const arr[])
 {
     if (ctx->error) return;
@@ -29,7 +29,7 @@ void lip_write_1darray_f64_data(struct lip_ctx_file *ctx, unsigned size,
     }
 }
 
-void lip_write_1darray_f32_data_inplace(struct lip_ctx_file *ctx, unsigned size,
+void lip_write_1darray_f32_data_inplace(struct lip_io_file *ctx, unsigned size,
                                         float arr[])
 {
     if (ctx->error) return;
@@ -38,7 +38,7 @@ void lip_write_1darray_f32_data_inplace(struct lip_ctx_file *ctx, unsigned size,
     ctx->error = fwrite(arr, size * sizeof(float), 1, ctx->fp) != 1;
 }
 
-void lip_write_1darray_f64_data_inplace(struct lip_ctx_file *ctx, unsigned size,
+void lip_write_1darray_f64_data_inplace(struct lip_io_file *ctx, unsigned size,
                                         double arr[])
 {
     if (ctx->error) return;

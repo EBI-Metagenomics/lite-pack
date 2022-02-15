@@ -1,7 +1,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_bool.h"
 
-void lip_read_bool(struct lip_ctx_file *ctx, bool *val)
+void lip_read_bool(struct lip_io_file *ctx, bool *val)
 {
     if (ctx->error) return;
 

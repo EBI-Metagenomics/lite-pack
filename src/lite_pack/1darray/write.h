@@ -8,7 +8,7 @@
 #include "lite_pack/1darray/write_int_inplace.h"
 #include <stdint.h>
 
-LIP_API void lip_write_1darray_size_type(struct lip_ctx_file *ctx,
+LIP_API void lip_write_1darray_size_type(struct lip_io_file *ctx,
                                          unsigned size, uint8_t type);
 #define lip_write_1darray_int_data(ctx, sz, arr)                               \
     __lip_write_1darray_int_data(ctx, sz, arr)

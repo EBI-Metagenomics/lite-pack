@@ -4,7 +4,7 @@
 #include "lite_pack/export.h"
 #include <stdint.h>
 
-struct lip_ctx_file;
+struct lip_io_file;
 
 #define __lip_read_1darray_signed_data(ctx, arr)                               \
     sizeof(*arr) == 1   ? lip_read_1darray_i8_data(ctx, (int8_t *)(arr))       \
@@ -35,30 +35,30 @@ struct lip_ctx_file;
 
 /* SIGNED */
 
-LIP_API void lip_read_1darray_i8_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_i8_data(struct lip_io_file *ctx, unsigned size,
                                       int8_t arr[]);
 
-LIP_API void lip_read_1darray_i16_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_i16_data(struct lip_io_file *ctx, unsigned size,
                                        int16_t arr[]);
 
-LIP_API void lip_read_1darray_i32_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_i32_data(struct lip_io_file *ctx, unsigned size,
                                        int32_t arr[]);
 
-LIP_API void lip_read_1darray_i64_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_i64_data(struct lip_io_file *ctx, unsigned size,
                                        int64_t arr[]);
 
 /* UNSIGNED */
 
-LIP_API void lip_read_1darray_u8_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_u8_data(struct lip_io_file *ctx, unsigned size,
                                       uint8_t arr[]);
 
-LIP_API void lip_read_1darray_u16_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_u16_data(struct lip_io_file *ctx, unsigned size,
                                        uint16_t arr[]);
 
-LIP_API void lip_read_1darray_u32_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_u32_data(struct lip_io_file *ctx, unsigned size,
                                        uint32_t arr[]);
 
-LIP_API void lip_read_1darray_u64_data(struct lip_ctx_file *ctx, unsigned size,
+LIP_API void lip_read_1darray_u64_data(struct lip_io_file *ctx, unsigned size,
                                        uint64_t arr[]);
 
 #endif
