@@ -9,5 +9,5 @@ void lip_read_1darray_size_type(struct lip_io_file *io, unsigned *size,
 
     unsigned char buf[6] = {0};
     lip_read_ext_size_type(io, size, type);
-    io->error = lip_unpack_1darray_size_type(buf, size, type) == 0;
+    io->error = unpack_1darray_size_type(buf, size, type) == 0;
 }

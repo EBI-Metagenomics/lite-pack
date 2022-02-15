@@ -10,7 +10,7 @@ void lip_read_1darray_f32_data(struct lip_io_file *io, unsigned size,
     io->error = fread(arr, size * sizeof(float), 1, io->fp) != 1;
     if (io->error) return;
 
-    lip_unpack_1darray_f32_data_inplace((unsigned char *)arr, size);
+    unpack_1darray_f32_data_inplace((unsigned char *)arr, size);
 }
 
 void lip_read_1darray_f64_data(struct lip_io_file *io, unsigned size,
@@ -21,5 +21,5 @@ void lip_read_1darray_f64_data(struct lip_io_file *io, unsigned size,
     io->error = fread(arr, size * sizeof(double), 1, io->fp) != 1;
     if (io->error) return;
 
-    lip_unpack_1darray_f64_data_inplace((unsigned char *)arr, size);
+    unpack_1darray_f64_data_inplace((unsigned char *)arr, size);
 }

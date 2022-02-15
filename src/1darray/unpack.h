@@ -3,8 +3,8 @@
 
 #include "lite_pack/unpack_ext.h"
 
-static inline unsigned
-lip_unpack_1darray_size_type(unsigned char buf[], unsigned *size, uint8_t *type)
+static inline unsigned unpack_1darray_size_type(unsigned char buf[],
+                                                unsigned *size, uint8_t *type)
 {
     return lip_unpack_ext_size_type(buf, size, type);
 }

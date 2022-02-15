@@ -7,7 +7,6 @@ void lip_write_1darray_size_type(struct lip_io_file *io, unsigned size,
 {
     if (io->error) return;
 
-    unsigned char buf[6] = {0};
-    unsigned sz = lip_pack_1darray_size_type(buf, size, type);
-    io->error = fwrite(buf, sz, 1, io->fp) != 1;
+    unsigned sz = pack_1darray_size_type(io->buf, size, type);
+    io->error = fwrite(io->buf, sz, 1, io->fp) != 1;
 }
