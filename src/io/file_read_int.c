@@ -31,9 +31,8 @@ static inline unsigned int_size(enum lip_format fmt)
 
 /* SIGNED INTEGER */
 
-static inline void read_int(struct lip_ctx_file *ctx)
+static inline void read_int(struct lip_ctx_file *ctx, unsigned char buf[])
 {
-    unsigned char buf[9] = {0};
     ctx->error = fread(buf, 1, 1, ctx->fp) != 1;
     if (ctx->error) return;
 
@@ -76,8 +75,8 @@ void __lip_read_i8(struct lip_ctx_file *ctx, int8_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[2] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_i8(buf, val) == 0;
@@ -87,8 +86,8 @@ void __lip_read_i16(struct lip_ctx_file *ctx, int16_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[3] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_i16(buf, val) == 0;
@@ -98,8 +97,8 @@ void __lip_read_i32(struct lip_ctx_file *ctx, int32_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[5] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_i32(buf, val) == 0;
@@ -110,7 +109,7 @@ void __lip_read_i64(struct lip_ctx_file *ctx, int64_t *val)
     if (ctx->error) return;
 
     unsigned char buf[9] = {0};
-    read_int(ctx);
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_i64(buf, val) == 0;
@@ -122,8 +121,8 @@ void __lip_read_u8(struct lip_ctx_file *ctx, uint8_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[2] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_u8(buf, val) == 0;
@@ -133,8 +132,8 @@ void __lip_read_u16(struct lip_ctx_file *ctx, uint16_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[3] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_u16(buf, val) == 0;
@@ -144,8 +143,8 @@ void __lip_read_u32(struct lip_ctx_file *ctx, uint32_t *val)
 {
     if (ctx->error) return;
 
-    unsigned char buf[5] = {0};
-    read_int(ctx);
+    unsigned char buf[9] = {0};
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_u32(buf, val) == 0;
@@ -156,7 +155,7 @@ void __lip_read_u64(struct lip_ctx_file *ctx, uint64_t *val)
     if (ctx->error) return;
 
     unsigned char buf[9] = {0};
-    read_int(ctx);
+    read_int(ctx, buf);
     if (ctx->error) return;
 
     ctx->error = __lip_unpack_u64(buf, val) == 0;
