@@ -56,6 +56,7 @@ add_library(
   src/1darray/write_int.c
   src/1darray/write_int_data.c
   src/1darray/write_int_data_inplace.c
+  src/io/file/file.c
   src/io/file/read_array.c
   src/io/file/read_bool.c
   src/io/file/read_ext.c
@@ -115,6 +116,8 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE _XOPEN_SOURCE=700)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-targets)
 

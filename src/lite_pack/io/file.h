@@ -41,4 +41,8 @@ LIP_API bool lip_read_str_data(struct lip_io_file *, unsigned size, char str[]);
 LIP_API bool lip_read_ext_size_type(struct lip_io_file *, unsigned *size,
                                     uint8_t *type);
 
+LIP_API int lip_fseek(struct lip_io_file *io, int64_t offset, int whence);
+LIP_API int64_t lip_ftell(struct lip_io_file *io);
+LIP_API void lip_rewind(struct lip_io_file *io);
+
 #endif
