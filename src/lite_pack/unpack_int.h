@@ -1,6 +1,7 @@
 #ifndef LIP_UNPACK_INT_H
 #define LIP_UNPACK_INT_H
 
+#include "lite_pack/export.h"
 #include <stdint.h>
 
 /* clang-format off */
@@ -32,14 +33,14 @@
              : __lip_unpack_unsigned(buf, val))
 /* clang-format on */
 
-unsigned __lip_unpack_i8(unsigned char const buf[], int8_t *val);
-unsigned __lip_unpack_i16(unsigned char const buf[], int16_t *val);
-unsigned __lip_unpack_i32(unsigned char const buf[], int32_t *val);
-unsigned __lip_unpack_i64(unsigned char const buf[], int64_t *val);
+LIP_API unsigned __lip_unpack_i8(unsigned char const buf[], int8_t *val);
+LIP_API unsigned __lip_unpack_i16(unsigned char const buf[], int16_t *val);
+LIP_API unsigned __lip_unpack_i32(unsigned char const buf[], int32_t *val);
+LIP_API unsigned __lip_unpack_i64(unsigned char const buf[], int64_t *val);
 
-unsigned __lip_unpack_u8(unsigned char const buf[], uint8_t *val);
-unsigned __lip_unpack_u16(unsigned char const buf[], uint16_t *val);
-unsigned __lip_unpack_u32(unsigned char const buf[], uint32_t *val);
-unsigned __lip_unpack_u64(unsigned char const buf[], uint64_t *val);
+LIP_API unsigned __lip_unpack_u8(unsigned char const buf[], uint8_t *val);
+LIP_API unsigned __lip_unpack_u16(unsigned char const buf[], uint16_t *val);
+LIP_API unsigned __lip_unpack_u32(unsigned char const buf[], uint32_t *val);
+LIP_API unsigned __lip_unpack_u64(unsigned char const buf[], uint64_t *val);
 
 #endif

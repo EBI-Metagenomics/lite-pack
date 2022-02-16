@@ -2,6 +2,7 @@
 #define FORMAT_H
 
 #include "lite_pack/compiler.h"
+#include "lite_pack/export.h"
 #include "lite_pack/number.h"
 #include <stdint.h>
 
@@ -59,14 +60,14 @@ enum lip_format_family
     LIP_FMT_FAMILY_EXT,
 };
 
-extern enum lip_format_family const __lip_format_family_map[];
+LIP_API extern enum lip_format_family const __lip_format_family_map[];
 
 static inline enum lip_format_family __lip_format_family(int first_byte)
 {
     return __lip_format_family_map[first_byte];
 }
 
-enum lip_format __lip_format(int first_byte);
+LIP_API enum lip_format __lip_format(int first_byte);
 
 static inline enum lip_format lip_format(uint8_t const buf[])
 {

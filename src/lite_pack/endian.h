@@ -16,17 +16,24 @@
 #endif
 
 #ifndef htonll
-#include <byteswap.h>
+
+#ifndef BYTE_ORDER
+#define BYTE_ORDER __BYTE_ORDER__
+#endif
+
+#ifndef BIG_ENDIAN
+#define BIG_ENDIAN __BIG_ENDIAN__
+#endif
 
 #if BYTE_ORDER == BIG_ENDIAN
 
-static inline uint64_t htonll(uint64_t x) { return 0; }
-static inline uint64_t ntohll(uint64_t x) { return 0; }
+static inline uint64_t htonll(uint64_t x) { return x; }
+static inline uint64_t ntohll(uint64_t x) { return x; }
 
 #else
 
-static inline uint64_t htonll(uint64_t x) { return bswap_64(x); }
-static inline uint64_t ntohll(uint64_t x) { return bswap_64(x); }
+static inline uint64_t htonll(uint64_t x) { return __builtin_bswap64(x); }
+static inline uint64_t ntohll(uint64_t x) { return __builtin_bswap64(x); }
 
 #endif
 #endif
