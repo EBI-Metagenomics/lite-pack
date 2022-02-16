@@ -45,23 +45,17 @@ add_library(
   src/1darray/pack_float.c
   src/1darray/pack_int.c
   src/1darray/pack_int_inplace.c
+  src/1darray/read.c
+  src/1darray/read_float.c
+  src/1darray/read_int.c
   src/1darray/unpack_float.c
   src/1darray/unpack_int.c
   src/1darray/unpack_int_inplace.c
   src/1darray/write.c
-  src/1darray/write_int.c
-  src/1darray/write_int_inplace.c
   src/1darray/write_float.c
-  src/1darray/read.c
-  src/1darray/read_int.c
-  src/1darray/read_float.c
-  src/io/file/write_array.c
-  src/io/file/write_bool.c
-  src/io/file/write_ext.c
-  src/io/file/write_float.c
-  src/io/file/write_int.c
-  src/io/file/write_map.c
-  src/io/file/write_str.c
+  src/1darray/write_int.c
+  src/1darray/write_int_data.c
+  src/1darray/write_int_data_inplace.c
   src/io/file/read_array.c
   src/io/file/read_bool.c
   src/io/file/read_ext.c
@@ -69,6 +63,13 @@ add_library(
   src/io/file/read_int.c
   src/io/file/read_map.c
   src/io/file/read_str.c
+  src/io/file/write_array.c
+  src/io/file/write_bool.c
+  src/io/file/write_ext.c
+  src/io/file/write_float.c
+  src/io/file/write_int.c
+  src/io/file/write_map.c
+  src/io/file/write_str.c
   src/first_byte.c
   src/format.c
   src/pack_array.c

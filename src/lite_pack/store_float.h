@@ -11,8 +11,7 @@ static inline unsigned lip_store_f32(unsigned char buf[], float val)
 
 static inline unsigned lip_store_f32_inplace(unsigned char buf[])
 {
-    return __lip_store_num32(
-        buf, (union __lip_num32){.c = {buf[0], buf[1], buf[2], buf[3]}});
+    return __lip_store_num32(buf, __LIP_NUM32(buf));
 }
 
 static inline unsigned lip_store_f64(unsigned char buf[], double val)
@@ -22,9 +21,7 @@ static inline unsigned lip_store_f64(unsigned char buf[], double val)
 
 static inline unsigned lip_store_f64_inplace(unsigned char buf[])
 {
-    return __lip_store_num64(
-        buf, (union __lip_num64){.c = {buf[0], buf[1], buf[2], buf[3], buf[4],
-                                       buf[5], buf[6], buf[7]}});
+    return __lip_store_num64(buf, __LIP_NUM64(buf));
 }
 
 static inline unsigned __lip_store_f32(unsigned char buf[], float val)

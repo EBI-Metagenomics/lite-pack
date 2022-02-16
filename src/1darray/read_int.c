@@ -2,6 +2,8 @@
 #include "1darray/unpack_int_inplace.h"
 #include "lite_pack/io/file.h"
 
+/* SIGNED */
+
 void lip_read_1darray_i8_data(struct lip_io_file *io, unsigned size,
                               int8_t arr[])
 {
@@ -45,6 +47,8 @@ void lip_read_1darray_i64_data(struct lip_io_file *io, unsigned size,
 
     unpack_1darray_i64_data_inplace((unsigned char *)arr, size);
 }
+
+/* UNSIGNED */
 
 void lip_read_1darray_u8_data(struct lip_io_file *io, unsigned size,
                               uint8_t arr[])

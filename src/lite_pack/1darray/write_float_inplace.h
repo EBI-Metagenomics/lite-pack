@@ -1,11 +1,11 @@
-#ifndef LIP_EXT_1DARRAY_WRITE_FLOAT_INPLACE_H
-#define LIP_EXT_1DARRAY_WRITE_FLOAT_INPLACE_H
+#ifndef LIP_1DARRAY_WRITE_FLOAT_INPLACE_H
+#define LIP_1DARRAY_WRITE_FLOAT_INPLACE_H
 
 #include "lite_pack/export.h"
 
 struct lip_io_file;
 
-#define __lip_write_1darray_float_inplace(io, size, arr)                      \
+#define __lip_write_1darray_float_data_inplace(io, size, arr)                  \
     _Generic((*arr), float                                                     \
              : lip_write_1darray_f32_data_inplace, double                      \
              : lip_write_1darray_f64_data_inplace)(io, size, arr)

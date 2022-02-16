@@ -34,7 +34,7 @@
 #define __lip_write_int(io, v)                                                 \
     ({                                                                         \
         __auto_type tmp = (v);                                                 \
-        __lip_write_int_typed(io, __builtin_constant_p(v) ? tmp : v);          \
+        __lip_write_int_typed(io, (__builtin_constant_p(v) ? tmp : v));        \
     })
 
 struct lip_io_file;
