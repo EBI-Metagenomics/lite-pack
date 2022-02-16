@@ -2,13 +2,13 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_ext.h"
 
-void lip_read_ext_size_type(struct lip_io_file *io, unsigned *size,
+bool lip_read_ext_size_type(struct lip_io_file *io, unsigned *size,
                             uint8_t *type)
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = fread(io->buf, 1, 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unsigned sz = 1;
     switch (lip_format(io->buf))
@@ -33,13 +33,13 @@ void lip_read_ext_size_type(struct lip_io_file *io, unsigned *size,
     case LIP_FMT_EXT_8:
         sz += 1;
         io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
-        if (io->error) return;
+        if (io->error) return false;
         break;
 
     default:
         io->error = true;
-        return;
+        return false;
     }
 
-    io->error = lip_unpack_ext_size_type(io->buf, size, type) == 0;
+    return !(io->error = lip_unpack_ext_size_type(io->buf, size, type) == 0);
 }

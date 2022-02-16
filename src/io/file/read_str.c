@@ -2,12 +2,12 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_str.h"
 
-void lip_read_str_size(struct lip_io_file *io, unsigned *size)
+bool lip_read_str_size(struct lip_io_file *io, unsigned *size)
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = fread(io->buf, 1, 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unsigned sz = 0;
     switch (lip_format(io->buf))
@@ -23,7 +23,7 @@ void lip_read_str_size(struct lip_io_file *io, unsigned *size)
     case LIP_FMT_STR_8:
         sz += 1;
         io->error = fread(io->buf + 1, sz, 1, io->fp) != 1;
-        if (io->error) return;
+        if (io->error) return false;
         fallthrough;
 
     case LIP_FMT_FIXSTR:
@@ -31,15 +31,15 @@ void lip_read_str_size(struct lip_io_file *io, unsigned *size)
 
     default:
         io->error = true;
-        return;
+        return false;
     }
 
-    io->error = lip_unpack_str_size(io->buf, size) == 0;
+    return !(io->error = lip_unpack_str_size(io->buf, size) == 0);
 }
 
-void lip_read_str_data(struct lip_io_file *io, unsigned size, char str[])
+bool lip_read_str_data(struct lip_io_file *io, unsigned size, char str[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
-    io->error = fread(str, size, 1, io->fp) != 1;
+    return !(io->error = fread(str, size, 1, io->fp) != 1);
 }

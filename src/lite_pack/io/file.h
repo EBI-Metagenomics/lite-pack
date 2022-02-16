@@ -18,27 +18,27 @@ struct lip_io_file
 
 /* WRITE */
 
-LIP_API void lip_write_bool(struct lip_io_file *io, bool val);
+LIP_API bool lip_write_bool(struct lip_io_file *io, bool val);
 #define lip_write_int(io, val) __lip_write_int(io, val)
 #define lip_write_float(io, val) __lip_write_float(io, val)
-LIP_API void lip_write_array_size(struct lip_io_file *, unsigned size);
-LIP_API void lip_write_map_size(struct lip_io_file *, unsigned size);
-LIP_API void lip_write_str_size(struct lip_io_file *, unsigned size);
-LIP_API void lip_write_str_data(struct lip_io_file *, unsigned size,
+LIP_API bool lip_write_array_size(struct lip_io_file *, unsigned size);
+LIP_API bool lip_write_map_size(struct lip_io_file *, unsigned size);
+LIP_API bool lip_write_str_size(struct lip_io_file *, unsigned size);
+LIP_API bool lip_write_str_data(struct lip_io_file *, unsigned size,
                                 char const str[]);
-LIP_API void lip_write_ext_size_type(struct lip_io_file *io, unsigned size,
+LIP_API bool lip_write_ext_size_type(struct lip_io_file *io, unsigned size,
                                      uint8_t type);
 
 /* READ */
 
-LIP_API void lip_read_bool(struct lip_io_file *, bool *val);
+LIP_API bool lip_read_bool(struct lip_io_file *, bool *val);
 #define lip_read_int(io, val) __lip_read_int(io, val)
 #define lip_read_float(io, val) __lip_read_float(io, val)
-LIP_API void lip_read_array_size(struct lip_io_file *, unsigned *size);
-LIP_API void lip_read_map_size(struct lip_io_file *, unsigned *size);
-LIP_API void lip_read_str_size(struct lip_io_file *, unsigned *size);
-LIP_API void lip_read_str_data(struct lip_io_file *, unsigned size, char str[]);
-LIP_API void lip_read_ext_size_type(struct lip_io_file *, unsigned *size,
+LIP_API bool lip_read_array_size(struct lip_io_file *, unsigned *size);
+LIP_API bool lip_read_map_size(struct lip_io_file *, unsigned *size);
+LIP_API bool lip_read_str_size(struct lip_io_file *, unsigned *size);
+LIP_API bool lip_read_str_data(struct lip_io_file *, unsigned size, char str[]);
+LIP_API bool lip_read_ext_size_type(struct lip_io_file *, unsigned *size,
                                     uint8_t *type);
 
 #endif

@@ -2,6 +2,7 @@
 #define LIP_IO_FILE_WRITE_INT_H
 
 #include "lite_pack/export.h"
+#include <stdbool.h>
 #include <stdint.h>
 
 #define __lip_write_signed(io, v)                                              \
@@ -39,14 +40,14 @@
 
 struct lip_io_file;
 
-LIP_API void __lip_write_i8(struct lip_io_file *, int val);
-LIP_API void __lip_write_i16(struct lip_io_file *, int val);
-LIP_API void __lip_write_i32(struct lip_io_file *, int val);
-LIP_API void __lip_write_i64(struct lip_io_file *, long val);
+LIP_API bool __lip_write_i8(struct lip_io_file *, int val);
+LIP_API bool __lip_write_i16(struct lip_io_file *, int val);
+LIP_API bool __lip_write_i32(struct lip_io_file *, int val);
+LIP_API bool __lip_write_i64(struct lip_io_file *, long val);
 
-LIP_API void __lip_write_u8(struct lip_io_file *, unsigned val);
-LIP_API void __lip_write_u16(struct lip_io_file *, unsigned val);
-LIP_API void __lip_write_u32(struct lip_io_file *, unsigned val);
-LIP_API void __lip_write_u64(struct lip_io_file *, unsigned long val);
+LIP_API bool __lip_write_u8(struct lip_io_file *, unsigned val);
+LIP_API bool __lip_write_u16(struct lip_io_file *, unsigned val);
+LIP_API bool __lip_write_u32(struct lip_io_file *, unsigned val);
+LIP_API bool __lip_write_u64(struct lip_io_file *, unsigned long val);
 
 #endif

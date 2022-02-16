@@ -2,6 +2,7 @@
 #define LIP_IO_FILE_READ_INT_H
 
 #include "lite_pack/export.h"
+#include <stdbool.h>
 #include <stdint.h>
 
 #define __lip_read_signed(io, v)                                               \
@@ -35,16 +36,16 @@ struct lip_io_file;
 
 /* SIGNED */
 
-LIP_API void __lip_read_i8(struct lip_io_file *, int8_t *val);
-LIP_API void __lip_read_i16(struct lip_io_file *, int16_t *val);
-LIP_API void __lip_read_i32(struct lip_io_file *, int32_t *val);
-LIP_API void __lip_read_i64(struct lip_io_file *, int64_t *val);
+LIP_API bool __lip_read_i8(struct lip_io_file *, int8_t *val);
+LIP_API bool __lip_read_i16(struct lip_io_file *, int16_t *val);
+LIP_API bool __lip_read_i32(struct lip_io_file *, int32_t *val);
+LIP_API bool __lip_read_i64(struct lip_io_file *, int64_t *val);
 
 /* UNSIGNED */
 
-LIP_API void __lip_read_u8(struct lip_io_file *, uint8_t *val);
-LIP_API void __lip_read_u16(struct lip_io_file *, uint16_t *val);
-LIP_API void __lip_read_u32(struct lip_io_file *, uint32_t *val);
-LIP_API void __lip_read_u64(struct lip_io_file *, uint64_t *val);
+LIP_API bool __lip_read_u8(struct lip_io_file *, uint8_t *val);
+LIP_API bool __lip_read_u16(struct lip_io_file *, uint16_t *val);
+LIP_API bool __lip_read_u32(struct lip_io_file *, uint32_t *val);
+LIP_API bool __lip_read_u64(struct lip_io_file *, uint64_t *val);
 
 #endif
