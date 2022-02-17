@@ -1,8 +1,0 @@
-#ifndef LITE_PACK_CONFIG_H
-#define LITE_PACK_CONFIG_H
-
-#ifndef LITE_PACK_THREAD_SAFE_LEVEL
-#define LITE_PACK_THREAD_SAFE_LEVEL 1
-#endif
-
-#endif

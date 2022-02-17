@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.0.2
+  VERSION 0.0.3
   LANGUAGES C)
 
 # Generate compile_commands.json file
@@ -85,6 +85,20 @@ add_library(
   src/unpack_map.c
   src/unpack_str.c)
 add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+set(THREAD_SAFE_LEVELS 0 1)
+set(LIP_THREAD_SAFE_LEVEL
+    "1"
+    CACHE STRING "Thread-safe level: 0 for none; 1 otherwise.")
+if(${LIP_THREAD_SAFE_LEVEL} IN_LIST THREAD_SAFE_LEVELS)
+  message(STATUS "Thread-safe level - ${LIP_THREAD_SAFE_LEVEL}")
+else()
+  message(
+    FATAL_ERROR "Thread-safe levels are either 0 or 1.")
+endif()
+
+set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/config.h)
+configure_file(${PROJECT_SOURCE_DIR}/src/lite_pack/config.h.in ${CONFIG_FILE})
 
 set(EXPORT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/export.h)
 include(GenerateExportHeader)
