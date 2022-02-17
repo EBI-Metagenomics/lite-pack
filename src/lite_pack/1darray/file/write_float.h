@@ -9,7 +9,7 @@ struct lip_file;
 
 /* SINGLE-CALL */
 
-#define __lip_write_1darray_float(file, size, arr)                             \
+#define lip_write_1darray_float(file, size, arr)                               \
     _Generic((*arr), float                                                     \
              : lip_write_1darray_f32, double                                   \
              : lip_write_1darray_f64)(file, size, arr)
