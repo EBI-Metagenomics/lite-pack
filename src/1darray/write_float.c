@@ -2,7 +2,7 @@
 #include "1darray/pack_float.h"
 #include "lite_pack/1darray/1darray.h"
 #include "lite_pack/1darray/type.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 #include "lite_pack/store_float.h"
 
 void lip_write_1darray_f32(struct lip_file *io, unsigned size,

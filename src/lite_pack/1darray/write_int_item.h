@@ -2,7 +2,7 @@
 #define LIP_1DARRAY_WRITE_INT_ITEM_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 #include "lite_pack/store_int.h"
 #include <stdint.h>
 

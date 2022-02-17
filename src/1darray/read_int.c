@@ -1,6 +1,6 @@
 #include "lite_pack/1darray/read_int.h"
 #include "1darray/unpack_int_inplace.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 
 /* SIGNED */
 

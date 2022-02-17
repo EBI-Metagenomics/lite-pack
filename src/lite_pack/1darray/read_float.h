@@ -2,7 +2,7 @@
 #define LIP_1DARRAY_READ_FLOAT_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 #include "lite_pack/load_float.h"
 #include <stdint.h>
 

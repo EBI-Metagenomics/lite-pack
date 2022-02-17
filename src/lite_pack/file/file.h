@@ -1,11 +1,11 @@
-#ifndef LIP_IO_FILE_H
-#define LIP_IO_FILE_H
+#ifndef LIP_FILE_FILE_H
+#define LIP_FILE_FILE_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/io/file/read_float.h"
-#include "lite_pack/io/file/read_int.h"
-#include "lite_pack/io/file/write_float.h"
-#include "lite_pack/io/file/write_int.h"
+#include "lite_pack/file/read_float.h"
+#include "lite_pack/file/read_int.h"
+#include "lite_pack/file/write_float.h"
+#include "lite_pack/file/write_int.h"
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>

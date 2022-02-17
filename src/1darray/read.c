@@ -1,6 +1,6 @@
 #include "1darray/unpack.h"
 #include "lite_pack/1darray/1darray.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 
 void lip_read_1darray_size_type(struct lip_file *io, unsigned *size,
                                 uint8_t *type)

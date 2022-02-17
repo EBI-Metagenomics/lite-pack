@@ -1,6 +1,6 @@
 #include "lite_pack/1darray/read_float.h"
 #include "1darray/unpack_float.h"
-#include "lite_pack/io/file.h"
+#include "lite_pack/file/file.h"
 
 void lip_read_1darray_f32_data(struct lip_file *io, unsigned size, float arr[])
 {
