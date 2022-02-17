@@ -8,35 +8,32 @@
 
 struct lip_file;
 
-#define __lip_write_1darray_signed_item(i, v)                                  \
-    sizeof(typeof(v)) == 1   ? lip_write_1darray_i8_item(i, (int8_t)(v))       \
-    : sizeof(typeof(v)) == 2 ? lip_write_1darray_i16_item(i, (int16_t)(v))     \
-    : sizeof(typeof(v)) == 4 ? lip_write_1darray_i32_item(i, (int32_t)(v))     \
-    : sizeof(typeof(v)) == 8 ? lip_write_1darray_i64_item(i, (int64_t)(v))     \
+#define __lip_write_1darray_signed_item(f, i)                                  \
+    sizeof(typeof(i)) == 1   ? lip_write_1darray_i8_item(f, (int8_t)(i))       \
+    : sizeof(typeof(i)) == 2 ? lip_write_1darray_i16_item(f, (int16_t)(i))     \
+    : sizeof(typeof(i)) == 4 ? lip_write_1darray_i32_item(f, (int32_t)(i))     \
+    : sizeof(typeof(i)) == 8 ? lip_write_1darray_i64_item(f, (int64_t)(i))     \
                              : 0
 
-#define __lip_write_1darray_unsigned_item(i, v)                                \
-    sizeof(typeof(v)) == 1   ? lip_write_1darray_u8_item(i, (uint8_t)(v))      \
-    : sizeof(typeof(v)) == 2 ? lip_write_1darray_u16_item(i, (uint16_t)(v))    \
-    : sizeof(typeof(v)) == 4 ? lip_write_1darray_u32_item(i, (uint32_t)(v))    \
-    : sizeof(typeof(v)) == 8 ? lip_write_1darray_u64_item(i, (uint64_t)(v))    \
+#define __lip_write_1darray_unsigned_item(f, i)                                \
+    sizeof(typeof(i)) == 1   ? lip_write_1darray_u8_item(f, (uint8_t)(i))      \
+    : sizeof(typeof(i)) == 2 ? lip_write_1darray_u16_item(f, (uint16_t)(i))    \
+    : sizeof(typeof(i)) == 4 ? lip_write_1darray_u32_item(f, (uint32_t)(i))    \
+    : sizeof(typeof(i)) == 8 ? lip_write_1darray_u64_item(f, (uint64_t)(i))    \
                              : 0U
 
-#define __lip_write_1darray_int_item_typed(i, v)                               \
-    _Generic((v), signed char                                                  \
-             : __lip_write_1darray_signed_item(i, v), signed short             \
-             : __lip_write_1darray_signed_item(i, v), signed int               \
-             : __lip_write_1darray_signed_item(i, v), signed long              \
-             : __lip_write_1darray_signed_item(i, v), signed long long         \
-             : __lip_write_1darray_signed_item(i, v), unsigned char            \
-             : __lip_write_1darray_unsigned_item(i, v), unsigned short         \
-             : __lip_write_1darray_unsigned_item(i, v), unsigned int           \
-             : __lip_write_1darray_unsigned_item(i, v), unsigned long          \
-             : __lip_write_1darray_unsigned_item(i, v), unsigned long long     \
-             : __lip_write_1darray_unsigned_item(i, v))
-
-#define __lip_write_1darray_int_item(i, v)                                     \
-    __lip_write_1darray_int_item_typed(i, (v))
+#define lip_write_1darray_int_item(f, i)                                       \
+    _Generic((i), signed char                                                  \
+             : __lip_write_1darray_signed_item(f, i), signed short             \
+             : __lip_write_1darray_signed_item(f, i), signed int               \
+             : __lip_write_1darray_signed_item(f, i), signed long              \
+             : __lip_write_1darray_signed_item(f, i), signed long long         \
+             : __lip_write_1darray_signed_item(f, i), unsigned char            \
+             : __lip_write_1darray_unsigned_item(f, i), unsigned short         \
+             : __lip_write_1darray_unsigned_item(f, i), unsigned int           \
+             : __lip_write_1darray_unsigned_item(f, i), unsigned long          \
+             : __lip_write_1darray_unsigned_item(f, i), unsigned long long     \
+             : __lip_write_1darray_unsigned_item(f, i))
 
 /* SIGNED */
 

@@ -24,7 +24,7 @@ struct lip_file;
     : sizeof(*a) == 8 ? lip_read_1darray_u64_data(f, s, (uint64_t *)(a))       \
                       : 0U
 
-#define __lip_read_1darray_int_data(f, s, a)                                   \
+#define lip_read_1darray_int_data(f, s, a)                                     \
     _Generic((*a), signed char                                                 \
              : __lip_read_1darray_signed_data(f, s, a), signed short           \
              : __lip_read_1darray_signed_data(f, s, a), signed int             \
@@ -81,7 +81,7 @@ LIP_API void lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
     : sizeof(*v) == 8 ? lip_read_1darray_u64_item(f, (uint64_t *)(v))          \
                       : 0U
 
-#define __lip_read_1darray_int_item(f, v)                                      \
+#define lip_read_1darray_int_item(f, v)                                        \
     _Generic((*v), signed char                                                 \
              : __lip_read_1darray_signed_item(f, v), signed short              \
              : __lip_read_1darray_signed_item(f, v), signed int                \
