@@ -4,6 +4,7 @@
 #include "lite_pack/export.h"
 #include "lite_pack/file/file.h"
 #include "lite_pack/load_float.h"
+#include "lite_pack/stdio_unlocked.h"
 #include <stdint.h>
 
 struct lip_file;
@@ -30,14 +31,14 @@ LIP_API void lip_read_1darray_f64_data(struct lip_file *file, unsigned size,
 
 static inline void lip_read_1darray_f32_item(struct lip_file *file, float *item)
 {
-    file->error |= fread(item, sizeof(float), 1, file->fp) != 1;
+    file->error |= lip_fread(item, sizeof(float), 1, file->fp) != 1;
     file->error |= lip_load_f32((unsigned char *)item, item) == 0;
 }
 
 static inline void lip_read_1darray_f64_item(struct lip_file *file,
                                              double *item)
 {
-    file->error |= fread(item, sizeof(double), 1, file->fp) != 1;
+    file->error |= lip_fread(item, sizeof(double), 1, file->fp) != 1;
     file->error |= lip_load_f64((unsigned char *)item, item) == 0;
 }
 

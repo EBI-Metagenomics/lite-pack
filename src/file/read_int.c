@@ -1,5 +1,6 @@
 #include "lite_pack/file/file.h"
 #include "lite_pack/format.h"
+#include "lite_pack/stdio_unlocked.h"
 #include "lite_pack/unpack_int.h"
 
 static inline unsigned int_size(enum lip_format fmt)
@@ -30,7 +31,7 @@ static inline unsigned int_size(enum lip_format fmt)
 
 static inline void read_int(struct lip_file *file, unsigned char buf[])
 {
-    file->error = fread(buf, 1, 1, file->fp) != 1;
+    file->error = lip_fread(buf, 1, 1, file->fp) != 1;
     if (file->error) return;
 
     unsigned sz = 0;
@@ -54,7 +55,7 @@ static inline void read_int(struct lip_file *file, unsigned char buf[])
     case LIP_FMT_INT_8:
     case LIP_FMT_UINT_8:
         sz += 1;
-        file->error = fread(buf + 1, sz, 1, file->fp) != 1;
+        file->error = lip_fread(buf + 1, sz, 1, file->fp) != 1;
         fallthrough;
 
     case LIP_FMT_POSITIVE_FIXINT:
