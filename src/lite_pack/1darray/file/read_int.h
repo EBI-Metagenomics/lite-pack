@@ -10,32 +10,32 @@ struct lip_file;
 
 /* DATA */
 
-#define __lip_read_1darray_signed_data(i, s, a)                                \
-    sizeof(*a) == 1   ? lip_read_1darray_i8_data(i, s, (int8_t *)(a))          \
-    : sizeof(*a) == 2 ? lip_read_1darray_i16_data(i, s, (int16_t *)(a))        \
-    : sizeof(*a) == 4 ? lip_read_1darray_i32_data(i, s, (int32_t *)(a))        \
-    : sizeof(*a) == 8 ? lip_read_1darray_i64_data(i, s, (int64_t *)(a))        \
+#define __lip_read_1darray_signed_data(f, s, a)                                \
+    sizeof(*a) == 1   ? lip_read_1darray_i8_data(f, s, (int8_t *)(a))          \
+    : sizeof(*a) == 2 ? lip_read_1darray_i16_data(f, s, (int16_t *)(a))        \
+    : sizeof(*a) == 4 ? lip_read_1darray_i32_data(f, s, (int32_t *)(a))        \
+    : sizeof(*a) == 8 ? lip_read_1darray_i64_data(f, s, (int64_t *)(a))        \
                       : 0
 
-#define __lip_read_1darray_unsigned_data(i, s, a)                              \
-    sizeof(*a) == 1   ? lip_read_1darray_u8_data(i, s, (uint8_t *)(a))         \
-    : sizeof(*a) == 2 ? lip_read_1darray_u16_data(i, s, (uint16_t *)(a))       \
-    : sizeof(*a) == 4 ? lip_read_1darray_u32_data(i, s, (uint32_t *)(a))       \
-    : sizeof(*a) == 8 ? lip_read_1darray_u64_data(i, s, (uint64_t *)(a))       \
+#define __lip_read_1darray_unsigned_data(f, s, a)                              \
+    sizeof(*a) == 1   ? lip_read_1darray_u8_data(f, s, (uint8_t *)(a))         \
+    : sizeof(*a) == 2 ? lip_read_1darray_u16_data(f, s, (uint16_t *)(a))       \
+    : sizeof(*a) == 4 ? lip_read_1darray_u32_data(f, s, (uint32_t *)(a))       \
+    : sizeof(*a) == 8 ? lip_read_1darray_u64_data(f, s, (uint64_t *)(a))       \
                       : 0U
 
-#define __lip_read_1darray_int_data(i, s, a)                                   \
+#define __lip_read_1darray_int_data(f, s, a)                                   \
     _Generic((*a), signed char                                                 \
-             : __lip_read_1darray_signed_data(i, s, a), signed short           \
-             : __lip_read_1darray_signed_data(i, s, a), signed int             \
-             : __lip_read_1darray_signed_data(i, s, a), signed long            \
-             : __lip_read_1darray_signed_data(i, s, a), signed long long       \
-             : __lip_read_1darray_signed_data(i, s, a), unsigned char          \
-             : __lip_read_1darray_unsigned_data(i, s, a), unsigned short       \
-             : __lip_read_1darray_unsigned_data(i, s, a), unsigned int         \
-             : __lip_read_1darray_unsigned_data(i, s, a), unsigned long        \
-             : __lip_read_1darray_unsigned_data(i, s, a), unsigned long long   \
-             : __lip_read_1darray_unsigned_data(i, s, a))
+             : __lip_read_1darray_signed_data(f, s, a), signed short           \
+             : __lip_read_1darray_signed_data(f, s, a), signed int             \
+             : __lip_read_1darray_signed_data(f, s, a), signed long            \
+             : __lip_read_1darray_signed_data(f, s, a), signed long long       \
+             : __lip_read_1darray_signed_data(f, s, a), unsigned char          \
+             : __lip_read_1darray_unsigned_data(f, s, a), unsigned short       \
+             : __lip_read_1darray_unsigned_data(f, s, a), unsigned int         \
+             : __lip_read_1darray_unsigned_data(f, s, a), unsigned long        \
+             : __lip_read_1darray_unsigned_data(f, s, a), unsigned long long   \
+             : __lip_read_1darray_unsigned_data(f, s, a))
 
 /* SIGNED */
 
@@ -67,32 +67,32 @@ LIP_API void lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
 
 /* ITEM */
 
-#define __lip_read_1darray_signed_item(i, v)                                   \
-    sizeof(*v) == 1   ? lip_read_1darray_i8_item(i, (int8_t *)(v))             \
-    : sizeof(*v) == 2 ? lip_read_1darray_i16_item(i, (int16_t *)(v))           \
-    : sizeof(*v) == 4 ? lip_read_1darray_i32_item(i, (int32_t *)(v))           \
-    : sizeof(*v) == 8 ? lip_read_1darray_i64_item(i, (int64_t *)(v))           \
+#define __lip_read_1darray_signed_item(f, v)                                   \
+    sizeof(*v) == 1   ? lip_read_1darray_i8_item(f, (int8_t *)(v))             \
+    : sizeof(*v) == 2 ? lip_read_1darray_i16_item(f, (int16_t *)(v))           \
+    : sizeof(*v) == 4 ? lip_read_1darray_i32_item(f, (int32_t *)(v))           \
+    : sizeof(*v) == 8 ? lip_read_1darray_i64_item(f, (int64_t *)(v))           \
                       : 0
 
-#define __lip_read_1darray_unsigned_item(i, v)                                 \
-    sizeof(*v) == 1   ? lip_read_1darray_u8_item(i, (uint8_t *)(v))            \
-    : sizeof(*v) == 2 ? lip_read_1darray_u16_item(i, (uint16_t *)(v))          \
-    : sizeof(*v) == 4 ? lip_read_1darray_u32_item(i, (uint32_t *)(v))          \
-    : sizeof(*v) == 8 ? lip_read_1darray_u64_item(i, (uint64_t *)(v))          \
+#define __lip_read_1darray_unsigned_item(f, v)                                 \
+    sizeof(*v) == 1   ? lip_read_1darray_u8_item(f, (uint8_t *)(v))            \
+    : sizeof(*v) == 2 ? lip_read_1darray_u16_item(f, (uint16_t *)(v))          \
+    : sizeof(*v) == 4 ? lip_read_1darray_u32_item(f, (uint32_t *)(v))          \
+    : sizeof(*v) == 8 ? lip_read_1darray_u64_item(f, (uint64_t *)(v))          \
                       : 0U
 
-#define __lip_read_1darray_int_item(i, v)                                      \
+#define __lip_read_1darray_int_item(f, v)                                      \
     _Generic((*v), signed char                                                 \
-             : __lip_read_1darray_signed_item(i, v), signed short              \
-             : __lip_read_1darray_signed_item(i, v), signed int                \
-             : __lip_read_1darray_signed_item(i, v), signed long               \
-             : __lip_read_1darray_signed_item(i, v), signed long long          \
-             : __lip_read_1darray_signed_item(i, v), unsigned char             \
-             : __lip_read_1darray_unsigned_item(i, v), unsigned short          \
-             : __lip_read_1darray_unsigned_item(i, v), unsigned int            \
-             : __lip_read_1darray_unsigned_item(i, v), unsigned long           \
-             : __lip_read_1darray_unsigned_item(i, v), unsigned long long      \
-             : __lip_read_1darray_unsigned_item(i, v))
+             : __lip_read_1darray_signed_item(f, v), signed short              \
+             : __lip_read_1darray_signed_item(f, v), signed int                \
+             : __lip_read_1darray_signed_item(f, v), signed long               \
+             : __lip_read_1darray_signed_item(f, v), signed long long          \
+             : __lip_read_1darray_signed_item(f, v), unsigned char             \
+             : __lip_read_1darray_unsigned_item(f, v), unsigned short          \
+             : __lip_read_1darray_unsigned_item(f, v), unsigned int            \
+             : __lip_read_1darray_unsigned_item(f, v), unsigned long           \
+             : __lip_read_1darray_unsigned_item(f, v), unsigned long long      \
+             : __lip_read_1darray_unsigned_item(f, v))
 
 /* SIGNED */
 

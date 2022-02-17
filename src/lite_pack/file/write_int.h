@@ -19,7 +19,7 @@
     : sizeof(v) == 8 ? __lip_write_u64(f, (uint64_t)(v))                       \
                      : 0U
 
-#define __lip_write_int_typed(f, v)                                            \
+#define __lip_write_int(f, v)                                                  \
     _Generic((v), signed char                                                  \
              : __lip_write_signed(f, v), signed short                          \
              : __lip_write_signed(f, v), signed int                            \
@@ -31,12 +31,6 @@
              : __lip_write_unsigned(f, v), unsigned long                       \
              : __lip_write_unsigned(f, v), unsigned long long                  \
              : __lip_write_unsigned(f, v))
-
-#define __lip_write_int(f, v)                                                  \
-    ({                                                                         \
-        __auto_type tmp = (v);                                                 \
-        __lip_write_int_typed(f, (__builtin_constant_p(v) ? tmp : v));         \
-    })
 
 struct lip_file;
 

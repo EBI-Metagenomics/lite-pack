@@ -1,14 +1,14 @@
 #ifndef LIP_1DARRAY_1DARRAY_H
 #define LIP_1DARRAY_1DARRAY_H
 
-#include "lite_pack/1darray/read_float.h"
-#include "lite_pack/1darray/read_int.h"
+#include "lite_pack/1darray/file/read_float.h"
+#include "lite_pack/1darray/file/read_int.h"
+#include "lite_pack/1darray/file/write_float.h"
+#include "lite_pack/1darray/file/write_int.h"
+#include "lite_pack/1darray/file/write_int_data.h"
+#include "lite_pack/1darray/file/write_int_data_inplace.h"
+#include "lite_pack/1darray/file/write_int_item.h"
 #include "lite_pack/1darray/type.h"
-#include "lite_pack/1darray/write_float.h"
-#include "lite_pack/1darray/write_int.h"
-#include "lite_pack/1darray/write_int_data.h"
-#include "lite_pack/1darray/write_int_data_inplace.h"
-#include "lite_pack/1darray/write_int_item.h"
 
 /* READ */
 

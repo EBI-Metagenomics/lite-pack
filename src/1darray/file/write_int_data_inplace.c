@@ -1,4 +1,4 @@
-#include "lite_pack/1darray/write_int_data_inplace.h"
+#include "lite_pack/1darray/file/write_int_data_inplace.h"
 #include "1darray/pack_int_inplace.h"
 #include "lite_pack/file/file.h"
 

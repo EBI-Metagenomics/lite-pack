@@ -1,6 +1,6 @@
-#include "lite_pack/1darray/write_int_data.h"
+#include "lite_pack/1darray/file/write_int_data.h"
 #include "1darray/pack.h"
-#include "lite_pack/1darray/write_int_item.h"
+#include "lite_pack/1darray/file/write_int_item.h"
 #include "lite_pack/file/file.h"
 #include "lite_pack/store_int.h"
 
