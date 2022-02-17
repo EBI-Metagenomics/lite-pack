@@ -6,7 +6,7 @@
 #include "lite_pack/load_int.h"
 #include <stdint.h>
 
-struct lip_io_file;
+struct lip_file;
 
 /* DATA */
 
@@ -39,30 +39,30 @@ struct lip_io_file;
 
 /* SIGNED */
 
-LIP_API void lip_read_1darray_i8_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_i8_data(struct lip_file *io, unsigned size,
                                       int8_t arr[]);
 
-LIP_API void lip_read_1darray_i16_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_i16_data(struct lip_file *io, unsigned size,
                                        int16_t arr[]);
 
-LIP_API void lip_read_1darray_i32_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_i32_data(struct lip_file *io, unsigned size,
                                        int32_t arr[]);
 
-LIP_API void lip_read_1darray_i64_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_i64_data(struct lip_file *io, unsigned size,
                                        int64_t arr[]);
 
 /* UNSIGNED */
 
-LIP_API void lip_read_1darray_u8_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_u8_data(struct lip_file *io, unsigned size,
                                       uint8_t arr[]);
 
-LIP_API void lip_read_1darray_u16_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_u16_data(struct lip_file *io, unsigned size,
                                        uint16_t arr[]);
 
-LIP_API void lip_read_1darray_u32_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_u32_data(struct lip_file *io, unsigned size,
                                        uint32_t arr[]);
 
-LIP_API void lip_read_1darray_u64_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
                                        uint64_t arr[]);
 
 /* ITEM */
@@ -96,28 +96,25 @@ LIP_API void lip_read_1darray_u64_data(struct lip_io_file *io, unsigned size,
 
 /* SIGNED */
 
-static inline void lip_read_1darray_i8_item(struct lip_io_file *io, int8_t *val)
+static inline void lip_read_1darray_i8_item(struct lip_file *io, int8_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_i8((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_i16_item(struct lip_io_file *io,
-                                             int16_t *val)
+static inline void lip_read_1darray_i16_item(struct lip_file *io, int16_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_i16((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_i32_item(struct lip_io_file *io,
-                                             int32_t *val)
+static inline void lip_read_1darray_i32_item(struct lip_file *io, int32_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_i32((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_i64_item(struct lip_io_file *io,
-                                             int64_t *val)
+static inline void lip_read_1darray_i64_item(struct lip_file *io, int64_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_i64((unsigned char *)val, val) == 0;
@@ -125,29 +122,25 @@ static inline void lip_read_1darray_i64_item(struct lip_io_file *io,
 
 /* UNSIGNED */
 
-static inline void lip_read_1darray_u8_item(struct lip_io_file *io,
-                                            uint8_t *val)
+static inline void lip_read_1darray_u8_item(struct lip_file *io, uint8_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_u8((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_u16_item(struct lip_io_file *io,
-                                             uint16_t *val)
+static inline void lip_read_1darray_u16_item(struct lip_file *io, uint16_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_u16((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_u32_item(struct lip_io_file *io,
-                                             uint32_t *val)
+static inline void lip_read_1darray_u32_item(struct lip_file *io, uint32_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_u32((unsigned char *)val, val) == 0;
 }
 
-static inline void lip_read_1darray_u64_item(struct lip_io_file *io,
-                                             uint64_t *val)
+static inline void lip_read_1darray_u64_item(struct lip_file *io, uint64_t *val)
 {
     io->error |= fread(val, sizeof(*val), 1, io->fp) != 1;
     io->error |= lip_load_u64((unsigned char *)val, val) == 0;

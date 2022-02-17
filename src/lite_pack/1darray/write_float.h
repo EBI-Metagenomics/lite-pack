@@ -5,7 +5,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/store_float.h"
 
-struct lip_io_file;
+struct lip_file;
 
 /* SINGLE-CALL */
 
@@ -14,10 +14,10 @@ struct lip_io_file;
              : lip_write_1darray_f32, double                                   \
              : lip_write_1darray_f64)(io, size, arr)
 
-LIP_API void lip_write_1darray_f32(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_f32(struct lip_file *io, unsigned size,
                                    float const arr[]);
 
-LIP_API void lip_write_1darray_f64(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_f64(struct lip_file *io, unsigned size,
                                    double const arr[]);
 
 /* DATA */
@@ -27,16 +27,16 @@ LIP_API void lip_write_1darray_f64(struct lip_io_file *io, unsigned size,
              : lip_write_1darray_f32_data, double                              \
              : lip_write_1darray_f64_data)(io, size, arr)
 
-LIP_API void lip_write_1darray_f32_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_f32_data(struct lip_file *io, unsigned size,
                                         float const arr[]);
 
-LIP_API void lip_write_1darray_f64_data(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_f64_data(struct lip_file *io, unsigned size,
                                         double const arr[]);
 
-LIP_API void lip_write_1darray_f32_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_f32_data_inplace(struct lip_file *io,
                                                 unsigned size, float arr[]);
 
-LIP_API void lip_write_1darray_f64_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_f64_data_inplace(struct lip_file *io,
                                                 unsigned size, double arr[]);
 
 /* ITEM */
@@ -46,14 +46,13 @@ LIP_API void lip_write_1darray_f64_data_inplace(struct lip_io_file *io,
              : lip_write_1darray_f32_item, double                              \
              : lip_write_1darray_f64_item)(io, val)
 
-static inline void lip_write_1darray_f32_item(struct lip_io_file *io, float val)
+static inline void lip_write_1darray_f32_item(struct lip_file *io, float val)
 {
     io->error |= lip_store_f32_inplace((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(val), 1, io->fp) != 1;
 }
 
-static inline void lip_write_1darray_f64_item(struct lip_io_file *io,
-                                              double val)
+static inline void lip_write_1darray_f64_item(struct lip_file *io, double val)
 {
     io->error |= lip_store_f64((unsigned char *)&val, val) == 0;
     io->error |= fwrite(&val, sizeof(val), 1, io->fp) != 1;

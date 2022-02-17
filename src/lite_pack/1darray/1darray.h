@@ -12,7 +12,7 @@
 
 /* READ */
 
-LIP_API void lip_read_1darray_size_type(struct lip_io_file *io, unsigned *size,
+LIP_API void lip_read_1darray_size_type(struct lip_file *io, unsigned *size,
                                         uint8_t *type);
 #define lip_read_1darray_int_data(i, s, a) __lip_read_1darray_int_data(i, s, a)
 #define lip_read_1darray_int_item(i, v) __lip_read_1darray_int_item(i, v)
@@ -25,7 +25,7 @@ LIP_API void lip_read_1darray_size_type(struct lip_io_file *io, unsigned *size,
 #define lip_write_1darray_int(i, s, a) __lip_write_1darray_int(i, s, a)
 #define lip_write_1darray_float(i, s, a) __lip_write_1darray_float(i, s, a)
 
-LIP_API void lip_write_1darray_size_type(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_size_type(struct lip_file *io, unsigned size,
                                          uint8_t type);
 
 #define lip_write_1darray_int_data(i, s, a)                                    \

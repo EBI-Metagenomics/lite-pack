@@ -2,7 +2,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_str.h"
 
-bool lip_read_str_size(struct lip_io_file *io, unsigned *size)
+bool lip_read_str_size(struct lip_file *io, unsigned *size)
 {
     if (io->error) return false;
 
@@ -37,7 +37,7 @@ bool lip_read_str_size(struct lip_io_file *io, unsigned *size)
     return !(io->error = lip_unpack_str_size(io->buf, size) == 0);
 }
 
-bool lip_read_str_data(struct lip_io_file *io, unsigned size, char str[])
+bool lip_read_str_data(struct lip_file *io, unsigned size, char str[])
 {
     if (io->error) return false;
 

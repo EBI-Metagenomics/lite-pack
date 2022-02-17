@@ -4,7 +4,7 @@
 #include "lite_pack/export.h"
 #include <stdint.h>
 
-struct lip_io_file;
+struct lip_file;
 
 #define __lip_write_1darray_signed_data_inplace(i, s, a)                       \
     sizeof(*a) == 1 ? lip_write_1darray_i8_data_inplace(i, s, (int8_t *)(a))   \
@@ -46,30 +46,30 @@ struct lip_io_file;
 
 /* SIGNED */
 
-LIP_API void lip_write_1darray_i8_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_i8_data_inplace(struct lip_file *io,
                                                unsigned size, int8_t arr[]);
 
-LIP_API void lip_write_1darray_i16_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_i16_data_inplace(struct lip_file *io,
                                                 unsigned size, int16_t arr[]);
 
-LIP_API void lip_write_1darray_i32_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_i32_data_inplace(struct lip_file *io,
                                                 unsigned size, int32_t arr[]);
 
-LIP_API void lip_write_1darray_i64_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_i64_data_inplace(struct lip_file *io,
                                                 unsigned size, int64_t arr[]);
 
 /* UNSIGNED */
 
-LIP_API void lip_write_1darray_u8_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_u8_data_inplace(struct lip_file *io,
                                                unsigned size, uint8_t arr[]);
 
-LIP_API void lip_write_1darray_u16_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_u16_data_inplace(struct lip_file *io,
                                                 unsigned size, uint16_t arr[]);
 
-LIP_API void lip_write_1darray_u32_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_u32_data_inplace(struct lip_file *io,
                                                 unsigned size, uint32_t arr[]);
 
-LIP_API void lip_write_1darray_u64_data_inplace(struct lip_io_file *io,
+LIP_API void lip_write_1darray_u64_data_inplace(struct lip_file *io,
                                                 unsigned size, uint64_t arr[]);
 
 #endif

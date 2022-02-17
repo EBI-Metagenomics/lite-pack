@@ -38,16 +38,16 @@
         __lip_write_int_typed(io, (__builtin_constant_p(v) ? tmp : v));        \
     })
 
-struct lip_io_file;
+struct lip_file;
 
-LIP_API bool __lip_write_i8(struct lip_io_file *, int val);
-LIP_API bool __lip_write_i16(struct lip_io_file *, int val);
-LIP_API bool __lip_write_i32(struct lip_io_file *, int val);
-LIP_API bool __lip_write_i64(struct lip_io_file *, long val);
+LIP_API bool __lip_write_i8(struct lip_file *, int val);
+LIP_API bool __lip_write_i16(struct lip_file *, int val);
+LIP_API bool __lip_write_i32(struct lip_file *, int val);
+LIP_API bool __lip_write_i64(struct lip_file *, long val);
 
-LIP_API bool __lip_write_u8(struct lip_io_file *, unsigned val);
-LIP_API bool __lip_write_u16(struct lip_io_file *, unsigned val);
-LIP_API bool __lip_write_u32(struct lip_io_file *, unsigned val);
-LIP_API bool __lip_write_u64(struct lip_io_file *, unsigned long val);
+LIP_API bool __lip_write_u8(struct lip_file *, unsigned val);
+LIP_API bool __lip_write_u16(struct lip_file *, unsigned val);
+LIP_API bool __lip_write_u32(struct lip_file *, unsigned val);
+LIP_API bool __lip_write_u64(struct lip_file *, unsigned long val);
 
 #endif

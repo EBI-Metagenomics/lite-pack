@@ -6,7 +6,7 @@
 #include "lite_pack/store_int.h"
 #include <stdint.h>
 
-struct lip_io_file;
+struct lip_file;
 
 #define __lip_write_1darray_signed(i, s, a)                                    \
     sizeof(*a) == 1   ? lip_write_1darray_i8(i, s, (int8_t const *)(a))        \
@@ -40,30 +40,30 @@ struct lip_io_file;
 
 /* SIGNED */
 
-LIP_API void lip_write_1darray_i8(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_i8(struct lip_file *io, unsigned size,
                                   int8_t const arr[]);
 
-LIP_API void lip_write_1darray_i16(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_i16(struct lip_file *io, unsigned size,
                                    int16_t const arr[]);
 
-LIP_API void lip_write_1darray_i32(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_i32(struct lip_file *io, unsigned size,
                                    int32_t const arr[]);
 
-LIP_API void lip_write_1darray_i64(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_i64(struct lip_file *io, unsigned size,
                                    int64_t const arr[]);
 
 /* UNSIGNED */
 
-LIP_API void lip_write_1darray_u8(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_u8(struct lip_file *io, unsigned size,
                                   uint8_t const arr[]);
 
-LIP_API void lip_write_1darray_u16(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_u16(struct lip_file *io, unsigned size,
                                    uint16_t const arr[]);
 
-LIP_API void lip_write_1darray_u32(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_u32(struct lip_file *io, unsigned size,
                                    uint32_t const arr[]);
 
-LIP_API void lip_write_1darray_u64(struct lip_io_file *io, unsigned size,
+LIP_API void lip_write_1darray_u64(struct lip_file *io, unsigned size,
                                    uint64_t const arr[]);
 
 #endif

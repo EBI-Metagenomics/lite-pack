@@ -28,7 +28,7 @@ static inline unsigned int_size(enum lip_format fmt)
     }
 }
 
-static inline void read_int(struct lip_io_file *io, unsigned char buf[])
+static inline void read_int(struct lip_file *io, unsigned char buf[])
 {
     io->error = fread(buf, 1, 1, io->fp) != 1;
     if (io->error) return;
@@ -68,7 +68,7 @@ static inline void read_int(struct lip_io_file *io, unsigned char buf[])
 
 /* SIGNED */
 
-bool __lip_read_i8(struct lip_io_file *io, int8_t *val)
+bool __lip_read_i8(struct lip_file *io, int8_t *val)
 {
     if (io->error) return false;
 
@@ -78,7 +78,7 @@ bool __lip_read_i8(struct lip_io_file *io, int8_t *val)
     return !(io->error = __lip_unpack_i8(io->buf, val) == 0);
 }
 
-bool __lip_read_i16(struct lip_io_file *io, int16_t *val)
+bool __lip_read_i16(struct lip_file *io, int16_t *val)
 {
     if (io->error) return false;
 
@@ -88,7 +88,7 @@ bool __lip_read_i16(struct lip_io_file *io, int16_t *val)
     return !(io->error = __lip_unpack_i16(io->buf, val) == 0);
 }
 
-bool __lip_read_i32(struct lip_io_file *io, int32_t *val)
+bool __lip_read_i32(struct lip_file *io, int32_t *val)
 {
     if (io->error) return false;
 
@@ -98,7 +98,7 @@ bool __lip_read_i32(struct lip_io_file *io, int32_t *val)
     return !(io->error = __lip_unpack_i32(io->buf, val) == 0);
 }
 
-bool __lip_read_i64(struct lip_io_file *io, int64_t *val)
+bool __lip_read_i64(struct lip_file *io, int64_t *val)
 {
     if (io->error) return false;
 
@@ -110,7 +110,7 @@ bool __lip_read_i64(struct lip_io_file *io, int64_t *val)
 
 /* UNSIGNED */
 
-bool __lip_read_u8(struct lip_io_file *io, uint8_t *val)
+bool __lip_read_u8(struct lip_file *io, uint8_t *val)
 {
     if (io->error) return false;
 
@@ -120,7 +120,7 @@ bool __lip_read_u8(struct lip_io_file *io, uint8_t *val)
     return !(io->error = __lip_unpack_u8(io->buf, val) == 0);
 }
 
-bool __lip_read_u16(struct lip_io_file *io, uint16_t *val)
+bool __lip_read_u16(struct lip_file *io, uint16_t *val)
 {
     if (io->error) return false;
 
@@ -130,7 +130,7 @@ bool __lip_read_u16(struct lip_io_file *io, uint16_t *val)
     return !(io->error = __lip_unpack_u16(io->buf, val) == 0);
 }
 
-bool __lip_read_u32(struct lip_io_file *io, uint32_t *val)
+bool __lip_read_u32(struct lip_file *io, uint32_t *val)
 {
     if (io->error) return false;
 
@@ -140,7 +140,7 @@ bool __lip_read_u32(struct lip_io_file *io, uint32_t *val)
     return !(io->error = __lip_unpack_u32(io->buf, val) == 0);
 }
 
-bool __lip_read_u64(struct lip_io_file *io, uint64_t *val)
+bool __lip_read_u64(struct lip_file *io, uint64_t *val)
 {
     if (io->error) return false;
 

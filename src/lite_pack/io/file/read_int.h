@@ -32,20 +32,20 @@
              : __lip_read_unsigned(io, v), unsigned long long                  \
              : __lip_read_unsigned(io, v))
 
-struct lip_io_file;
+struct lip_file;
 
 /* SIGNED */
 
-LIP_API bool __lip_read_i8(struct lip_io_file *, int8_t *val);
-LIP_API bool __lip_read_i16(struct lip_io_file *, int16_t *val);
-LIP_API bool __lip_read_i32(struct lip_io_file *, int32_t *val);
-LIP_API bool __lip_read_i64(struct lip_io_file *, int64_t *val);
+LIP_API bool __lip_read_i8(struct lip_file *, int8_t *val);
+LIP_API bool __lip_read_i16(struct lip_file *, int16_t *val);
+LIP_API bool __lip_read_i32(struct lip_file *, int32_t *val);
+LIP_API bool __lip_read_i64(struct lip_file *, int64_t *val);
 
 /* UNSIGNED */
 
-LIP_API bool __lip_read_u8(struct lip_io_file *, uint8_t *val);
-LIP_API bool __lip_read_u16(struct lip_io_file *, uint16_t *val);
-LIP_API bool __lip_read_u32(struct lip_io_file *, uint32_t *val);
-LIP_API bool __lip_read_u64(struct lip_io_file *, uint64_t *val);
+LIP_API bool __lip_read_u8(struct lip_file *, uint8_t *val);
+LIP_API bool __lip_read_u16(struct lip_file *, uint16_t *val);
+LIP_API bool __lip_read_u32(struct lip_file *, uint32_t *val);
+LIP_API bool __lip_read_u64(struct lip_file *, uint64_t *val);
 
 #endif

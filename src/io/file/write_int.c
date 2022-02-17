@@ -3,7 +3,7 @@
 
 /* SIGNED */
 
-bool __lip_write_i8(struct lip_io_file *io, int val)
+bool __lip_write_i8(struct lip_file *io, int val)
 {
     if (io->error) return false;
 
@@ -11,7 +11,7 @@ bool __lip_write_i8(struct lip_io_file *io, int val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_i16(struct lip_io_file *io, int val)
+bool __lip_write_i16(struct lip_file *io, int val)
 {
     if (io->error) return false;
 
@@ -19,7 +19,7 @@ bool __lip_write_i16(struct lip_io_file *io, int val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_i32(struct lip_io_file *io, int val)
+bool __lip_write_i32(struct lip_file *io, int val)
 {
     if (io->error) return false;
 
@@ -27,7 +27,7 @@ bool __lip_write_i32(struct lip_io_file *io, int val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_i64(struct lip_io_file *io, long val)
+bool __lip_write_i64(struct lip_file *io, long val)
 {
     if (io->error) return false;
 
@@ -37,7 +37,7 @@ bool __lip_write_i64(struct lip_io_file *io, long val)
 
 /* UNSIGNED */
 
-bool __lip_write_u8(struct lip_io_file *io, unsigned val)
+bool __lip_write_u8(struct lip_file *io, unsigned val)
 {
     if (io->error) return false;
 
@@ -45,7 +45,7 @@ bool __lip_write_u8(struct lip_io_file *io, unsigned val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_u16(struct lip_io_file *io, unsigned val)
+bool __lip_write_u16(struct lip_file *io, unsigned val)
 {
     if (io->error) return false;
 
@@ -53,7 +53,7 @@ bool __lip_write_u16(struct lip_io_file *io, unsigned val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_u32(struct lip_io_file *io, unsigned val)
+bool __lip_write_u32(struct lip_file *io, unsigned val)
 {
     if (io->error) return false;
 
@@ -61,7 +61,7 @@ bool __lip_write_u32(struct lip_io_file *io, unsigned val)
     return !(io->error = fwrite(io->buf, sz, 1, io->fp) != 1);
 }
 
-bool __lip_write_u64(struct lip_io_file *io, unsigned long val)
+bool __lip_write_u64(struct lip_file *io, unsigned long val)
 {
     if (io->error) return false;
 

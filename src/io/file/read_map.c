@@ -2,7 +2,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_map.h"
 
-bool lip_read_map_size(struct lip_io_file *io, unsigned *size)
+bool lip_read_map_size(struct lip_file *io, unsigned *size)
 {
     if (io->error) return false;
 

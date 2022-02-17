@@ -1,7 +1,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/pack_bool.h"
 
-bool lip_write_bool(struct lip_io_file *io, bool val)
+bool lip_write_bool(struct lip_file *io, bool val)
 {
     if (io->error) return false;
 

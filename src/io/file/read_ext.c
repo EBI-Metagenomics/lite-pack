@@ -2,8 +2,7 @@
 #include "lite_pack/io/file.h"
 #include "lite_pack/unpack_ext.h"
 
-bool lip_read_ext_size_type(struct lip_io_file *io, unsigned *size,
-                            uint8_t *type)
+bool lip_read_ext_size_type(struct lip_file *io, unsigned *size, uint8_t *type)
 {
     if (io->error) return false;
 

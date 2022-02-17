@@ -2,8 +2,7 @@
 #include "1darray/unpack_float.h"
 #include "lite_pack/io/file.h"
 
-void lip_read_1darray_f32_data(struct lip_io_file *io, unsigned size,
-                               float arr[])
+void lip_read_1darray_f32_data(struct lip_file *io, unsigned size, float arr[])
 {
     if (io->error) return;
 
@@ -13,8 +12,7 @@ void lip_read_1darray_f32_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_f32_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_f64_data(struct lip_io_file *io, unsigned size,
-                               double arr[])
+void lip_read_1darray_f64_data(struct lip_file *io, unsigned size, double arr[])
 {
     if (io->error) return;
 

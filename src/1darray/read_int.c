@@ -4,8 +4,7 @@
 
 /* SIGNED */
 
-void lip_read_1darray_i8_data(struct lip_io_file *io, unsigned size,
-                              int8_t arr[])
+void lip_read_1darray_i8_data(struct lip_file *io, unsigned size, int8_t arr[])
 {
     if (io->error) return;
 
@@ -15,7 +14,7 @@ void lip_read_1darray_i8_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_i8_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_i16_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_i16_data(struct lip_file *io, unsigned size,
                                int16_t arr[])
 {
     if (io->error) return;
@@ -26,7 +25,7 @@ void lip_read_1darray_i16_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_i16_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_i32_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_i32_data(struct lip_file *io, unsigned size,
                                int32_t arr[])
 {
     if (io->error) return;
@@ -37,7 +36,7 @@ void lip_read_1darray_i32_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_i32_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_i64_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_i64_data(struct lip_file *io, unsigned size,
                                int64_t arr[])
 {
     if (io->error) return;
@@ -50,8 +49,7 @@ void lip_read_1darray_i64_data(struct lip_io_file *io, unsigned size,
 
 /* UNSIGNED */
 
-void lip_read_1darray_u8_data(struct lip_io_file *io, unsigned size,
-                              uint8_t arr[])
+void lip_read_1darray_u8_data(struct lip_file *io, unsigned size, uint8_t arr[])
 {
     if (io->error) return;
 
@@ -61,7 +59,7 @@ void lip_read_1darray_u8_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_u8_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_u16_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_u16_data(struct lip_file *io, unsigned size,
                                uint16_t arr[])
 {
     if (io->error) return;
@@ -72,7 +70,7 @@ void lip_read_1darray_u16_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_u16_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_u32_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_u32_data(struct lip_file *io, unsigned size,
                                uint32_t arr[])
 {
     if (io->error) return;
@@ -83,7 +81,7 @@ void lip_read_1darray_u32_data(struct lip_io_file *io, unsigned size,
     unpack_1darray_u32_data_inplace((unsigned char *)arr, size);
 }
 
-void lip_read_1darray_u64_data(struct lip_io_file *io, unsigned size,
+void lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
                                uint64_t arr[])
 {
     if (io->error) return;
