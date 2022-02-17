@@ -1,5 +1,5 @@
-#ifndef LIP_NUMBER_H
-#define LIP_NUMBER_H
+#ifndef LITE_PACK_NUMBER_H
+#define LITE_PACK_NUMBER_H
 
 #include <stdint.h>
 

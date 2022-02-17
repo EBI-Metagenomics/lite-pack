@@ -1,5 +1,5 @@
-#ifndef LIP_LOAD_INT_H
-#define LIP_LOAD_INT_H
+#ifndef LITE_PACK_LOAD_INT_H
+#define LITE_PACK_LOAD_INT_H
 
 #include "lite_pack/format.h"
 #include "lite_pack/load_number.h"

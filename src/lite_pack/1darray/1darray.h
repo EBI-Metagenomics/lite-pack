@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_1DARRAY_H
-#define LIP_1DARRAY_1DARRAY_H
+#ifndef LITE_PACK_1DARRAY_1DARRAY_H
+#define LITE_PACK_1DARRAY_1DARRAY_H
 
 #include "lite_pack/1darray/file/read_float.h"
 #include "lite_pack/1darray/file/read_int.h"

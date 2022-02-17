@@ -1,5 +1,5 @@
-#ifndef LIP_FILE_WRITE_FLOAT_H
-#define LIP_FILE_WRITE_FLOAT_H
+#ifndef LITE_PACK_FILE_WRITE_FLOAT_H
+#define LITE_PACK_FILE_WRITE_FLOAT_H
 
 #include "lite_pack/export.h"
 #include <stdbool.h>

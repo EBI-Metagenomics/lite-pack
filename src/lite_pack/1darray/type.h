@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_TYPE_H
-#define LIP_1DARRAY_TYPE_H
+#ifndef LITE_PACK_1DARRAY_TYPE_H
+#define LITE_PACK_1DARRAY_TYPE_H
 
 enum lip_1darray_type
 {

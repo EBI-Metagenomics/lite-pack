@@ -1,5 +1,5 @@
-#ifndef LIP_UNPACK_ARRAY_H
-#define LIP_UNPACK_ARRAY_H
+#ifndef LITE_PACK_UNPACK_ARRAY_H
+#define LITE_PACK_UNPACK_ARRAY_H
 
 #include "lite_pack/export.h"
 #include <stdint.h>

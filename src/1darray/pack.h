@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_PACK_H
-#define LIP_1DARRAY_PACK_H
+#ifndef _1DARRAY_PACK_H
+#define _1DARRAY_PACK_H
 
 #include "lite_pack/pack_ext.h"
 

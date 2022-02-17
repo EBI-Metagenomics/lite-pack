@@ -1,5 +1,5 @@
-#ifndef LIP_FILE_FILE_H
-#define LIP_FILE_FILE_H
+#ifndef LITE_PACK_FILE_FILE_H
+#define LITE_PACK_FILE_FILE_H
 
 #include "lite_pack/export.h"
 #include "lite_pack/file/read_float.h"

@@ -1,5 +1,5 @@
-#ifndef LIP_FILE_WRITE_INT_H
-#define LIP_FILE_WRITE_INT_H
+#ifndef LITE_PACK_FILE_WRITE_INT_H
+#define LITE_PACK_FILE_WRITE_INT_H
 
 #include "lite_pack/export.h"
 #include <stdbool.h>

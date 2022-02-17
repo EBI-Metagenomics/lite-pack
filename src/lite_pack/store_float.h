@@ -1,5 +1,5 @@
-#ifndef LIP_STORE_FLOAT_H
-#define LIP_STORE_FLOAT_H
+#ifndef LITE_PACK_STORE_FLOAT_H
+#define LITE_PACK_STORE_FLOAT_H
 
 #include "lite_pack/first_byte.h"
 #include "lite_pack/store_number.h"

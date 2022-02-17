@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_PACK_INT_H
-#define LIP_1DARRAY_PACK_INT_H
+#ifndef _1DARRAY_PACK_INT_H
+#define _1DARRAY_PACK_INT_H
 
 #include <stdint.h>
 

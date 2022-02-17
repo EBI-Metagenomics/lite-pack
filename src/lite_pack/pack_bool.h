@@ -1,5 +1,5 @@
-#ifndef LIP_PACK_BOOL
-#define LIP_PACK_BOOL
+#ifndef LITE_PACK_PACK_BOOL
+#define LITE_PACK_PACK_BOOL
 
 #include "lite_pack/store_bool.h"
 #include <stdint.h>

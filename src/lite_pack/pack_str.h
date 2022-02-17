@@ -1,5 +1,5 @@
-#ifndef LIP_PACK_STR_H
-#define LIP_PACK_STR_H
+#ifndef LITE_PACK_PACK_STR_H
+#define LITE_PACK_PACK_STR_H
 
 #include "lite_pack/export.h"
 #include <stdint.h>

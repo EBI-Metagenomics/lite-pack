@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_UNPACK_H
-#define LIP_1DARRAY_UNPACK_H
+#ifndef _1DARRAY_UNPACK_H
+#define _1DARRAY_UNPACK_H
 
 #include "lite_pack/unpack_ext.h"
 

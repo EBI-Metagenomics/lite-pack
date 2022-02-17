@@ -1,5 +1,5 @@
-#ifndef LIP_UNPACK_BOOL_H
-#define LIP_UNPACK_BOOL_H
+#ifndef LITE_PACK_UNPACK_BOOL_H
+#define LITE_PACK_UNPACK_BOOL_H
 
 #include "lite_pack/export.h"
 #include <stdbool.h>

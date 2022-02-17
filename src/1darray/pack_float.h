@@ -1,5 +1,5 @@
-#ifndef LIP_1DARRAY_PACK_FLOAT_H
-#define LIP_1DARRAY_PACK_FLOAT_H
+#ifndef _1DARRAY_PACK_FLOAT_H
+#define _1DARRAY_PACK_FLOAT_H
 
 void pack_1darray_f32_data(unsigned char buf[], unsigned size,
                            float const arr[]);

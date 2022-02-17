@@ -1,5 +1,5 @@
-#ifndef LIP_STORE_STR_H
-#define LIP_STORE_STR_H
+#ifndef LITE_PACK_STORE_STR_H
+#define LITE_PACK_STORE_STR_H
 
 #include "lite_pack/compiler.h"
 #include "lite_pack/first_byte.h"

@@ -1,5 +1,5 @@
-#ifndef LIP_LOAD_BOOL_H
-#define LIP_LOAD_BOOL_H
+#ifndef LITE_PACK_LOAD_BOOL_H
+#define LITE_PACK_LOAD_BOOL_H
 
 #include "lite_pack/format.h"
 #include <stdbool.h>

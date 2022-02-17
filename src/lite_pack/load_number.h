@@ -1,5 +1,5 @@
-#ifndef LIP_LOAD_NUMBER_H
-#define LIP_LOAD_NUMBER_H
+#ifndef LITE_PACK_LOAD_NUMBER_H
+#define LITE_PACK_LOAD_NUMBER_H
 
 #include "lite_pack/endian.h"
 #include "lite_pack/number.h"
