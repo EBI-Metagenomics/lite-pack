@@ -33,11 +33,11 @@ LIP_API void lip_write_1darray_f32_data(struct lip_file *io, unsigned size,
 LIP_API void lip_write_1darray_f64_data(struct lip_file *io, unsigned size,
                                         double const arr[]);
 
-LIP_API void lip_write_1darray_f32_data_inplace(struct lip_file *io,
-                                                unsigned size, float arr[]);
+LIP_API void lip_write_1darray_f32_data_in(struct lip_file *io, unsigned size,
+                                           float arr[]);
 
-LIP_API void lip_write_1darray_f64_data_inplace(struct lip_file *io,
-                                                unsigned size, double arr[]);
+LIP_API void lip_write_1darray_f64_data_in(struct lip_file *io, unsigned size,
+                                           double arr[]);
 
 /* ITEM */
 
@@ -48,7 +48,7 @@ LIP_API void lip_write_1darray_f64_data_inplace(struct lip_file *io,
 
 static inline void lip_write_1darray_f32_item(struct lip_file *io, float val)
 {
-    io->error |= lip_store_f32_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_f32_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(val), 1, io->fp) != 1;
 }
 

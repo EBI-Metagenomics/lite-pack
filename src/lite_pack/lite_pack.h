@@ -63,16 +63,16 @@ static inline unsigned lip_store_u64(unsigned char buf[], uint64_t val);
 static inline unsigned lip_store_f32(unsigned char buf[], float val);
 static inline unsigned lip_store_f64(unsigned char buf[], double val);
 
-static inline unsigned lip_store_i8_inplace(unsigned char buf[]);
-static inline unsigned lip_store_i16_inplace(unsigned char buf[]);
-static inline unsigned lip_store_i32_inplace(unsigned char buf[]);
-static inline unsigned lip_store_i64_inplace(unsigned char buf[]);
-static inline unsigned lip_store_u8_inplace(unsigned char buf[]);
-static inline unsigned lip_store_u16_inplace(unsigned char buf[]);
-static inline unsigned lip_store_u32_inplace(unsigned char buf[]);
-static inline unsigned lip_store_u64_inplace(unsigned char buf[]);
-static inline unsigned lip_store_f32_inplace(unsigned char buf[]);
-static inline unsigned lip_store_f64_inplace(unsigned char buf[]);
+static inline unsigned lip_store_i8_in(unsigned char buf[]);
+static inline unsigned lip_store_i16_in(unsigned char buf[]);
+static inline unsigned lip_store_i32_in(unsigned char buf[]);
+static inline unsigned lip_store_i64_in(unsigned char buf[]);
+static inline unsigned lip_store_u8_in(unsigned char buf[]);
+static inline unsigned lip_store_u16_in(unsigned char buf[]);
+static inline unsigned lip_store_u32_in(unsigned char buf[]);
+static inline unsigned lip_store_u64_in(unsigned char buf[]);
+static inline unsigned lip_store_f32_in(unsigned char buf[]);
+static inline unsigned lip_store_f64_in(unsigned char buf[]);
 /* clang-format on */
 
 /* LOAD RAW NUMBERS */
@@ -88,16 +88,16 @@ static inline unsigned lip_load_u64(unsigned char const buf[], uint64_t *val);
 static inline unsigned lip_load_f32(unsigned char const buf[], float *val);
 static inline unsigned lip_load_f64(unsigned char const buf[], double *val);
 
-static inline unsigned lip_load_i8_inplace(unsigned char buf[]);
-static inline unsigned lip_load_i16_inplace(unsigned char buf[]);
-static inline unsigned lip_load_i32_inplace(unsigned char buf[]);
-static inline unsigned lip_load_i64_inplace(unsigned char buf[]);
-static inline unsigned lip_load_u8_inplace(unsigned char buf[]);
-static inline unsigned lip_load_u16_inplace(unsigned char buf[]);
-static inline unsigned lip_load_u32_inplace(unsigned char buf[]);
-static inline unsigned lip_load_u64_inplace(unsigned char buf[]);
-static inline unsigned lip_load_f32_inplace(unsigned char buf[]);
-static inline unsigned lip_load_f64_inplace(unsigned char buf[]);
+static inline unsigned lip_load_i8_in(unsigned char buf[]);
+static inline unsigned lip_load_i16_in(unsigned char buf[]);
+static inline unsigned lip_load_i32_in(unsigned char buf[]);
+static inline unsigned lip_load_i64_in(unsigned char buf[]);
+static inline unsigned lip_load_u8_in(unsigned char buf[]);
+static inline unsigned lip_load_u16_in(unsigned char buf[]);
+static inline unsigned lip_load_u32_in(unsigned char buf[]);
+static inline unsigned lip_load_u64_in(unsigned char buf[]);
+static inline unsigned lip_load_f32_in(unsigned char buf[]);
+static inline unsigned lip_load_f64_in(unsigned char buf[]);
 
 /* clang-format off */
 enum lip_format;

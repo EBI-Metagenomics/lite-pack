@@ -9,7 +9,7 @@ static inline unsigned lip_store_f32(unsigned char buf[], float val)
     return __lip_store_num32(buf, __LIP_NUM32(val));
 }
 
-static inline unsigned lip_store_f32_inplace(unsigned char buf[])
+static inline unsigned lip_store_f32_in(unsigned char buf[])
 {
     return __lip_store_num32(buf, __LIP_NUM32(buf));
 }
@@ -19,7 +19,7 @@ static inline unsigned lip_store_f64(unsigned char buf[], double val)
     return __lip_store_num64(buf, __LIP_NUM64(val));
 }
 
-static inline unsigned lip_store_f64_inplace(unsigned char buf[])
+static inline unsigned lip_store_f64_in(unsigned char buf[])
 {
     return __lip_store_num64(buf, __LIP_NUM64(buf));
 }

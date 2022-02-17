@@ -10,7 +10,7 @@ static inline unsigned lip_load_f32(unsigned char const buf[], float *val)
     return 4;
 }
 
-static inline unsigned lip_load_f32_inplace(unsigned char buf[])
+static inline unsigned lip_load_f32_in(unsigned char buf[])
 {
     union __lip_num32 num = __lip_load_num32(buf);
     memcpy(buf, num.c, 4);
@@ -23,7 +23,7 @@ static inline unsigned lip_load_f64(unsigned char const buf[], double *val)
     return 8;
 }
 
-static inline unsigned lip_load_f64_inplace(unsigned char buf[])
+static inline unsigned lip_load_f64_in(unsigned char buf[])
 {
     union __lip_num64 num = __lip_load_num64(buf);
     memcpy(buf, num.c, 8);

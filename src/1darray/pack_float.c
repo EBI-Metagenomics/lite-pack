@@ -8,10 +8,10 @@ void pack_1darray_f32_data(unsigned char buf[], unsigned size,
         buf += lip_store_f32(buf, arr[i]);
 }
 
-void pack_1darray_f32_data_inplace(unsigned char buf[], unsigned size)
+void pack_1darray_f32_data_in(unsigned char buf[], unsigned size)
 {
     for (unsigned i = 0; i < size; ++i)
-        buf += lip_store_f32_inplace(buf);
+        buf += lip_store_f32_in(buf);
 }
 
 void pack_1darray_f64_data(unsigned char buf[], unsigned size,
@@ -21,8 +21,8 @@ void pack_1darray_f64_data(unsigned char buf[], unsigned size,
         buf += lip_store_f64(buf, arr[i]);
 }
 
-void pack_1darray_f64_data_inplace(unsigned char buf[], unsigned size)
+void pack_1darray_f64_data_in(unsigned char buf[], unsigned size)
 {
     for (unsigned i = 0; i < size; ++i)
-        buf += lip_store_f64_inplace(buf);
+        buf += lip_store_f64_in(buf);
 }

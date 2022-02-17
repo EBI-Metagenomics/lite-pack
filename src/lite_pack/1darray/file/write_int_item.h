@@ -42,25 +42,25 @@ struct lip_file;
 
 static inline void lip_write_1darray_i8_item(struct lip_file *io, int8_t val)
 {
-    io->error |= lip_store_i8_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_i8_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(int8_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_i16_item(struct lip_file *io, int16_t val)
 {
-    io->error |= lip_store_i16_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_i16_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(int16_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_i32_item(struct lip_file *io, int32_t val)
 {
-    io->error |= lip_store_i32_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_i32_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(int32_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_i64_item(struct lip_file *io, int64_t val)
 {
-    io->error |= lip_store_i64_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_i64_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(int64_t), 1, io->fp) != 1;
 }
 
@@ -68,25 +68,25 @@ static inline void lip_write_1darray_i64_item(struct lip_file *io, int64_t val)
 
 static inline void lip_write_1darray_u8_item(struct lip_file *io, uint8_t val)
 {
-    io->error |= lip_store_u8_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_u8_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(uint8_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_u16_item(struct lip_file *io, uint16_t val)
 {
-    io->error |= lip_store_u16_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_u16_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(uint16_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_u32_item(struct lip_file *io, uint32_t val)
 {
-    io->error |= lip_store_u32_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_u32_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(uint32_t), 1, io->fp) != 1;
 }
 
 static inline void lip_write_1darray_u64_item(struct lip_file *io, uint64_t val)
 {
-    io->error |= lip_store_u64_inplace((unsigned char *)&val) == 0;
+    io->error |= lip_store_u64_in((unsigned char *)&val) == 0;
     io->error |= fwrite(&val, sizeof(uint64_t), 1, io->fp) != 1;
 }
 

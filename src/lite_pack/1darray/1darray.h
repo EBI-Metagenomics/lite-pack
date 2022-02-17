@@ -6,7 +6,7 @@
 #include "lite_pack/1darray/file/write_float.h"
 #include "lite_pack/1darray/file/write_int.h"
 #include "lite_pack/1darray/file/write_int_data.h"
-#include "lite_pack/1darray/file/write_int_data_inplace.h"
+#include "lite_pack/1darray/file/write_int_data_in.h"
 #include "lite_pack/1darray/file/write_int_item.h"
 #include "lite_pack/1darray/type.h"
 
@@ -31,15 +31,15 @@ LIP_API void lip_write_1darray_size_type(struct lip_file *io, unsigned size,
 #define lip_write_1darray_int_data(i, s, a)                                    \
     __lip_write_1darray_int_data(i, s, a)
 
-#define lip_write_1darray_int_data_inplace(i, s, a)                            \
-    __lip_write_1darray_int_data_inplace(i, s, a)
+#define lip_write_1darray_int_data_in(i, s, a)                                 \
+    __lip_write_1darray_int_data_in(i, s, a)
 
 #define lip_write_1darray_int_item(i, v) __lip_write_1darray_int_item(i, v)
 #define lip_write_1darray_float_data(i, s, a)                                  \
     __lip_write_1darray_float_data(i, s, a)
 
-#define lip_write_1darray_float_data_inplace(i, s, a)                          \
-    __lip_write_1darray_float_data_inplace(i, s, a)
+#define lip_write_1darray_float_data_in(i, s, a)                               \
+    __lip_write_1darray_float_data_in(i, s, a)
 
 #define lip_write_1darray_float_item(i, v) __lip_write_1darray_float_item(i, v)
 

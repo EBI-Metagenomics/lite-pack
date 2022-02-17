@@ -43,20 +43,20 @@ void lip_write_1darray_f64_data(struct lip_file *io, unsigned size,
         lip_write_1darray_f64_item(io, arr[i]);
 }
 
-void lip_write_1darray_f32_data_inplace(struct lip_file *io, unsigned size,
-                                        float arr[])
+void lip_write_1darray_f32_data_in(struct lip_file *io, unsigned size,
+                                   float arr[])
 {
     if (io->error) return;
 
-    pack_1darray_f32_data_inplace((unsigned char *)arr, size);
+    pack_1darray_f32_data_in((unsigned char *)arr, size);
     io->error = fwrite(arr, size * sizeof(float), 1, io->fp) != 1;
 }
 
-void lip_write_1darray_f64_data_inplace(struct lip_file *io, unsigned size,
-                                        double arr[])
+void lip_write_1darray_f64_data_in(struct lip_file *io, unsigned size,
+                                   double arr[])
 {
     if (io->error) return;
 
-    pack_1darray_f64_data_inplace((unsigned char *)arr, size);
+    pack_1darray_f64_data_in((unsigned char *)arr, size);
     io->error = fwrite(arr, size * sizeof(double), 1, io->fp) != 1;
 }
