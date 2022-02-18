@@ -1,5 +1,5 @@
-#ifndef LITE_PACK_STORE_BOOL
-#define LITE_PACK_STORE_BOOL
+#ifndef LITE_PACK_STORE_BOOL_H
+#define LITE_PACK_STORE_BOOL_H
 
 #include "lite_pack/first_byte.h"
 #include <stdbool.h>

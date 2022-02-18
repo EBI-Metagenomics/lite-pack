@@ -1,5 +1,5 @@
-#ifndef LITE_PACK_H
-#define LITE_PACK_H
+#ifndef LITE_PACK_LITE_PACK_H
+#define LITE_PACK_LITE_PACK_H
 
 #include "lite_pack/export.h"
 #include "lite_pack/format.h"

@@ -1,5 +1,5 @@
-#ifndef LITE_PACK_1DARRAY_WRITE_INT_DATA_IN_H
-#define LITE_PACK_1DARRAY_WRITE_INT_DATA_IN_H
+#ifndef LITE_PACK_1DARRAY_FILE_WRITE_INT_DATA_IN_H
+#define LITE_PACK_1DARRAY_FILE_WRITE_INT_DATA_IN_H
 
 #include "lite_pack/export.h"
 #include <stdint.h>

@@ -1,5 +1,5 @@
-#ifndef COMPILER_H
-#define COMPILER_H
+#ifndef LITE_PACK_COMPILER_H
+#define LITE_PACK_COMPILER_H
 
 #include <assert.h>
 #include <limits.h>

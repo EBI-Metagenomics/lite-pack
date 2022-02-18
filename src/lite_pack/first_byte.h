@@ -1,5 +1,5 @@
-#ifndef FIRST_BYTE_H
-#define FIRST_BYTE_H
+#ifndef LITE_PACK_FIRST_BYTE_H
+#define LITE_PACK_FIRST_BYTE_H
 
 #include "lite_pack/export.h"
 #include "lite_pack/format.h"

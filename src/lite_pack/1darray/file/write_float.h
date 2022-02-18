@@ -1,5 +1,5 @@
-#ifndef LITE_PACK_1DARRAY_WRITE_FLOAT_H
-#define LITE_PACK_1DARRAY_WRITE_FLOAT_H
+#ifndef LITE_PACK_1DARRAY_FILE_WRITE_FLOAT_H
+#define LITE_PACK_1DARRAY_FILE_WRITE_FLOAT_H
 
 #include "lite_pack/export.h"
 #include "lite_pack/file/file.h"
