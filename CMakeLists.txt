@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.0.3
+  VERSION 0.0.4
   LANGUAGES C)
 
 # Generate compile_commands.json file
@@ -37,7 +37,7 @@ else()
   endif()
 endif()
 
-include("cmake/sanitizers.cmake")
+include(cmake/sanitizers.cmake)
 
 add_library(
   ${PROJECT_NAME}
@@ -93,12 +93,12 @@ set(LIP_THREAD_SAFE_LEVEL
 if(${LIP_THREAD_SAFE_LEVEL} IN_LIST THREAD_SAFE_LEVELS)
   message(STATUS "Thread-safe level - ${LIP_THREAD_SAFE_LEVEL}")
 else()
-  message(
-    FATAL_ERROR "Thread-safe levels are either 0 or 1.")
+  message(FATAL_ERROR "Thread-safe levels are either 0 or 1.")
 endif()
 
 set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/config.h)
-configure_file(${PROJECT_SOURCE_DIR}/src/lite_pack/config.h.in ${CONFIG_FILE})
+configure_file(${PROJECT_SOURCE_DIR}/include/lite_pack/config.h.in
+               ${CONFIG_FILE})
 
 set(EXPORT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/export.h)
 include(GenerateExportHeader)
@@ -126,15 +126,15 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${WARNING_FLAGS})
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC $<INSTALL_INTERFACE:include>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+  PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE _XOPEN_SOURCE=700)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-targets)
 
-install(DIRECTORY src/${PROJECT_NAME}/ DESTINATION include/${PROJECT_NAME})
+install(DIRECTORY include/${PROJECT_NAME}/ DESTINATION include/${PROJECT_NAME})
 
 install(
   EXPORT ${PROJECT_NAME}-targets
@@ -144,18 +144,19 @@ install(
 
 include(CMakePackageConfigHelpers)
 
-set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake)
-configure_package_config_file(${PROJECT_NAME}-config.cmake.in ${CONFIG_FILE}
-                              INSTALL_DESTINATION lib/cmake/${PROJECT_NAME})
+set(CMAKE_CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake)
+configure_package_config_file(
+  ${PROJECT_NAME}-config.cmake.in ${CMAKE_CONFIG_FILE}
+  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME})
 
-set(VERSION_FILE
+set(CMAKE_VERSION_FILE
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake)
-write_basic_package_version_file(${VERSION_FILE} COMPATIBILITY SameMajorVersion)
+write_basic_package_version_file(${CMAKE_VERSION_FILE}
+                                 COMPATIBILITY SameMajorVersion)
 
-install(FILES ${CONFIG_FILE} ${VERSION_FILE}
+install(FILES ${CMAKE_VERSION_FILE} ${CMAKE_CONFIG_FILE}
         DESTINATION lib/cmake/${PROJECT_NAME})
-
-install(FILES ${EXPORT_FILE} DESTINATION include/${PROJECT_NAME})
+install(FILES ${EXPORT_FILE} ${CONFIG_FILE} DESTINATION include/${PROJECT_NAME})
 
 enable_testing()
 add_subdirectory(test)

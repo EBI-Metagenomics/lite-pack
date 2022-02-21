@@ -18,6 +18,13 @@ struct lip_file
     bool error;
 };
 
+static inline void lip_file_init(struct lip_file *file)
+{
+    file->fp = 0;
+    memset(file->buf, 0, 9);
+    file->error = 0;
+}
+
 /* WRITE */
 
 LIP_API bool lip_write_bool(struct lip_file *io, bool val);
