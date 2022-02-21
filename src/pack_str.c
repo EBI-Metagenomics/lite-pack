@@ -12,8 +12,7 @@ unsigned lip_pack_str_size(unsigned char buf[], unsigned size)
     return __lip_store_str32(buf, size);
 }
 
-unsigned lip_pack_str_data(unsigned char buf[], unsigned size,
-                           char const val[])
+unsigned lip_pack_str_data(unsigned char buf[], unsigned size, char const val[])
 {
     memcpy(buf, val, size);
     return size;

@@ -7,8 +7,9 @@ static unsigned const sizes[] = {
 
 static unsigned const pack_sizes[] = {1, 1, 3, 3, 5, 5};
 
-static enum lip_format const formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP, LIP_FMT_MAP_16,
-                       LIP_FMT_MAP_16, LIP_FMT_MAP_32, LIP_FMT_MAP_32};
+static enum lip_format const formats[] = {LIP_FMT_FIXMAP, LIP_FMT_FIXMAP,
+                                          LIP_FMT_MAP_16, LIP_FMT_MAP_16,
+                                          LIP_FMT_MAP_32, LIP_FMT_MAP_32};
 
 static unsigned char buf[17] = {0};
 
