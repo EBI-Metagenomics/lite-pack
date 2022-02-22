@@ -18,9 +18,9 @@ struct lip_file
     bool error;
 };
 
-static inline void lip_file_init(struct lip_file *file)
+static inline void lip_file_init(struct lip_file *file, FILE *fp)
 {
-    file->fp = 0;
+    file->fp = fp;
     memset(file->buf, 0, 9);
     file->error = 0;
 }

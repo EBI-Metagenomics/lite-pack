@@ -3,32 +3,6 @@
 #include "lite_pack/stdio_unlocked.h"
 #include "lite_pack/unpack_int.h"
 
-static inline unsigned int_size(enum lip_format fmt)
-{
-    unsigned sz = 0;
-    switch (fmt)
-    {
-    case LIP_FMT_INT_64:
-    case LIP_FMT_UINT_64:
-        sz += 2;
-        fallthrough;
-    case LIP_FMT_INT_32:
-    case LIP_FMT_UINT_32:
-        sz += 2;
-        fallthrough;
-    case LIP_FMT_INT_16:
-    case LIP_FMT_UINT_16:
-        sz += 1;
-        fallthrough;
-    case LIP_FMT_INT_8:
-    case LIP_FMT_UINT_8:
-        sz += 1;
-        fallthrough;
-    default:
-        return 0;
-    }
-}
-
 static inline void read_int(struct lip_file *file, unsigned char buf[])
 {
     file->error = lip_fread(buf, 1, 1, file->fp) != 1;

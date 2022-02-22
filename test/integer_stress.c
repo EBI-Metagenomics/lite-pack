@@ -164,5 +164,5 @@ static int test_u64(void)
 int main(void)
 {
     return test_i8() | test_i16() | test_i32() | test_i64() | test_u8() |
-           test_u16() | test_u32();
+           test_u16() | test_u32() | test_u64();
 }
