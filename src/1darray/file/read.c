@@ -7,7 +7,7 @@ bool lip_read_1darray_size_type(struct lip_file *file, unsigned *size,
 {
     if (file->error) return false;
 
-    lip_read_ext_size_type(io, size, type);
+    lip_read_ext_size_type(file, size, type);
     file->error = unpack_1darray_size_type(file->buf, size, type) == 0;
     return !file->error;
 }

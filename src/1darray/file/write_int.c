@@ -12,9 +12,9 @@ bool lip_write_1darray_i8(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_INT8);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_INT8);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_i8_item(io, arr[i]);
+        lip_write_1darray_i8_item(file, arr[i]);
 
     return !file->error;
 }
@@ -24,9 +24,9 @@ bool lip_write_1darray_i16(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_INT16);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_INT16);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_i16_item(io, arr[i]);
+        lip_write_1darray_i16_item(file, arr[i]);
 
     return !file->error;
 }
@@ -36,9 +36,9 @@ bool lip_write_1darray_i32(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_INT32);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_INT32);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_i32_item(io, arr[i]);
+        lip_write_1darray_i32_item(file, arr[i]);
 
     return !file->error;
 }
@@ -48,9 +48,9 @@ bool lip_write_1darray_i64(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_INT64);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_INT64);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_i64_item(io, arr[i]);
+        lip_write_1darray_i64_item(file, arr[i]);
 
     return !file->error;
 }
@@ -62,9 +62,9 @@ bool lip_write_1darray_u8(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_UINT8);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_UINT8);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_u8_item(io, arr[i]);
+        lip_write_1darray_u8_item(file, arr[i]);
 
     return !file->error;
 }
@@ -74,9 +74,9 @@ bool lip_write_1darray_u16(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_UINT16);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_UINT16);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_u16_item(io, arr[i]);
+        lip_write_1darray_u16_item(file, arr[i]);
 
     return !file->error;
 }
@@ -86,9 +86,9 @@ bool lip_write_1darray_u32(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_UINT32);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_UINT32);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_u32_item(io, arr[i]);
+        lip_write_1darray_u32_item(file, arr[i]);
 
     return !file->error;
 }
@@ -98,9 +98,9 @@ bool lip_write_1darray_u64(struct lip_file *file, unsigned size,
 {
     if (file->error) return false;
 
-    lip_write_1darray_size_type(io, size, LIP_1DARRAY_UINT64);
+    lip_write_1darray_size_type(file, size, LIP_1DARRAY_UINT64);
     for (unsigned i = 0; i < size; ++i)
-        lip_write_1darray_u64_item(io, arr[i]);
+        lip_write_1darray_u64_item(file, arr[i]);
 
     return !file->error;
 }

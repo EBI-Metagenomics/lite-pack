@@ -28,8 +28,8 @@ static inline void lip_file_init(struct lip_file *file, FILE *fp)
 /* WRITE */
 
 LIP_API bool lip_write_bool(struct lip_file *file, bool val);
-#define lip_write_int(io, val) __lip_write_int(io, val)
-#define lip_write_float(io, val) __lip_write_float(io, val)
+#define lip_write_int(file, val) __lip_write_int(file, val)
+#define lip_write_float(file, val) __lip_write_float(file, val)
 LIP_API bool lip_write_array_size(struct lip_file *, unsigned size);
 LIP_API bool lip_write_map_size(struct lip_file *, unsigned size);
 LIP_API bool lip_write_str_size(struct lip_file *, unsigned size);
@@ -41,8 +41,8 @@ LIP_API bool lip_write_ext_size_type(struct lip_file *file, unsigned size,
 /* READ */
 
 LIP_API bool lip_read_bool(struct lip_file *, bool *val);
-#define lip_read_int(io, val) __lip_read_int(io, val)
-#define lip_read_float(io, val) __lip_read_float(io, val)
+#define lip_read_int(file, val) __lip_read_int(file, val)
+#define lip_read_float(file, val) __lip_read_float(file, val)
 LIP_API bool lip_read_array_size(struct lip_file *, unsigned *size);
 LIP_API bool lip_read_map_size(struct lip_file *, unsigned *size);
 LIP_API bool lip_read_str_size(struct lip_file *, unsigned *size);
@@ -64,8 +64,8 @@ static inline bool lip_write_cstr(struct lip_file *file, char const str[])
 
     size_t size = strlen(str);
     if (size > INT_MAX) return false;
-    lip_write_str_size(io, (unsigned)size);
-    return lip_write_str_data(io, (unsigned)size, str);
+    lip_write_str_size(file, (unsigned)size);
+    return lip_write_str_data(file, (unsigned)size, str);
 }
 
 static inline bool lip_read_cstr(struct lip_file *file, unsigned size,
@@ -75,10 +75,10 @@ static inline bool lip_read_cstr(struct lip_file *file, unsigned size,
 
     str[0] = 0;
     unsigned sz = 0;
-    if (!lip_read_str_size(io, &sz)) return false;
+    if (!lip_read_str_size(file, &sz)) return false;
 
     if (sz > size) return !(file->error = true);
-    lip_read_str_data(io, sz, str);
+    lip_read_str_data(file, sz, str);
     str[sz] = 0;
     return !file->error;
 }
