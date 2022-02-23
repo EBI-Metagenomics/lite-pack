@@ -21,7 +21,7 @@ LIP_API bool lip_read_1darray_size_type(struct lip_file *, unsigned *size,
 
 /* WRITE */
 
-LIP_API bool lip_write_1darray_size_type(struct lip_file *io, unsigned size,
+LIP_API bool lip_write_1darray_size_type(struct lip_file *file, unsigned size,
                                          uint8_t type);
 // lip_write_1darray_float(file, size, arr)
 // lip_write_1darray_float_data(file, size, arr)

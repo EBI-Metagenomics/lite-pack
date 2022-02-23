@@ -2,13 +2,13 @@
 #include "lite_pack/1darray/1darray.h"
 #include "lite_pack/file/file.h"
 
-bool lip_write_1darray_size_type(struct lip_file *io, unsigned size,
+bool lip_write_1darray_size_type(struct lip_file *file, unsigned size,
                                  uint8_t type)
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
-    unsigned sz = pack_1darray_size_type(io->buf, size, type);
-    io->error = fwrite(io->buf, sz, 1, io->fp) != 1;
+    unsigned sz = pack_1darray_size_type(file->buf, size, type);
+    file->error = fwrite(file->buf, sz, 1, file->fp) != 1;
 
-    return !io->error;
+    return !file->error;
 }

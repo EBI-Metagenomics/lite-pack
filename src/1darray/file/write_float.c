@@ -5,70 +5,70 @@
 #include "lite_pack/file/file.h"
 #include "lite_pack/store_float.h"
 
-bool lip_write_1darray_f32(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f32(struct lip_file *file, unsigned size,
                            float const arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     lip_write_1darray_size_type(io, size, LIP_1DARRAY_F32);
     for (unsigned i = 0; i < size; ++i)
         lip_write_1darray_f32_item(io, arr[i]);
 
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_write_1darray_f64(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f64(struct lip_file *file, unsigned size,
                            double const arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     lip_write_1darray_size_type(io, size, LIP_1DARRAY_F64);
     for (unsigned i = 0; i < size; ++i)
         lip_write_1darray_f64_item(io, arr[i]);
 
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_write_1darray_f32_data(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f32_data(struct lip_file *file, unsigned size,
                                 float const arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     for (unsigned i = 0; i < size; ++i)
         lip_write_1darray_f32_item(io, arr[i]);
 
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_write_1darray_f64_data(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f64_data(struct lip_file *file, unsigned size,
                                 double const arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     for (unsigned i = 0; i < size; ++i)
         lip_write_1darray_f64_item(io, arr[i]);
 
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_write_1darray_f32_data_in(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f32_data_in(struct lip_file *file, unsigned size,
                                    float arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     pack_1darray_f32_data_in((unsigned char *)arr, size);
-    io->error = fwrite(arr, size * sizeof(float), 1, io->fp) != 1;
+    file->error = fwrite(arr, size * sizeof(float), 1, file->fp) != 1;
 
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_write_1darray_f64_data_in(struct lip_file *io, unsigned size,
+bool lip_write_1darray_f64_data_in(struct lip_file *file, unsigned size,
                                    double arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
     pack_1darray_f64_data_in((unsigned char *)arr, size);
-    io->error = fwrite(arr, size * sizeof(double), 1, io->fp) != 1;
+    file->error = fwrite(arr, size * sizeof(double), 1, file->fp) != 1;
 
-    return !io->error;
+    return !file->error;
 }

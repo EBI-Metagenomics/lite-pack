@@ -38,9 +38,9 @@ bool lip_read_str_size(struct lip_file *file, unsigned *size)
     return !(file->error = lip_unpack_str_size(file->buf, size) == 0);
 }
 
-bool lip_read_str_data(struct lip_file *io, unsigned size, char str[])
+bool lip_read_str_data(struct lip_file *file, unsigned size, char str[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
-    return !(io->error = lip_fread(str, size, 1, io->fp) != 1);
+    return !(file->error = lip_fread(str, size, 1, file->fp) != 1);
 }

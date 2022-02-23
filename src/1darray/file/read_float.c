@@ -3,24 +3,26 @@
 #include "lite_pack/file/file.h"
 #include "lite_pack/stdio_unlocked.h"
 
-bool lip_read_1darray_f32_data(struct lip_file *io, unsigned size, float arr[])
+bool lip_read_1darray_f32_data(struct lip_file *file, unsigned size,
+                               float arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
-    io->error = lip_fread(arr, size * sizeof(float), 1, io->fp) != 1;
-    if (io->error) return false;
+    file->error = lip_fread(arr, size * sizeof(float), 1, file->fp) != 1;
+    if (file->error) return false;
 
     unpack_1darray_f32_data_in((unsigned char *)arr, size);
-    return !io->error;
+    return !file->error;
 }
 
-bool lip_read_1darray_f64_data(struct lip_file *io, unsigned size, double arr[])
+bool lip_read_1darray_f64_data(struct lip_file *file, unsigned size,
+                               double arr[])
 {
-    if (io->error) return false;
+    if (file->error) return false;
 
-    io->error = lip_fread(arr, size * sizeof(double), 1, io->fp) != 1;
-    if (io->error) return false;
+    file->error = lip_fread(arr, size * sizeof(double), 1, file->fp) != 1;
+    if (file->error) return false;
 
     unpack_1darray_f64_data_in((unsigned char *)arr, size);
-    return !io->error;
+    return !file->error;
 }
