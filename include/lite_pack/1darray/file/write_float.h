@@ -14,10 +14,10 @@ struct lip_file;
              : lip_write_1darray_f32, double                                   \
              : lip_write_1darray_f64)(file, size, arr)
 
-LIP_API void lip_write_1darray_f32(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f32(struct lip_file *file, unsigned size,
                                    float const arr[]);
 
-LIP_API void lip_write_1darray_f64(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f64(struct lip_file *file, unsigned size,
                                    double const arr[]);
 
 /* DATA */
@@ -27,10 +27,10 @@ LIP_API void lip_write_1darray_f64(struct lip_file *file, unsigned size,
              : lip_write_1darray_f32_data, double                              \
              : lip_write_1darray_f64_data)(file, size, arr)
 
-LIP_API void lip_write_1darray_f32_data(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f32_data(struct lip_file *file, unsigned size,
                                         float const arr[]);
 
-LIP_API void lip_write_1darray_f64_data(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f64_data(struct lip_file *file, unsigned size,
                                         double const arr[]);
 
 #define lip_write_1darray_float_data_in(file, size, arr)                       \
@@ -38,10 +38,10 @@ LIP_API void lip_write_1darray_f64_data(struct lip_file *file, unsigned size,
              : lip_write_1darray_f32_data_in, double                           \
              : lip_write_1darray_f64_data_in)(file, size, arr)
 
-LIP_API void lip_write_1darray_f32_data_in(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f32_data_in(struct lip_file *file, unsigned size,
                                            float arr[]);
 
-LIP_API void lip_write_1darray_f64_data_in(struct lip_file *file, unsigned size,
+LIP_API bool lip_write_1darray_f64_data_in(struct lip_file *file, unsigned size,
                                            double arr[]);
 
 /* ITEM */
@@ -51,17 +51,19 @@ LIP_API void lip_write_1darray_f64_data_in(struct lip_file *file, unsigned size,
              : lip_write_1darray_f32_item, double                              \
              : lip_write_1darray_f64_item)(file, item)
 
-static inline void lip_write_1darray_f32_item(struct lip_file *file, float item)
+static inline bool lip_write_1darray_f32_item(struct lip_file *file, float item)
 {
     file->error |= lip_store_f32_in((unsigned char *)&item) == 0;
     file->error |= fwrite(&item, sizeof(item), 1, file->fp) != 1;
+    return !file->error;
 }
 
-static inline void lip_write_1darray_f64_item(struct lip_file *file,
+static inline bool lip_write_1darray_f64_item(struct lip_file *file,
                                               double item)
 {
     file->error |= lip_store_f64((unsigned char *)&item, item) == 0;
     file->error |= fwrite(&item, sizeof(item), 1, file->fp) != 1;
+    return !file->error;
 }
 
 #endif

@@ -16,10 +16,10 @@ struct lip_file;
              : lip_read_1darray_f32_data, double                               \
              : lip_read_1darray_f64_data)(file, sz, arr)
 
-LIP_API void lip_read_1darray_f32_data(struct lip_file *file, unsigned size,
+LIP_API bool lip_read_1darray_f32_data(struct lip_file *file, unsigned size,
                                        float arr[]);
 
-LIP_API void lip_read_1darray_f64_data(struct lip_file *file, unsigned size,
+LIP_API bool lip_read_1darray_f64_data(struct lip_file *file, unsigned size,
                                        double arr[]);
 
 /* ITEM */
@@ -29,17 +29,19 @@ LIP_API void lip_read_1darray_f64_data(struct lip_file *file, unsigned size,
              : lip_read_1darray_f32_item, double                               \
              : lip_read_1darray_f64_item)(file, item)
 
-static inline void lip_read_1darray_f32_item(struct lip_file *file, float *item)
+static inline bool lip_read_1darray_f32_item(struct lip_file *file, float *item)
 {
     file->error |= lip_fread(item, sizeof(float), 1, file->fp) != 1;
     file->error |= lip_load_f32((unsigned char *)item, item) == 0;
+    return !file->error;
 }
 
-static inline void lip_read_1darray_f64_item(struct lip_file *file,
+static inline bool lip_read_1darray_f64_item(struct lip_file *file,
                                              double *item)
 {
     file->error |= lip_fread(item, sizeof(double), 1, file->fp) != 1;
     file->error |= lip_load_f64((unsigned char *)item, item) == 0;
+    return !file->error;
 }
 
 #endif

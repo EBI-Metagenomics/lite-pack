@@ -5,90 +5,98 @@
 
 /* SIGNED */
 
-void lip_read_1darray_i8_data(struct lip_file *io, unsigned size, int8_t arr[])
+bool lip_read_1darray_i8_data(struct lip_file *io, unsigned size, int8_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(int8_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_i8_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_i16_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_i16_data(struct lip_file *io, unsigned size,
                                int16_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(int16_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_i16_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_i32_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_i32_data(struct lip_file *io, unsigned size,
                                int32_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(int32_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_i32_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_i64_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_i64_data(struct lip_file *io, unsigned size,
                                int64_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(int64_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_i64_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
 /* UNSIGNED */
 
-void lip_read_1darray_u8_data(struct lip_file *io, unsigned size, uint8_t arr[])
+bool lip_read_1darray_u8_data(struct lip_file *io, unsigned size, uint8_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(uint8_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_u8_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_u16_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_u16_data(struct lip_file *io, unsigned size,
                                uint16_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(uint16_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_u16_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_u32_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_u32_data(struct lip_file *io, unsigned size,
                                uint32_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(uint32_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_u32_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
 
-void lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
+bool lip_read_1darray_u64_data(struct lip_file *io, unsigned size,
                                uint64_t arr[])
 {
-    if (io->error) return;
+    if (io->error) return false;
 
     io->error = lip_fread(arr, size * sizeof(uint64_t), 1, io->fp) != 1;
-    if (io->error) return;
+    if (io->error) return false;
 
     unpack_1darray_u64_data_in((unsigned char *)arr, size);
+    return !io->error;
 }
