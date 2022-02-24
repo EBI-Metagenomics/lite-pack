@@ -25,6 +25,8 @@ static inline void lip_file_init(struct lip_file *file, FILE *fp)
     file->error = 0;
 }
 
+static inline FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
+
 /* WRITE */
 
 LIP_API bool lip_write_bool(struct lip_file *file, bool val);
@@ -49,12 +51,6 @@ LIP_API bool lip_read_str_size(struct lip_file *, unsigned *size);
 LIP_API bool lip_read_str_data(struct lip_file *, unsigned size, char str[]);
 LIP_API bool lip_read_ext_size_type(struct lip_file *, unsigned *size,
                                     uint8_t *type);
-
-/* FILE OPERATIONS */
-
-LIP_API int lip_fseek(struct lip_file *file, int64_t offset, int whence);
-LIP_API int64_t lip_ftell(struct lip_file *file);
-LIP_API void lip_rewind(struct lip_file *file);
 
 /* C-STRING */
 

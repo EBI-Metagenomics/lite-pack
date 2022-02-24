@@ -27,7 +27,6 @@ add_library(
   src/1darray/unpack_float.c
   src/1darray/unpack_int.c
   src/1darray/unpack_int_in.c
-  src/file/file.c
   src/file/read_array.c
   src/file/read_bool.c
   src/file/read_ext.c
