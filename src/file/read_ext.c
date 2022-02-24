@@ -12,7 +12,7 @@ bool lip_read_ext_size_type(struct lip_file *file, unsigned *size,
     if (file->error) return false;
 
     unsigned sz = 1;
-    switch (lip_format(file->buf))
+    switch (lip_format(file->buf[0]))
     {
     case LIP_FMT_FIXEXT_16:
         fallthrough;

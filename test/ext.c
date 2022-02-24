@@ -24,7 +24,7 @@ int main(void)
     {
         clear(buf);
         if (lip_pack_ext_size_type(buf, a[i].size, 33) != a[i].pack_sz) ERROR;
-        if (lip_format(buf) != a[i].fmt) ERROR;
+        if (lip_format(buf[0]) != a[i].fmt) ERROR;
         unsigned size = 0;
         if (lip_unpack_ext_size_type(buf, &size, &type) != a[i].pack_sz) ERROR;
         if (type != 33) ERROR;

@@ -33,7 +33,7 @@ int main(void)
         if (lip_pack_str_size(buf, len) != pack_sizes[i]) ERROR;
         if (lip_pack_str_data(buf + pack_sizes[i], len, str) != sizes[i]) ERROR;
 
-        if (lip_format(buf) != formats[i]) ERROR;
+        if (lip_format(buf[0]) != formats[i]) ERROR;
         if (lip_unpack_str_size(buf, &len) != pack_sizes[i]) ERROR;
         if (len != sizes[i]) ERROR;
         if (lip_unpack_str_data(buf + pack_sizes[i], len, out) != sizes[i])

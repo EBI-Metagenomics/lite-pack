@@ -18,7 +18,7 @@ int main(void)
     {
         clear(buf);
         if (lip_pack_array_size(buf, sizes[i]) != pack_sizes[i]) ERROR;
-        if (lip_format(buf) != formats[i]) ERROR;
+        if (lip_format(buf[0]) != formats[i]) ERROR;
         unsigned size = 0;
         if (lip_unpack_array_size(buf, &size) != pack_sizes[i]) ERROR;
         if (size != sizes[i]) ERROR;

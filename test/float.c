@@ -18,7 +18,7 @@ static int test_f32(void)
     {
         clear(buf);
         if (lip_pack_float(buf, f32_values[i]) != 5) ERROR;
-        if (lip_format(buf) != LIP_FMT_FLOAT_32) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_FLOAT_32) ERROR;
 
         float v = 0;
         if (lip_unpack_float(buf, &v) != 5) ERROR;
@@ -34,7 +34,7 @@ static int test_f64(void)
     {
         clear(buf);
         if (lip_pack_float(buf, f64_values[i]) != 9) ERROR;
-        if (lip_format(buf) != LIP_FMT_FLOAT_64) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_FLOAT_64) ERROR;
 
         double v = 0;
         if (lip_unpack_float(buf, &v) != 9) ERROR;

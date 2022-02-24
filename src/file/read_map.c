@@ -11,7 +11,7 @@ bool lip_read_map_size(struct lip_file *file, unsigned *size)
     if (file->error) return false;
 
     unsigned sz = 0;
-    switch (lip_format(file->buf))
+    switch (lip_format(file->buf[0]))
     {
     case LIP_FMT_MAP_32:
         sz += 2;

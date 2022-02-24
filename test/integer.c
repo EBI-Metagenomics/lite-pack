@@ -94,31 +94,31 @@ static int positive_integer_check(unsigned char buf[9], unsigned long v)
     uint64_t u64 = 0;
     if (v <= 127U)
     {
-        if (lip_format(buf) != LIP_FMT_POSITIVE_FIXINT) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_POSITIVE_FIXINT) ERROR;
         if (lip_unpack_int(buf, &u8) != 1) ERROR;
         if (v != u8) ERROR;
     }
     else if (v <= 255U)
     {
-        if (lip_format(buf) != LIP_FMT_UINT_8) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_UINT_8) ERROR;
         if (lip_unpack_int(buf, &u8) != 2) ERROR;
         if (v != u8) ERROR;
     }
     else if (v <= 65535U)
     {
-        if (lip_format(buf) != LIP_FMT_UINT_16) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_UINT_16) ERROR;
         if (lip_unpack_int(buf, &u16) != 3) ERROR;
         if (v != u16) ERROR;
     }
     else if (v <= 4294967295U)
     {
-        if (lip_format(buf) != LIP_FMT_UINT_32) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_UINT_32) ERROR;
         if (lip_unpack_int(buf, &u32) != 5) ERROR;
         if (v != u32) ERROR;
     }
     else
     {
-        if (lip_format(buf) != LIP_FMT_UINT_64) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_UINT_64) ERROR;
         if (lip_unpack_int(buf, &u64) != 9) ERROR;
         if (v != u64) ERROR;
     }
@@ -133,31 +133,31 @@ static int negative_integer_check(unsigned char buf[9], long v)
     int64_t i64 = 0;
     if (v >= -32)
     {
-        if (lip_format(buf) != LIP_FMT_NEGATIVE_FIXINT) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_NEGATIVE_FIXINT) ERROR;
         if (lip_unpack_int(buf, &i8) != 1) ERROR;
         if (v != i8) ERROR;
     }
     else if (v >= INT8_MIN)
     {
-        if (lip_format(buf) != LIP_FMT_INT_8) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_INT_8) ERROR;
         if (lip_unpack_int(buf, &i8) != 2) ERROR;
         if (v != i8) ERROR;
     }
     else if (v >= INT16_MIN)
     {
-        if (lip_format(buf) != LIP_FMT_INT_16) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_INT_16) ERROR;
         if (lip_unpack_int(buf, &i16) != 3) ERROR;
         if (v != i16) ERROR;
     }
     else if (v >= INT32_MIN)
     {
-        if (lip_format(buf) != LIP_FMT_INT_32) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_INT_32) ERROR;
         if (lip_unpack_int(buf, &i32) != 5) ERROR;
         if (v != i32) ERROR;
     }
     else
     {
-        if (lip_format(buf) != LIP_FMT_INT_64) ERROR;
+        if (lip_format(buf[0]) != LIP_FMT_INT_64) ERROR;
         if (lip_unpack_int(buf, &i64) != 9) ERROR;
         if (v != i64) ERROR;
     }

@@ -9,7 +9,7 @@ static inline void read_int(struct lip_file *file, unsigned char buf[])
     if (file->error) return;
 
     unsigned sz = 0;
-    switch (lip_format(buf))
+    switch (lip_format(buf[0]))
     {
     case LIP_FMT_INT_64:
     case LIP_FMT_UINT_64:

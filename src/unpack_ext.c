@@ -6,7 +6,7 @@
 unsigned lip_unpack_ext_size_type(unsigned char const buf[], unsigned *size,
                                   uint8_t *type)
 {
-    enum lip_format fmt = lip_format(buf);
+    enum lip_format fmt = lip_format(buf[0]);
     *size = 1;
     switch (fmt)
     {

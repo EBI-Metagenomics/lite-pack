@@ -4,7 +4,7 @@
 
 unsigned lip_unpack_str_size(unsigned char const buf[], unsigned *size)
 {
-    switch (lip_format(buf))
+    switch (lip_format(buf[0]))
     {
     case LIP_FMT_FIXSTR:
         *size = (unsigned)__lip_format_fix_value(buf[0]);

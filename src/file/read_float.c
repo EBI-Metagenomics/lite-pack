@@ -10,7 +10,7 @@ bool __lip_read_f32(struct lip_file *file, float *val)
     file->error = lip_fread(file->buf, 1, 1, file->fp) != 1;
     if (file->error) return false;
 
-    if (lip_format(file->buf) != LIP_FMT_FLOAT_32)
+    if (lip_format(file->buf[0]) != LIP_FMT_FLOAT_32)
     {
         file->error = true;
         return false;
@@ -30,11 +30,11 @@ bool __lip_read_f64(struct lip_file *file, double *val)
     if (file->error) return false;
 
     unsigned sz = 0;
-    if (lip_format(file->buf) == LIP_FMT_FLOAT_32)
+    if (lip_format(file->buf[0]) == LIP_FMT_FLOAT_32)
     {
         sz = 4;
     }
-    else if (lip_format(file->buf) == LIP_FMT_FLOAT_64)
+    else if (lip_format(file->buf[0]) == LIP_FMT_FLOAT_64)
     {
         sz = 8;
     }

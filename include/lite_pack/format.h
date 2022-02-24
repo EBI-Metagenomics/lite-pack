@@ -69,17 +69,17 @@ static inline enum lip_format_family __lip_format_family(int first_byte)
 
 LIP_API enum lip_format __lip_format(int first_byte);
 
-static inline enum lip_format lip_format(uint8_t const buf[])
+static inline enum lip_format lip_format(unsigned char first_byte)
 {
-    return __lip_format(buf[0]);
+    return __lip_format(first_byte);
 }
 
-static inline enum lip_format_family lip_format_family(uint8_t const buf[])
+static inline enum lip_format_family lip_format_family(unsigned char first_byte)
 {
-    return __lip_format_family(buf[0]);
+    return __lip_format_family(first_byte);
 }
 
-static inline int __lip_format_fix_value(uint8_t first_byte)
+static inline int __lip_format_fix_value(unsigned char first_byte)
 {
     enum lip_format format = __lip_format(first_byte);
     switch (format)
