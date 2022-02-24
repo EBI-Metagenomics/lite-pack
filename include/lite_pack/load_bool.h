@@ -6,7 +6,7 @@
 
 static inline unsigned __lip_load_bool(unsigned char const buf[], bool *val)
 {
-    *val = __lip_format(buf[0]) ^ LIP_FMT_FALSE;
+    *val = lip_format(buf[0]) ^ LIP_FMT_FALSE;
     return 1;
 }
 

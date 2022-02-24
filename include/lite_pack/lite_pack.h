@@ -103,8 +103,8 @@ static inline unsigned lip_load_f64_in(unsigned char buf[]);
 enum lip_format;
 enum lip_format_family;
 
-static inline enum lip_format lip_format(unsigned char first_byte);
-static inline enum lip_format_family lip_format_family(unsigned char first_byte);
+LIP_API enum lip_format lip_format(int first_byte);
+static inline enum lip_format_family lip_format_family(int first_byte);
 /* clang-format on */
 
 #endif

@@ -43,7 +43,7 @@ enum lip_format_family const __lip_format_family_map[] = {
     [LIP_FMT_NEGATIVE_FIXINT] = LIP_FMT_FAMILY_INT,
 };
 
-enum lip_format __lip_format(int first_byte)
+enum lip_format lip_format(int first_byte)
 {
     switch (first_byte)
     {

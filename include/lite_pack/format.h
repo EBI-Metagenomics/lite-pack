@@ -62,26 +62,16 @@ enum lip_format_family
 
 LIP_API extern enum lip_format_family const __lip_format_family_map[];
 
-static inline enum lip_format_family __lip_format_family(int first_byte)
+static inline enum lip_format_family lip_format_family(int first_byte)
 {
     return __lip_format_family_map[first_byte];
 }
 
-LIP_API enum lip_format __lip_format(int first_byte);
-
-static inline enum lip_format lip_format(unsigned char first_byte)
-{
-    return __lip_format(first_byte);
-}
-
-static inline enum lip_format_family lip_format_family(unsigned char first_byte)
-{
-    return __lip_format_family(first_byte);
-}
+LIP_API enum lip_format lip_format(int first_byte);
 
 static inline int __lip_format_fix_value(unsigned char first_byte)
 {
-    enum lip_format format = __lip_format(first_byte);
+    enum lip_format format = lip_format(first_byte);
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -101,7 +91,7 @@ static inline int __lip_format_fix_value(unsigned char first_byte)
 
 static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
 {
-    enum lip_format format = __lip_format(first_byte.i);
+    enum lip_format format = lip_format(first_byte.i);
     switch (format)
     {
     case LIP_FMT_POSITIVE_FIXINT:
@@ -119,7 +109,7 @@ static inline unsigned __lip_format_fix_pvalue(union __lip_num8 first_byte)
 
 static inline int __lip_format_fix_nvalue(union __lip_num8 first_byte)
 {
-    enum lip_format format = __lip_format(first_byte.i);
+    enum lip_format format = lip_format(first_byte.i);
     switch (format)
     {
     case LIP_FMT_NEGATIVE_FIXINT:
