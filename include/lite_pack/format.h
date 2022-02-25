@@ -58,16 +58,20 @@ enum lip_format_family
     LIP_FMT_FAMILY_ARRAY,
     LIP_FMT_FAMILY_MAP,
     LIP_FMT_FAMILY_EXT,
+    LIP_FMT_FAMILY_NEVER_USED,
 };
 
 LIP_API extern enum lip_format_family const __lip_format_family_map[];
 
-static inline enum lip_format_family lip_format_family(int first_byte)
+LIP_API enum lip_format lip_format(int first_byte);
+
+static inline enum lip_format_family lip_format_family(enum lip_format fmt)
 {
-    return __lip_format_family_map[first_byte];
+    return __lip_format_family_map[fmt];
 }
 
-LIP_API enum lip_format lip_format(int first_byte);
+LIP_API char const *lip_format_string(enum lip_format fmt);
+LIP_API char const *lip_format_family_string(enum lip_format_family family);
 
 static inline int __lip_format_fix_value(unsigned char first_byte)
 {

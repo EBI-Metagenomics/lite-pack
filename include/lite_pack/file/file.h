@@ -27,6 +27,8 @@ static inline void lip_file_init(struct lip_file *file, FILE *fp)
 
 static inline FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
 
+LIP_API bool lip_file_skip(struct lip_file *file);
+
 /* WRITE */
 
 LIP_API bool lip_write_bool(struct lip_file *file, bool val);

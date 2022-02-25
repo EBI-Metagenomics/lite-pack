@@ -3,7 +3,7 @@
 #include "lite_pack/file/file.h"
 
 bool lip_write_1darray_size_type(struct lip_file *file, unsigned size,
-                                 uint8_t type)
+                                 enum lip_1darray_type type)
 {
     if (file->error) return false;
 

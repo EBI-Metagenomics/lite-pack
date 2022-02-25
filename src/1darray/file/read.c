@@ -3,11 +3,15 @@
 #include "lite_pack/file/file.h"
 
 bool lip_read_1darray_size_type(struct lip_file *file, unsigned *size,
-                                uint8_t *type)
+                                enum lip_1darray_type *type)
 {
     if (file->error) return false;
 
-    lip_read_ext_size_type(file, size, type);
+    unsigned sz = 0;
+    uint8_t typ = 0;
+    file->error = !lip_read_ext_size_type(file, &sz, &typ);
+    if (file->error) return false;
+
     file->error = unpack_1darray_size_type(file->buf, size, type) == 0;
     return !file->error;
 }

@@ -3,13 +3,58 @@
 #include <limits.h>
 #include <stdlib.h>
 
+char const __lip_format_string[][24] = {
+    [LIP_FMT_POSITIVE_FIXINT] = "LIP_FMT_POSITIVE_FIXINT",
+    [LIP_FMT_FIXMAP] = "LIP_FMT_FIXMAP",
+    [LIP_FMT_FIXARRAY] = "LIP_FMT_FIXARRAY",
+    [LIP_FMT_FIXSTR] = "LIP_FMT_FIXSTR",
+    [LIP_FMT_NIL] = "LIP_FMT_NIL",
+    [LIP_FMT_NEVER_USED] = "LIP_FMT_NEVER_USED",
+    [LIP_FMT_FALSE] = "LIP_FMT_FALSE",
+    [LIP_FMT_TRUE] = "LIP_FMT_TRUE",
+    [LIP_FMT_BIN_8] = "LIP_FMT_BIN_8",
+    [LIP_FMT_BIN_16] = "LIP_FMT_BIN_16",
+    [LIP_FMT_BIN_32] = "LIP_FMT_BIN_32",
+    [LIP_FMT_EXT_8] = "LIP_FMT_EXT_8",
+    [LIP_FMT_EXT_16] = "LIP_FMT_EXT_16",
+    [LIP_FMT_EXT_32] = "LIP_FMT_EXT_32",
+    [LIP_FMT_FLOAT_32] = "LIP_FMT_FLOAT_32",
+    [LIP_FMT_FLOAT_64] = "LIP_FMT_FLOAT_64",
+    [LIP_FMT_UINT_8] = "LIP_FMT_UINT_8",
+    [LIP_FMT_UINT_16] = "LIP_FMT_UINT_16",
+    [LIP_FMT_UINT_32] = "LIP_FMT_UINT_32",
+    [LIP_FMT_UINT_64] = "LIP_FMT_UINT_64",
+    [LIP_FMT_INT_8] = "LIP_FMT_INT_8",
+    [LIP_FMT_INT_16] = "LIP_FMT_INT_16",
+    [LIP_FMT_INT_32] = "LIP_FMT_INT_32",
+    [LIP_FMT_INT_64] = "LIP_FMT_INT_64",
+    [LIP_FMT_FIXEXT_1] = "LIP_FMT_FIXEXT_1",
+    [LIP_FMT_FIXEXT_2] = "LIP_FMT_FIXEXT_2",
+    [LIP_FMT_FIXEXT_4] = "LIP_FMT_FIXEXT_4",
+    [LIP_FMT_FIXEXT_8] = "LIP_FMT_FIXEXT_8",
+    [LIP_FMT_FIXEXT_16] = "LIP_FMT_FIXEXT_16",
+    [LIP_FMT_STR_8] = "LIP_FMT_STR_8",
+    [LIP_FMT_STR_16] = "LIP_FMT_STR_16",
+    [LIP_FMT_STR_32] = "LIP_FMT_STR_32",
+    [LIP_FMT_ARRAY_16] = "LIP_FMT_ARRAY_16",
+    [LIP_FMT_ARRAY_32] = "LIP_FMT_ARRAY_32",
+    [LIP_FMT_MAP_16] = "LIP_FMT_MAP_16",
+    [LIP_FMT_MAP_32] = "LIP_FMT_MAP_32",
+    [LIP_FMT_NEGATIVE_FIXINT] = "LIP_FMT_NEGATIVE_FIXINT",
+};
+
+char const *lip_format_string(enum lip_format fmt)
+{
+    return __lip_format_string[fmt];
+}
+
 enum lip_format_family const __lip_format_family_map[] = {
     [LIP_FMT_POSITIVE_FIXINT] = LIP_FMT_FAMILY_INT,
     [LIP_FMT_FIXMAP] = LIP_FMT_FAMILY_MAP,
     [LIP_FMT_FIXARRAY] = LIP_FMT_FAMILY_ARRAY,
     [LIP_FMT_FIXSTR] = LIP_FMT_FAMILY_STR,
     [LIP_FMT_NIL] = LIP_FMT_FAMILY_NIL,
-    [LIP_FMT_NEVER_USED] = 0,
+    [LIP_FMT_NEVER_USED] = LIP_FMT_FAMILY_NEVER_USED,
     [LIP_FMT_FALSE] = LIP_FMT_FAMILY_BOOL,
     [LIP_FMT_TRUE] = LIP_FMT_FAMILY_BOOL,
     [LIP_FMT_BIN_8] = LIP_FMT_FAMILY_BIN,
@@ -42,6 +87,24 @@ enum lip_format_family const __lip_format_family_map[] = {
     [LIP_FMT_MAP_32] = LIP_FMT_FAMILY_MAP,
     [LIP_FMT_NEGATIVE_FIXINT] = LIP_FMT_FAMILY_INT,
 };
+
+char const __lip_format_family_string[][26] = {
+    [LIP_FMT_FAMILY_NIL] = "LIP_FMT_FAMILY_NIL",
+    [LIP_FMT_FAMILY_BOOL] = "LIP_FMT_FAMILY_BOOL",
+    [LIP_FMT_FAMILY_INT] = "LIP_FMT_FAMILY_INT",
+    [LIP_FMT_FAMILY_FLOAT] = "LIP_FMT_FAMILY_FLOAT",
+    [LIP_FMT_FAMILY_STR] = "LIP_FMT_FAMILY_STR",
+    [LIP_FMT_FAMILY_BIN] = "LIP_FMT_FAMILY_BIN",
+    [LIP_FMT_FAMILY_ARRAY] = "LIP_FMT_FAMILY_ARRAY",
+    [LIP_FMT_FAMILY_MAP] = "LIP_FMT_FAMILY_MAP",
+    [LIP_FMT_FAMILY_EXT] = "LIP_FMT_FAMILY_EXT",
+    [LIP_FMT_FAMILY_NEVER_USED] = "LIP_FMT_FAMILY_NEVER_USED",
+};
+
+char const *lip_format_family_string(enum lip_format_family family)
+{
+    return __lip_format_family_string[family];
+}
 
 enum lip_format lip_format(int first_byte)
 {
