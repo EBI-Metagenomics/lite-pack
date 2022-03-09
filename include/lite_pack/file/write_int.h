@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_FILE_WRITE_INT_H
 #define LITE_PACK_FILE_WRITE_INT_H
 
+#include "lite_pack/bug.h"
 #include "lite_pack/export.h"
 #include <stdbool.h>
 #include <stdint.h>
@@ -10,14 +11,14 @@
     : sizeof(typeof(v)) == 2 ? __lip_write_i16(f, (int16_t)(v))                \
     : sizeof(typeof(v)) == 4 ? __lip_write_i32(f, (int32_t)(v))                \
     : sizeof(typeof(v)) == 8 ? __lip_write_i64(f, (int64_t)(v))                \
-                             : (void)0
+                             : __lip_bug_on_reach()
 
 #define __lip_write_unsigned(f, v)                                             \
     sizeof(typeof(v)) == 1   ? __lip_write_u8(f, (uint8_t)(v))                 \
     : sizeof(typeof(v)) == 2 ? __lip_write_u16(f, (uint16_t)(v))               \
     : sizeof(typeof(v)) == 4 ? __lip_write_u32(f, (uint32_t)(v))               \
     : sizeof(typeof(v)) == 8 ? __lip_write_u64(f, (uint64_t)(v))               \
-                             : (void)0U
+                             : __lip_bug_on_reach()
 
 #define __lip_write_int(f, v)                                                  \
     _Generic((v), signed char                                                  \

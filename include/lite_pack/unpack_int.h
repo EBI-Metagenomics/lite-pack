@@ -1,35 +1,36 @@
 #ifndef LITE_PACK_UNPACK_INT_H
 #define LITE_PACK_UNPACK_INT_H
 
+#include "lite_pack/bug.h"
 #include "lite_pack/export.h"
 #include <stdint.h>
 
 /* clang-format off */
-#define __lip_unpack_signed(buf, val)                                            \
+#define __lip_unpack_signed(buf, val)                                              \
     sizeof(*val) == 1   ? __lip_unpack_i8(buf, (int8_t*)(val))                     \
     : sizeof(*val) == 2 ? __lip_unpack_i16(buf, (int16_t*)(val))                   \
     : sizeof(*val) == 4 ? __lip_unpack_i32(buf, (int32_t*)(val))                   \
     : sizeof(*val) == 8 ? __lip_unpack_i64(buf, (int64_t*)(val))                   \
-                       : 0
+                       : __lip_bug_on_reach()
 
-#define __lip_unpack_unsigned(buf, val)                                          \
+#define __lip_unpack_unsigned(buf, val)                                            \
     sizeof(*val) == 1   ? __lip_unpack_u8(buf, (uint8_t*)(val))                    \
     : sizeof(*val) == 2 ? __lip_unpack_u16(buf, (uint16_t*)(val))                  \
     : sizeof(*val) == 4 ? __lip_unpack_u32(buf, (uint32_t*)(val))                  \
     : sizeof(*val) == 8 ? __lip_unpack_u64(buf, (uint64_t*)(val))                  \
-                       : 0U
+                       : __lip_bug_on_reach()
 
-#define __lip_unpack_int(buf, val)                                               \
-    _Generic((*val), signed char                                                \
-             : __lip_unpack_signed(buf, val), signed short                       \
-             : __lip_unpack_signed(buf, val), signed int                         \
-             : __lip_unpack_signed(buf, val), signed long                        \
-             : __lip_unpack_signed(buf, val), signed long long                   \
-             : __lip_unpack_signed(buf, val), unsigned char                      \
-             : __lip_unpack_unsigned(buf, val), unsigned short                   \
-             : __lip_unpack_unsigned(buf, val), unsigned int                     \
-             : __lip_unpack_unsigned(buf, val), unsigned long                    \
-             : __lip_unpack_unsigned(buf, val), unsigned long long               \
+#define __lip_unpack_int(buf, val)                                                 \
+    _Generic((*val), signed char                                                   \
+             : __lip_unpack_signed(buf, val), signed short                         \
+             : __lip_unpack_signed(buf, val), signed int                           \
+             : __lip_unpack_signed(buf, val), signed long                          \
+             : __lip_unpack_signed(buf, val), signed long long                     \
+             : __lip_unpack_signed(buf, val), unsigned char                        \
+             : __lip_unpack_unsigned(buf, val), unsigned short                     \
+             : __lip_unpack_unsigned(buf, val), unsigned int                       \
+             : __lip_unpack_unsigned(buf, val), unsigned long                      \
+             : __lip_unpack_unsigned(buf, val), unsigned long long                 \
              : __lip_unpack_unsigned(buf, val))
 /* clang-format on */
 

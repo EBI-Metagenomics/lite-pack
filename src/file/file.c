@@ -100,6 +100,7 @@ static inline bool skip_bin(struct lip_file *file, enum lip_format fmt)
     (void)fmt;
     // Not implemented yet
     assert(false);
+    return true;
 }
 
 static inline bool skip_array(struct lip_file *file, enum lip_format fmt)
