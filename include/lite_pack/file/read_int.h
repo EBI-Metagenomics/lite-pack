@@ -10,14 +10,14 @@
     : sizeof(*v) == 2 ? __lip_read_i16(f, (int16_t *)(v))                      \
     : sizeof(*v) == 4 ? __lip_read_i32(f, (int32_t *)(v))                      \
     : sizeof(*v) == 8 ? __lip_read_i64(f, (int64_t *)(v))                      \
-                      : 0
+                      : (void)0
 
 #define __lip_read_unsigned(f, v)                                              \
     sizeof(*v) == 1   ? __lip_read_u8(f, (uint8_t *)(v))                       \
     : sizeof(*v) == 2 ? __lip_read_u16(f, (uint16_t *)(v))                     \
     : sizeof(*v) == 4 ? __lip_read_u32(f, (uint32_t *)(v))                     \
     : sizeof(*v) == 8 ? __lip_read_u64(f, (uint64_t *)(v))                     \
-                      : 0U
+                      : (void)0U
 
 #define __lip_read_int(f, v)                                                   \
     _Generic((*v), signed char                                                 \
