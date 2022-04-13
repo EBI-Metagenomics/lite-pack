@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.18 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.0.5
+  VERSION 0.0.6
   LANGUAGES C)
 
 # Generate compile_commands.json file
