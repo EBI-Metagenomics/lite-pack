@@ -10,7 +10,7 @@
     : sizeof(typeof(v)) == 2 ? __lip_pack_i16(buf, (int16_t)(v))               \
     : sizeof(typeof(v)) == 4 ? __lip_pack_i32(buf, (int32_t)(v))               \
     : sizeof(typeof(v)) == 8 ? __lip_pack_i64(buf, (int64_t)(v))               \
-                             : (int)__lip_bug_on_reach()
+                             : (unsigned)__lip_bug_on_reach()
 
 #define __lip_pack_unsigned(buf, v)                                            \
     sizeof(typeof(v)) == 1   ? __lip_pack_u8(buf, (uint8_t)(v))                \
