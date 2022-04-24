@@ -31,7 +31,7 @@ Clone it and enter the following commands:
 ```
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_ALL_WARNINGS=ON ..
+cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_ALL_WARNINGS=ON LIP_THREAD_SAFE_LEVEL=0 ..
 make
 make test
 ```
