@@ -130,6 +130,10 @@ install(FILES ${CMAKE_VERSION_FILE} ${CMAKE_CONFIG_FILE}
         DESTINATION lib/cmake/${PROJECT_NAME})
 install(FILES ${EXPORT_FILE} ${CONFIG_FILE} DESTINATION include/${PROJECT_NAME})
 
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
+              ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
+        DESTINATION share/docs/${PROJECT_NAME})
+
 enable_testing()
 add_subdirectory(test)
 
