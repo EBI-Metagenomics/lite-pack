@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DCI_BUILD=ON
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DENABLE_ALL_WARNINGS=ON
 
       - name: Build
         working-directory: ${{github.workspace}}/build
@@ -29,7 +29,7 @@ jobs:
 
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           files: |
             ${{github.workspace}}/build/package/*
