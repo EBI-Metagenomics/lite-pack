@@ -3,7 +3,7 @@ name: Test
 on: push
 
 jobs:
-  build:
+  test:
     name: Test on ${{ matrix.os }} with build type ${{ matrix.build_type }}
     runs-on: ${{ matrix.os }}
     env:
@@ -15,12 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Check for sudo
-        shell: bash
-        run: |
-          if type sudo >/dev/null 2>&1; then SUDO="sudo"; else SUDO=""; fi
-          echo "SUDO=$SUDO" >> $GITHUB_ENV
 
       - name: Configure CMake
         if: runner.os == 'Linux'
@@ -36,8 +30,3 @@ jobs:
       - name: Test
         working-directory: ${{github.workspace}}/build
         run: ctest -C ${{env.BUILD_TYPE}}
-
-      - name: Install
-        working-directory: ${{github.workspace}}/build
-        shell: bash
-        run: $SUDO cmake --build . --target install --config $BUILD_TYPE
