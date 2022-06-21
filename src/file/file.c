@@ -1,5 +1,15 @@
 #include "lite_pack/file/file.h"
 #include "lite_pack/format.h"
+#include <string.h>
+
+void lip_file_init(struct lip_file *file, FILE *fp)
+{
+    file->fp = fp;
+    memset(file->buf, 0, 9);
+    file->error = 0;
+}
+
+FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
 
 static inline bool fpeek(FILE *fp, int *first_byte)
 {

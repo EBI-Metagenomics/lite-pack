@@ -6,10 +6,8 @@
 #include "lite_pack/file/read_int.h"
 #include "lite_pack/file/write_float.h"
 #include "lite_pack/file/write_int.h"
-#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
 struct lip_file
 {
@@ -18,14 +16,9 @@ struct lip_file
     bool error;
 };
 
-static inline void lip_file_init(struct lip_file *file, FILE *fp)
-{
-    file->fp = fp;
-    memset(file->buf, 0, 9);
-    file->error = 0;
-}
+LIP_API void lip_file_init(struct lip_file *file, FILE *fp);
 
-static inline FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
+LIP_API FILE *lip_file_ptr(struct lip_file *file);
 
 LIP_API bool lip_file_skip(struct lip_file *file);
 
@@ -56,29 +49,7 @@ LIP_API bool lip_read_ext_size_type(struct lip_file *, unsigned *size,
 
 /* C-STRING */
 
-static inline bool lip_write_cstr(struct lip_file *file, char const str[])
-{
-    if (file->error) return false;
-
-    size_t size = strlen(str);
-    if (size > INT_MAX) return false;
-    lip_write_str_size(file, (unsigned)size);
-    return lip_write_str_data(file, (unsigned)size, str);
-}
-
-static inline bool lip_read_cstr(struct lip_file *file, unsigned size,
-                                 char str[])
-{
-    if (file->error) return false;
-
-    str[0] = 0;
-    unsigned sz = 0;
-    if (!lip_read_str_size(file, &sz)) return false;
-
-    if (sz > size) return !(file->error = true);
-    lip_read_str_data(file, sz, str);
-    str[sz] = 0;
-    return !file->error;
-}
+LIP_API bool lip_write_cstr(struct lip_file *file, char const str[]);
+LIP_API bool lip_read_cstr(struct lip_file *file, unsigned size, char str[]);
 
 #endif

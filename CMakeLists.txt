@@ -30,6 +30,7 @@ add_library(
   src/file/file.c
   src/file/read_array.c
   src/file/read_bool.c
+  src/file/read_cstr.c
   src/file/read_ext.c
   src/file/read_float.c
   src/file/read_int.c
@@ -37,6 +38,7 @@ add_library(
   src/file/read_str.c
   src/file/write_array.c
   src/file/write_bool.c
+  src/file/write_cstr.c
   src/file/write_ext.c
   src/file/write_float.c
   src/file/write_int.c
