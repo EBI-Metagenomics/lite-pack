@@ -2,6 +2,7 @@
 #define LITE_PACK_LITE_PACK_H
 
 #include "lite_pack/export.h"
+#include "lite_pack/file/file.h"
 #include "lite_pack/format.h"
 #include "lite_pack/load_float.h"
 #include "lite_pack/load_int.h"
@@ -51,7 +52,6 @@ LIP_API unsigned lip_unpack_ext_size_type(unsigned char const buf[],
 
 /* STORE RAW NUMBERS */
 
-/* clang-format off */
 static inline unsigned lip_store_i8(unsigned char buf[], int8_t val);
 static inline unsigned lip_store_i16(unsigned char buf[], int16_t val);
 static inline unsigned lip_store_i32(unsigned char buf[], int32_t val);
@@ -73,7 +73,6 @@ static inline unsigned lip_store_u32_in(unsigned char buf[]);
 static inline unsigned lip_store_u64_in(unsigned char buf[]);
 static inline unsigned lip_store_f32_in(unsigned char buf[]);
 static inline unsigned lip_store_f64_in(unsigned char buf[]);
-/* clang-format on */
 
 /* LOAD RAW NUMBERS */
 
@@ -99,12 +98,10 @@ static inline unsigned lip_load_u64_in(unsigned char buf[]);
 static inline unsigned lip_load_f32_in(unsigned char buf[]);
 static inline unsigned lip_load_f64_in(unsigned char buf[]);
 
-/* clang-format off */
 enum lip_format;
 enum lip_format_family;
 
 LIP_API enum lip_format lip_format(int first_byte);
 static inline enum lip_format_family lip_format_family(enum lip_format fmt);
-/* clang-format on */
 
 #endif
