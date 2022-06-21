@@ -1,5 +1,6 @@
 #include "lite_pack/pack_str.h"
 #include "lite_pack/store_str.h"
+#include <string.h>
 
 unsigned lip_pack_str_size(unsigned char buf[], unsigned size)
 {

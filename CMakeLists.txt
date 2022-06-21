@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 project(
   lite_pack
   VERSION 0.1.4
-  LANGUAGES C)
+  LANGUAGES C
+)
 
 # Generate compile_commands.json file
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -46,24 +47,40 @@ add_library(
   src/file/write_str.c
   src/first_byte.c
   src/format.c
+  src/load_bool.c
+  src/load_ext.c
+  src/load_float.c
+  src/load_int.c
+  src/load_number.c
   src/pack_array.c
   src/pack_ext.c
+  src/pack_float.c
   src/pack_int.c
   src/pack_map.c
   src/pack_str.c
+  src/store_bool.c
+  src/store_ext.c
+  src/store_float.c
+  src/store_int.c
+  src/store_map.c
+  src/store_number.c
+  src/store_str.c
   src/unpack_array.c
   src/unpack_bool.c
   src/unpack_ext.c
   src/unpack_float.c
   src/unpack_int.c
   src/unpack_map.c
-  src/unpack_str.c)
+  src/unpack_str.c
+)
 add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 set(THREAD_SAFE_LEVELS 0 1)
-set(LIP_THREAD_SAFE_LEVEL
-    "1"
-    CACHE STRING "Thread-safe level: 0 for none; 1 otherwise.")
+set(
+  LIP_THREAD_SAFE_LEVEL
+  "1"
+  CACHE STRING "Thread-safe level: 0 for none; 1 otherwise."
+)
 if(${LIP_THREAD_SAFE_LEVEL} IN_LIST THREAD_SAFE_LEVELS)
   message(STATUS "Thread-safe level - ${LIP_THREAD_SAFE_LEVEL}")
 else()
@@ -71,8 +88,10 @@ else()
 endif()
 
 set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/config.h)
-configure_file(${PROJECT_SOURCE_DIR}/include/lite_pack/config.h.in
-               ${CONFIG_FILE})
+configure_file(
+  ${PROJECT_SOURCE_DIR}/include/lite_pack/config.h.in
+  ${CONFIG_FILE}
+)
 
 set(EXPORT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/export.h)
 include(GenerateExportHeader)
@@ -85,13 +104,16 @@ generate_export_header(
   EXPORT_MACRO_NAME
   LIP_API
   EXPORT_FILE_NAME
-  ${EXPORT_FILE})
+  ${EXPORT_FILE}
+)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
   include(CheckIPOSupported)
   check_ipo_supported()
-  set_target_properties(${PROJECT_NAME} PROPERTIES INTERPROCEDURAL_OPTIMIZATION
-                                                   TRUE)
+  set_target_properties(
+    ${PROJECT_NAME} PROPERTIES INTERPROCEDURAL_OPTIMIZATION
+    TRUE
+  )
 endif()
 
 target_compile_features(${PROJECT_NAME} PRIVATE c_std_11)
@@ -100,9 +122,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${WARNING_FLAGS})
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC $<INSTALL_INTERFACE:include>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-  PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+  PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE _XOPEN_SOURCE=700)
 
@@ -114,35 +137,47 @@ install(
   EXPORT ${PROJECT_NAME}-targets
   FILE ${PROJECT_NAME}-targets.cmake
   NAMESPACE LITE_PACK::
-  DESTINATION lib/cmake/${PROJECT_NAME})
+  DESTINATION lib/cmake/${PROJECT_NAME}
+)
 
 include(CMakePackageConfigHelpers)
 
 set(CMAKE_CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake)
 configure_package_config_file(
   ${PROJECT_NAME}-config.cmake.in ${CMAKE_CONFIG_FILE}
-  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME})
+  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}
+)
 
-set(CMAKE_VERSION_FILE
-    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake)
-write_basic_package_version_file(${CMAKE_VERSION_FILE}
-                                 COMPATIBILITY SameMajorVersion)
+set(
+  CMAKE_VERSION_FILE
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+)
+write_basic_package_version_file(
+  ${CMAKE_VERSION_FILE}
+  COMPATIBILITY SameMajorVersion
+)
 
-install(FILES ${CMAKE_VERSION_FILE} ${CMAKE_CONFIG_FILE}
-        DESTINATION lib/cmake/${PROJECT_NAME})
+install(
+  FILES ${CMAKE_VERSION_FILE} ${CMAKE_CONFIG_FILE}
+  DESTINATION lib/cmake/${PROJECT_NAME}
+)
 install(FILES ${EXPORT_FILE} ${CONFIG_FILE} DESTINATION include/${PROJECT_NAME})
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
-              ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
-        DESTINATION share/docs/${PROJECT_NAME})
+install(
+  FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
+  ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
+  DESTINATION share/docs/${PROJECT_NAME}
+)
 
 enable_testing()
 add_subdirectory(test)
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VENDOR "Danilo Horta")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
-    "C library implementing the amazing MessagePack serialisation format")
+set(
+  CPACK_PACKAGE_DESCRIPTION_SUMMARY
+  "C library implementing the amazing MessagePack serialisation format"
+)
 set(CPACK_PACKAGE_CONTACT "Danilo Horta")
 set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})

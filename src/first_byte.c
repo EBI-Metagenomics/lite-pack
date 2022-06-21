@@ -1,4 +1,4 @@
-#include "lite_pack/first_byte.h"
+#include "first_byte.h"
 #include "lite_pack/number.h"
 
 unsigned char __lip_first_byte(enum lip_format format)

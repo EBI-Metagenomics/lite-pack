@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define array_size(arr) (sizeof(arr) / sizeof((arr)[0]))
 
