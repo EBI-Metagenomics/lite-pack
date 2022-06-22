@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_FILE_H
 #define LITE_PACK_FILE_H
 
+#include "lite_pack/file/file.h"
 #include "lite_pack/file/read_array.h"
 #include "lite_pack/file/read_bool.h"
 #include "lite_pack/file/read_cstr.h"

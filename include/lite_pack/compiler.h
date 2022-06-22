@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <limits.h>
+#include <stdbool.h>
 #include <stdint.h>
 
 static_assert(CHAR_BIT == 8, "8-bits char");
@@ -59,5 +60,21 @@ static_assert(sizeof(double) == 8, "64-bits double");
 #endif
 
 CHECK_FLOAT_ORDER();
+
+#ifndef __always_inline
+#define __always_inline inline
+#endif
+
+__attribute__((unused)) static __always_inline bool
+__lip_maybe_unused_bool(bool v)
+{
+    return v;
+}
+
+__attribute__((unused)) static __always_inline unsigned
+__lip_maybe_unused_unsigned(unsigned v)
+{
+    return v;
+}
 
 #endif

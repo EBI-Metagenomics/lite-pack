@@ -1,4 +1,3 @@
-#include "lite_pack/file/file.h"
 #include "helper.h"
 #include "lite_pack/lite_pack.h"
 
@@ -53,9 +52,20 @@ static void test_incorrect_usage()
     fclose(file.fp);
 }
 
+static void test_warnings()
+{
+    struct lip_file file = {0};
+
+    file.fp = fopen(TMPDIR "/file2.mp", "wb");
+    lip_write_int(&file, 0);
+    if (file.error) ERROR;
+    fclose(file.fp);
+}
+
 int main(void)
 {
     test_correct_usage();
     test_incorrect_usage();
+    test_warnings();
     return 0;
 }
