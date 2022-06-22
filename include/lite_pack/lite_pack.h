@@ -102,6 +102,6 @@ enum lip_format;
 enum lip_format_family;
 
 LIP_API enum lip_format lip_format(int first_byte);
-static inline enum lip_format_family lip_format_family(enum lip_format fmt);
+LIP_API enum lip_format_family lip_format_family(enum lip_format fmt);
 
 #endif

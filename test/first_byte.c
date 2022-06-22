@@ -3,6 +3,7 @@
 
 extern unsigned char __lip_first_byte(enum lip_format format);
 extern unsigned char __lip_first_byte_fix(enum lip_format format, int val);
+extern int __lip_format_fix_value(unsigned char first_byte);
 
 static unsigned char ch = 0;
 

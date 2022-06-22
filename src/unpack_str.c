@@ -1,4 +1,5 @@
 #include "lite_pack/unpack_str.h"
+#include "format.h"
 #include "lite_pack/format.h"
 #include "lite_pack/load_number.h"
 

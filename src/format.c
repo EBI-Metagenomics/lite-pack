@@ -1,4 +1,5 @@
 #include "lite_pack/format.h"
+#include "format.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -100,6 +101,11 @@ char const __lip_format_family_string[][26] = {
     [LIP_FMT_FAMILY_EXT] = "LIP_FMT_FAMILY_EXT",
     [LIP_FMT_FAMILY_NEVER_USED] = "LIP_FMT_FAMILY_NEVER_USED",
 };
+
+enum lip_format_family lip_format_family(enum lip_format fmt)
+{
+    return __lip_format_family_map[fmt];
+}
 
 char const *lip_format_family_string(enum lip_format_family family)
 {
@@ -222,4 +228,24 @@ enum lip_format lip_format(int first_byte)
         return LIP_FMT_MAP_32;
     }
     __builtin_unreachable();
+}
+
+int __lip_format_fix_value(unsigned char first_byte)
+{
+    enum lip_format format = lip_format(first_byte);
+    switch (format)
+    {
+    case LIP_FMT_POSITIVE_FIXINT:
+        return (int)first_byte;
+    case LIP_FMT_FIXMAP:
+        return (int)(~0x80 & first_byte);
+    case LIP_FMT_FIXARRAY:
+        return (int)(~0x90 & first_byte);
+    case LIP_FMT_FIXSTR:
+        return (int)(~0xa0 & first_byte);
+    case LIP_FMT_NEGATIVE_FIXINT:
+        return __LIP_NUM8(first_byte).i;
+    default:
+        return 0;
+    }
 }
