@@ -6,19 +6,19 @@
 
 /* SIGNED INTEGER */
 
-LIP_API unsigned __lip_store_negative_fixint(unsigned char buf[], int8_t val);
-LIP_API unsigned __lip_store_int8(unsigned char buf[], int8_t val);
-LIP_API unsigned __lip_store_int16(unsigned char buf[], int16_t val);
-LIP_API unsigned __lip_store_int32(unsigned char buf[], int32_t val);
-LIP_API unsigned __lip_store_int64(unsigned char buf[], int64_t val);
+LIP_API unsigned lip_store_negative_fixint(unsigned char buf[], int8_t val);
+LIP_API unsigned lip_store_int8(unsigned char buf[], int8_t val);
+LIP_API unsigned lip_store_int16(unsigned char buf[], int16_t val);
+LIP_API unsigned lip_store_int32(unsigned char buf[], int32_t val);
+LIP_API unsigned lip_store_int64(unsigned char buf[], int64_t val);
 
 /* UNSIGNED INTEGER */
 
-LIP_API unsigned __lip_store_positive_fixint(unsigned char buf[], uint8_t val);
-LIP_API unsigned __lip_store_uint8(unsigned char buf[], uint8_t val);
-LIP_API unsigned __lip_store_uint16(unsigned char buf[], uint16_t val);
-LIP_API unsigned __lip_store_uint32(unsigned char buf[], uint32_t val);
-LIP_API unsigned __lip_store_uint64(unsigned char buf[], uint64_t val);
+LIP_API unsigned lip_store_positive_fixint(unsigned char buf[], uint8_t val);
+LIP_API unsigned lip_store_uint8(unsigned char buf[], uint8_t val);
+LIP_API unsigned lip_store_uint16(unsigned char buf[], uint16_t val);
+LIP_API unsigned lip_store_uint32(unsigned char buf[], uint32_t val);
+LIP_API unsigned lip_store_uint64(unsigned char buf[], uint64_t val);
 
 /* RAW SIGNED INTEGER FOR PUBLIC INTERFACE */
 

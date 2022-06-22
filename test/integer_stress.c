@@ -5,7 +5,7 @@ static unsigned char buf[9] = {0};
 
 static int test_i8(void)
 {
-    if (__lip_store_int8(buf, -1) != 2) ERROR;
+    if (lip_store_int8(buf, -1) != 2) ERROR;
 
     uint8_t u8 = 0;
     if (lip_unpack_int(buf, &u8) != 0) ERROR;
@@ -24,7 +24,7 @@ static int test_i8(void)
 
 static int test_i16(void)
 {
-    if (__lip_store_int16(buf, -1) != 3) ERROR;
+    if (lip_store_int16(buf, -1) != 3) ERROR;
 
     uint8_t u8 = 0;
     if (lip_unpack_int(buf, &u8) != 0) ERROR;
@@ -43,7 +43,7 @@ static int test_i16(void)
 
 static int test_i32(void)
 {
-    if (__lip_store_int32(buf, -1) != 5) ERROR;
+    if (lip_store_int32(buf, -1) != 5) ERROR;
 
     uint8_t u8 = 0;
     if (lip_unpack_int(buf, &u8) != 0) ERROR;
@@ -62,7 +62,7 @@ static int test_i32(void)
 
 static int test_i64(void)
 {
-    if (__lip_store_int64(buf, -1) != 9) ERROR;
+    if (lip_store_int64(buf, -1) != 9) ERROR;
 
     uint8_t u8 = 0;
     if (lip_unpack_int(buf, &u8) != 0) ERROR;
@@ -81,7 +81,7 @@ static int test_i64(void)
 
 static int test_u8(void)
 {
-    if (__lip_store_uint8(buf, UINT8_MAX) != 2) ERROR;
+    if (lip_store_uint8(buf, UINT8_MAX) != 2) ERROR;
 
     int8_t i8 = 0;
     if (lip_unpack_int(buf, &i8) != 0) ERROR;
@@ -103,7 +103,7 @@ static int test_u8(void)
 
 static int test_u16(void)
 {
-    if (__lip_store_uint16(buf, UINT16_MAX) != 3) ERROR;
+    if (lip_store_uint16(buf, UINT16_MAX) != 3) ERROR;
 
     int8_t i8 = 0;
     if (lip_unpack_int(buf, &i8) != 0) ERROR;
@@ -124,7 +124,7 @@ static int test_u16(void)
 
 static int test_u32(void)
 {
-    if (__lip_store_uint32(buf, UINT32_MAX) != 5) ERROR;
+    if (lip_store_uint32(buf, UINT32_MAX) != 5) ERROR;
 
     int8_t i8 = 0;
     if (lip_unpack_int(buf, &i8) != 0) ERROR;
@@ -144,7 +144,7 @@ static int test_u32(void)
 
 static int test_u64(void)
 {
-    if (__lip_store_uint64(buf, UINT64_MAX) != 9) ERROR;
+    if (lip_store_uint64(buf, UINT64_MAX) != 9) ERROR;
 
     int8_t i8 = 0;
     if (lip_unpack_int(buf, &i8) != 0) ERROR;

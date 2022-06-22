@@ -23,13 +23,13 @@ unsigned lip_unpack_ext_size_type(unsigned char const buf[], unsigned *size,
         *size <<= 1;
         fallthrough;
     case LIP_FMT_FIXEXT_1:
-        return 1 + __lip_load_fixext(buf + 1, type);
+        return 1 + lip_load_fixext(buf + 1, type);
     case LIP_FMT_EXT_8:
-        return 1 + __lip_load_ext8(buf + 1, size, type);
+        return 1 + lip_load_ext8(buf + 1, size, type);
     case LIP_FMT_EXT_16:
-        return 1 + __lip_load_ext16(buf + 1, size, type);
+        return 1 + lip_load_ext16(buf + 1, size, type);
     case LIP_FMT_EXT_32:
-        return 1 + __lip_load_ext32(buf + 1, size, type);
+        return 1 + lip_load_ext32(buf + 1, size, type);
     default:
         return 0;
     }

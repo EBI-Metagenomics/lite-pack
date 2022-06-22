@@ -53,6 +53,7 @@ add_library(
   src/load_int.c
   src/load_number.c
   src/pack_array.c
+  src/pack_bool.c
   src/pack_ext.c
   src/pack_float.c
   src/pack_int.c

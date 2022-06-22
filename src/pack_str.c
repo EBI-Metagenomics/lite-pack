@@ -5,12 +5,12 @@
 unsigned lip_pack_str_size(unsigned char buf[], unsigned size)
 {
     if (size <= 0x1f)
-        return __lip_store_fixstr(buf, (uint8_t)size);
+        return lip_store_fixstr(buf, (uint8_t)size);
     else if (size <= 0xff)
-        return __lip_store_str8(buf, (uint8_t)size);
+        return lip_store_str8(buf, (uint8_t)size);
     else if (size <= 0xffff)
-        return __lip_store_str16(buf, (uint16_t)size);
-    return __lip_store_str32(buf, size);
+        return lip_store_str16(buf, (uint16_t)size);
+    return lip_store_str32(buf, size);
 }
 
 unsigned lip_pack_str_data(unsigned char buf[], unsigned size, char const val[])

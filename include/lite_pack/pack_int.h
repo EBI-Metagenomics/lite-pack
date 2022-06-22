@@ -6,17 +6,17 @@
 #include <stdint.h>
 
 #define __lip_pack_signed(buf, v)                                              \
-    sizeof(typeof(v)) == 1   ? __lip_pack_i8(buf, (int8_t)(v))                 \
-    : sizeof(typeof(v)) == 2 ? __lip_pack_i16(buf, (int16_t)(v))               \
-    : sizeof(typeof(v)) == 4 ? __lip_pack_i32(buf, (int32_t)(v))               \
-    : sizeof(typeof(v)) == 8 ? __lip_pack_i64(buf, (int64_t)(v))               \
+    sizeof(typeof(v)) == 1   ? lip_pack_i8(buf, (int8_t)(v))                   \
+    : sizeof(typeof(v)) == 2 ? lip_pack_i16(buf, (int16_t)(v))                 \
+    : sizeof(typeof(v)) == 4 ? lip_pack_i32(buf, (int32_t)(v))                 \
+    : sizeof(typeof(v)) == 8 ? lip_pack_i64(buf, (int64_t)(v))                 \
                              : (unsigned)__lip_bug_on_reach()
 
 #define __lip_pack_unsigned(buf, v)                                            \
-    sizeof(typeof(v)) == 1   ? __lip_pack_u8(buf, (uint8_t)(v))                \
-    : sizeof(typeof(v)) == 2 ? __lip_pack_u16(buf, (uint16_t)(v))              \
-    : sizeof(typeof(v)) == 4 ? __lip_pack_u32(buf, (uint32_t)(v))              \
-    : sizeof(typeof(v)) == 8 ? __lip_pack_u64(buf, (uint64_t)(v))              \
+    sizeof(typeof(v)) == 1   ? lip_pack_u8(buf, (uint8_t)(v))                  \
+    : sizeof(typeof(v)) == 2 ? lip_pack_u16(buf, (uint16_t)(v))                \
+    : sizeof(typeof(v)) == 4 ? lip_pack_u32(buf, (uint32_t)(v))                \
+    : sizeof(typeof(v)) == 8 ? lip_pack_u64(buf, (uint64_t)(v))                \
                              : (unsigned)__lip_bug_on_reach()
 
 #define __lip_pack_int(buf, v)                                                 \
@@ -32,14 +32,14 @@
              : __lip_pack_unsigned(buf, v), unsigned long long                 \
              : __lip_pack_unsigned(buf, v))
 
-LIP_API unsigned __lip_pack_i8(unsigned char buf[], int val);
-LIP_API unsigned __lip_pack_i16(unsigned char buf[], int val);
-LIP_API unsigned __lip_pack_i32(unsigned char buf[], int val);
-LIP_API unsigned __lip_pack_i64(unsigned char buf[], long val);
+LIP_API unsigned lip_pack_i8(unsigned char buf[], int val);
+LIP_API unsigned lip_pack_i16(unsigned char buf[], int val);
+LIP_API unsigned lip_pack_i32(unsigned char buf[], int val);
+LIP_API unsigned lip_pack_i64(unsigned char buf[], long val);
 
-LIP_API unsigned __lip_pack_u8(unsigned char buf[], unsigned val);
-LIP_API unsigned __lip_pack_u16(unsigned char buf[], unsigned val);
-LIP_API unsigned __lip_pack_u32(unsigned char buf[], unsigned val);
-LIP_API unsigned __lip_pack_u64(unsigned char buf[], unsigned long val);
+LIP_API unsigned lip_pack_u8(unsigned char buf[], unsigned val);
+LIP_API unsigned lip_pack_u16(unsigned char buf[], unsigned val);
+LIP_API unsigned lip_pack_u32(unsigned char buf[], unsigned val);
+LIP_API unsigned lip_pack_u64(unsigned char buf[], unsigned long val);
 
 #endif

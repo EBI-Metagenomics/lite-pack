@@ -4,7 +4,7 @@
 #include "lite_pack/format.h"
 #include <stdbool.h>
 
-unsigned __lip_load_bool(unsigned char const buf[], bool *val)
+unsigned lip_load_bool(unsigned char const buf[], bool *val)
 {
     *val = lip_format(buf[0]) ^ LIP_FMT_FALSE;
     return 1;

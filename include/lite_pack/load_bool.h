@@ -4,6 +4,6 @@
 #include "lite_pack/export.h"
 #include <stdbool.h>
 
-LIP_API unsigned __lip_load_bool(unsigned char const buf[], bool *val);
+LIP_API unsigned lip_load_bool(unsigned char const buf[], bool *val);
 
 #endif
