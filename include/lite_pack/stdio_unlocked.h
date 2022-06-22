@@ -27,7 +27,7 @@ extern size_t fread_unlocked(void *, size_t, size_t, FILE *);
 
 #endif
 
-#if LITE_PACK_THREAD_SAFE_LEVEL == 0
+#if LIP_THREAD_SAFE_LEVEL == 0
 static inline size_t lip_fread(void *restrict buf, size_t size, size_t count,
                                FILE *restrict fp)
 {

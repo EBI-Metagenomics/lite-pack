@@ -12,22 +12,27 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/compiler-options.cmake)
 include(cmake/sanitizers.cmake)
 
-add_library(
-  ${PROJECT_NAME}
-  src/1darray/file/read.c
-  src/1darray/file/read_float.c
-  src/1darray/file/read_int.c
-  src/1darray/file/write.c
-  src/1darray/file/write_float.c
-  src/1darray/file/write_int.c
-  src/1darray/file/write_int_data.c
-  src/1darray/file/write_int_data_in.c
-  src/1darray/pack_float.c
-  src/1darray/pack_int.c
-  src/1darray/pack_int_in.c
-  src/1darray/unpack_float.c
-  src/1darray/unpack_int.c
-  src/1darray/unpack_int_in.c
+set(THREAD_SAFE_LEVELS 0 1)
+set(
+  THREAD_SAFE_LEVEL
+  "1"
+  CACHE STRING "Thread-safe level: 0 for none; 1 otherwise."
+)
+if(${THREAD_SAFE_LEVEL} IN_LIST THREAD_SAFE_LEVELS)
+  message(STATUS "Thread-safe level - ${THREAD_SAFE_LEVEL}")
+else()
+  message(FATAL_ERROR "Thread-safe levels are either 0 or 1.")
+endif()
+
+option(ENABLE_1DARRAY_EXTENSION "Enable 1darray extension (defaults to TRUE)" TRUE)
+if(${ENABLE_1DARRAY_EXTENSION})
+  set(ENABLE_1DARRAY_EXTENSION 1)
+else()
+  set(ENABLE_1DARRAY_EXTENSION 0)
+endif()
+
+set(
+  FILE_SOURCES
   src/file/file.c
   src/file/read_array.c
   src/file/read_bool.c
@@ -74,19 +79,32 @@ add_library(
   src/unpack_map.c
   src/unpack_str.c
 )
-add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-set(THREAD_SAFE_LEVELS 0 1)
-set(
-  LIP_THREAD_SAFE_LEVEL
-  "1"
-  CACHE STRING "Thread-safe level: 0 for none; 1 otherwise."
-)
-if(${LIP_THREAD_SAFE_LEVEL} IN_LIST THREAD_SAFE_LEVELS)
-  message(STATUS "Thread-safe level - ${LIP_THREAD_SAFE_LEVEL}")
-else()
-  message(FATAL_ERROR "Thread-safe levels are either 0 or 1.")
+if(${LIP_ENABLE_1DARRAY_EXTENSION})
+  list(
+    APPEND FILE_SOURCES
+    src/1darray/file/read.c
+    src/1darray/file/read_float.c
+    src/1darray/file/read_int.c
+    src/1darray/file/write.c
+    src/1darray/file/write_float.c
+    src/1darray/file/write_int.c
+    src/1darray/file/write_int_data.c
+    src/1darray/file/write_int_data_in.c
+    src/1darray/pack_float.c
+    src/1darray/pack_int.c
+    src/1darray/pack_int_in.c
+    src/1darray/unpack_float.c
+    src/1darray/unpack_int.c
+    src/1darray/unpack_int_in.c
+  )
 endif()
+
+add_library(
+  ${PROJECT_NAME}
+  ${FILE_SOURCES}
+)
+add_library(LITE_PACK::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 set(CONFIG_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/config.h)
 configure_file(
