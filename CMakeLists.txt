@@ -27,8 +27,10 @@ endif()
 option(ENABLE_1DARRAY_EXTENSION "Enable 1darray extension (defaults to TRUE)" TRUE)
 if(${ENABLE_1DARRAY_EXTENSION})
   set(ENABLE_1DARRAY_EXTENSION 1)
+  message(STATUS "Enabled 1darray extension")
 else()
   set(ENABLE_1DARRAY_EXTENSION 0)
+  message(STATUS "Disabled 1darray extension")
 endif()
 
 set(
@@ -80,7 +82,7 @@ set(
   src/unpack_str.c
 )
 
-if(${LIP_ENABLE_1DARRAY_EXTENSION})
+if(${ENABLE_1DARRAY_EXTENSION})
   list(
     APPEND FILE_SOURCES
     src/1darray/file/read.c

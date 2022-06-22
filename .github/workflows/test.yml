@@ -12,13 +12,17 @@ jobs:
       matrix:
         os: [ubuntu-22.04, ubuntu-20.04, macos-12, macos-11]
         build_type: [Release, Debug]
+        enable_1darray_extension: [ON, OFF]
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure CMake
         if: runner.os == 'Linux'
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DUSE_SANITIZER='Address;Undefined' -DENABLE_ALL_WARNINGS=ON
+        run: |
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+            -DUSE_SANITIZER='Address;Undefined' -DENABLE_ALL_WARNINGS=ON \
+            -DENABLE_1DARRAY_EXTENSION=${{env.enable_1darray_extension}}
 
       - name: Configure CMake
         if: runner.os == 'macOS'
