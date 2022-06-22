@@ -19,7 +19,7 @@ bool __lip_read_f32(struct lip_file *file, float *val)
     file->error = lip_fread(file->buf + 1, 4, 1, file->fp) != 1;
     if (file->error) return false;
 
-    return !(file->error = __lip_unpack_f32(file->buf, val) == 0);
+    return !(file->error = lip_unpack_f32(file->buf, val) == 0);
 }
 
 bool __lip_read_f64(struct lip_file *file, double *val)
@@ -47,5 +47,5 @@ bool __lip_read_f64(struct lip_file *file, double *val)
     file->error = lip_fread(file->buf + 1, sz, 1, file->fp) != 1;
     if (file->error) return false;
 
-    return !(file->error = __lip_unpack_f64(file->buf, val) == 0);
+    return !(file->error = lip_unpack_f64(file->buf, val) == 0);
 }

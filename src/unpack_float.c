@@ -2,7 +2,7 @@
 #include "lite_pack/format.h"
 #include "lite_pack/load_number.h"
 
-unsigned __lip_unpack_f32(unsigned char const buf[], float *val)
+unsigned lip_unpack_f32(unsigned char const buf[], float *val)
 {
     if (lip_format(buf[0]) == LIP_FMT_FLOAT_32)
     {
@@ -12,7 +12,7 @@ unsigned __lip_unpack_f32(unsigned char const buf[], float *val)
     return 0;
 }
 
-unsigned __lip_unpack_f64(unsigned char const buf[], double *val)
+unsigned lip_unpack_f64(unsigned char const buf[], double *val)
 {
     if (lip_format(buf[0]) == LIP_FMT_FLOAT_32)
     {
