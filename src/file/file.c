@@ -1,4 +1,7 @@
 #include "lite_pack/file/file.h"
+#include "lite_pack/file/read_array.h"
+#include "lite_pack/file/read_ext.h"
+#include "lite_pack/file/read_map.h"
 #include "lite_pack/format.h"
 #include <string.h>
 

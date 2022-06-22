@@ -1,6 +1,6 @@
 #include "1darray/unpack.h"
 #include "lite_pack/1darray/1darray.h"
-#include "lite_pack/file/file.h"
+#include "lite_pack/file/read_ext.h"
 
 bool lip_read_1darray_size_type(struct lip_file *file, unsigned *size,
                                 enum lip_1darray_type *type)

@@ -1,8 +1,7 @@
 #ifndef LITE_PACK_LITE_PACK_H
 #define LITE_PACK_LITE_PACK_H
 
-#include "lite_pack/export.h"
-#include "lite_pack/file/file.h"
+#include "lite_pack/file.h"
 #include "lite_pack/format.h"
 #include "lite_pack/load_float.h"
 #include "lite_pack/load_int.h"

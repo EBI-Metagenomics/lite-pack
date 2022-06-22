@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+struct lip_file;
+
 #define __lip_read_signed(f, v)                                                \
     sizeof(*v) == 1   ? __lip_read_i8(f, (int8_t *)(v))                        \
     : sizeof(*v) == 2 ? __lip_read_i16(f, (int16_t *)(v))                      \
@@ -20,7 +22,7 @@
     : sizeof(*v) == 8 ? __lip_read_u64(f, (uint64_t *)(v))                     \
                       : (bool)__lip_bug_on_reach()
 
-#define __lip_read_int(f, v)                                                   \
+#define lip_read_int(f, v)                                                     \
     _Generic((*v), signed char                                                 \
              : __lip_read_signed(f, v), signed short                           \
              : __lip_read_signed(f, v), signed int                             \

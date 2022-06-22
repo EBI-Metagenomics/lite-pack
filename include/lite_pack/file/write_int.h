@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+struct lip_file;
+
 #define __lip_write_signed(f, v)                                               \
     sizeof(typeof(v)) == 1   ? __lip_write_i8(f, (int8_t)(v))                  \
     : sizeof(typeof(v)) == 2 ? __lip_write_i16(f, (int16_t)(v))                \
@@ -20,7 +22,7 @@
     : sizeof(typeof(v)) == 8 ? __lip_write_u64(f, (uint64_t)(v))               \
                              : (bool)__lip_bug_on_reach()
 
-#define __lip_write_int(f, v)                                                  \
+#define lip_write_int(f, v)                                                    \
     _Generic((v), signed char                                                  \
              : __lip_write_signed(f, v), signed short                          \
              : __lip_write_signed(f, v), signed int                            \
@@ -32,8 +34,6 @@
              : __lip_write_unsigned(f, v), unsigned long                       \
              : __lip_write_unsigned(f, v), unsigned long long                  \
              : __lip_write_unsigned(f, v))
-
-struct lip_file;
 
 LIP_API bool __lip_write_i8(struct lip_file *, int val);
 LIP_API bool __lip_write_i16(struct lip_file *, int val);

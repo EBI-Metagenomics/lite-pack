@@ -1,4 +1,6 @@
+#include "lite_pack/file/read_cstr.h"
 #include "lite_pack/file/file.h"
+#include "lite_pack/file/read_str.h"
 
 bool lip_read_cstr(struct lip_file *file, unsigned size, char str[])
 {
