@@ -1,6 +1,7 @@
 #include "lite_pack/unpack_float.h"
 #include "lite_pack/format.h"
-#include "lite_pack/load_number.h"
+#include "load_number.h"
+#include "number.h"
 
 unsigned lip_unpack_f32(unsigned char const buf[], float *val)
 {

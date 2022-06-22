@@ -1,6 +1,6 @@
 #include "lite_pack/unpack_int.h"
 #include "lite_pack/format.h"
-#include "lite_pack/load_number.h"
+#include "load_number.h"
 
 /* SIGNED INTEGER */
 

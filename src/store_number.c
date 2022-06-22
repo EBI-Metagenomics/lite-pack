@@ -1,5 +1,5 @@
 #include "lite_pack/endian.h"
-#include "lite_pack/number.h"
+#include "number.h"
 #include <string.h>
 
 unsigned __lip_store_num8(unsigned char buf[], union __lip_num8 val)

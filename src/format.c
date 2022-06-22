@@ -1,5 +1,6 @@
 #include "lite_pack/format.h"
 #include "format.h"
+#include "number.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>

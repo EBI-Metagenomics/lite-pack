@@ -2,7 +2,7 @@
 #define LITE_PACK_LOAD_NUMBER_H
 
 #include "lite_pack/endian.h"
-#include "lite_pack/number.h"
+#include "number.h"
 #include <string.h>
 
 union __lip_num8 __lip_load_num8(unsigned char const buf[])

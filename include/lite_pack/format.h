@@ -3,7 +3,6 @@
 
 #include "lite_pack/compiler.h"
 #include "lite_pack/export.h"
-#include "lite_pack/number.h"
 #include <stdint.h>
 
 enum lip_format
@@ -61,10 +60,7 @@ enum lip_format_family
     LIP_FMT_FAMILY_NEVER_USED,
 };
 
-LIP_API extern enum lip_format_family const __lip_format_family_map[];
-
 LIP_API enum lip_format lip_format(int first_byte);
-
 LIP_API enum lip_format_family lip_format_family(enum lip_format fmt);
 
 LIP_API char const *lip_format_string(enum lip_format fmt);

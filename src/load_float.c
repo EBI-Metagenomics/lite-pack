@@ -1,5 +1,6 @@
 #include "lite_pack/format.h"
-#include "lite_pack/load_number.h"
+#include "load_number.h"
+#include "number.h"
 #include <string.h>
 
 unsigned lip_load_f32(unsigned char const buf[], float *val)

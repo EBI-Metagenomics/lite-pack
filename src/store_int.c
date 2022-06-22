@@ -1,6 +1,6 @@
 #include "lite_pack/store_int.h"
 #include "first_byte.h"
-#include "lite_pack/store_number.h"
+#include "store_number.h"
 
 /* SIGNED INTEGER */
 

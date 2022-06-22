@@ -1,6 +1,6 @@
 #include "lite_pack/store_ext.h"
 #include "first_byte.h"
-#include "lite_pack/store_number.h"
+#include "store_number.h"
 
 unsigned lip_store_fixext(unsigned char buf[], enum lip_format fmt,
                           uint8_t type)

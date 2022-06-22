@@ -1,7 +1,7 @@
 #include "lite_pack/unpack_map.h"
 #include "format.h"
 #include "lite_pack/format.h"
-#include "lite_pack/load_number.h"
+#include "load_number.h"
 
 unsigned lip_unpack_map_size(unsigned char const buf[], unsigned *size)
 {

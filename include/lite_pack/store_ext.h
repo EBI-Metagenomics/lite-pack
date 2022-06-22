@@ -2,7 +2,7 @@
 #define LITE_PACK_STORE_EXT_H
 
 #include "lite_pack/export.h"
-#include "lite_pack/store_number.h"
+#include <stdint.h>
 
 enum lip_format;
 

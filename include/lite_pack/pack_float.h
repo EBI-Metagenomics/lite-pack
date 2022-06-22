@@ -3,7 +3,7 @@
 
 #include "lite_pack/export.h"
 
-#define __lip_pack_float(buf, val)                                             \
+#define lip_pack_float(buf, val)                                               \
     _Generic((val), float : lip_pack_f32, double : lip_pack_f64)(buf, val)
 
 LIP_API unsigned lip_pack_f32(unsigned char buf[], float val);

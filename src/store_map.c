@@ -1,5 +1,5 @@
 #include "first_byte.h"
-#include "lite_pack/store_number.h"
+#include "store_number.h"
 
 unsigned lip_store_fixmap(unsigned char buf[], uint8_t size)
 {

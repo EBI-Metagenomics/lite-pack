@@ -19,7 +19,7 @@
     : sizeof(typeof(v)) == 8 ? lip_pack_u64(buf, (uint64_t)(v))                \
                              : (unsigned)__lip_bug_on_reach()
 
-#define __lip_pack_int(buf, v)                                                 \
+#define lip_pack_int(buf, v)                                                   \
     _Generic((v), signed char                                                  \
              : __lip_pack_signed(buf, v), signed short                         \
              : __lip_pack_signed(buf, v), signed int                           \

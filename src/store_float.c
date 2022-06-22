@@ -1,5 +1,5 @@
 #include "lite_pack/store_float.h"
-#include "lite_pack/store_number.h"
+#include "store_number.h"
 
 unsigned lip_store_f32(unsigned char buf[], float val)
 {

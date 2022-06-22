@@ -2,7 +2,8 @@
 #define LITE_PACK_LOAD_EXT_H
 
 #include "first_byte.h"
-#include "lite_pack/load_number.h"
+#include "load_number.h"
+#include "number.h"
 
 unsigned lip_load_fixext(unsigned char const buf[], uint8_t *type)
 {

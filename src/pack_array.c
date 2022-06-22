@@ -1,6 +1,6 @@
 #include "lite_pack/pack_array.h"
 #include "first_byte.h"
-#include "lite_pack/store_number.h"
+#include "store_number.h"
 
 static inline unsigned lip_store_fixarray(unsigned char buf[], uint8_t size)
 {
