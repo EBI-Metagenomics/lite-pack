@@ -3,6 +3,7 @@
 
 #include "lite_pack/format.h"
 #include "lite_pack/load_number.h"
+#include <string.h>
 
 /* RAW SIGNED INTEGER FOR PUBLIC INTERFACE */
 

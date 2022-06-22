@@ -1,8 +1,6 @@
-#ifndef LITE_PACK_LOAD_FLOAT_H
-#define LITE_PACK_LOAD_FLOAT_H
-
 #include "lite_pack/format.h"
 #include "lite_pack/load_number.h"
+#include <string.h>
 
 unsigned lip_load_f32(unsigned char const buf[], float *val)
 {
@@ -29,5 +27,3 @@ unsigned lip_load_f64_in(unsigned char buf[])
     memcpy(buf, num.c, 8);
     return 8;
 }
-
-#endif
