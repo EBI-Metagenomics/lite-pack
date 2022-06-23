@@ -12,6 +12,8 @@ static void test_correct_usage()
     if (!lip_write_float(&file, 3.2f)) ERROR;
     if (!lip_write_str_size(&file, 5)) ERROR;
     if (!lip_write_str_data(&file, 5, "hello")) ERROR;
+    if (!lip_write_str_size(&file, 0)) ERROR;
+    if (!lip_write_str_data(&file, 0, "")) ERROR;
     if (file.error) ERROR;
     fclose(file.fp);
 
@@ -32,6 +34,9 @@ static void test_correct_usage()
     char hello[6] = {0};
     if (!lip_read_str_data(&file, 5, hello)) ERROR;
     if (strncmp(hello, "hello", 5) != 0) ERROR;
+    char empty[1] = {0};
+    if (!lip_read_str_data(&file, 0, hello)) ERROR;
+    if (strncmp(empty, "", 0) != 0) ERROR;
     if (file.error) ERROR;
     fclose(file.fp);
 }

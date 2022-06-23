@@ -13,5 +13,5 @@ bool lip_write_str_data(struct lip_file *file, unsigned size, char const str[])
 {
     if (file->error) return false;
 
-    return !(file->error = fwrite(str, size, 1, file->fp) != 1);
+    return !(file->error = fwrite(str, size, 1, file->fp) * size != size);
 }
