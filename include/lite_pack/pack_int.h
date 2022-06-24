@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_PACK_INT_H
 #define LITE_PACK_PACK_INT_H
 
+#include "lite_pack/bug.h"
 #include "lite_pack/compiler.h"
 #include "lite_pack/export.h"
 #include "lite_pack/store_int.h"
