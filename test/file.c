@@ -181,7 +181,7 @@ static void test_object()
 
     if (f1.error) ERROR;
     if (f2.error) ERROR;
-    fclose(lip_file_ptr(&f2));
+    fclose(lip_file_ptr(&f1));
 }
 
 int main(void)
