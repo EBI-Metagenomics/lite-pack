@@ -1,4 +1,5 @@
 #include "lite_pack/file/file.h"
+#include "fpeek.h"
 #include "lite_pack/file/read_array.h"
 #include "lite_pack/file/read_ext.h"
 #include "lite_pack/file/read_map.h"
@@ -13,13 +14,6 @@ void lip_file_init(struct lip_file *file, FILE *fp)
 }
 
 FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
-
-static inline bool fpeek(FILE *fp, int *first_byte)
-{
-    *first_byte = fgetc(fp);
-    ungetc(*first_byte, fp);
-    return *first_byte != EOF;
-}
 
 static inline bool skip_nil(struct lip_file *file)
 {

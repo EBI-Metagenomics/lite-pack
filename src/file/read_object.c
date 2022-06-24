@@ -1,4 +1,5 @@
 #include "lite_pack/file/read_object.h"
+#include "fpeek.h"
 #include "lite_pack/file/file.h"
 #include "lite_pack/file/read_array.h"
 #include "lite_pack/file/read_bool.h"
@@ -10,20 +11,12 @@
 #include "lite_pack/format.h"
 #include "lite_pack/object.h"
 
-static inline int fpeek(FILE *fp)
-{
-    int c = fgetc(fp);
-    ungetc(c, fp);
-
-    return c;
-}
-
 bool lip_read_object(struct lip_file *file, struct lip_object *obj)
 {
     if (file->error) return false;
 
-    int ch = fpeek(lip_file_ptr(file));
-    if (ch == EOF) return false;
+    int ch = 0;
+    if (!fpeek(file->fp, &ch)) return false;
 
     enum lip_format fmt = lip_format(ch);
     enum lip_format_family family = lip_format_family(fmt);
