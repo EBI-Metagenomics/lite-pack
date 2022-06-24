@@ -59,12 +59,14 @@ set(
   src/load_float.c
   src/load_int.c
   src/load_number.c
+  src/object.c
   src/pack_array.c
   src/pack_bool.c
   src/pack_ext.c
   src/pack_float.c
   src/pack_int.c
   src/pack_map.c
+  src/pack_object.c
   src/pack_str.c
   src/store_bool.c
   src/store_ext.c
@@ -79,6 +81,7 @@ set(
   src/unpack_float.c
   src/unpack_int.c
   src/unpack_map.c
+  src/unpack_object.c
   src/unpack_str.c
 )
 
