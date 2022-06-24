@@ -5,6 +5,7 @@
 #include "lite_pack/format.h"
 #include "lite_pack/load_float.h"
 #include "lite_pack/load_int.h"
+#include "lite_pack/object.h"
 #include "lite_pack/pack_array.h"
 #include "lite_pack/pack_bool.h"
 #include "lite_pack/pack_ext.h"
