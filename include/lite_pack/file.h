@@ -9,6 +9,7 @@
 #include "lite_pack/file/read_float.h"
 #include "lite_pack/file/read_int.h"
 #include "lite_pack/file/read_map.h"
+#include "lite_pack/file/read_object.h"
 #include "lite_pack/file/read_str.h"
 #include "lite_pack/file/write_array.h"
 #include "lite_pack/file/write_bool.h"
@@ -17,6 +18,7 @@
 #include "lite_pack/file/write_float.h"
 #include "lite_pack/file/write_int.h"
 #include "lite_pack/file/write_map.h"
+#include "lite_pack/file/write_object.h"
 #include "lite_pack/file/write_str.h"
 
 #endif
