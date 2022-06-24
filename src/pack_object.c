@@ -1,5 +1,5 @@
 #include "lite_pack/pack_object.h"
-#include "lite_pack/bug.h"
+#include "lite_pack/compiler.h"
 #include "lite_pack/object.h"
 #include "lite_pack/pack_array.h"
 #include "lite_pack/pack_bool.h"

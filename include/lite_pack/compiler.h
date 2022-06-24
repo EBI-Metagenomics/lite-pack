@@ -77,4 +77,11 @@ __lip_maybe_unused_unsigned(unsigned v)
     return v;
 }
 
+__attribute__((unused)) __attribute__((const)) static __always_inline int
+__lip_bug_on_reach(void)
+{
+    assert(0);
+    return 0;
+}
+
 #endif
