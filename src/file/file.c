@@ -9,7 +9,7 @@ void lip_file_init(struct lip_file *file, FILE *fp)
 {
     file->fp = fp;
     memset(file->buf, 0, 9);
-    file->error = 0;
+    file->error = false;
 }
 
 FILE *lip_file_ptr(struct lip_file *file) { return file->fp; }
@@ -178,3 +178,5 @@ bool lip_file_skip(struct lip_file *file)
 
     __builtin_unreachable();
 }
+
+bool lip_file_error(struct lip_file const *file) { return file->error; }

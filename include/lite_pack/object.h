@@ -1,6 +1,7 @@
 #ifndef LITE_PACK_OBJECT_H
 #define LITE_PACK_OBJECT_H
 
+#include "lite_pack/export.h"
 #include "lite_pack/format.h"
 
 struct lip_object
@@ -12,7 +13,7 @@ struct lip_object
     {
         bool b;
 
-        unsigned u;
+        unsigned size;
 
         uint8_t u8;
         uint16_t u16;
@@ -26,9 +27,9 @@ struct lip_object
 
         float f32;
         double f64;
-    } val;
+    } value;
 };
 
-void lip_object_init(struct lip_object *obj);
+LIP_API void lip_object_init(struct lip_object *obj);
 
 #endif

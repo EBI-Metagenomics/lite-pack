@@ -26,32 +26,40 @@ LIP_API bool lip_write_object(struct lip_file *file,
 
     case LIP_FMT_FAMILY_BOOL:
 
-        return lip_write_bool(file, obj->val.b);
+        return lip_write_bool(file, obj->value.b);
 
     case LIP_FMT_FAMILY_INT:
 
-        if (fmt == LIP_FMT_INT_8) return lip_write_int(file, obj->val.i8);
-        if (fmt == LIP_FMT_INT_16) return lip_write_int(file, obj->val.i16);
-        if (fmt == LIP_FMT_INT_32) return lip_write_int(file, obj->val.i32);
-        if (fmt == LIP_FMT_INT_64) return lip_write_int(file, obj->val.i64);
+        if (fmt == LIP_FMT_POSITIVE_FIXINT)
+            return lip_write_int(file, obj->value.u8);
 
-        if (fmt == LIP_FMT_UINT_8) return lip_write_int(file, obj->val.u8);
-        if (fmt == LIP_FMT_UINT_16) return lip_write_int(file, obj->val.u16);
-        if (fmt == LIP_FMT_UINT_32) return lip_write_int(file, obj->val.u32);
-        if (fmt == LIP_FMT_UINT_64) return lip_write_int(file, obj->val.u64);
+        if (fmt == LIP_FMT_INT_8) return lip_write_int(file, obj->value.i8);
+        if (fmt == LIP_FMT_INT_16) return lip_write_int(file, obj->value.i16);
+        if (fmt == LIP_FMT_INT_32) return lip_write_int(file, obj->value.i32);
+        if (fmt == LIP_FMT_INT_64) return lip_write_int(file, obj->value.i64);
+
+        if (fmt == LIP_FMT_UINT_8) return lip_write_int(file, obj->value.u8);
+        if (fmt == LIP_FMT_UINT_16) return lip_write_int(file, obj->value.u16);
+        if (fmt == LIP_FMT_UINT_32) return lip_write_int(file, obj->value.u32);
+        if (fmt == LIP_FMT_UINT_64) return lip_write_int(file, obj->value.u64);
+
+        if (fmt == LIP_FMT_NEGATIVE_FIXINT)
+            return lip_write_int(file, obj->value.i8);
 
         return __lip_bug_on_reach();
 
     case LIP_FMT_FAMILY_FLOAT:
 
-        if (fmt == LIP_FMT_FLOAT_32) lip_write_float(file, obj->val.f32);
-        if (fmt == LIP_FMT_FLOAT_64) lip_write_float(file, obj->val.f64);
+        if (fmt == LIP_FMT_FLOAT_32)
+            return lip_write_float(file, obj->value.f32);
+        if (fmt == LIP_FMT_FLOAT_64)
+            return lip_write_float(file, obj->value.f64);
 
         return __lip_bug_on_reach();
 
     case LIP_FMT_FAMILY_STR:
 
-        return lip_write_str_size(file, obj->val.u);
+        return lip_write_str_size(file, obj->value.size);
 
     case LIP_FMT_FAMILY_BIN:
 
@@ -59,15 +67,15 @@ LIP_API bool lip_write_object(struct lip_file *file,
 
     case LIP_FMT_FAMILY_ARRAY:
 
-        return lip_write_array_size(file, obj->val.u);
+        return lip_write_array_size(file, obj->value.size);
 
     case LIP_FMT_FAMILY_MAP:
 
-        return lip_write_map_size(file, obj->val.u);
+        return lip_write_map_size(file, obj->value.size);
 
     case LIP_FMT_FAMILY_EXT:
 
-        return lip_write_ext_size_type(file, obj->val.u, obj->type);
+        return lip_write_ext_size_type(file, obj->value.size, obj->type);
 
     case LIP_FMT_FAMILY_NEVER_USED:
 
