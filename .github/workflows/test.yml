@@ -6,8 +6,6 @@ jobs:
   test:
     name: Test on ${{ matrix.os }} with build type ${{ matrix.build_type }}
     runs-on: ${{ matrix.os }}
-    env:
-      BUILD_TYPE: ${{ matrix.build_type }}
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-20.04, macos-12, macos-11]
@@ -20,17 +18,17 @@ jobs:
       - name: Configure CMake
         if: runner.os == 'Linux'
         run: |
-          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} \
             -DUSE_SANITIZER='Address;Undefined' -DENABLE_ALL_WARNINGS=ON \
-            -DENABLE_1DARRAY_EXTENSION=${{env.enable_1darray_extension}}
+            -DENABLE_1DARRAY_EXTENSION=${{matrix.enable_1darray_extension}}
 
       - name: Configure CMake
         if: runner.os == 'macOS'
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_ALL_WARNINGS=ON
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DENABLE_ALL_WARNINGS=ON
 
       - name: Build
-        run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+        run: cmake --build ${{github.workspace}}/build --config ${{matrix.build_type}}
 
       - name: Test
         working-directory: ${{github.workspace}}/build
-        run: ctest -C ${{env.BUILD_TYPE}} --rerun-failed --output-on-failure
+        run: ctest -C ${{matrix.build_type}} --rerun-failed --output-on-failure

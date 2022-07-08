@@ -2,6 +2,20 @@
 #include "lite_pack/file/file.h"
 #include "lite_pack/file/read_str.h"
 
+/**
+ * lip_read_cstr(): Read a null-terminated string.
+ * @file: Stream.
+ * @size: Size of @str.
+ * @str: Destination of the c-string.
+ *
+ * @str must be of size 1 or larger. Size of @str must be sufficient
+ * to hold the null byte. On success, @size will be equal to
+ * `strlen(str)+1`.
+ *
+ * Return:
+ * * true       - Success.
+ * * false      - Failure.
+ */
 bool lip_read_cstr(struct lip_file *file, unsigned size, char str[])
 {
     if (file->error) return false;
