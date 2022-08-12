@@ -2,10 +2,24 @@ cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.3.0
+  VERSION 0.3.1
   LANGUAGES C)
 
-# Generate compile_commands.json file
+set(LIP_MAIN_PROJECT OFF)
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+  set(LIP_MAIN_PROJECT ON)
+endif()
+
+if(LIP_MAIN_PROJECT)
+  set(LIP_BUILD_TESTS_DEFAULT ON)
+else()
+  set(LIP_BUILD_TESTS_DEFAULT OFF)
+endif()
+
+option(LIP_BUILD_TESTS "Build the unit tests" ${LIP_BUILD_TESTS_DEFAULT})
+message(STATUS "LIP_MAIN_PROJECT: " ${LIP_MAIN_PROJECT})
+message(STATUS "LIP_BUILD_TESTS: " ${LIP_BUILD_TESTS})
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/compiler-options.cmake)
@@ -172,8 +186,10 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.md
               ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
         DESTINATION share/docs/${PROJECT_NAME})
 
-enable_testing()
-add_subdirectory(test)
+if(LIP_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(test)
+endif()
 
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 set(CPACK_PACKAGE_VENDOR "Danilo Horta")

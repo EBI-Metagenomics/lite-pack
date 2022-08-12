@@ -1,8 +1,6 @@
 #include "lorem.h"
 #include <stdlib.h>
 
-#define array_size(arr) (sizeof(arr) / sizeof((arr)[0]))
-
 static char const paragraph[] =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
     "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim "
