@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 project(
   lite_pack
@@ -144,7 +144,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
   set_target_properties(lite_pack PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif()
 
-target_compile_features(lite_pack PRIVATE c_std_11)
+target_compile_features(lite_pack PUBLIC c_std_23)
 target_compile_options(lite_pack PRIVATE ${WARNING_FLAGS})
 
 target_include_directories(

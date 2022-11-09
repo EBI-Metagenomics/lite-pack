@@ -8,19 +8,19 @@
 
 #define __lip_pack_signed(buf, v)                                              \
     __lip_maybe_unused_unsigned(                                               \
-        sizeof(typeof(v)) == 1   ? lip_pack_i8(buf, (int8_t)(v))               \
-        : sizeof(typeof(v)) == 2 ? lip_pack_i16(buf, (int16_t)(v))             \
-        : sizeof(typeof(v)) == 4 ? lip_pack_i32(buf, (int32_t)(v))             \
-        : sizeof(typeof(v)) == 8 ? lip_pack_i64(buf, (int64_t)(v))             \
-                                 : (unsigned)__lip_bug_on_reach())
+        sizeof(__typeof__(v)) == 1   ? lip_pack_i8(buf, (int8_t)(v))           \
+        : sizeof(__typeof__(v)) == 2 ? lip_pack_i16(buf, (int16_t)(v))         \
+        : sizeof(__typeof__(v)) == 4 ? lip_pack_i32(buf, (int32_t)(v))         \
+        : sizeof(__typeof__(v)) == 8 ? lip_pack_i64(buf, (int64_t)(v))         \
+                                     : (unsigned)__lip_bug_on_reach())
 
 #define __lip_pack_unsigned(buf, v)                                            \
     __lip_maybe_unused_unsigned(                                               \
-        sizeof(typeof(v)) == 1   ? lip_pack_u8(buf, (uint8_t)(v))              \
-        : sizeof(typeof(v)) == 2 ? lip_pack_u16(buf, (uint16_t)(v))            \
-        : sizeof(typeof(v)) == 4 ? lip_pack_u32(buf, (uint32_t)(v))            \
-        : sizeof(typeof(v)) == 8 ? lip_pack_u64(buf, (uint64_t)(v))            \
-                                 : (unsigned)__lip_bug_on_reach())
+        sizeof(__typeof__(v)) == 1   ? lip_pack_u8(buf, (uint8_t)(v))          \
+        : sizeof(__typeof__(v)) == 2 ? lip_pack_u16(buf, (uint16_t)(v))        \
+        : sizeof(__typeof__(v)) == 4 ? lip_pack_u32(buf, (uint32_t)(v))        \
+        : sizeof(__typeof__(v)) == 8 ? lip_pack_u64(buf, (uint64_t)(v))        \
+                                     : (unsigned)__lip_bug_on_reach())
 
 #define lip_pack_int(buf, v)                                                   \
     _Generic((v), signed char                                                  \

@@ -9,18 +9,21 @@
 struct lip_file;
 
 #define __lip_write_1darray_signed_item(f, i)                                  \
-    sizeof(typeof(i)) == 1   ? lip_write_1darray_i8_item(f, (int8_t)(i))       \
-    : sizeof(typeof(i)) == 2 ? lip_write_1darray_i16_item(f, (int16_t)(i))     \
-    : sizeof(typeof(i)) == 4 ? lip_write_1darray_i32_item(f, (int32_t)(i))     \
-    : sizeof(typeof(i)) == 8 ? lip_write_1darray_i64_item(f, (int64_t)(i))     \
-                             : 0
+    sizeof(__typeof__(i)) == 1   ? lip_write_1darray_i8_item(f, (int8_t)(i))   \
+    : sizeof(__typeof__(i)) == 2 ? lip_write_1darray_i16_item(f, (int16_t)(i)) \
+    : sizeof(__typeof__(i)) == 4 ? lip_write_1darray_i32_item(f, (int32_t)(i)) \
+    : sizeof(__typeof__(i)) == 8 ? lip_write_1darray_i64_item(f, (int64_t)(i)) \
+                                 : 0
 
 #define __lip_write_1darray_unsigned_item(f, i)                                \
-    sizeof(typeof(i)) == 1   ? lip_write_1darray_u8_item(f, (uint8_t)(i))      \
-    : sizeof(typeof(i)) == 2 ? lip_write_1darray_u16_item(f, (uint16_t)(i))    \
-    : sizeof(typeof(i)) == 4 ? lip_write_1darray_u32_item(f, (uint32_t)(i))    \
-    : sizeof(typeof(i)) == 8 ? lip_write_1darray_u64_item(f, (uint64_t)(i))    \
-                             : 0U
+    sizeof(__typeof__(i)) == 1 ? lip_write_1darray_u8_item(f, (uint8_t)(i))    \
+    : sizeof(__typeof__(i)) == 2                                               \
+        ? lip_write_1darray_u16_item(f, (uint16_t)(i))                         \
+    : sizeof(__typeof__(i)) == 4                                               \
+        ? lip_write_1darray_u32_item(f, (uint32_t)(i))                         \
+    : sizeof(__typeof__(i)) == 8                                               \
+        ? lip_write_1darray_u64_item(f, (uint64_t)(i))                         \
+        : 0U
 
 #define lip_write_1darray_int_item(f, i)                                       \
     _Generic((i), signed char                                                  \
