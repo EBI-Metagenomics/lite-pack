@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.4.0
+  VERSION 0.4.1
   LANGUAGES C)
 
 set(LIP_MAIN_PROJECT OFF)
@@ -47,6 +47,7 @@ else()
 endif()
 
 set(FILE_SOURCES
+    src/endian.c
     src/file/file.c
     src/file/read_array.c
     src/file/read_bool.c
@@ -82,6 +83,7 @@ set(FILE_SOURCES
     src/pack_map.c
     src/pack_object.c
     src/pack_str.c
+    src/stdio_unlocked.c
     src/store_bool.c
     src/store_ext.c
     src/store_float.c
