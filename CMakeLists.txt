@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.4.1
+  VERSION 0.4.2
   LANGUAGES C)
 
 set(LIP_MAIN_PROJECT OFF)
@@ -21,10 +21,11 @@ message(STATUS "LIP_MAIN_PROJECT: " ${LIP_MAIN_PROJECT})
 message(STATUS "LIP_BUILD_TESTS: " ${LIP_BUILD_TESTS})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_EXTENSIONS OFF)
 
-include(cmake/compiler-options.cmake)
 include(cmake/sanitizers.cmake)
+include(cmake/warnings.cmake)
 
 set(THREAD_SAFE_LEVELS 0 1)
 set(THREAD_SAFE_LEVEL
@@ -146,7 +147,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
   set_target_properties(lite_pack PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif()
 
-target_compile_features(lite_pack PUBLIC c_std_23)
 target_compile_options(lite_pack PRIVATE ${WARNING_FLAGS})
 
 target_include_directories(
@@ -189,19 +189,3 @@ if(LIP_BUILD_TESTS)
   enable_testing()
   add_subdirectory(test)
 endif()
-
-set(CPACK_PACKAGE_NAME lite_pack)
-set(CPACK_PACKAGE_VENDOR "Danilo Horta")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
-    "C library implementing the amazing MessagePack serialisation format")
-set(CPACK_PACKAGE_CONTACT "Danilo Horta")
-set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
-set(CPACK_RESOURCE_FILE_README ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
-set(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/package)
-set(CPACK_VERBATIM_VARIABLES YES)
-set(CPACK_PACKAGE_RELOCATABLE YES)
-set(CPACK_MONOLITHIC_INSTALL YES)
-include(CPack)
