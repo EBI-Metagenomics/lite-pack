@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 project(
   lite_pack
-  VERSION 0.4.2
+  VERSION 0.4.3
   LANGUAGES C)
 
 set(LIP_MAIN_PROJECT OFF)
@@ -147,6 +147,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
   set_target_properties(lite_pack PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif()
 
+set_target_properties(lite_pack PROPERTIES VERSION ${PROJECT_VERSION})
+set_target_properties(lite_pack PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
 target_compile_options(lite_pack PRIVATE ${WARNING_FLAGS})
 
 target_include_directories(
