@@ -1,6 +1,6 @@
-#include "lite_pack/pack_float.h"
+#include "lip/pack_float.h"
 #include "first_byte.h"
-#include "lite_pack/store_float.h"
+#include "lip/store_float.h"
 
 unsigned lip_pack_f32(unsigned char buf[], float val)
 {

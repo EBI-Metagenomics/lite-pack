@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_ext.h"
+#include "lip/file/file.h"
+#include "lip/pack_ext.h"
 
 bool lip_write_ext_size_type(struct lip_file *file, unsigned size, uint8_t type)
 {

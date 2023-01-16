@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_bool.h"
+#include "lip/file/file.h"
+#include "lip/pack_bool.h"
 
 bool lip_write_bool(struct lip_file *file, bool val)
 {

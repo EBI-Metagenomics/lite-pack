@@ -1,5 +1,5 @@
-#include "lite_pack/pack_ext.h"
-#include "lite_pack/store_ext.h"
+#include "lip/pack_ext.h"
+#include "lip/store_ext.h"
 
 unsigned lip_pack_ext_size_type(unsigned char buf[], unsigned size,
                                 uint8_t type)

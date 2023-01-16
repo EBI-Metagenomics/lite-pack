@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack/lite_pack.h"
+#include "lip/lip.h"
 
 static unsigned const sizes[] = {
     0, 15, 16, 65535, 65536, 4294967295,

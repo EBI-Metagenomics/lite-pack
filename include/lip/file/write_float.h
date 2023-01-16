@@ -1,0 +1,15 @@
+#ifndef LIP_FILE_WRITE_FLOAT_H
+#define LIP_FILE_WRITE_FLOAT_H
+
+#include "lip/export.h"
+#include <stdbool.h>
+
+struct lip_file;
+
+#define lip_write_float(f, v)                                                  \
+    _Generic((v), float : __lip_write_f32, double : __lip_write_f64)(f, v)
+
+LIP_API bool __lip_write_f32(struct lip_file *, float val);
+LIP_API bool __lip_write_f64(struct lip_file *, double val);
+
+#endif

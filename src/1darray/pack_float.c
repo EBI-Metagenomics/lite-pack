@@ -1,5 +1,5 @@
 #include "1darray/pack_float.h"
-#include "lite_pack/store_float.h"
+#include "lip/store_float.h"
 
 void pack_1darray_f32_data(unsigned char buf[], unsigned size,
                            float const arr[])

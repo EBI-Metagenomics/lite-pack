@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/file/write_str.h"
+#include "lip/file/file.h"
+#include "lip/file/write_str.h"
 #include <limits.h>
 #include <string.h>
 

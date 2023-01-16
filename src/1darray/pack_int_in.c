@@ -1,5 +1,5 @@
 #include "1darray/pack_int_in.h"
-#include "lite_pack/store_int.h"
+#include "lip/store_int.h"
 
 void pack_1darray_i8_data_in(unsigned char buf[], unsigned size)
 {

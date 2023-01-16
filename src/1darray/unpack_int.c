@@ -1,5 +1,5 @@
 #include "1darray/unpack_int.h"
-#include "lite_pack/load_int.h"
+#include "lip/load_int.h"
 
 void unpack_1darray_i8_data(unsigned char const buf[], unsigned size,
                             int8_t arr[])

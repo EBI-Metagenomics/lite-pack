@@ -1,5 +1,5 @@
 #include "1darray/unpack_float.h"
-#include "lite_pack/load_float.h"
+#include "lip/load_float.h"
 
 void unpack_1darray_f32_data(unsigned char const buf[], unsigned size,
                              float arr[])

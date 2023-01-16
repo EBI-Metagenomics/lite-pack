@@ -1,7 +1,7 @@
-#ifndef LITE_PACK_LOAD_INT_H
-#define LITE_PACK_LOAD_INT_H
+#ifndef LIP_LOAD_INT_H
+#define LIP_LOAD_INT_H
 
-#include "lite_pack/format.h"
+#include "lip/format.h"
 #include "load_number.h"
 #include "number.h"
 #include <string.h>

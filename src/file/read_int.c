@@ -1,7 +1,7 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/format.h"
-#include "lite_pack/stdio_unlocked.h"
-#include "lite_pack/unpack_int.h"
+#include "lip/file/file.h"
+#include "lip/format.h"
+#include "lip/stdio_unlocked.h"
+#include "lip/unpack_int.h"
 
 static inline void read_int(struct lip_file *file, unsigned char buf[])
 {

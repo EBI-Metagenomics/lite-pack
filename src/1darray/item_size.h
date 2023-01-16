@@ -1,7 +1,7 @@
 #ifndef _1DARRAY_ITEM_SIZE_H
 #define _1DARRAY_ITEM_SIZE_H
 
-#include "lite_pack/1darray/type.h"
+#include "lip/1darray/type.h"
 
 static inline unsigned _1darray_item_size(enum lip_1darray_type type)
 {

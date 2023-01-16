@@ -1,6 +1,6 @@
 #include "first_byte.h"
-#include "lite_pack/compiler.h"
-#include "lite_pack/format.h"
+#include "lip/compiler.h"
+#include "lip/format.h"
 #include "store_number.h"
 
 unsigned lip_store_fixstr(unsigned char buf[], uint8_t size)

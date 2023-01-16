@@ -1,6 +1,6 @@
-#include "lite_pack/file/read_cstr.h"
-#include "lite_pack/file/file.h"
-#include "lite_pack/file/read_str.h"
+#include "lip/file/read_cstr.h"
+#include "lip/file/file.h"
+#include "lip/file/read_str.h"
 
 /**
  * lip_read_cstr(): Read a null-terminated string.

@@ -1,7 +1,7 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/format.h"
-#include "lite_pack/stdio_unlocked.h"
-#include "lite_pack/unpack_float.h"
+#include "lip/file/file.h"
+#include "lip/format.h"
+#include "lip/stdio_unlocked.h"
+#include "lip/unpack_float.h"
 
 bool __lip_read_f32(struct lip_file *file, float *val)
 {

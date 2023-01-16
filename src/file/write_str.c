@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_str.h"
+#include "lip/file/file.h"
+#include "lip/pack_str.h"
 
 bool lip_write_str_size(struct lip_file *file, unsigned size)
 {

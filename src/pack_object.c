@@ -1,13 +1,13 @@
-#include "lite_pack/pack_object.h"
-#include "lite_pack/compiler.h"
-#include "lite_pack/object.h"
-#include "lite_pack/pack_array.h"
-#include "lite_pack/pack_bool.h"
-#include "lite_pack/pack_ext.h"
-#include "lite_pack/pack_float.h"
-#include "lite_pack/pack_int.h"
-#include "lite_pack/pack_map.h"
-#include "lite_pack/pack_str.h"
+#include "lip/pack_object.h"
+#include "lip/compiler.h"
+#include "lip/object.h"
+#include "lip/pack_array.h"
+#include "lip/pack_bool.h"
+#include "lip/pack_ext.h"
+#include "lip/pack_float.h"
+#include "lip/pack_int.h"
+#include "lip/pack_map.h"
+#include "lip/pack_str.h"
 
 LIP_API unsigned lip_pack_object(unsigned char buf[],
                                  struct lip_object const *obj)

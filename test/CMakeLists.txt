@@ -15,7 +15,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/assets/i64.txt ${ASSETS}/i64.txt
 
 function(lp_add_test name)
   add_executable(${name} ${name}.c helper.c)
-  target_link_libraries(${name} PRIVATE LITE_PACK::lite_pack)
+  target_link_libraries(${name} PRIVATE LIP::lip)
   target_compile_options(${name} PRIVATE ${WARNING_FLAGS})
   add_test(NAME ${name} COMMAND ${name})
   target_compile_definitions(${name} PUBLIC "TMPDIR=\"${TMPDIR}\"")

@@ -1,5 +1,5 @@
-#include "lite_pack/endian.h"
-#include "lite_pack/compiler.h"
+#include "lip/endian.h"
+#include "lip/compiler.h"
 #include <arpa/inet.h>
 
 #if __APPLE__

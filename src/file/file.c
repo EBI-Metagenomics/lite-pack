@@ -1,9 +1,9 @@
-#include "lite_pack/file/file.h"
+#include "lip/file/file.h"
 #include "fpeek.h"
-#include "lite_pack/file/read_array.h"
-#include "lite_pack/file/read_ext.h"
-#include "lite_pack/file/read_map.h"
-#include "lite_pack/format.h"
+#include "lip/file/read_array.h"
+#include "lip/file/read_ext.h"
+#include "lip/file/read_map.h"
+#include "lip/format.h"
 #include <string.h>
 
 void lip_file_init(struct lip_file *file, FILE *fp)

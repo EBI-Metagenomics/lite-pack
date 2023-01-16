@@ -1,5 +1,5 @@
-#include "lite_pack/pack_map.h"
-#include "lite_pack/store_map.h"
+#include "lip/pack_map.h"
+#include "lip/store_map.h"
 
 unsigned lip_pack_map_size(unsigned char buf[], unsigned size)
 {

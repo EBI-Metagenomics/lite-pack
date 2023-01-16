@@ -1,7 +1,7 @@
-#ifndef LITE_PACK_LOAD_BOOL_H
-#define LITE_PACK_LOAD_BOOL_H
+#ifndef LIP_LOAD_BOOL_H
+#define LIP_LOAD_BOOL_H
 
-#include "lite_pack/format.h"
+#include "lip/format.h"
 #include <stdbool.h>
 
 unsigned lip_load_bool(unsigned char const buf[], bool *val)

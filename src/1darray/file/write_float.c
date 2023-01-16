@@ -1,9 +1,9 @@
-#include "lite_pack/1darray/file/write_float.h"
+#include "lip/1darray/file/write_float.h"
 #include "1darray/pack_float.h"
-#include "lite_pack/1darray/1darray.h"
-#include "lite_pack/1darray/type.h"
-#include "lite_pack/file/file.h"
-#include "lite_pack/store_float.h"
+#include "lip/1darray/1darray.h"
+#include "lip/1darray/type.h"
+#include "lip/file/file.h"
+#include "lip/store_float.h"
 
 bool lip_write_1darray_f32(struct lip_file *file, unsigned size,
                            float const arr[])

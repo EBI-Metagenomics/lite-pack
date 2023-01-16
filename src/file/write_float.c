@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_float.h"
+#include "lip/file/file.h"
+#include "lip/pack_float.h"
 
 bool __lip_write_f32(struct lip_file *file, float val)
 {

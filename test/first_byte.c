@@ -1,5 +1,5 @@
 #include "helper.h"
-#include "lite_pack/lite_pack.h"
+#include "lip/lip.h"
 
 extern unsigned char __lip_first_byte(enum lip_format format);
 extern unsigned char __lip_first_byte_fix(enum lip_format format, int val);

@@ -1,7 +1,7 @@
 #ifndef LOAD_NUMBER_H
 #define LOAD_NUMBER_H
 
-#include "lite_pack/endian.h"
+#include "lip/endian.h"
 #include "number.h"
 #include <string.h>
 

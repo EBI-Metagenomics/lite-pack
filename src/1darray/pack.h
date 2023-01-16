@@ -2,8 +2,8 @@
 #define _1DARRAY_PACK_H
 
 #include "1darray/item_size.h"
-#include "lite_pack/1darray/type.h"
-#include "lite_pack/pack_ext.h"
+#include "lip/1darray/type.h"
+#include "lip/pack_ext.h"
 #include <limits.h>
 
 static inline unsigned pack_1darray_size_type(unsigned char buf[],

@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_map.h"
+#include "lip/file/file.h"
+#include "lip/pack_map.h"
 
 bool lip_write_map_size(struct lip_file *file, unsigned size)
 {

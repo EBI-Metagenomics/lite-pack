@@ -1,6 +1,6 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/stdio_unlocked.h"
-#include "lite_pack/unpack_bool.h"
+#include "lip/file/file.h"
+#include "lip/stdio_unlocked.h"
+#include "lip/unpack_bool.h"
 
 bool lip_read_bool(struct lip_file *file, bool *val)
 {

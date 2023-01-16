@@ -1,7 +1,7 @@
-#include "lite_pack/1darray/file/read_int.h"
+#include "lip/1darray/file/read_int.h"
 #include "1darray/unpack_int_in.h"
-#include "lite_pack/file/file.h"
-#include "lite_pack/stdio_unlocked.h"
+#include "lip/file/file.h"
+#include "lip/stdio_unlocked.h"
 
 /* SIGNED */
 

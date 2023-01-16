@@ -1,5 +1,5 @@
-#include "lite_pack/stdio_unlocked.h"
-#include "lite_pack/config.h"
+#include "lip/stdio_unlocked.h"
+#include "lip/config.h"
 
 #ifdef __APPLE__
 #include <stdio.h>
@@ -9,7 +9,7 @@
 extern size_t __fread(void *restrict buf, size_t size, size_t count,
                       FILE *restrict fp);
 
-#if LIP_THREAD_SAFE_LEVEL == 0
+#if defined(LIP_THREAD_SAFE)
 static inline size_t fread_unlocked(void *restrict buf, size_t size,
                                     size_t count, FILE *restrict fp)
 {
@@ -23,13 +23,13 @@ static inline size_t fread_unlocked(void *restrict buf, size_t size,
 #define _GNU_SOURCE
 #include <stdio.h>
 
-#if LIP_THREAD_SAFE_LEVEL == 0
+#if defined(LIP_THREAD_SAFE)
 extern size_t fread_unlocked(void *, size_t, size_t, FILE *);
 #endif
 
 #endif
 
-#if LIP_THREAD_SAFE_LEVEL == 0
+#if defined(LIP_THREAD_SAFE)
 size_t lip_fread(void *restrict buf, size_t size, size_t count,
                  FILE *restrict fp)
 {

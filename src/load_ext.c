@@ -1,5 +1,5 @@
-#ifndef LITE_PACK_LOAD_EXT_H
-#define LITE_PACK_LOAD_EXT_H
+#ifndef LIP_LOAD_EXT_H
+#define LIP_LOAD_EXT_H
 
 #include "first_byte.h"
 #include "load_number.h"

@@ -1,5 +1,5 @@
-#include "lite_pack/file/file.h"
-#include "lite_pack/pack_array.h"
+#include "lip/file/file.h"
+#include "lip/pack_array.h"
 
 bool lip_write_array_size(struct lip_file *file, unsigned size)
 {
