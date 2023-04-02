@@ -9,21 +9,21 @@
 struct lip_file;
 
 #define __lip_write_1darray_signed(f, s, a)                                    \
-    sizeof(*a) == 1   ? lip_write_1darray_i8(f, s, (int8_t const *)(a))        \
-    : sizeof(*a) == 2 ? lip_write_1darray_i16(f, s, (int16_t const *)(a))      \
-    : sizeof(*a) == 4 ? lip_write_1darray_i32(f, s, (int32_t const *)(a))      \
-    : sizeof(*a) == 8 ? lip_write_1darray_i64(f, s, (int64_t const *)(a))      \
-                      : 0
+    sizeof(*(a)) == 1   ? lip_write_1darray_i8(f, s, (int8_t const *)(a))      \
+    : sizeof(*(a)) == 2 ? lip_write_1darray_i16(f, s, (int16_t const *)(a))    \
+    : sizeof(*(a)) == 4 ? lip_write_1darray_i32(f, s, (int32_t const *)(a))    \
+    : sizeof(*(a)) == 8 ? lip_write_1darray_i64(f, s, (int64_t const *)(a))    \
+                        : 0
 
 #define __lip_write_1darray_unsigned(f, s, a)                                  \
-    sizeof(*a) == 1   ? lip_write_1darray_u8(f, s, (uint8_t const *)(a))       \
-    : sizeof(*a) == 2 ? lip_write_1darray_u16(f, s, (uint16_t const *)(a))     \
-    : sizeof(*a) == 4 ? lip_write_1darray_u32(f, s, (uint32_t const *)(a))     \
-    : sizeof(*a) == 8 ? lip_write_1darray_u64(f, s, (uint64_t const *)(a))     \
-                      : 0U
+    sizeof(*(a)) == 1   ? lip_write_1darray_u8(f, s, (uint8_t const *)(a))     \
+    : sizeof(*(a)) == 2 ? lip_write_1darray_u16(f, s, (uint16_t const *)(a))   \
+    : sizeof(*(a)) == 4 ? lip_write_1darray_u32(f, s, (uint32_t const *)(a))   \
+    : sizeof(*(a)) == 8 ? lip_write_1darray_u64(f, s, (uint64_t const *)(a))   \
+                        : 0U
 
 #define lip_write_1darray_int(f, s, a)                                         \
-    _Generic((*a), signed char                                                 \
+    _Generic(*(a), signed char                                                 \
              : __lip_write_1darray_signed(f, s, a), signed short               \
              : __lip_write_1darray_signed(f, s, a), signed int                 \
              : __lip_write_1darray_signed(f, s, a), signed long                \

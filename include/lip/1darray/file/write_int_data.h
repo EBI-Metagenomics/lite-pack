@@ -9,24 +9,27 @@
 struct lip_file;
 
 #define __lip_write_1darray_signed_data(f, s, a)                               \
-    sizeof(*a) == 1   ? lip_write_1darray_i8_data(f, s, (int8_t const *)(a))   \
-    : sizeof(*a) == 2 ? lip_write_1darray_i16_data(f, s, (int16_t const *)(a)) \
-    : sizeof(*a) == 4 ? lip_write_1darray_i32_data(f, s, (int32_t const *)(a)) \
-    : sizeof(*a) == 8 ? lip_write_1darray_i64_data(f, s, (int64_t const *)(a)) \
-                      : 0
+    sizeof(*(a)) == 1 ? lip_write_1darray_i8_data(f, s, (int8_t const *)(a))   \
+    : sizeof(*(a)) == 2                                                        \
+        ? lip_write_1darray_i16_data(f, s, (int16_t const *)(a))               \
+    : sizeof(*(a)) == 4                                                        \
+        ? lip_write_1darray_i32_data(f, s, (int32_t const *)(a))               \
+    : sizeof(*(a)) == 8                                                        \
+        ? lip_write_1darray_i64_data(f, s, (int64_t const *)(a))               \
+        : 0
 
 #define __lip_write_1darray_unsigned_data(f, s, a)                             \
-    sizeof(*a) == 1 ? lip_write_1darray_u8_data(f, s, (uint8_t const *)(a))    \
-    : sizeof(*a) == 2                                                          \
+    sizeof(*(a)) == 1 ? lip_write_1darray_u8_data(f, s, (uint8_t const *)(a))  \
+    : sizeof(*(a)) == 2                                                        \
         ? lip_write_1darray_u16_data(f, s, (uint16_t const *)(a))              \
-    : sizeof(*a) == 4                                                          \
+    : sizeof(*(a)) == 4                                                        \
         ? lip_write_1darray_u32_data(f, s, (uint32_t const *)(a))              \
-    : sizeof(*a) == 8                                                          \
+    : sizeof(*(a)) == 8                                                        \
         ? lip_write_1darray_u64_data(f, s, (uint64_t const *)(a))              \
         : 0U
 
 #define lip_write_1darray_int_data(f, s, a)                                    \
-    _Generic((*a), signed char                                                 \
+    _Generic(*(a), signed char                                                 \
              : __lip_write_1darray_signed_data(f, s, a), signed short          \
              : __lip_write_1darray_signed_data(f, s, a), signed int            \
              : __lip_write_1darray_signed_data(f, s, a), signed long           \
