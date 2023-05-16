@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.20.2 FATAL_ERROR)
 project(
   lip
-  VERSION 0.5.1
+  VERSION 0.5.2
   LANGUAGES C)
 set(PROJECT_DESCRIPTION "C library for MessagePack serialisation format.")
 
