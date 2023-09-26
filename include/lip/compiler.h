@@ -6,6 +6,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifndef static_assert
+#define static_assert(expr, msg) _Static_assert(expr, msg)
+#endif
+
 static_assert(CHAR_BIT == 8, "8-bits char");
 static_assert(sizeof(int) >= 4, ">=32-bits int");
 static_assert(sizeof(long) >= 8, ">=64-bits long");
