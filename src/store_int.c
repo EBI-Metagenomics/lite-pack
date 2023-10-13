@@ -13,25 +13,25 @@ unsigned lip_store_negative_fixint(unsigned char buf[], int8_t val)
 unsigned lip_store_int8(unsigned char buf[], int8_t val)
 {
     buf[0] = __lip_first_byte(LIP_FMT_INT_8);
-    return 1 + lip_store_u8(buf + 1, val);
+    return 1 + lip_store_u8(buf + 1, *(uint8_t *)&val);
 }
 
 unsigned lip_store_int16(unsigned char buf[], int16_t val)
 {
     buf[0] = __lip_first_byte(LIP_FMT_INT_16);
-    return 1 + lip_store_u16(buf + 1, val);
+    return 1 + lip_store_u16(buf + 1, *(uint16_t *)&val);
 }
 
 unsigned lip_store_int32(unsigned char buf[], int32_t val)
 {
     buf[0] = __lip_first_byte(LIP_FMT_INT_32);
-    return 1 + lip_store_u32(buf + 1, val);
+    return 1 + lip_store_u32(buf + 1, *(uint32_t *)&val);
 }
 
 unsigned lip_store_int64(unsigned char buf[], int64_t val)
 {
     buf[0] = __lip_first_byte(LIP_FMT_INT_64);
-    return 1 + lip_store_u64(buf + 1, val);
+    return 1 + lip_store_u64(buf + 1, *(uint64_t *)&val);
 }
 
 /* UNSIGNED INTEGER */

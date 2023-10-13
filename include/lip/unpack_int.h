@@ -11,7 +11,7 @@
         : sizeof(*(val)) == 2 ? lip_unpack_i16(buf, (int16_t *)(val))          \
         : sizeof(*(val)) == 4 ? lip_unpack_i32(buf, (int32_t *)(val))          \
         : sizeof(*(val)) == 8 ? lip_unpack_i64(buf, (int64_t *)(val))          \
-                              : (unsigned)__lip_bug_on_reach())
+                              : __lip_bug_on_reach())
 
 #define __lip_unpack_unsigned(buf, val)                                        \
     __lip_maybe_unused_unsigned(                                               \
@@ -19,7 +19,7 @@
         : sizeof(*(val)) == 2 ? lip_unpack_u16(buf, (uint16_t *)(val))         \
         : sizeof(*(val)) == 4 ? lip_unpack_u32(buf, (uint32_t *)(val))         \
         : sizeof(*(val)) == 8 ? lip_unpack_u64(buf, (uint64_t *)(val))         \
-                              : (unsigned)__lip_bug_on_reach())
+                              : __lip_bug_on_reach())
 
 #define lip_unpack_int(buf, val)                                               \
     _Generic(*(val), signed char                                               \
