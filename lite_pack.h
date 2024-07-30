@@ -41,43 +41,43 @@ size_t lip_unpack_map_size(unsigned char const buffer[], uint32_t *size);
 size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *type);
 
 #ifndef LLONG_WIDTH
-#error "Undefined LLONG_WIDTH"
+#define LLONG_WIDTH (__SIZEOF_LONG_LONG__ * CHAR_BIT)
 #endif
 
 #ifndef LONG_WIDTH
-#error "Undefined LONG_WIDTH"
+#define LONG_WIDTH (__SIZEOF_LONG__ * CHAR_BIT)
 #endif
 
 #ifndef INT_WIDTH
-#error "Undefined INT_WIDTH"
+#define INT_WIDTH (__SIZEOF_INT__ * CHAR_BIT)
 #endif
 
 #ifndef SHRT_WIDTH
-#error "Undefined SHRT_WIDTH"
+#define SHRT_WIDTH (__SIZEOF_SHORT__ * CHAR_BIT)
 #endif
 
 #ifndef SCHAR_WIDTH
-#error "Undefined SCHAR_WIDTH"
+#define SCHAR_WIDTH CHAR_BIT
 #endif
 
 #ifndef ULLONG_WIDTH
-#error "Undefined ULLONG_WIDTH"
+#define ULLONG_WIDTH LLONG_WIDTH
 #endif
 
 #ifndef ULONG_WIDTH
-#error "Undefined ULONG_WIDTH"
+#define ULONG_WIDTH LONG_WIDTH
 #endif
 
 #ifndef UINT_WIDTH
-#error "Undefined UINT_WIDTH"
+#define UINT_WIDTH INT_WIDTH
 #endif
 
 #ifndef USHRT_WIDTH
-#error "Undefined USHRT_WIDTH"
+#define USHRT_WIDTH SHRT_WIDTH
 #endif
 
 #ifndef UCHAR_WIDTH
-#error "Undefined UCHAR_WIDTH"
+#define UCHAR_WIDTH SCHAR_WIDTH
 #endif
 
 #if LLONG_WIDTH == 64
