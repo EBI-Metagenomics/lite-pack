@@ -1,4 +1,4 @@
--std=c2x
+-std=c11
 -Wall
 -Wextra
 -pedantic
