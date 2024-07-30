@@ -40,9 +40,49 @@ size_t lip_unpack_array_size(unsigned char const buffer[], uint32_t *size);
 size_t lip_unpack_map_size(unsigned char const buffer[], uint32_t *size);
 size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *type);
 
+#ifndef LLONG_WIDTH
+#error "Undefined LLONG_WIDTH"
+#endif
+
+#ifndef LONG_WIDTH
+#error "Undefined LONG_WIDTH"
+#endif
+
+#ifndef INT_WIDTH
+#error "Undefined INT_WIDTH"
+#endif
+
+#ifndef SHRT_WIDTH
+#error "Undefined SHRT_WIDTH"
+#endif
+
+#ifndef SCHAR_WIDTH
+#error "Undefined SCHAR_WIDTH"
+#endif
+
+#ifndef ULLONG_WIDTH
+#error "Undefined ULLONG_WIDTH"
+#endif
+
+#ifndef ULONG_WIDTH
+#error "Undefined ULONG_WIDTH"
+#endif
+
+#ifndef UINT_WIDTH
+#error "Undefined UINT_WIDTH"
+#endif
+
+#ifndef USHRT_WIDTH
+#error "Undefined USHRT_WIDTH"
+#endif
+
+#ifndef UCHAR_WIDTH
+#error "Undefined UCHAR_WIDTH"
+#endif
+
 #if LLONG_WIDTH == 64
 static inline size_t lip_pack_signed_long_long(unsigned char buffer[], signed long long data) { return lip_pack_i64(buffer, data); }
-static inline size_t lip_unpack_signed_long_long(unsigned char buffer[], signed long long *data) { return lip_unpack_i64(buffer, data); }
+static inline size_t lip_unpack_signed_long_long(unsigned char buffer[], signed long long *data) { return lip_unpack_i64(buffer, (int64_t *)data); }
 #else
 #error "Unsupported signed long long width"
 #endif
@@ -68,7 +108,7 @@ static inline size_t lip_unpack_signed_short(unsigned char buffer[], signed shor
 #error "Unsupported signed short width"
 #endif
 
-#if UCHAR_WIDTH == 8
+#if SCHAR_WIDTH == 8
 static inline size_t lip_pack_signed_char(unsigned char buffer[], signed char data) { return lip_pack_i8(buffer, data); }
 static inline size_t lip_unpack_signed_char(unsigned char buffer[], signed char *data) { return lip_unpack_i8(buffer, data); }
 #else
@@ -77,7 +117,7 @@ static inline size_t lip_unpack_signed_char(unsigned char buffer[], signed char 
 
 #if ULLONG_WIDTH == 64
 static inline size_t lip_pack_unsigned_long_long(unsigned char buffer[], unsigned long long data) { return lip_pack_u64(buffer, data); }
-static inline size_t lip_unpack_unsigned_long_long(unsigned char buffer[], unsigned long long *data) { return lip_unpack_u64(buffer, data); }
+static inline size_t lip_unpack_unsigned_long_long(unsigned char buffer[], unsigned long long *data) { return lip_unpack_u64(buffer, (uint64_t *)data); }
 #else
 #error "Unsupported unsigned long long width"
 #endif

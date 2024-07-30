@@ -5,6 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if __STDC_VERSION__ >= 202311L
+#define STATIC_ASSERT(x) _Static_assert((x))
+#else
+#include <assert.h>
+#define STATIC_ASSERT(x) static_assert((x), "")
+#endif
+
 #define array_size(x) (sizeof(x) / sizeof((x)[0]))
 
 #define fail()                                                                 \
@@ -119,16 +126,16 @@ static int positive_integer_check(unsigned char buffer[9], unsigned long v)
   signed long ilong = 0;
   signed long long illong = 0;
 
-  static_assert(UINT8_MAX  == UCHAR_MAX );
-  static_assert(UINT16_MAX == USHRT_MAX );
-  static_assert(UINT32_MAX == UINT_MAX  );
-  static_assert(UINT64_MAX == ULONG_MAX );
-  static_assert(UINT64_MAX == ULLONG_MAX);
-  static_assert(INT8_MAX   == CHAR_MAX  );
-  static_assert(INT16_MAX  == SHRT_MAX  );
-  static_assert(INT32_MAX  == INT_MAX   );
-  static_assert(INT64_MAX  == LONG_MAX  );
-  static_assert(INT64_MAX  == LLONG_MAX );
+  STATIC_ASSERT(UINT8_MAX  == UCHAR_MAX );
+  STATIC_ASSERT(UINT16_MAX == USHRT_MAX );
+  STATIC_ASSERT(UINT32_MAX == UINT_MAX  );
+  STATIC_ASSERT(UINT64_MAX == ULONG_MAX );
+  STATIC_ASSERT(UINT64_MAX == ULLONG_MAX);
+  STATIC_ASSERT(INT8_MAX   == SCHAR_MAX  );
+  STATIC_ASSERT(INT16_MAX  == SHRT_MAX  );
+  STATIC_ASSERT(INT32_MAX  == INT_MAX   );
+  STATIC_ASSERT(INT64_MAX  == LONG_MAX  );
+  STATIC_ASSERT(INT64_MAX  == LLONG_MAX );
 
   if (/*0 <= v &&   */v <= INT8_MAX && (lip_unpack_int(buffer, &u8)     != 1 || v != (unsigned long) u8    )) fail();
   if (/*0 <= v &&   */v <= INT8_MAX && (lip_unpack_int(buffer, &u16)    != 1 || v != (unsigned long) u16   )) fail();
@@ -307,11 +314,11 @@ static int negative_integer_check(unsigned char buffer[9], long v)
   signed long ilong = 0;
   signed long long illong = 0;
 
-  static_assert(INT8_MAX   == CHAR_MAX  );
-  static_assert(INT16_MAX  == SHRT_MAX  );
-  static_assert(INT32_MAX  == INT_MAX   );
-  static_assert(INT64_MAX  == LONG_MAX  );
-  static_assert(INT64_MAX  == LLONG_MAX );
+  STATIC_ASSERT(INT8_MAX   == SCHAR_MAX  );
+  STATIC_ASSERT(INT16_MAX  == SHRT_MAX  );
+  STATIC_ASSERT(INT32_MAX  == INT_MAX   );
+  STATIC_ASSERT(INT64_MAX  == LONG_MAX  );
+  STATIC_ASSERT(INT64_MAX  == LLONG_MAX );
 
 
   if (-32 <= v && (lip_unpack_int(buffer, &i8)     != 1 || v != i8    )) fail();
