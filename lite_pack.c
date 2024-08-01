@@ -71,7 +71,7 @@ enum lip_format_family
   LIP_FMT_FAMILY_NEVER_USED,
 };
 
-static inline unsigned char const_first_byte(enum format format)
+static inline unsigned char first_byte(enum format format, number number)
 {
   switch (format)
   {
@@ -107,23 +107,12 @@ static inline unsigned char const_first_byte(enum format format)
   case LIP_FMT_ARRAY_32:   return 0xdd;
   case LIP_FMT_MAP_16:     return 0xde;
   case LIP_FMT_MAP_32:     return 0xdf;
-  default:                 return 0;
-  }
-}
-
-static inline unsigned char var_first_byte(enum format format, number number)
-{
-  switch (format)
-  {
   case LIP_FMT_POSITIVE_FIXINT: return (unsigned char)(0x00 | number.u8);
   case LIP_FMT_FIXMAP:          return (unsigned char)(0x80 | number.u8);
   case LIP_FMT_FIXARRAY:        return (unsigned char)(0x90 | number.u8);
   case LIP_FMT_FIXSTR:          return (unsigned char)(0xa0 | number.u8);
   case LIP_FMT_NEGATIVE_FIXINT: return (unsigned char)(0xe0 | number.u8);
-  case LIP_FMT_EXT_8:           return (unsigned char)(0x00 | number.u8);
-  case LIP_FMT_EXT_16:          return (unsigned char)(0x00 | number.u8);
-  case LIP_FMT_EXT_32:          return (unsigned char)(0x00 | number.u8);
-  default:                      return 0;
+  default:                 return 0;
   }
 }
 
@@ -219,19 +208,21 @@ static inline int is_little_endian(void)
       double:   (number){.d = (x)},                                           \
       float:    (number){.f = (x)})
 
-/*****************************************************************************/
-/* STORE & LOAD FUNCTIONS BLOCK                                              */
-/*****************************************************************************/
-static inline size_t store_number(unsigned char buffer[], enum format format,
-                                  int size, number number)
+static inline size_t copy_number(unsigned char buffer[], int size,
+                                 number number)
 {
-  if (size == 0) buffer[0] = var_first_byte(format, number);
-  else           buffer[0] = const_first_byte(format);
   if (is_little_endian() && size == 2) number.u16 = bswap16(number.u16);
   if (is_little_endian() && size == 4) number.u32 = bswap32(number.u32);
   if (is_little_endian() && size == 8) number.u64 = bswap64(number.u64);
-  memcpy(buffer + 1, &number, size);
-  return (size_t)(1 + size);
+  memcpy(buffer, &number, size);
+  return (size_t)size;
+}
+
+static inline size_t store_number(unsigned char buffer[], enum format format,
+                                  int size, number number)
+{
+  buffer[0] = first_byte(format, number);
+  return 1 + copy_number(buffer + 1, size, number);
 }
 
 static inline void load_number(unsigned char const buffer[], int size,
@@ -248,8 +239,7 @@ static inline void load_number(unsigned char const buffer[], int size,
 /*****************************************************************************/
 size_t lip_pack_bool(unsigned char buffer[], bool data)
 {
-  if (data) buffer[0] = const_first_byte(LIP_FMT_TRUE);
-  else      buffer[0] = const_first_byte(LIP_FMT_FALSE);
+  buffer[0] = first_byte(data ? LIP_FMT_TRUE : LIP_FMT_FALSE, as_number(0));
   return 1;
 }
 
@@ -353,9 +343,9 @@ size_t lip_pack_ext(unsigned char buffer[], uint32_t size, uint8_t type)
   else if (size == 4)       return store_number(buffer, LIP_FMT_FIXEXT_4 , 1, as_number(type));
   else if (size == 8)       return store_number(buffer, LIP_FMT_FIXEXT_8 , 1, as_number(type));
   else if (size == 16)      return store_number(buffer, LIP_FMT_FIXEXT_16, 1, as_number(type));
-  else if (size <= 0xFFU)   return store_number(buffer, LIP_FMT_EXT_8    , 1, as_number(size)) + store_number(buffer + 2, LIP_FMT_EXT_8 , 0, as_number(type));
-  else if (size <= 0xFFFFU) return store_number(buffer, LIP_FMT_EXT_16   , 2, as_number(size)) + store_number(buffer + 3, LIP_FMT_EXT_16, 0, as_number(type));
-  else                      return store_number(buffer, LIP_FMT_EXT_32   , 4, as_number(size)) + store_number(buffer + 5, LIP_FMT_EXT_32, 0, as_number(type));
+  else if (size <= 0xFFU)   return store_number(buffer, LIP_FMT_EXT_8    , 1, as_number(size)) + copy_number(buffer + 2, 1, as_number(type));
+  else if (size <= 0xFFFFU) return store_number(buffer, LIP_FMT_EXT_16   , 2, as_number(size)) + copy_number(buffer + 3, 1, as_number(type));
+  else                      return store_number(buffer, LIP_FMT_EXT_32   , 4, as_number(size)) + copy_number(buffer + 5, 1, as_number(type));
 }
 
 size_t lip_pack_bin(unsigned char buffer[], uint32_t size)
