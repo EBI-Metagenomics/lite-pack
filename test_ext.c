@@ -31,6 +31,7 @@ int main(void)
     memset(buffer, 0, array_size(buffer));
     if (lip_pack_ext(buffer, a[i].size, 33) != a[i].pack_size) fail();
     if (lip_unpack_ext(buffer, &size, &type) != a[i].pack_size) fail();
+    if (lip_size(buffer) != a[i].pack_size) fail();
     if (type != 33) fail();
     if (size != a[i].size) fail();
   }

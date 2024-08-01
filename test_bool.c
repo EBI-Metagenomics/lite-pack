@@ -18,11 +18,13 @@ int main(void)
   memset(buffer, 0, sizeof(buffer));
   if (lip_pack_bool(buffer, false) != 1) fail();
   if (lip_unpack_bool(buffer, &v) != 1) fail();
+  if (lip_size(buffer) != 1) fail();
   if (v != false) fail();
 
   memset(buffer, 0, sizeof(buffer));
   if (lip_pack_bool(buffer, true) != 1) fail();
   if (lip_unpack_bool(buffer, &v) != 1) fail();
+  if (lip_size(buffer) != 1) fail();
   if (v != true) fail();
 
   return 0;

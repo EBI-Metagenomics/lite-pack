@@ -616,9 +616,9 @@ size_t lip_size(unsigned char const buffer[])
   case LIP_FMT_BIN_8:           return 2;
   case LIP_FMT_BIN_16:          return 3;
   case LIP_FMT_BIN_32:          return 5;
-  case LIP_FMT_EXT_8:           return 2;
-  case LIP_FMT_EXT_16:          return 3;
-  case LIP_FMT_EXT_32:          return 5;
+  case LIP_FMT_EXT_8:           return 3;
+  case LIP_FMT_EXT_16:          return 4;
+  case LIP_FMT_EXT_32:          return 6;
   case LIP_FMT_FLOAT_32:        return 5;
   case LIP_FMT_FLOAT_64:        return 9;
   case LIP_FMT_UINT_8:          return 2;

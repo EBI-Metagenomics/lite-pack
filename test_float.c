@@ -26,6 +26,7 @@ static int test_f32(void)
     memset(buffer, 0, sizeof(buffer));
     if (lip_pack_float(buffer, values[i]) != 5) fail();
     if (lip_unpack_float(buffer, &v) != 5) fail();
+    if (lip_size(buffer) != 5) fail();
     if (v != values[i]) fail();
   }
 
@@ -51,6 +52,7 @@ static int test_f64(void)
     memset(buffer, 0, sizeof(buffer));
     if (lip_pack_float(buffer, values[i]) != 9) fail();
     if (lip_unpack_float(buffer, &v) != 9) fail();
+    if (lip_size(buffer) != 9) fail();
     if (v != values[i]) fail();
   }
 

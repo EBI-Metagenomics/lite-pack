@@ -26,6 +26,7 @@ int main(void)
     memset(buffer, 0, array_size(buffer));
     if (lip_pack_array(buffer, sizes[i]) != pack_sizes[i]) fail();
     if (lip_unpack_array(buffer, &size) != pack_sizes[i]) fail();
+    if (lip_size(buffer) != pack_sizes[i]) fail();
     if (size != sizes[i]) fail();
   }
 
