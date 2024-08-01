@@ -3,7 +3,7 @@
 
 typedef union
 {
-  unsigned char c[8];
+  char    c[8];
   uint64_t u64;
   int64_t  i64;
   uint32_t u32;
@@ -111,18 +111,18 @@ static inline unsigned char const_first_byte(enum format format)
   }
 }
 
-static inline unsigned char var_first_byte(enum format format, number data)
+static inline unsigned char var_first_byte(enum format format, number number)
 {
   switch (format)
   {
-  case LIP_FMT_POSITIVE_FIXINT: return (unsigned char)(0x00 | data.u8);
-  case LIP_FMT_FIXMAP:          return (unsigned char)(0x80 | data.u8);
-  case LIP_FMT_FIXARRAY:        return (unsigned char)(0x90 | data.u8);
-  case LIP_FMT_FIXSTR:          return (unsigned char)(0xa0 | data.u8);
-  case LIP_FMT_NEGATIVE_FIXINT: return (unsigned char)(0xe0 | data.u8);
-  case LIP_FMT_EXT_8:           return (unsigned char)(0x00 | data.u8);
-  case LIP_FMT_EXT_16:          return (unsigned char)(0x00 | data.u8);
-  case LIP_FMT_EXT_32:          return (unsigned char)(0x00 | data.u8);
+  case LIP_FMT_POSITIVE_FIXINT: return (unsigned char)(0x00 | number.u8);
+  case LIP_FMT_FIXMAP:          return (unsigned char)(0x80 | number.u8);
+  case LIP_FMT_FIXARRAY:        return (unsigned char)(0x90 | number.u8);
+  case LIP_FMT_FIXSTR:          return (unsigned char)(0xa0 | number.u8);
+  case LIP_FMT_NEGATIVE_FIXINT: return (unsigned char)(0xe0 | number.u8);
+  case LIP_FMT_EXT_8:           return (unsigned char)(0x00 | number.u8);
+  case LIP_FMT_EXT_16:          return (unsigned char)(0x00 | number.u8);
+  case LIP_FMT_EXT_32:          return (unsigned char)(0x00 | number.u8);
   default:                      return 0;
   }
 }
@@ -175,7 +175,7 @@ static enum format format(int first_byte)
   }
 }
 
-static uint64_t bswap64(uint64_t x)
+static inline uint64_t bswap64(uint64_t x)
 {
   return ((x & 0xFF00000000000000u) >> 56) |
          ((x & 0x00FF000000000000u) >> 40) |
@@ -187,7 +187,7 @@ static uint64_t bswap64(uint64_t x)
          ((x & 0x00000000000000FFu) << 56);
 }
 
-static uint32_t bswap32(uint32_t x)
+static inline uint32_t bswap32(uint32_t x)
 {
   return ((x & 0xFF000000u) >> 24) |
          ((x & 0x00FF0000u) >>  8) |
@@ -195,15 +195,15 @@ static uint32_t bswap32(uint32_t x)
          ((x & 0x000000FFu) << 24);
 }
 
-static uint16_t bswap16(uint16_t x)
+static inline uint16_t bswap16(uint16_t x)
 {
   return (uint16_t)(((x & 0xFF00u) >> 8) | ((x & 0x00FFu) << 8));
 }
 
-static int is_little_endian(void)
+static inline int is_little_endian(void)
 {
- const union { uint32_t u; uint8_t c[4]; } one = { .u = 1 };
- return one.c[0];
+  const union { uint32_t u; uint8_t c[4]; } one = { .u = 1 };
+  return one.c[0];
 }
 
 #define as_number(x)                                                          \
@@ -223,24 +223,24 @@ static int is_little_endian(void)
 /* STORE & LOAD FUNCTIONS BLOCK                                              */
 /*****************************************************************************/
 static inline size_t store_number(unsigned char buffer[], enum format format,
-                                  int size, number data)
+                                  int size, number number)
 {
-  if (size == 0) buffer[0] = var_first_byte(format, data);
+  if (size == 0) buffer[0] = var_first_byte(format, number);
   else           buffer[0] = const_first_byte(format);
-  if (is_little_endian() && size == 2) data.u16 = bswap16(data.u16);
-  if (is_little_endian() && size == 4) data.u32 = bswap32(data.u32);
-  if (is_little_endian() && size == 8) data.u64 = bswap64(data.u64);
-  memcpy(buffer + 1, &data, size);
+  if (is_little_endian() && size == 2) number.u16 = bswap16(number.u16);
+  if (is_little_endian() && size == 4) number.u32 = bswap32(number.u32);
+  if (is_little_endian() && size == 8) number.u64 = bswap64(number.u64);
+  memcpy(buffer + 1, &number, size);
   return (size_t)(1 + size);
 }
 
 static inline void load_number(unsigned char const buffer[], int size,
-                               number *data)
+                               number *number)
 {
-  memcpy(data->c, buffer, size);
-  if (is_little_endian() && size == 2) data->u16 = bswap16(data->u16);
-  if (is_little_endian() && size == 4) data->u32 = bswap32(data->u32);
-  if (is_little_endian() && size == 8) data->u64 = bswap64(data->u64);
+  memcpy(number->c, buffer, size);
+  if (is_little_endian() && size == 2) number->u16 = bswap16(number->u16);
+  if (is_little_endian() && size == 4) number->u32 = bswap32(number->u32);
+  if (is_little_endian() && size == 8) number->u64 = bswap64(number->u64);
 }
 
 /*****************************************************************************/
@@ -363,6 +363,20 @@ size_t lip_pack_ext(unsigned char buffer[], uint32_t size, uint8_t type)
   else if (size <= 0xFFU)   return store_number(buffer, LIP_FMT_EXT_8    , 1, as_number(size)) + store_number(buffer + 2, LIP_FMT_EXT_8 , 0, as_number(type));
   else if (size <= 0xFFFFU) return store_number(buffer, LIP_FMT_EXT_16   , 2, as_number(size)) + store_number(buffer + 3, LIP_FMT_EXT_16, 0, as_number(type));
   else                      return store_number(buffer, LIP_FMT_EXT_32   , 4, as_number(size)) + store_number(buffer + 5, LIP_FMT_EXT_32, 0, as_number(type));
+}
+
+size_t lip_pack_bin_size(unsigned char buffer[], uint32_t size)
+{
+
+  if      (size <= 0xFF)   return store_number(buffer, LIP_FMT_BIN_8 , 1, as_number(size));
+  else if (size <= 0xFFFF) return store_number(buffer, LIP_FMT_BIN_16, 2, as_number(size));
+  else                     return store_number(buffer, LIP_FMT_BIN_32, 4, as_number(size));
+}
+
+size_t lip_pack_bin_data(unsigned char buffer[], uint32_t size, char const data[])
+{
+  memcpy(buffer, data, size);
+  return size;
 }
 
 /*****************************************************************************/
@@ -596,4 +610,22 @@ size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *typ
   case LIP_FMT_EXT_32   : load_number(buffer + 1, 4, &number); *size = number.u32; load_number(buffer + 5, 1, &number); *type = number.u8; return 1 + 4 + 1;
   default               : return 0; /* invalid buffer */
   }
+}
+
+size_t lip_unpack_bin_size(unsigned char const buffer[], uint32_t *size)
+{
+  number number;
+  switch (format(buffer[0]))
+  {
+  case LIP_FMT_BIN_8 : load_number(buffer + 1, 1, &number); *size = number.u8 ; return 1 + 1;
+  case LIP_FMT_BIN_16: load_number(buffer + 1, 2, &number); *size = number.u16; return 1 + 2;
+  case LIP_FMT_BIN_32: load_number(buffer + 1, 4, &number); *size = number.u32; return 1 + 4;
+  default            : return 0; /* invalid buffer */
+  }
+}
+
+size_t lip_unpack_bin_data(unsigned char const buffer[], uint32_t size, char data[])
+{
+  memcpy(data, buffer, size);
+  return size;
 }

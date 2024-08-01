@@ -40,7 +40,7 @@ int main(void)
   unsigned sizes[] = {0, 0x1F, 0x20, 0xFF, 0x100, 0xFFFF, 0x10000U};
 
   unsigned pack_sizes[] = {
-      1, 1, 2, 2, 3, 3, 5,
+      2, 2, 2, 2, 3, 3, 5,
   };
 
   unsigned long buffer_size = 0x10000UL + 6UL;
@@ -51,23 +51,23 @@ int main(void)
   char *output = malloc(output_size);
   if (!output) exit(1);
 
-  char const *str = 0;
+  char const *bin = 0;
 
   for (unsigned i = 0; i < array_size(sizes); ++i)
   {
     memset(buffer, 0, buffer_size);
 
-    str = lorem_new(sizes[i]);
-    unsigned length = (unsigned)strlen(str);
-    if (lip_pack_string_size(buffer, length) != pack_sizes[i]) fail();
-    if (lip_pack_string_data(buffer + pack_sizes[i], length, str) != sizes[i]) fail();
+    bin = lorem_new(sizes[i]);
+    unsigned length = (unsigned)strlen(bin);
+    if (lip_pack_bin_size(buffer, length) != pack_sizes[i]) fail();
+    if (lip_pack_bin_data(buffer + pack_sizes[i], length, bin) != sizes[i]) fail();
 
-    if (lip_unpack_string_size(buffer, &length) != pack_sizes[i]) fail();
+    if (lip_unpack_bin_size(buffer, &length) != pack_sizes[i]) fail();
     if (length != sizes[i]) fail();
-    if (lip_unpack_string_data(buffer + pack_sizes[i], length, output) != sizes[i]) fail();
-    if (strncmp(output, str, length) != 0) fail();
+    if (lip_unpack_bin_data(buffer + pack_sizes[i], length, output) != sizes[i]) fail();
+    if (memcmp(output, bin, length) != 0) fail();
 
-    free((char *)str);
+    free((char *)bin);
   }
 
   free(buffer);
