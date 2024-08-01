@@ -14,10 +14,9 @@
     exit(1);                                                                   \
   } while (1)
 
-static unsigned char buffer[9] = {0};
-
 static int test_f32(void)
 {
+  unsigned char buffer[9] = {0};
   float v = 0;
   float values[] = {-1.2f,   -0.0f,       +0.0f,    1.2f,     FLT_MAX,
                     FLT_MIN, FLT_EPSILON, INFINITY, -INFINITY};
@@ -35,6 +34,7 @@ static int test_f32(void)
 
 static int test_f64(void)
 {
+  unsigned char buffer[9] = {0};
   double v = 0;
   double values[] = {-1.2,
                      -0.0,

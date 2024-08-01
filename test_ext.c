@@ -23,7 +23,7 @@ int main(void)
       {0, 3}, {1, 2},  {2, 2},  {3, 3},     {4, 2},     {5, 3},
       {8, 2}, {15, 3}, {16, 2}, {65535, 4}, {65536, 6}, {4294967295, 6}};
 
-  unsigned char buffer[17] = {0};
+  unsigned char buffer[9] = {0};
   uint8_t type = 0;
   unsigned size = 0;
   for (unsigned i = 0; i < array_size(a); ++i)

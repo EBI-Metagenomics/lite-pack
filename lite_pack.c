@@ -324,7 +324,7 @@ size_t lip_pack_f32(unsigned char buffer[], float data)
   return store_number(buffer, LIP_FMT_FLOAT_32, 4, as_number(data));
 }
 
-size_t lip_pack_string_size(unsigned char buffer[], uint32_t size)
+size_t lip_pack_string(unsigned char buffer[], uint32_t size)
 {
   if      (size <= 0x1F)   return store_number(buffer, LIP_FMT_FIXSTR, 0, as_number(size));
   else if (size <= 0xFF)   return store_number(buffer, LIP_FMT_STR_8 , 1, as_number(size));
@@ -332,21 +332,14 @@ size_t lip_pack_string_size(unsigned char buffer[], uint32_t size)
   else                     return store_number(buffer, LIP_FMT_STR_32, 4, as_number(size));
 }
 
-size_t lip_pack_string_data(unsigned char buffer[], uint32_t size,
-                            char const data[])
-{
-  memcpy(buffer, data, size);
-  return size;
-}
-
-size_t lip_pack_array_size(unsigned char buffer[], uint32_t size)
+size_t lip_pack_array(unsigned char buffer[], uint32_t size)
 {
   if      (size <= 0xF)    return store_number(buffer, LIP_FMT_FIXARRAY, 0, as_number(size));
   else if (size <= 0xFFFF) return store_number(buffer, LIP_FMT_ARRAY_16, 2, as_number(size));
   else                     return store_number(buffer, LIP_FMT_ARRAY_32, 4, as_number(size));
 }
 
-size_t lip_pack_map_size(unsigned char buffer[], uint32_t size)
+size_t lip_pack_map(unsigned char buffer[], uint32_t size)
 {
   if      (size <= 0xF)    return store_number(buffer, LIP_FMT_FIXMAP, 0, as_number(size));
   else if (size <= 0xFFFF) return store_number(buffer, LIP_FMT_MAP_16, 2, as_number(size));
@@ -365,18 +358,12 @@ size_t lip_pack_ext(unsigned char buffer[], uint32_t size, uint8_t type)
   else                      return store_number(buffer, LIP_FMT_EXT_32   , 4, as_number(size)) + store_number(buffer + 5, LIP_FMT_EXT_32, 0, as_number(type));
 }
 
-size_t lip_pack_bin_size(unsigned char buffer[], uint32_t size)
+size_t lip_pack_bin(unsigned char buffer[], uint32_t size)
 {
 
   if      (size <= 0xFF)   return store_number(buffer, LIP_FMT_BIN_8 , 1, as_number(size));
   else if (size <= 0xFFFF) return store_number(buffer, LIP_FMT_BIN_16, 2, as_number(size));
   else                     return store_number(buffer, LIP_FMT_BIN_32, 4, as_number(size));
-}
-
-size_t lip_pack_bin_data(unsigned char buffer[], uint32_t size, char const data[])
-{
-  memcpy(buffer, data, size);
-  return size;
 }
 
 /*****************************************************************************/
@@ -551,7 +538,7 @@ size_t lip_unpack_f32(unsigned char const buffer[], float *data)
   return 0;
 }
 
-size_t lip_unpack_string_size(unsigned char const buffer[], uint32_t *size)
+size_t lip_unpack_string(unsigned char const buffer[], uint32_t *size)
 {
   number number;
   switch (format(buffer[0]))
@@ -564,14 +551,7 @@ size_t lip_unpack_string_size(unsigned char const buffer[], uint32_t *size)
   }
 }
 
-size_t lip_unpack_string_data(unsigned char const buffer[], uint32_t size,
-                              char data[])
-{
-  memcpy(data, buffer, size);
-  return size;
-}
-
-size_t lip_unpack_array_size(unsigned char const buffer[], uint32_t *size)
+size_t lip_unpack_array(unsigned char const buffer[], uint32_t *size)
 {
   number number;
   switch (format(buffer[0]))
@@ -583,7 +563,7 @@ size_t lip_unpack_array_size(unsigned char const buffer[], uint32_t *size)
   }
 }
 
-size_t lip_unpack_map_size(unsigned char const buffer[], uint32_t *size)
+size_t lip_unpack_map(unsigned char const buffer[], uint32_t *size)
 {
   number number;
   switch (format(buffer[0]))
@@ -612,7 +592,7 @@ size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *typ
   }
 }
 
-size_t lip_unpack_bin_size(unsigned char const buffer[], uint32_t *size)
+size_t lip_unpack_bin(unsigned char const buffer[], uint32_t *size)
 {
   number number;
   switch (format(buffer[0]))
@@ -622,10 +602,4 @@ size_t lip_unpack_bin_size(unsigned char const buffer[], uint32_t *size)
   case LIP_FMT_BIN_32: load_number(buffer + 1, 4, &number); *size = number.u32; return 1 + 4;
   default            : return 0; /* invalid buffer */
   }
-}
-
-size_t lip_unpack_bin_data(unsigned char const buffer[], uint32_t size, char data[])
-{
-  memcpy(data, buffer, size);
-  return size;
 }

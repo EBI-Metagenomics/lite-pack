@@ -14,7 +14,7 @@
 
 int main(void)
 {
-  unsigned char buffer[17] = {0};
+  unsigned char buffer[9] = {0};
   unsigned size = 0;
   unsigned sizes[] = {
       0, 15, 16, 65535, 65536, 4294967295,
@@ -24,8 +24,8 @@ int main(void)
   for (unsigned i = 0; i < array_size(sizes); ++i)
   {
     memset(buffer, 0, array_size(buffer));
-    if (lip_pack_array_size(buffer, sizes[i]) != pack_sizes[i]) fail();
-    if (lip_unpack_array_size(buffer, &size) != pack_sizes[i]) fail();
+    if (lip_pack_array(buffer, sizes[i]) != pack_sizes[i]) fail();
+    if (lip_unpack_array(buffer, &size) != pack_sizes[i]) fail();
     if (size != sizes[i]) fail();
   }
 

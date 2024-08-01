@@ -17,13 +17,11 @@ size_t lip_pack_u32(unsigned char buffer[], uint32_t data);
 size_t lip_pack_u64(unsigned char buffer[], uint64_t data);
 size_t lip_pack_f32(unsigned char buffer[], float  data);
 size_t lip_pack_f64(unsigned char buffer[], double data);
-size_t lip_pack_string_size(unsigned char buffer[], uint32_t size);
-size_t lip_pack_string_data(unsigned char buffer[], uint32_t size, char const data[]);
-size_t lip_pack_array_size(unsigned char buffer[], uint32_t size);
-size_t lip_pack_map_size(unsigned char buffer[], uint32_t size);
+size_t lip_pack_string(unsigned char buffer[], uint32_t size);
+size_t lip_pack_array(unsigned char buffer[], uint32_t size);
+size_t lip_pack_map(unsigned char buffer[], uint32_t size);
 size_t lip_pack_ext(unsigned char buffer[], uint32_t size, uint8_t type);
-size_t lip_pack_bin_size(unsigned char buffer[], uint32_t size);
-size_t lip_pack_bin_data(unsigned char buffer[], uint32_t size, char const data[]);
+size_t lip_pack_bin(unsigned char buffer[], uint32_t size);
 
 size_t lip_unpack_bool(unsigned char const buffer[], bool *data);
 size_t lip_unpack_i8 (unsigned char const buffer[], int8_t  *data);
@@ -36,13 +34,11 @@ size_t lip_unpack_u32(unsigned char const buffer[], uint32_t *data);
 size_t lip_unpack_u64(unsigned char const buffer[], uint64_t *data);
 size_t lip_unpack_f32(unsigned char const buffer[], float  *data);
 size_t lip_unpack_f64(unsigned char const buffer[], double *data);
-size_t lip_unpack_string_size(unsigned char const buffer[], uint32_t *size);
-size_t lip_unpack_string_data(unsigned char const buffer[], uint32_t size, char data[]);
-size_t lip_unpack_array_size(unsigned char const buffer[], uint32_t *size);
-size_t lip_unpack_map_size(unsigned char const buffer[], uint32_t *size);
+size_t lip_unpack_string(unsigned char const buffer[], uint32_t *size);
+size_t lip_unpack_array(unsigned char const buffer[], uint32_t *size);
+size_t lip_unpack_map(unsigned char const buffer[], uint32_t *size);
 size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *type);
-size_t lip_unpack_bin_size(unsigned char const buffer[], uint32_t *size);
-size_t lip_unpack_bin_data(unsigned char const buffer[], uint32_t size, char data[]);
+size_t lip_unpack_bin(unsigned char const buffer[], uint32_t *size);
 
 #ifndef LLONG_WIDTH
 #define LLONG_WIDTH (__SIZEOF_LONG_LONG__ * CHAR_BIT)
