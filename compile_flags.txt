@@ -10,3 +10,4 @@
 -Wno-unused-macros
 -Wno-cast-qual
 -Wno-float-equal
+-Wno-covered-switch-default
