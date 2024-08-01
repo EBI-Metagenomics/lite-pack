@@ -237,6 +237,12 @@ static inline void load_number(unsigned char const buffer[], int size,
 /*****************************************************************************/
 /* PACK FUNCTIONS BLOCK                                                      */
 /*****************************************************************************/
+size_t lip_pack_nil(unsigned char buffer[])
+{
+  buffer[0] = first_byte(LIP_FMT_NIL, as_number(0));
+  return 1;
+}
+
 size_t lip_pack_bool(unsigned char buffer[], bool data)
 {
   buffer[0] = first_byte(data ? LIP_FMT_TRUE : LIP_FMT_FALSE, as_number(0));
@@ -359,6 +365,11 @@ size_t lip_pack_bin(unsigned char buffer[], uint32_t size)
 /*****************************************************************************/
 /* UNPACK FUNCTIONS BLOCK                                                    */
 /*****************************************************************************/
+size_t lip_unpack_nil(unsigned char buffer[])
+{
+  return format(buffer[0]) == LIP_FMT_NIL ? 1 : 0;
+}
+
 size_t lip_unpack_bool(unsigned char const buffer[], bool *data)
 {
   if (format(buffer[0]) == LIP_FMT_FALSE || format(buffer[0]) == LIP_FMT_TRUE)

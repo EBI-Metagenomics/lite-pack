@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+size_t lip_pack_nil(unsigned char buffer[]);
 size_t lip_pack_bool(unsigned char buffer[], bool data);
 size_t lip_pack_i8 (unsigned char buffer[], int8_t  data);
 size_t lip_pack_i16(unsigned char buffer[], int16_t data);
@@ -23,6 +24,7 @@ size_t lip_pack_map(unsigned char buffer[], uint32_t size);
 size_t lip_pack_ext(unsigned char buffer[], uint32_t size, uint8_t type);
 size_t lip_pack_bin(unsigned char buffer[], uint32_t size);
 
+size_t lip_unpack_nil(unsigned char buffer[]);
 size_t lip_unpack_bool(unsigned char const buffer[], bool *data);
 size_t lip_unpack_i8 (unsigned char const buffer[], int8_t  *data);
 size_t lip_unpack_i16(unsigned char const buffer[], int16_t *data);
