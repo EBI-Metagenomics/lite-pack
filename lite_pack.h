@@ -42,6 +42,8 @@ size_t lip_unpack_map(unsigned char const buffer[], uint32_t *size);
 size_t lip_unpack_ext(unsigned char const buffer[], uint32_t *size, uint8_t *type);
 size_t lip_unpack_bin(unsigned char const buffer[], uint32_t *size);
 
+size_t lip_size(unsigned char const buffer[]);
+
 #ifndef LLONG_WIDTH
 #define LLONG_WIDTH (__SIZEOF_LONG_LONG__ * CHAR_BIT)
 #endif

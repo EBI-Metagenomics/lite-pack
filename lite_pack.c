@@ -604,3 +604,48 @@ size_t lip_unpack_bin(unsigned char const buffer[], uint32_t *size)
   default            : return 0; /* invalid buffer */
   }
 }
+
+size_t lip_size(unsigned char const buffer[])
+{
+  switch (format(buffer[0]))
+  {
+  case LIP_FMT_NIL:             return 1;
+  case LIP_FMT_NEVER_USED:      return 0;
+  case LIP_FMT_FALSE:           return 1;
+  case LIP_FMT_TRUE:            return 1;
+  case LIP_FMT_BIN_8:           return 2;
+  case LIP_FMT_BIN_16:          return 3;
+  case LIP_FMT_BIN_32:          return 5;
+  case LIP_FMT_EXT_8:           return 2;
+  case LIP_FMT_EXT_16:          return 3;
+  case LIP_FMT_EXT_32:          return 5;
+  case LIP_FMT_FLOAT_32:        return 5;
+  case LIP_FMT_FLOAT_64:        return 9;
+  case LIP_FMT_UINT_8:          return 2;
+  case LIP_FMT_UINT_16:         return 3;
+  case LIP_FMT_UINT_32:         return 5;
+  case LIP_FMT_UINT_64:         return 9;
+  case LIP_FMT_INT_8:           return 2;
+  case LIP_FMT_INT_16:          return 3;
+  case LIP_FMT_INT_32:          return 5;
+  case LIP_FMT_INT_64:          return 9;
+  case LIP_FMT_FIXEXT_1:        return 2;
+  case LIP_FMT_FIXEXT_2:        return 2;
+  case LIP_FMT_FIXEXT_4:        return 2;
+  case LIP_FMT_FIXEXT_8:        return 2;
+  case LIP_FMT_FIXEXT_16:       return 2;
+  case LIP_FMT_STR_8:           return 2;
+  case LIP_FMT_STR_16:          return 3;
+  case LIP_FMT_STR_32:          return 5;
+  case LIP_FMT_ARRAY_16:        return 3;
+  case LIP_FMT_ARRAY_32:        return 5;
+  case LIP_FMT_MAP_16:          return 3;
+  case LIP_FMT_MAP_32:          return 5;
+  case LIP_FMT_POSITIVE_FIXINT: return 1;
+  case LIP_FMT_FIXMAP:          return 1;
+  case LIP_FMT_FIXARRAY:        return 1;
+  case LIP_FMT_FIXSTR:          return 1;
+  case LIP_FMT_NEGATIVE_FIXINT: return 1;
+  default:                      return 0;
+  }
+}
