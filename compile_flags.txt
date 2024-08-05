@@ -11,3 +11,4 @@
 -Wno-cast-qual
 -Wno-float-equal
 -Wno-covered-switch-default
+-Wno-padded
