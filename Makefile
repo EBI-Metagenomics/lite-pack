@@ -22,6 +22,10 @@ $(TEST_TARGET): %: %.o $(LIB) $(HDR)
 check: $(TEST_TARGET)
 	for test in $(TEST_TARGET); do ./$$test || exit 1; done
 
-.PHONY: all clean check
+io: %: lite_pack_io.o $(LIB) $(HDR) lite_pack_io.h
+	$(CC) $(CFLAGS) $< -L. -llite_pack -o test_io
+	./test_io
+
+.PHONY: all clean check io
 clean:
-	rm -f $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_TARGET)
+	rm -f $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_TARGET) test_io io.mp
