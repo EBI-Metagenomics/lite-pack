@@ -19,11 +19,11 @@ $(LIB): $(OBJ)
 $(TEST_TARGET): %: %.o $(LIB) $(HDR)
 	$(CC) $(CFLAGS) $< -L. -llite_pack -o $@
 
-check: $(TEST_TARGET)
-	for test in $(TEST_TARGET); do ./$$test || exit 1; done
+test_io: %: lite_pack_io.o $(LIB) $(HDR) lite_pack_io.h
+	$(CC) $(CFLAGS) $< -L. -llite_pack -o $@
 
-io: %: lite_pack_io.o $(LIB) $(HDR) lite_pack_io.h
-	$(CC) $(CFLAGS) $< -L. -llite_pack -o test_io
+check: $(TEST_TARGET) test_io
+	for test in $(TEST_TARGET); do ./$$test || exit 1; done
 	./test_io
 
 .PHONY: all clean check io
