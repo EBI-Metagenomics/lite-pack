@@ -1,3 +1,5 @@
+-L/usr/local/lib
+-I/usr/local/include
 -std=c11
 -Wall
 -Wextra
