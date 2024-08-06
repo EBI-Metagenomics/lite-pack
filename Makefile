@@ -4,7 +4,7 @@ SRC = lite_pack.c
 HDR = lite_pack.h
 OBJ = $(SRC:.c=.o)
 LIB = liblite_pack.a
-PREFIX := /usr/local
+PREFIX ?= /usr/local
 TEST_SRC = $(wildcard test_*.c)
 TEST_OBJ = $(TEST_SRC:.c=.o)
 TEST_TARGET = $(basename $(TEST_OBJ))
