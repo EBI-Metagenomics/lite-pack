@@ -30,4 +30,4 @@ install: $(LIB)
 
 .PHONY: all clean check
 clean:
-	rm -f $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_TARGET)
+	rm -f $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_TARGET) io.mp
