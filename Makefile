@@ -23,11 +23,14 @@ $(TEST_TARGET): %: %.o $(LIB) $(HDR)
 check: $(TEST_TARGET)
 	for test in $(TEST_TARGET); do ./$$test || exit 1; done
 
-install: $(LIB)
+install: $(LIB) $(HDR)
 	@mkdir -p $(PREFIX)/lib $(PREFIX)/include
 	install -m 0755 $(LIB) $(PREFIX)/lib/
 	install -m 0644 $(HDR) $(PREFIX)/include/
 
-.PHONY: all clean check
+uninstall:
+	rm -f $(PREFIX)/lib/$(LIB) $(HDR:%=$(PREFIX)/include/%)
+
+.PHONY: all clean check uninstall
 clean:
 	rm -f $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_TARGET)
