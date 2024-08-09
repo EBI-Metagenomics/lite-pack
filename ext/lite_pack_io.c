@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
-void lio_writer_init(struct lio_writer *x, int fd)
+void lio_wsetup(struct lio_writer *x, int fd)
 {
   x->fd = fd;
   memset(x->buffer, 0, LIO_BUFFER_SIZE);
@@ -57,7 +57,9 @@ int lio_flush(struct lio_writer *x)
   return 0;
 }
 
-void lio_reader_init(struct lio_reader *x, int fd)
+int lio_wfile(struct lio_writer const *x) { return x->fd; }
+
+void lio_rsetup(struct lio_reader *x, int fd)
 {
   x->fd = fd;
   memset(x->buffer, 0, LIO_BUFFER_SIZE);
@@ -82,9 +84,13 @@ unsigned char *lio_read(struct lio_reader *x)
   if (active == 0) align(x);
   if (LIO_BUFFER_SIZE - x->head < LIO_HEADER_SIZE) align(x);
 
-  ssize_t n = read(x->fd, x->buffer + x->tail, LIO_BUFFER_SIZE - x->tail);
-  if (n == -1) return x->invalid_buffer;
-  x->tail += (size_t)n;
+  if (LIO_BUFFER_SIZE > x->tail && !x->_feof)
+  {
+    ssize_t n = read(x->fd, x->buffer + x->tail, LIO_BUFFER_SIZE - x->tail);
+    if (n == 0) x->_feof = 1;
+    if (n == -1) return x->invalid_buffer;
+    x->tail += (size_t)n;
+  }
 
   if (x->tail - x->head == 0) return x->invalid_buffer;
 
@@ -119,3 +125,7 @@ int lio_free(struct lio_reader *x, size_t size)
   x->head += size;
   return 0;
 }
+
+int lio_feof(struct lio_reader const *x) { return x->_feof && (x->tail - x->head) == 0; }
+
+int lio_rfile(struct lio_reader const *x) { return x->fd; }

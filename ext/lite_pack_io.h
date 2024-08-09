@@ -21,17 +21,21 @@ struct lio_reader
   unsigned char invalid_buffer[1];
   size_t head;
   size_t tail;
+  int _feof;
 };
 
-void           lio_writer_init(struct lio_writer *, int fd);
+void           lio_wsetup(struct lio_writer *, int fd);
 unsigned char *lio_alloc(struct lio_writer *);
 int            lio_write(struct lio_writer *, size_t size);
 int            lio_writeb(struct lio_writer *, size_t size, void const *data);
 int            lio_flush(struct lio_writer *);
+int            lio_wfile(struct lio_writer const *);
 
-void           lio_reader_init(struct lio_reader *, int fd);
+void           lio_rsetup(struct lio_reader *, int fd);
 unsigned char *lio_read(struct lio_reader *);
 int            lio_readb(struct lio_reader *, size_t size, unsigned char *data);
 int            lio_free(struct lio_reader *, size_t size);
+int            lio_feof(struct lio_reader const *);
+int            lio_rfile(struct lio_reader const *);
 
 #endif
