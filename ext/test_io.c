@@ -12,7 +12,7 @@ static int test_writer(void)
   if (!fd) return 1;
 
   struct lio_writer io = {0};
-  lio_writer_init(&io, fd);
+  lio_wsetup(&io, fd);
 
   for (int i = 0; i < 120000; i++)
   {
@@ -57,7 +57,7 @@ static int test_reader(void)
   if (!fd) return 1;
 
   struct lio_reader io = {0};
-  lio_reader_init(&io, fd);
+  lio_rsetup(&io, fd);
 
   for (int i = 0; i < 120000; i++)
   {
