@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -O3
+CFLAGS = -std=c11 -Wall -Wextra -pedantic -O3
 SRC = lio.c
 HDR = lio.h
 OBJ = $(SRC:.c=.o)

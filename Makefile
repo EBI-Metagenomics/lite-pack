@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -O2
+CFLAGS = -std=c11 -Wall -Wextra -pedantic -O3
 SRC = lite_pack.c
 HDR = lite_pack.h
 OBJ = $(SRC:.c=.o)
