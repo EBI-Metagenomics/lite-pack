@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -O2
-SRC = lite_pack_io.c
-HDR = lite_pack_io.h
+CFLAGS = -std=c11 -Wall -Wextra -O3
+SRC = lio.c
+HDR = lio.h
 OBJ = $(SRC:.c=.o)
-LIB = liblite_pack_io.a
+LIB = liblio.a
 PREFIX ?= /usr/local
 TEST_SRC = $(wildcard test_*.c)
 TEST_OBJ = $(TEST_SRC:.c=.o)
@@ -18,7 +18,7 @@ $(LIB): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TEST_TARGET): %: %.o $(LIB) $(HDR)
-	$(CC) $(CFLAGS) $< -L. -llite_pack_io -llite_pack -o $@
+	$(CC) $(CFLAGS) $< -L. -llio -llite_pack -o $@
 
 check: $(TEST_TARGET)
 	for test in $(TEST_TARGET); do ./$$test || exit 1; done

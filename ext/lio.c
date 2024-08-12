@@ -1,4 +1,4 @@
-#include "lite_pack_io.h"
+#include "lio.h"
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
@@ -58,6 +58,23 @@ int lio_flush(struct lio_writer *x)
 }
 
 int lio_wfile(struct lio_writer const *x) { return x->fd; }
+
+int lio_wtell(struct lio_writer const *x, long *offset)
+{
+  if ((*offset = lseek(x->fd, 0, SEEK_CUR)) < 0) return 1;
+  *offset += (off_t)x->backlog;
+  return 0;
+}
+
+int lio_wseek(struct lio_writer *x, long offset)
+{
+  if (x->allocated > 0) return 1;
+  if (lio_flush(x)) return 1;
+  if (lseek(x->fd, (off_t)offset, SEEK_SET) < 0) return 1;
+  return 0;
+}
+
+int lio_wrewind(struct lio_writer *x) { return lio_wseek(x, 0); }
 
 void lio_rsetup(struct lio_reader *x, int fd)
 {
@@ -126,6 +143,24 @@ int lio_free(struct lio_reader *x, size_t size)
   return 0;
 }
 
-int lio_feof(struct lio_reader const *x) { return x->_feof && (x->tail - x->head) == 0; }
+int lio_eof(struct lio_reader const *x) { return x->_feof && (x->tail - x->head) == 0; }
 
 int lio_rfile(struct lio_reader const *x) { return x->fd; }
+
+int lio_rtell(struct lio_reader const *x, long *offset)
+{
+  if ((*offset = lseek(x->fd, 0, SEEK_CUR)) < 0) return 1;
+  size_t active = x->tail - x->head;
+  *offset -= (off_t)active;
+  return 0;
+}
+
+int lio_rseek(struct lio_reader *x, long offset)
+{
+  if (lseek(x->fd, (off_t)offset, SEEK_SET) < 0) return 1;
+  x->head = 0;
+  x->tail = 0;
+  return 0;
+}
+
+int lio_rrewind(struct lio_reader *x) { return lio_rseek(x, 0); }
