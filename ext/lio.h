@@ -44,10 +44,10 @@ int            lio_rtell(struct lio_reader const *, long *offset);
 int            lio_rseek(struct lio_reader *, long offset);
 int            lio_rrewind(struct lio_reader *);
 
-#define lio_setup (x, fd)     _Generic((x), struct lio_writer *: lio_wsetup , struct lio_reader *: lio_rsetup) (x, fd)
-#define lio_file  (x)         _Generic((x), struct lio_writer *: lio_wfile  , struct lio_reader *: lio_rfile)  (x)
-#define lio_tell  (x, offset) _Generic((x), struct lio_writer *: lio_wtell  , struct lio_reader *: lio_rtell)  (x, offset)
-#define lio_seek  (x, offset) _Generic((x), struct lio_writer *: lio_wseek  , struct lio_reader *: lio_rseek)  (x, offset)
-#define lio_rewind(x)         _Generic((x), struct lio_writer *: lio_wrewind, struct lio_reader *: lio_rrewind)(x)
+#define lio_setup(x, fd)    _Generic((x), struct lio_writer *: lio_wsetup , struct lio_reader *: lio_rsetup) (x, fd)
+#define lio_file(x)         _Generic((x), struct lio_writer *: lio_wfile  , struct lio_reader *: lio_rfile)  (x)
+#define lio_tell(x, offset) _Generic((x), struct lio_writer *: lio_wtell  , struct lio_reader *: lio_rtell)  (x, offset)
+#define lio_seek(x, offset) _Generic((x), struct lio_writer *: lio_wseek  , struct lio_reader *: lio_rseek)  (x, offset)
+#define lio_rewind(x)       _Generic((x), struct lio_writer *: lio_wrewind, struct lio_reader *: lio_rrewind)(x)
 
 #endif

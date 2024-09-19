@@ -1,3 +1,6 @@
+*.mp
+test_[^\.]*
+
 .cache/
 compile_commands.json
 *Debug*/
