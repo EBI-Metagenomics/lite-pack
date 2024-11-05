@@ -1,44 +1,90 @@
 # Lite Pack
 
-C library implementing the amazing [MessagePack](https://msgpack.org) serialisation format.
+A C library implementing the [MessagePack](https://msgpack.org) serialisation format.
 
 ## Description
 
 There are a few exceptional alternative libraries listed at the end of this README.
-However, I wanted to have more control on how the serialisation is done mainly
-for performance reasons.
-In particular, I wanted to make it easy for the user to implement
-its own [extension types](https://github.com/msgpack/msgpack/blob/master/spec.md#extension-types)
-with zero-copy writing and reading
-(Think about [homogeneous-typed arrays](https://github.com/msgpack/msgpack/pull/267).)
-The excellent CMP library, for example, has an old [open issue](https://github.com/camgunz/cmp/issues/29)
-on a related matter but its API would need to be heavily modified to allow it to happen.
+However, I wanted greater control over the serialisation process, primarily for performance reasons.
+In particular, I aimed to make it easier for users to implement their own [extension types](https://github.com/msgpack/msgpack/blob/master/spec.md#extension-types)
+with zero-copy writing and reading (e.g., [homogeneous-typed arrays](https://github.com/msgpack/msgpack/pull/267)).
+
+The CMP library, for example, has a long-standing [open issue](https://github.com/camgunz/cmp/issues/29)
+on a related topic, but its API would require substantial modification to support this functionality.
 
 ## Getting Started
 
-### Dependencies
+Add the files `lite_pack.c` `lite_pack.h` to your project and compile
+using a C11-compatible compiler.
 
-- It currently works on MacOS and Linux and requires up-to-date compiler supporting C11 standard.
+## Example
 
-### Installing
+The example bellow packs an array of 3 values of the following types:
+floating-point, integer, and boolean.
 
-- I recommend for now copying the files from the `src/` directory into your project.
+```c
+#include "lite_pack.h"
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
 
-### Build and test it
+int main(void)
+{
+  unsigned char buffer[16] = {0};
+  unsigned char *pointer = buffer;
 
-Clone it and enter the following commands:
+  pointer += lip_pack_array(pointer, 3);
+  pointer += lip_pack_float(pointer, 3.14);
+  pointer += lip_pack_int(pointer, 42);
+  pointer += lip_pack_bool(pointer, true);
+
+  printf("Number of bytes packed: %ld\n", pointer - buffer);
+
+  pointer = buffer;
+
+  uint32_t array_size = 0;
+  float float_value = 0;
+  int int_value = 0;
+  bool bool_value = 0;
+
+  pointer += lip_unpack_array(pointer, &array_size);
+  pointer += lip_unpack_float(pointer, &float_value);
+  pointer += lip_unpack_int(pointer, &int_value);
+  pointer += lip_unpack_bool(pointer, &bool_value);
+
+  printf("Number of bytes unpacked: %ld\n", pointer - buffer);
+  printf("Array size: %u\n", array_size);
+  printf("Float value: %f\n", float_value);
+  printf("Int value: %d\n", int_value);
+  printf("Bool value: %d\n", bool_value);
+
+  return 0;
+}
+```
+
+Running the compiled example on my machine outputs:
 
 ```
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_ALL_WARNINGS=ON THREAD_SAFE_LEVEL=0 ..
+Number of bytes packed: 12
+Number of bytes unpacked: 1
+Array size: 3
+Float value: 0.000000
+Int value: 0
+Bool value: 0
+```
+
+## Build, Check, and Install
+
+```
 make
-make test
+make check
+make install
 ```
 
 ## Help
 
-Please, consider raising an GitHub issue.
+If you encounter any issues, please consider raising a GitHub issue.
 
 ## Authors
 
@@ -46,7 +92,7 @@ Please, consider raising an GitHub issue.
 
 ## Version History
 
-It is in alpha stage.
+This project is currently in the alpha stage.
 
 ## License
 
