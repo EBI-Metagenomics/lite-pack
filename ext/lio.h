@@ -22,6 +22,7 @@ struct lio_reader
   size_t head;
   size_t tail;
   int _feof;
+  int error;
 };
 
 void           lio_wsetup(struct lio_writer *, int fd);
@@ -35,6 +36,8 @@ int            lio_wseek(struct lio_writer *, long offset);
 int            lio_wrewind(struct lio_writer *);
 
 void           lio_rsetup(struct lio_reader *, int fd);
+int            lio_rerror(struct lio_reader const *);
+int            lio_rinvalid(struct lio_reader const *, unsigned char const *data);
 unsigned char *lio_read(struct lio_reader *);
 int            lio_readb(struct lio_reader *, size_t size, unsigned char *data);
 int            lio_free(struct lio_reader *, size_t size);
@@ -49,5 +52,8 @@ int            lio_rrewind(struct lio_reader *);
 #define lio_tell(x, offset) _Generic((x), struct lio_writer *: lio_wtell  , struct lio_reader *: lio_rtell)  (x, offset)
 #define lio_seek(x, offset) _Generic((x), struct lio_writer *: lio_wseek  , struct lio_reader *: lio_rseek)  (x, offset)
 #define lio_rewind(x)       _Generic((x), struct lio_writer *: lio_wrewind, struct lio_reader *: lio_rrewind)(x)
+
+int lio_liberror(int);
+int lio_syserror(int);
 
 #endif
