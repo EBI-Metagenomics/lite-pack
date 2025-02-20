@@ -61,29 +61,73 @@ static int test_reader(void)
 
   for (int i = 0; i < 120000; i++)
   {
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 0) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 1) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 10) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 100) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 1000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 10000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 100000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 1000000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 10000000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 100000000UL) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &u64)) || u64 != 1000000000UL) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -1) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -10) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -100) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -1000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -10000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -100000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -1000000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -10000000) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -100000000L) return 1;
-    if (lio_free(&io, lip_unpack_int(lio_read(&io), &i64)) || i64 != -1000000000L) return 1;
+    unsigned char *ptr = NULL;
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 0) return 1;
 
-    if (lio_free(&io, lip_unpack_string(lio_read(&io), &u32)) || u32 != sizeof(buffer)) return 1;
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 1) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 10) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 100) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 1000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 10000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 100000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 1000000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 10000000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 100000000UL) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &u64)) || u64 != 1000000000UL) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -1) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -10) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -100) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -1000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -10000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -100000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -1000000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -10000000) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -100000000L) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_int(ptr, &i64)) || i64 != -1000000000L) return 1;
+
+    if (lio_read(&io, &ptr)) return 1;
+    if (lio_free(&io, lip_unpack_string(ptr, &u32)) || u32 != sizeof(buffer)) return 1;
+
     if (lio_readb(&io, u32, buffer)) return 1;
     if (memcmp(hello, buffer, sizeof(buffer)) != 0) return 1;
   }

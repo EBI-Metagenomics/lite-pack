@@ -84,21 +84,9 @@ void lio_rsetup(struct lio_reader *x, int fd)
 {
   x->fd = fd;
   memset(x->buffer, 0, LIO_BUFFER_SIZE);
-  x->invalid_buffer[0] = 0xc1;
   x->head = 0;
   x->tail = 0;
   x->_feof = 0;
-  x->error = 0;
-}
-
-int lio_rerror(struct lio_reader const *x)
-{
-  return x->error;
-}
-
-int lio_rinvalid(struct lio_reader const *x, unsigned char const *data)
-{
-  return x->invalid_buffer == data;
 }
 
 static inline void align(struct lio_reader *x)
@@ -109,33 +97,31 @@ static inline void align(struct lio_reader *x)
   x->tail = size;
 }
 
-unsigned char *lio_read(struct lio_reader *x)
+int lio_read(struct lio_reader *x, unsigned char **data)
 {
   size_t active = x->tail - x->head;
-  if (active >= LIO_HEADER_SIZE) return x->buffer + x->head;
+  if (active >= LIO_HEADER_SIZE)
+  {
+    *data = x->buffer + x->head;
+    return 0;
+  }
 
   if (active == 0) align(x);
   if (LIO_BUFFER_SIZE - x->head < LIO_HEADER_SIZE) align(x);
 
+  x->_feof = 0;
   if (LIO_BUFFER_SIZE > x->tail && !x->_feof)
   {
     ssize_t n = read(x->fd, x->buffer + x->tail, LIO_BUFFER_SIZE - x->tail);
     if (n == 0) x->_feof = 1;
-    if (n == -1)
-    {
-      x->error = -errno;
-      return x->invalid_buffer;
-    }
+    if (n == -1) return -errno;
     x->tail += (size_t)n;
   }
 
-  if (x->tail - x->head == 0)
-  {
-    x->error = 1;
-    return x->invalid_buffer;
-  }
+  if (x->tail - x->head == 0) return 1;
 
-  return x->buffer + x->head;
+  *data = x->buffer + x->head;
+  return 0;
 }
 
 static inline int full_read(int fd, size_t size, unsigned char *buffer)

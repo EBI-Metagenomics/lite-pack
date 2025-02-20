@@ -18,11 +18,9 @@ struct lio_reader
 {
   int fd;
   unsigned char buffer[LIO_BUFFER_SIZE];
-  unsigned char invalid_buffer[1];
   size_t head;
   size_t tail;
   int _feof;
-  int error;
 };
 
 void           lio_wsetup(struct lio_writer *, int fd);
@@ -36,9 +34,7 @@ int            lio_wseek(struct lio_writer *, long offset);
 int            lio_wrewind(struct lio_writer *);
 
 void           lio_rsetup(struct lio_reader *, int fd);
-int            lio_rerror(struct lio_reader const *);
-int            lio_rinvalid(struct lio_reader const *, unsigned char const *data);
-unsigned char *lio_read(struct lio_reader *);
+int            lio_read(struct lio_reader *, unsigned char **data);
 int            lio_readb(struct lio_reader *, size_t size, unsigned char *data);
 int            lio_free(struct lio_reader *, size_t size);
 int            lio_eof(struct lio_reader const *);
