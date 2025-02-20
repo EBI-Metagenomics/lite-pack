@@ -5,12 +5,14 @@ A C library implementing the [MessagePack](https://msgpack.org) serialisation fo
 ## Description
 
 There are a few exceptional alternative libraries listed at the end of this README.
-However, I wanted greater control over the serialisation process, primarily for performance reasons.
+However, I wanted greater control over the serialisation process, primarily for performance
+reasons.
 In particular, I aimed to make it easier for users to implement their own [extension types](https://github.com/msgpack/msgpack/blob/master/spec.md#extension-types)
 with zero-copy writing and reading (e.g., [homogeneous-typed arrays](https://github.com/msgpack/msgpack/pull/267)).
 
 The CMP library, for example, has a long-standing [open issue](https://github.com/camgunz/cmp/issues/29)
-on a related topic, but its API would require substantial modification to support this functionality.
+on a related topic, but its API would require substantial modification to support
+this functionality.
 
 ## Getting Started
 
@@ -65,7 +67,7 @@ int main(void)
 
 Running the compiled example on my machine outputs:
 
-```
+```text
 Number of bytes packed: 12
 Number of bytes unpacked: 1
 Array size: 3
@@ -76,7 +78,7 @@ Bool value: 0
 
 ## Build, Check, and Install
 
-```
+```text
 make
 make check
 make install
